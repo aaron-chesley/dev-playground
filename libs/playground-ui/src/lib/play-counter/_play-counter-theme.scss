@@ -1,0 +1,27 @@
+.play-counter {
+  display: flex;
+  flex-direction: row;
+}
+
+.play-counter-btn {
+  background: var(--play-primary-color);
+  border: none;
+  border-radius: var(--play-border-radius);
+  color: white;
+  cursor: pointer;
+}
+
+.play-counter-quantity {
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: center;
+  min-width: 20px;
+}
+
+play-counter.ng-invalid.ng-touched {
+  .play-counter {
+    .play-counter-quantity {
+      color: var(--play-error-color);
+    }
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "version": 1,
+  "projects": {
+    "dev-playground-demo": {
+      "projectType": "application",
+      "root": "apps/dev-playground-demo",
+      "sourceRoot": "apps/dev-playground-demo/src",
+      "prefix": "dev-playground",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/dev-playground-demo",
+            "index": "apps/dev-playground-demo/src/index.html",
+            "main": "apps/dev-playground-demo/src/main.ts",
+            "polyfills": "apps/dev-playground-demo/src/polyfills.ts",
+            "tsConfig": "apps/dev-playground-demo/tsconfig.app.json",
+            "stylePreprocessorOptions": {
+              "includePaths": ["libs/playground-ui/src/lib"]
+            },
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/dev-playground-demo/src/favicon.ico",
+              "apps/dev-playground-demo/src/assets"
+            ],
+            "styles": ["apps/dev-playground-demo/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/dev-playground-demo/src/environments/environment.ts",
+                  "with": "apps/dev-playground-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "dev-playground-demo:build:production"
+            },
+            "development": {
+              "browserTarget": "dev-playground-demo:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dev-playground-demo:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/dev-playground-demo/src/**/*.ts",
+              "apps/dev-playground-demo/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/dev-playground-demo"],
+          "options": {
+            "jestConfig": "apps/dev-playground-demo/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "dev-playground-demo-e2e": {
+      "root": "apps/dev-playground-demo-e2e",
+      "sourceRoot": "apps/dev-playground-demo-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/dev-playground-demo-e2e/cypress.json",
+            "devServerTarget": "dev-playground-demo:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dev-playground-demo:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/dev-playground-demo-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["dev-playground-demo"]
+    },
+    "playground-ui": {
+      "projectType": "library",
+      "root": "libs/playground-ui",
+      "sourceRoot": "libs/playground-ui/src",
+      "prefix": "dev-playground",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/playground-ui"],
+          "options": {
+            "jestConfig": "libs/playground-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/playground-ui/src/**/*.ts",
+              "libs/playground-ui/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/playground-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/playground-ui",
+            "config": {
+              "configFolder": "libs/playground-ui/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "playground-ui-e2e": {
+      "root": "apps/playground-ui-e2e",
+      "sourceRoot": "apps/playground-ui-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/playground-ui-e2e/cypress.json",
+            "devServerTarget": "playground-ui:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "playground-ui:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/playground-ui-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["playground-ui"]
+    },
+    "storybook": {
+      "projectType": "library",
+      "root": "libs/storybook",
+      "sourceRoot": "libs/storybook/src",
+      "prefix": "dev-playground",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/storybook"],
+          "options": {
+            "jestConfig": "libs/storybook/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/storybook/src/**/*.ts",
+              "libs/storybook/src/**/*.html"
+            ]
+          }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/storybook/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/storybook",
+            "config": {
+              "configFolder": "libs/storybook/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        }
+      },
+      "tags": []
+    },
+    "storybook-e2e": {
+      "root": "apps/storybook-e2e",
+      "sourceRoot": "apps/storybook-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/storybook-e2e/cypress.json",
+            "devServerTarget": "storybook:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "storybook:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/storybook-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["storybook"]
+    }
+  }
+}

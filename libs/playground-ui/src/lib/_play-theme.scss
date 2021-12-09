@@ -1,0 +1,16 @@
+@use './play-card/play-card-theme.scss';
+@use './play-button/play-button-theme.scss';
+@use './play-input-text/play-input-text-theme.scss';
+@use './play-counter/play-counter-theme';
+
+/* Globals */
+:root {
+  /* Colors */
+  --play-primary-color: #167ed0;
+  --play-success-color: #16d067;
+  --play-error-color: #d02c16;
+  --play-warning-color: #d0b716;
+
+  /* Borders */
+  --play-border-radius: 4px;
+}

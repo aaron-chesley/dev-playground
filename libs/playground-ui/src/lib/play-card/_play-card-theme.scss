@@ -1,0 +1,16 @@
+/* Card Variables */
+play-card {
+  --play-card-padding: 30px;
+  --play-card-bg: #ffffff;
+  --play-card-border-radius: var(--play-border-radius);
+  --play-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024,
+    0 1px 3px #0000001f;
+}
+
+/* Card Styles */
+.play-card {
+  padding: var(--play-card-padding);
+  background-color: var(--play-card-bg);
+  border-radius: var(--play-card-border-radius);
+  box-shadow: var(--play-box-shadow);
+}

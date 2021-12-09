@@ -1,0 +1,14 @@
+.play-input-text {
+  border: 1px solid #a6a6a6;
+  padding: 5px;
+  border-radius: 4px;
+  height: 40px;
+  box-sizing: border-box;
+  &:focus {
+    outline-color: var(--play-primary-color);
+  }
+}
+
+.play-input-text.ng-invalid.ng-touched {
+  border: 2px solid var(--play-error-color);
+}

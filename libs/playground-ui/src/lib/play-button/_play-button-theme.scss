@@ -1,0 +1,36 @@
+button {
+  --play-btn-line-height: 36px;
+  --play-btn-border-radius: var(--play-border-radius);
+  --play-btn-font-size: 14px;
+  --play-btn-font-weigt: 500;
+  --play-btn-min-width: 64px;
+  --play-btn-padding: 0 16px;
+  --play-btn-cursor: pointer;
+}
+
+.play-button {
+  padding: var(--play-btn-padding);
+  border-radius: var(--play-btn-border-radius);
+  line-height: var(--play-btn-line-height);
+  cursor: var(--play-btn-cursor);
+  min-width: var(--play-btn-min-width);
+  font-weight: var(--play-btn-font-weigt);
+  font-size: var(--play-btn-font-size);
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &-flat {
+    background-color: var(--play-primary-color);
+    color: #ffffff;
+    border: none;
+  }
+
+  &-outline {
+    background-color: #ffffff;
+    color: var(--play-primary-color);
+    border: 1px solid #0000001f;
+  }
+}
