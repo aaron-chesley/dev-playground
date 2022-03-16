@@ -295,6 +295,131 @@
       },
       "tags": [],
       "implicitDependencies": ["storybook"]
+    },
+    "tiptap-poc": {
+      "projectType": "application",
+      "root": "apps/tiptap-poc",
+      "sourceRoot": "apps/tiptap-poc/src",
+      "prefix": "dev-playground",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/tiptap-poc",
+            "index": "apps/tiptap-poc/src/index.html",
+            "main": "apps/tiptap-poc/src/main.ts",
+            "polyfills": "apps/tiptap-poc/src/polyfills.ts",
+            "tsConfig": "apps/tiptap-poc/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/tiptap-poc/src/favicon.ico",
+              "apps/tiptap-poc/src/assets"
+            ],
+            "styles": ["apps/tiptap-poc/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/tiptap-poc/src/environments/environment.ts",
+                  "with": "apps/tiptap-poc/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "tiptap-poc:build:production"
+            },
+            "development": {
+              "browserTarget": "tiptap-poc:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4201
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "tiptap-poc:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/tiptap-poc/src/**/*.ts",
+              "apps/tiptap-poc/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/tiptap-poc"],
+          "options": {
+            "jestConfig": "apps/tiptap-poc/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "tiptap-poc-e2e": {
+      "root": "apps/tiptap-poc-e2e",
+      "sourceRoot": "apps/tiptap-poc-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/tiptap-poc-e2e/cypress.json",
+            "devServerTarget": "tiptap-poc:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "tiptap-poc:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/tiptap-poc-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["tiptap-poc"]
     }
   }
 }
