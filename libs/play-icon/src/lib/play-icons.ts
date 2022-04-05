@@ -1,0 +1,33 @@
+export const playIconFontColor: PlayIcon = {
+  name: 'fontColor',
+  data: `<svg width="52" height="52" viewBox="0 0 52 52" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M21.0859 31.1914H14.4082L13.1387 35H9.08887L15.9697 16.5156H19.499L26.418 35H22.3682L21.0859 31.1914ZM15.4365 28.1064H20.0576L17.7344 21.1875L15.4365 28.1064Z" fill="currentColor"/>
+  <path d="M9 37.5391H26.4941V38.8086H9V37.5391Z" fill="currentColor"/>
+  <path d="M44.6464 27.6464L40.8536 23.8536C40.5386 23.5386 40.7617 23 41.2071 23H48.7929C49.2383 23 49.4614 23.5386 49.1464 23.8536L45.3536 27.6464C45.1583 27.8417 44.8417 27.8417 44.6464 27.6464Z" fill="currentColor"/>
+  </svg>`,
+};
+
+export const playIconFontSize: PlayIcon = {
+  name: 'fontSize',
+  data: `<svg width="52" height="52" viewBox="0 0 52 52" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20.9492 18.0342H28.3535V14H8.66406V18.0342H15.9688V38.1719H20.9492V18.0342Z" fill="currentColor"/>
+  <path d="M6.00121 38.1719C6.55349 38.1719 7.00121 37.724 7.00121 37.1715L7.00121 22.1667L8.20121 23.7673C8.36034 23.9796 8.59724 24.1199 8.85979 24.1574C9.12234 24.1949 9.38904 24.1266 9.60121 23.9674C9.85301 23.7785 10.0012 23.482 10.0012 23.1671C10.0012 22.9506 9.93103 22.74 9.80121 22.5669L6.80121 18.5654C6.61204 18.3174 6.31805 18.1719 6.00621 18.1719C5.69437 18.1719 5.40037 18.3174 5.21121 18.5654L2.21121 22.4268C1.87155 22.8633 1.9499 23.4926 2.38621 23.8323C2.82251 24.1721 3.45155 24.0937 3.79121 23.6573L5.00121 22.0867L5.00121 37.1715C5.00121 37.724 5.44892 38.1719 6.00121 38.1719Z" fill="currentColor"/>
+  <path d="M40.8536 24.8536L44.6464 28.6464C44.8417 28.8417 45.1583 28.8417 45.3536 28.6464L49.1464 24.8536C49.4614 24.5386 49.2383 24 48.7929 24H41.2071C40.7617 24 40.5386 24.5386 40.8536 24.8536Z" fill="currentColor"/>
+  </svg>
+  `,
+};
+
+export const playIconFormattingOptions: PlayIcon = {
+  name: 'formattingOptions',
+  data: `<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M29.0859 29.6758H22.4082L21.1387 33.4844H17.0889L23.9697 15H27.499L34.418 33.4844H30.3682L29.0859 29.6758ZM23.4365 26.5908H28.0576L25.7344 19.6719L23.4365 26.5908Z" fill="currentColor"/>
+  <path d="M17 36.0234H34.4941V37.293H17V36.0234Z" fill="currentColor"/>
+  </svg>
+  `,
+};
+
+export type playIcon = 'fontColor' | 'fontSize' | 'formattingOptions';
+export interface PlayIcon {
+  name: playIcon;
+  data: string;
+}
