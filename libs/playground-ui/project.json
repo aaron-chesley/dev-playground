@@ -28,7 +28,9 @@
         "port": 4400,
         "config": {
           "configFolder": "libs/playground-ui/.storybook"
-        }
+        },
+        "styles": ["libs/playground-ui/.storybook/styles.scss"],
+        "projectBuildConfig": "playground-ui:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -44,7 +46,9 @@
         "outputPath": "dist/storybook/playground-ui",
         "config": {
           "configFolder": "libs/playground-ui/.storybook"
-        }
+        },
+        "styles": ["libs/playground-ui/.storybook/styles.scss"],
+        "projectBuildConfig": "playground-ui:build-storybook"
       },
       "configurations": {
         "ci": {
