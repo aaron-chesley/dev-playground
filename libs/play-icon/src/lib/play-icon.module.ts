@@ -4,11 +4,7 @@ import { PlayIconComponent } from './play-icon/play-icon.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    PlayIconComponent
-  ],
-  exports: [
-    PlayIconComponent
-  ],
+  declarations: [PlayIconComponent],
+  exports: [PlayIconComponent],
 })
 export class PlayIconModule {}
