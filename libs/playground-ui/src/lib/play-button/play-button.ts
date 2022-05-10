@@ -1,15 +1,25 @@
-import { NgModule, Directive, HostBinding } from '@angular/core';
+import { NgModule, Directive, HostBinding, Input, OnInit } from '@angular/core';
 
 @Directive({ selector: '[playButtonFlat]' })
-export class PlayButtonFlatDirective {
+export class PlayButtonFlatDirective implements OnInit {
+  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
   @HostBinding('class')
-  className = 'play-button play-button-flat';
+  className = '';
+
+  ngOnInit() {
+    this.className = `play-button play-button-flat ${this.color}`;
+  }
 }
 
 @Directive({ selector: '[playButtonOutline]' })
-export class PlayButtonOutlineDirective {
+export class PlayButtonOutlineDirective implements OnInit {
+  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
   @HostBinding('class')
-  className = 'play-button play-button-outline';
+  className = '';
+
+  ngOnInit() {
+    this.className = `play-button play-button-outline ${this.color}`;
+  }
 }
 
 @NgModule({
