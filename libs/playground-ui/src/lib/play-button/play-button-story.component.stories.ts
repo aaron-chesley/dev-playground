@@ -19,15 +19,15 @@ const Template: Story<PlayButtonStoryComponent> = (
   template: `<div style="display: flex; flex-direction: column">
     <div class="button-item">
       <label>Flat: </label>
-      <button playButtonFlat color="primary">Primary</button>
-      <button playButtonFlat color="accent">Accent</button>
-      <button playButtonFlat color="primary" disabled>Disabled</button>
+      <button playButton appearance="flat" color="primary">Primary</button>
+      <button playButton appearance="flat" color="accent">Accent</button>
+      <button playButton appearance="flat" color="primary" disabled>Disabled</button>
     </div>
     <div class="button-item">
     <label>Outline: </label>
-      <button playButtonOutline color="primary">Primary</button>
-      <button playButtonOutline color="accent">Accent</button>
-      <button playButtonOutline color="primary" disabled>Disabled</button>
+      <button playButton appearance="outline" color="primary">Primary</button>
+      <button playButton appearance="outline" color="accent">Accent</button>
+      <button playButton appearance="outline" color="primary" disabled>Disabled</button>
     </div>
   </div>`,
   styles: [

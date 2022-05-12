@@ -1,31 +1,30 @@
 import { NgModule, Directive, HostBinding, Input, OnInit } from '@angular/core';
+import { PlayColor } from '../play-color.type';
+import { PlayButtonAppearance } from './play-button-appearance.type';
 
-@Directive({ selector: '[playButtonFlat]' })
-export class PlayButtonFlatDirective implements OnInit {
-  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
+@Directive({ selector: '[playButton]' })
+export class PlayButtonDirective implements OnInit {
   @HostBinding('class')
   className = '';
 
-  ngOnInit() {
-    this.className = `play-button play-button-flat ${this.color}`;
-  }
-}
+  @Input() appearance: PlayButtonAppearance = 'outline';
 
-@Directive({ selector: '[playButtonOutline]' })
-export class PlayButtonOutlineDirective implements OnInit {
-  @Input() color: 'primary' | 'accent' | 'warn' = 'primary';
-  @HostBinding('class')
-  className = '';
+  @Input() color: PlayColor = 'accent';
 
   ngOnInit() {
-    this.className = `play-button play-button-outline ${this.color}`;
+    this.className = `play-button play-button-${this.appearance} ${this.color}`;
   }
 }
 
 @NgModule({
   imports: [],
-  declarations: [PlayButtonFlatDirective, PlayButtonOutlineDirective],
-  exports: [PlayButtonFlatDirective, PlayButtonOutlineDirective],
+  declarations: [PlayButtonDirective],
+  exports: [PlayButtonDirective],
   providers: [],
 })
 export class PlayButtonModule {}
+
+// @Input()
+//   set color(value: PlayColor) {
+//     this.className = this.className += `play-button play-button-flat ${value}`;
+//   }
