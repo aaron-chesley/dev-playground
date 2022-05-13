@@ -1,14 +1,14 @@
 {
   "projectType": "library",
-  "root": "libs/playground-ui",
-  "sourceRoot": "libs/playground-ui/src",
+  "root": "libs/play-ui",
+  "sourceRoot": "libs/play-ui/src",
   "prefix": "dev-playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/playground-ui"],
+      "outputs": ["coverage/libs/play-ui"],
       "options": {
-        "jestConfig": "libs/playground-ui/jest.config.js",
+        "jestConfig": "libs/play-ui/jest.config.js",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/playground-ui/src/**/*.ts",
-          "libs/playground-ui/src/**/*.html"
+          "libs/play-ui/src/**/*.ts",
+          "libs/play-ui/src/**/*.html"
         ]
       }
     },
@@ -27,10 +27,10 @@
         "uiFramework": "@storybook/angular",
         "port": 4400,
         "config": {
-          "configFolder": "libs/playground-ui/.storybook"
+          "configFolder": "libs/play-ui/.storybook"
         },
-        "styles": ["libs/playground-ui/.storybook/styles.scss"],
-        "projectBuildConfig": "playground-ui:build-storybook"
+        "styles": ["libs/play-ui/.storybook/styles.scss"],
+        "projectBuildConfig": "play-ui:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -45,10 +45,10 @@
         "uiFramework": "@storybook/angular",
         "outputPath": "dist/storybook/playground-ui",
         "config": {
-          "configFolder": "libs/playground-ui/.storybook"
+          "configFolder": "libs/play-ui/.storybook"
         },
-        "styles": ["libs/playground-ui/.storybook/styles.scss"],
-        "projectBuildConfig": "playground-ui:build-storybook"
+        "styles": ["libs/play-ui/.storybook/styles.scss"],
+        "projectBuildConfig": "play-ui:build-storybook"
       },
       "configurations": {
         "ci": {

@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'playground-ui',
+  displayName: 'play-ui',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/playground-ui',
+  coverageDirectory: '../../coverage/libs/play-ui',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

@@ -7,11 +7,11 @@
       "executor": "@nrwl/cypress:cypress",
       "options": {
         "cypressConfig": "apps/playground-ui-e2e/cypress.json",
-        "devServerTarget": "playground-ui:storybook"
+        "devServerTarget": "play-ui:storybook"
       },
       "configurations": {
         "ci": {
-          "devServerTarget": "playground-ui:storybook:ci"
+          "devServerTarget": "play-ui:storybook:ci"
         }
       }
     },
@@ -24,5 +24,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["playground-ui"]
+  "implicitDependencies": ["play-ui"]
 }

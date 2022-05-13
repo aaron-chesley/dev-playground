@@ -4,7 +4,7 @@
     "dev-playground-demo": "apps/dev-playground-demo",
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
     "play-icon": "libs/play-icon",
-    "playground-ui": "libs/playground-ui",
+    "play-ui": "libs/play-ui",
     "playground-ui-e2e": "apps/playground-ui-e2e",
     "storybook": "libs/storybook",
     "storybook-e2e": "apps/storybook-e2e",

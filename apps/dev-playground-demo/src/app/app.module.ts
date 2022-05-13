@@ -7,7 +7,7 @@ import {
   PlayButtonModule,
   PlayInputTextModule,
   PlayCounterModule,
-} from '@dev-playground/playground-ui';
+} from '@dev-playground/play-ui';
 import { AppComponent } from './app.component';
 
 @NgModule({
