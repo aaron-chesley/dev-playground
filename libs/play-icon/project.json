@@ -28,7 +28,8 @@
         "port": 4400,
         "config": {
           "configFolder": "libs/play-icon/.storybook"
-        }
+        },
+        "projectBuildConfig": "play-icon:build-storybook"
       },
       "configurations": {
         "ci": {
@@ -44,7 +45,8 @@
         "outputPath": "dist/storybook/play-icon",
         "config": {
           "configFolder": "libs/play-icon/.storybook"
-        }
+        },
+        "projectBuildConfig": "play-icon:build-storybook"
       },
       "configurations": {
         "ci": {

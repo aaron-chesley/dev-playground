@@ -43,15 +43,15 @@ const Template: Story<PlayIconComponent> = (args: PlayIconComponent) => ({
   component: PlayIconComponent,
   template: `<div class="container">
     <div class="icon-container">
-      <play-icon name="fontColor"></play-icon>
+      <play-icon name="fontColor" color="#4911ee" size="75"></play-icon>
       <small>Font Color</small>
     </div>
     <div class="icon-container">
-      <play-icon name="fontSize"></play-icon>
+      <play-icon name="fontSize" color="#4911ee" size="75"></play-icon>
       <small>Font Size</small>
     </div>
     <div class="icon-container">
-      <play-icon name="formattingOptions"></play-icon>
+      <play-icon name="formattingOptions" color="#4911ee" size="75"></play-icon>
       <small>Formatting Options</small>
     </div>
   </div>`,
