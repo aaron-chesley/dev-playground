@@ -24,7 +24,7 @@ export class PlayIconComponent implements OnChanges {
   @Input() size: number | null = null;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.name || changes.size) {
+    if (changes.name || changes.size || changes.color) {
       if (this.svgIcon) {
         this.element.nativeElement.removeChild(this.svgIcon);
       }
@@ -38,6 +38,7 @@ export class PlayIconComponent implements OnChanges {
       }
 
       if (this.color) {
+        this.svgIcon.setAttribute('fill', 'currentColor');
         this.svgIcon.setAttribute('color', this.color);
       }
 

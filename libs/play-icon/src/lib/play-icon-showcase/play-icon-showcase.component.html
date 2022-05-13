@@ -1,0 +1,9 @@
+<div class="container">
+  <div
+    class="icon-container"
+    *ngFor="let iconName of iconNames; trackBy: trackByFn"
+  >
+    <play-icon [name]="iconName" [color]="color" [size]="size"></play-icon>
+    <small>{{ iconName }}</small>
+  </div>
+</div>
