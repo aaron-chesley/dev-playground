@@ -5,7 +5,6 @@
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
     "play-icon": "libs/play-icon",
     "play-ui": "libs/play-ui",
-    "playground-ui-e2e": "apps/playground-ui-e2e",
     "storybook": "libs/storybook",
     "storybook-e2e": "apps/storybook-e2e",
     "tiptap-poc": "apps/tiptap-poc",
