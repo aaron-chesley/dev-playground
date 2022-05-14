@@ -15,7 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dev-playground/play-icon": ["libs/play-icon/src/index.ts"],
       "@dev-playground/play-ui": ["libs/play-ui/src/index.ts"],
       "@dev-playground/storybook": ["libs/storybook/src/index.ts"]
     }

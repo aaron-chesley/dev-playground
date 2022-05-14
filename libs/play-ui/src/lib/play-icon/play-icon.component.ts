@@ -9,7 +9,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { PlayIconRegistryService } from '../play-icon-registry.service';
+import { PlayIconRegistryService } from './play-icon-registry.service';
 
 @Component({
   selector: 'play-icon',

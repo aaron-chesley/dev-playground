@@ -3,7 +3,6 @@
   "projects": {
     "dev-playground-demo": "apps/dev-playground-demo",
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
-    "play-icon": "libs/play-icon",
     "play-ui": "libs/play-ui",
     "storybook": "libs/storybook",
     "storybook-e2e": "apps/storybook-e2e",

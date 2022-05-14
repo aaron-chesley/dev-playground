@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-  home,
-  PlayIconModule,
-  PlayIconRegistryService,
-} from '@dev-playground/play-icon';
+import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
+import { PlayIconModule } from '../../play-icon/play-icon.module';
+import { home } from '../../play-icon/play-icons';
 import { PlayButtonModule } from '../play-button.module';
 
 import { PlayButtonShowcaseComponent } from './play-button-showcase.component';

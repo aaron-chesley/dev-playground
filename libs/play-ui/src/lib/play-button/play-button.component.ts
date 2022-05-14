@@ -1,11 +1,9 @@
 import {
-  NgModule,
   HostBinding,
   Input,
   OnChanges,
   SimpleChanges,
   Component,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
 } from '@angular/core';
 import { PlayColor } from '../play-color.type';

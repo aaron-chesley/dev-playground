@@ -18,5 +18,5 @@ const Template: Story<PlayButtonShowcaseComponent> = (
   props: args,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const Showcase = Template.bind({});
+Showcase.args = {};
