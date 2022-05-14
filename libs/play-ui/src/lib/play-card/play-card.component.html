@@ -1,3 +1,7 @@
-<div class="play-card">
+<div class="play-card-wrapper">
+  <div class="play-card-header">
+    <ng-content select="play-card-header"></ng-content>
+  </div>
   <ng-content></ng-content>
+  <ng-content select="play-card-footer"></ng-content>
 </div>
