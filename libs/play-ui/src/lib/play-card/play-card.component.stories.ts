@@ -1,5 +1,5 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { PlayCardComponent } from './play-card';
+import { PlayCardComponent } from './play-card.component';
 
 export default {
   title: 'PlayCardComponent',
