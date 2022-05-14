@@ -1,0 +1,19 @@
+.container {
+  display: flex; flex-direction: column
+}
+
+.button-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.button-item label {
+  width: 100px;
+  margin-right: 20px;
+}
+
+.button-item button {
+  margin-right: 20px;
+}

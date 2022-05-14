@@ -1,0 +1,76 @@
+:host.play-btn {
+  padding: 0 16px;
+  border-radius: 4px;
+  line-height: 36px;
+  cursor: pointer;
+  min-width: 64px;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+:host.play-btn-flat {
+  color: #ffffff;
+  &.primary {
+    background-color: var(--play-primary-color);
+    border: 1px solid var(--play-primary-color);
+  }
+  &.accent {
+    background-color: var(--play-accent-color);
+    border: 1px solid var(--play-accent-color);
+  }
+}
+
+:host.play-btn-outline {
+  background-color: #ffffff;
+  &.primary {
+    color: var(--play-primary-color);
+    border: 1px solid var(--play-primary-color);
+  }
+  &.accent {
+    background-color: #ffffff;
+    color: var(--play-accent-color);
+    border: 1px solid var(--play-accent-color);
+  }
+}
+
+:host.play-btn-fab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  &.primary {
+    background-color: var(--play-primary-color)
+  }
+  &.accent {
+    background-color: var(--play-accent-color)
+  }
+}
+
+:host.play-btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  &.primary {
+    color: var(--play-primary-color)
+  }
+  &.accent {
+    color: var(--play-accent-color)
+  }
+}
+
+:host:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
