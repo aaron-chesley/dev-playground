@@ -36,6 +36,9 @@ export class PlayButtonComponent implements OnChanges {
         case 'fab':
           this.className = `play-btn-fab ${this.color}`;
           break;
+        case 'fabMini':
+          this.className = `play-btn-fab fab-mini ${this.color}`;
+          break;
         case 'icon':
           this.className = `play-btn-icon ${this.color}`;
           break;
