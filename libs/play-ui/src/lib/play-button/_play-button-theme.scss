@@ -8,7 +8,7 @@
   font-size: 1rem;
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.3;
     cursor: default;
   }
 
@@ -32,5 +32,53 @@
     background-color: #ffffff;
     color: var(--play-accent-color);
     border: 1px solid var(--play-accent-color);
+  }
+
+  &-fab.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--play-primary-color);
+  }
+  &-fab.accent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: var(--play-accent-color);
+  }
+
+  &-icon.primary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    color: var(--play-primary-color)
+  }
+  &-icon.accent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    color: var(--play-accent-color)
   }
 }

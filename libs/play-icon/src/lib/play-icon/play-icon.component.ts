@@ -14,6 +14,13 @@ import { PlayIconRegistryService } from '../play-icon-registry.service';
 @Component({
   selector: 'play-icon',
   template: ``,
+  styles: [
+    `
+      :host {
+        display: flex;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayIconComponent implements OnChanges {
@@ -37,8 +44,8 @@ export class PlayIconComponent implements OnChanges {
         this.svgIcon.setAttribute('width', size);
       }
 
+      this.svgIcon.setAttribute('fill', 'currentColor');
       if (this.color) {
-        this.svgIcon.setAttribute('fill', 'currentColor');
         this.svgIcon.setAttribute('color', this.color);
       }
 

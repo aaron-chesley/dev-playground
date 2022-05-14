@@ -1,1 +1,1 @@
-export type PlayButtonAppearance = 'flat' | 'outline';
+export type PlayButtonAppearance = 'flat' | 'outline' | 'fab' | 'icon';
