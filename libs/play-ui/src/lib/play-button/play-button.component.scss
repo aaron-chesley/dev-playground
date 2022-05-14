@@ -102,7 +102,7 @@
   background-position: 50%;
   transform: scale(10,10);
   opacity: 0;
-  transition: transform .5s, opacity 1s;
+  transition: transform .2s, opacity 1s;
 }
 
 :host.ripple:active:after {
