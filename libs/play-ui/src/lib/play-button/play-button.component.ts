@@ -28,19 +28,19 @@ export class PlayButtonComponent implements OnChanges {
     if (changes.appearance || changes.color) {
       switch (this.appearance) {
         case 'flat':
-          this.className = `play-btn play-btn-flat ${this.color}`;
+          this.className = `play-btn play-btn-flat ripple ${this.color}`;
           break;
         case 'outline':
-          this.className = `play-btn play-btn-outline ${this.color}`;
+          this.className = `play-btn play-btn-outline ripple ${this.color}`;
           break;
         case 'fab':
-          this.className = `play-btn-fab ${this.color}`;
+          this.className = `play-btn-fab ripple ${this.color}`;
           break;
         case 'fabMini':
-          this.className = `play-btn-fab fab-mini ${this.color}`;
+          this.className = `play-btn-fab fab-mini ripple ${this.color}`;
           break;
         case 'icon':
-          this.className = `play-btn-icon ${this.color}`;
+          this.className = `play-btn-icon ripple ${this.color}`;
           break;
         default:
           break;
