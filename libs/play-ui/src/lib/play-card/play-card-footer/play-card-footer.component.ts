@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
+  Input,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -14,4 +15,10 @@ import {
 })
 export class PlayCardFooterComponent {
   @HostBinding('class') className = 'play-card-footer';
+  @HostBinding('style.justify-content') justifyContent = 'left';
+  @Input() set position(
+    value: 'left' | 'center' | 'right' | 'space-around' | 'space-between'
+  ) {
+    this.justifyContent = value;
+  }
 }
