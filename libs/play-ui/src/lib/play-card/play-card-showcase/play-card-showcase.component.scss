@@ -1,4 +1,12 @@
 .container {
   display: flex;
   gap: 25px;
+
+  play-card {
+    width: 500px;
+  }
+
+  ul {
+    margin-bottom: 0px;
+  }
 }

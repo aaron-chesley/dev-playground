@@ -5,6 +5,7 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
+import { PlayCardService } from '../play-card.service';
 
 @Component({
   selector: 'play-card-body',
@@ -14,9 +15,17 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayCardBodyComponent {
-  @HostBinding('class') className = 'play-card-body';
+  @HostBinding('class.play-card-body') className = 'play-card-body';
+  @HostBinding('class.play-card-body-with-header') get withHeader() {
+    return this.playCardService.hasHeader;
+  }
+  @HostBinding('class.play-card-body-with-footer') get withFooter() {
+    return this.playCardService.hasFooter;
+  }
   @HostBinding('style.height') heightInPixels = '';
   @Input() set height(value: number) {
     this.heightInPixels = `${value}px`;
   }
+
+  constructor(private playCardService: PlayCardService) {}
 }

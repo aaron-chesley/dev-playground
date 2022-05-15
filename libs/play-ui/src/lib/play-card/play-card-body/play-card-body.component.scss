@@ -5,6 +5,14 @@
   flex-direction: column;
   box-sizing: border-box;
   margin: 0px -25px 0px -25px;
-  padding: 25px 25px;
+  padding: 0px 25px;
+}
+
+.play-card-body-with-footer {
+  padding-bottom: 25px;
+}
+
+.play-card-body-with-header {
+  padding-top: 25px;
 }
 

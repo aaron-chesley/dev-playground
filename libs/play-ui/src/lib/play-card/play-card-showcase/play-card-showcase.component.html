@@ -1,6 +1,11 @@
 <div class="container">
-  <play-card style="width: 500px">
-    <play-card-header>Confirm</play-card-header>
+  <play-card>
+    <play-card-header position="space-between">
+      <span>Confirm</span>
+      <button playButton appearance="icon">
+        <play-icon name="close"></play-icon>
+      </button>
+    </play-card-header>
     <play-card-body [height]="125">
       <label>Do you accept the following terms?</label>
       <ul>
@@ -19,8 +24,13 @@
     </play-card-footer>
   </play-card>
 
-  <play-card style="width: 500px">
-    <play-card-header>Confirm</play-card-header>
+  <play-card>
+    <play-card-header position="space-between">
+      <span>Confirm</span>
+      <button playButton appearance="icon">
+        <play-icon name="close"></play-icon>
+      </button>
+    </play-card-header>
     <play-card-body>
       <label>Do you accept the following terms?</label>
       <ul>
