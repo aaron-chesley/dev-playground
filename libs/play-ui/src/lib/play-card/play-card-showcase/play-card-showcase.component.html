@@ -11,14 +11,9 @@
     </ul>
   </play-card-body>
   <play-card-footer position="right">
-    <button
-      style="margin-right: 10px"
-      playButton
-      appearance="outline"
-      color="accent"
-    >
-      Cancel
-    </button>
-    <button playButton appearance="flat" color="accent">Accept</button>
+    <play-button-group [gap]="10">
+      <button playButton appearance="outline" color="accent">Cancel</button>
+      <button playButton appearance="flat" color="accent">Accept</button>
+    </play-button-group>
   </play-card-footer>
 </play-card>
