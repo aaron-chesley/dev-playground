@@ -6,6 +6,9 @@
 
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
   padding: var(--play-card-padding);
   background-color: var(--play-card-bg);
   border-radius: var(--play-card-border-radius);

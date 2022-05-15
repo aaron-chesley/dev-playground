@@ -1,7 +1,10 @@
 .play-card-body {
   display: flex;
+  flex-grow: 1;
+  overflow: auto;
   flex-direction: column;
   box-sizing: border-box;
   margin: 0px -25px 0px -25px;
   padding: 25px 25px;
 }
+

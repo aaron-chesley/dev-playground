@@ -1,19 +1,41 @@
-<play-card style="width: 500px">
-  <play-card-header>Confirm</play-card-header>
-  <play-card-body>
-    <label>Do you accept the following terms?</label>
-    <ul>
-      <li>I will not pledge allegiance to Bart.</li>
-      <li>I will not yell "Fire" in a crowded classroom.</li>
-      <li>I will not encourage others to fly.</li>
-      <li>I will not Xerox my butt.</li>
-      <li>I will not trade pants with others.</li>
-    </ul>
-  </play-card-body>
-  <play-card-footer position="right">
-    <play-button-group [gap]="10">
-      <button playButton appearance="outline" color="accent">Cancel</button>
-      <button playButton appearance="flat" color="accent">Accept</button>
-    </play-button-group>
-  </play-card-footer>
-</play-card>
+<div class="container">
+  <play-card style="width: 500px">
+    <play-card-header>Confirm</play-card-header>
+    <play-card-body [height]="125">
+      <label>Do you accept the following terms?</label>
+      <ul>
+        <li>I will not pledge allegiance to Bart.</li>
+        <li>I will not yell "Fire" in a crowded classroom.</li>
+        <li>I will not encourage others to fly.</li>
+        <li>I will not Xerox my butt.</li>
+        <li>I will not trade pants with others.</li>
+      </ul>
+    </play-card-body>
+    <play-card-footer position="right">
+      <play-button-group [gap]="10">
+        <button playButton appearance="outline" color="accent">Cancel</button>
+        <button playButton appearance="flat" color="accent">Accept</button>
+      </play-button-group>
+    </play-card-footer>
+  </play-card>
+
+  <play-card style="width: 500px">
+    <play-card-header>Confirm</play-card-header>
+    <play-card-body>
+      <label>Do you accept the following terms?</label>
+      <ul>
+        <li>I will not pledge allegiance to Bart.</li>
+        <li>I will not yell "Fire" in a crowded classroom.</li>
+        <li>I will not encourage others to fly.</li>
+        <li>I will not Xerox my butt.</li>
+        <li>I will not trade pants with others.</li>
+      </ul>
+    </play-card-body>
+    <play-card-footer position="left">
+      <play-button-group [gap]="10">
+        <button playButton appearance="outline" color="accent">Cancel</button>
+        <button playButton appearance="flat" color="accent">Accept</button>
+      </play-button-group>
+    </play-card-footer>
+  </play-card>
+</div>
