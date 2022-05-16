@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
-  Input,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -15,9 +14,4 @@ import {
 })
 export class PlayCardBodyComponent {
   @HostBinding('class.play-card-body') className = 'play-card-body';
-
-  @HostBinding('style.height') heightInPixels = '';
-  @Input() set height(value: number) {
-    this.heightInPixels = `${value}px`;
-  }
 }

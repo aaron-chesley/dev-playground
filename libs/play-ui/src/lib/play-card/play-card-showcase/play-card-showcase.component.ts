@@ -9,4 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class PlayCardShowcaseComponent {
   @Input() showHeader = true;
   @Input() showFooter = true;
+  @Input() cardHeight = 0;
 }

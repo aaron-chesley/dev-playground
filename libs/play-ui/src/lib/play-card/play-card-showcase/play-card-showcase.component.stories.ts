@@ -22,4 +22,5 @@ export const Showcase = Template.bind({});
 Showcase.args = {
   showHeader: true,
   showFooter: true,
+  cardHeight: 498,
 };
