@@ -19,4 +19,7 @@ const Template: Story<PlayCardShowcaseComponent> = (
 });
 
 export const Showcase = Template.bind({});
-Showcase.args = {};
+Showcase.args = {
+  showHeader: true,
+  showFooter: true,
+};

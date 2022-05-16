@@ -1,6 +1,6 @@
 <div class="container">
   <play-card>
-    <play-card-header position="space-between">
+    <play-card-header *ngIf="showHeader" position="space-between">
       <span>Confirm</span>
       <button playButton appearance="icon">
         <play-icon name="close"></play-icon>
@@ -16,7 +16,7 @@
         <li>I will not trade pants with others.</li>
       </ul>
     </play-card-body>
-    <play-card-footer position="right">
+    <play-card-footer *ngIf="showFooter" position="right">
       <play-button-group [gap]="10">
         <button playButton appearance="outline" color="accent">Cancel</button>
         <button playButton appearance="flat" color="accent">Accept</button>
@@ -25,7 +25,7 @@
   </play-card>
 
   <play-card>
-    <play-card-header position="space-between">
+    <play-card-header *ngIf="showHeader" position="space-between">
       <span>Confirm</span>
       <button playButton appearance="icon">
         <play-icon name="close"></play-icon>
@@ -41,7 +41,7 @@
         <li>I will not trade pants with others.</li>
       </ul>
     </play-card-body>
-    <play-card-footer position="left">
+    <play-card-footer *ngIf="showFooter" position="left">
       <play-button-group [gap]="10">
         <button playButton appearance="outline" color="accent">Cancel</button>
         <button playButton appearance="flat" color="accent">Accept</button>

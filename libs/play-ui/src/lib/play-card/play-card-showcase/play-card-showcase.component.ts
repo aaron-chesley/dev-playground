@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'play-card-showcase',
@@ -6,4 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./play-card-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayCardShowcaseComponent {}
+export class PlayCardShowcaseComponent {
+  @Input() showHeader = true;
+  @Input() showFooter = true;
+}
