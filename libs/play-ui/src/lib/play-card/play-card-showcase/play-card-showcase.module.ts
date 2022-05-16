@@ -4,7 +4,7 @@ import { PlayButtonModule } from '../../play-button/play-button.module';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconModule } from '../../play-icon/play-icon.module';
 import { close } from '../../play-icon/play-icons';
-import { PlayCardModule } from '../play-card.module';
+import { PlayCardModule } from '../play-card/play-card.module';
 
 import { PlayCardShowcaseComponent } from './play-card-showcase.component';
 

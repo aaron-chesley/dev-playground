@@ -5,8 +5,8 @@ import {
   HostBinding,
   ViewEncapsulation,
 } from '@angular/core';
-import { PlayCardFooterComponent } from './play-card-footer/play-card-footer.component';
-import { PlayCardHeaderComponent } from './play-card-header/play-card-header.component';
+import { PlayCardFooterComponent } from '../play-card-footer/play-card-footer.component';
+import { PlayCardHeaderComponent } from '../play-card-header/play-card-header.component';
 
 @Component({
   selector: 'play-card',
