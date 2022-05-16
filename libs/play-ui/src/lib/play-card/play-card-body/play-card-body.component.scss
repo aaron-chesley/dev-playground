@@ -1,9 +1,11 @@
+@import '../play-card-variables';
+
 .play-card-body {
   display: flex;
   flex-grow: 1;
   overflow: auto;
   flex-direction: column;
   box-sizing: border-box;
-  margin: 0px -25px 0px -25px;
-  padding: 0px 25px;
+  margin: 0px calc($play-card-padding * -1);
+  padding: 0px $play-card-padding;
 }

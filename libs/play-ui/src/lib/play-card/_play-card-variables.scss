@@ -1,0 +1,10 @@
+play-card {
+  --play-card-padding: 25px;
+  --play-card-bg: #ffffff;
+  --play-card-border-radius: 4px;
+  --play-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124, 0 1px 3px #0000001f;
+}
+
+$play-card-padding: #{var(--play-card-padding)};
+$play-header-height: 64px;
+$play-footer-height: $play-header-height;

@@ -1,10 +1,12 @@
+@import '../play-card-variables';
+
 .play-card-footer {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  margin: 0px -25px -25px -25px;
-  padding: 0px 25px;
+  margin: 0px calc($play-card-padding * -1) calc($play-card-padding * -1) calc($play-card-padding * -1);
+  padding: 0px $play-card-padding;
   border-top: 1px solid #00000024;
   font-size: 1.5rem;
-  min-height: 64px;
+  min-height: $play-footer-height;
 }
