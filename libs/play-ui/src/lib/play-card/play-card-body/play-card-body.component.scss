@@ -1,4 +1,4 @@
-@import '../play-card-variables';
+@use '../play-card-variables' as card;
 
 .play-card-body {
   display: flex;
@@ -6,6 +6,6 @@
   overflow: auto;
   flex-direction: column;
   box-sizing: border-box;
-  margin: 0px calc($play-card-padding * -1);
-  padding: 0px $play-card-padding;
+  margin: 0px card.$play-card-margin;
+  padding: 0px card.$play-card-padding;
 }
