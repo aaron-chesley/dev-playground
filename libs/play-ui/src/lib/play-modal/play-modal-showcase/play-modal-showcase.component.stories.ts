@@ -19,4 +19,6 @@ const Template: Story<PlayModalShowcaseComponent> = (
 });
 
 export const Showcase = Template.bind({});
-Showcase.args = {};
+Showcase.args = {
+  disableBackdropClose: false,
+};

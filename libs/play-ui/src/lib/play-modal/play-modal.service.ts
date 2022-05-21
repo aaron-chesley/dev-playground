@@ -7,8 +7,8 @@ export class PlayModalService {
   alert() {
     return this.dialog.open(PlayModalAlertComponent, {
       hasBackdrop: true,
-      height: '500px',
-      width: '500px',
+      height: '400px',
+      width: '600px',
     });
   }
 

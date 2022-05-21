@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { PlayModalService } from '../play-modal.service';
 
 @Component({
@@ -7,9 +12,15 @@ import { PlayModalService } from '../play-modal.service';
   styleUrls: ['./play-modal-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PlayModalShowcaseComponent {
+export class PlayModalShowcaseComponent implements OnInit {
+  @Input() disableBackdropClose = false;
+
   showAlert() {
     this.playModalService.alert();
+  }
+
+  ngOnInit(): void {
+    this.showAlert();
   }
   constructor(private playModalService: PlayModalService) {}
 }
