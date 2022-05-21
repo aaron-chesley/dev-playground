@@ -5,7 +5,11 @@ import { PlayModalAlertComponent } from './play-modal-alert/play-modal-alert.com
 @Injectable({ providedIn: 'root' })
 export class PlayModalService {
   alert() {
-    return this.dialog.open(PlayModalAlertComponent);
+    return this.dialog.open(PlayModalAlertComponent, {
+      hasBackdrop: true,
+      height: '500px',
+      width: '500px',
+    });
   }
 
   constructor(private dialog: MatDialog) {}

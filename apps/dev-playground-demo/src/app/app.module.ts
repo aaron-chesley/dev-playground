@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -8,6 +9,7 @@ import {
   PlayButtonModule,
   PlayInputTextModule,
   PlayCounterModule,
+  PlayModalModule,
 } from '@dev-playground/play-ui';
 import { AppComponent } from './app.component';
 
@@ -15,12 +17,14 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     FormsModule,
     PlayCardModule,
     PlayButtonModule,
     PlayInputTextModule,
     PlayCounterModule,
+    PlayModalModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
