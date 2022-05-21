@@ -5,3 +5,5 @@ export * from './lib/play-counter/play-counter.module';
 export * from './lib/play-icon/play-icon.module';
 export * from './lib/play-icon/play-icons';
 export * from './lib/play-icon/play-icon-registry.service';
+export * from './lib/play-modal/play-modal.module';
+export * from './lib/play-modal/play-modal.service';
