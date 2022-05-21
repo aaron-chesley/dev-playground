@@ -16,7 +16,9 @@ export class PlayModalShowcaseComponent implements OnInit {
   @Input() disableBackdropClose = false;
 
   showAlert() {
-    this.playModalService.alert();
+    this.playModalService.alert({
+      alertBody: 'That operation is not allowed.',
+    });
   }
 
   ngOnInit(): void {
