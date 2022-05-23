@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayButtonModule } from '../../play-button/play-button.module';
 import { PlayCardModule } from '../../play-card/play-card/play-card.module';
 import { PlayModalAlertModule } from '../play-modal-alert/play-modal-alert.module';
+import { PlayModalConfirmModule } from '../play-modal-confirm/play-modal-confirm.module';
 import { PlayModalModule } from '../play-modal.module';
 
 import { PlayModalShowcaseComponent } from './play-modal-showcase.component';
@@ -14,6 +15,7 @@ import { PlayModalShowcaseComponent } from './play-modal-showcase.component';
     BrowserAnimationsModule,
     PlayModalModule,
     PlayModalAlertModule,
+    PlayModalConfirmModule,
     PlayCardModule,
     PlayButtonModule,
   ],

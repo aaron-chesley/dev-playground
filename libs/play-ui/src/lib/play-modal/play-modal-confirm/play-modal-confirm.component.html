@@ -1,0 +1,14 @@
+<play-card>
+  <play-card-header>Confirm</play-card-header>
+  <play-card-body>{{ data?.confirmBody }}</play-card-body>
+  <play-card-footer position="right">
+    <play-button-group [gap]="10">
+      <button playButton appearance="outline" [mat-dialog-close]="false">
+        No
+      </button>
+      <button playButton appearance="flat" [mat-dialog-close]="true">
+        Yes
+      </button>
+    </play-button-group>
+  </play-card-footer>
+</play-card>

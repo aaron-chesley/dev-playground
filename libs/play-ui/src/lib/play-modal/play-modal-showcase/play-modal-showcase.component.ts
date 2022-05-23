@@ -21,8 +21,16 @@ export class PlayModalShowcaseComponent implements OnInit {
     });
   }
 
+  showConfirm() {
+    const x = this.playModalService.confirm({
+      confirmBody: 'Are you sure you want to do that?',
+    });
+
+    x.subscribe((res) => console.log('res: ', res));
+  }
+
   ngOnInit(): void {
-    this.showAlert();
+    this.showConfirm();
   }
   constructor(private playModalService: PlayModalService) {}
 }

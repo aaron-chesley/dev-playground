@@ -8,6 +8,10 @@
   font-size: 1rem;
 }
 
+:host.play-btn:focus-visible {
+  outline: none;
+}
+
 :host.play-btn-flat {
   color: #ffffff;
   &.primary {
