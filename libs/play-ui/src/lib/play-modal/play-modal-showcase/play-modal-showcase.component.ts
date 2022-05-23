@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { PlayModalService } from '../play-modal.service';
+import { PlayCustomShowcaseComponent } from './play-modal-custom-showcase.component';
 
 @Component({
   selector: 'play-modal-showcase',
@@ -22,15 +23,17 @@ export class PlayModalShowcaseComponent implements OnInit {
   }
 
   showConfirm() {
-    const x = this.playModalService.confirm({
+    this.playModalService.confirm({
       confirmBody: 'Are you sure you want to do that?',
     });
+  }
 
-    x.subscribe((res) => console.log('res: ', res));
+  showCustom() {
+    this.playModalService.custom(PlayCustomShowcaseComponent);
   }
 
   ngOnInit(): void {
-    this.showConfirm();
+    this.showCustom();
   }
   constructor(private playModalService: PlayModalService) {}
 }
