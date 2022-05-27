@@ -1,7 +1,8 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
+import { PlayModalLoaderService } from './play-modal-loader.service';
 import { PlayModalAlertData } from './play-modal-alert/play-modal-alert-data.interface';
 import { PlayModalAlertComponent } from './play-modal-alert/play-modal-alert.component';
 import { PlayModalConfirmData } from './play-modal-confirm/play-modal-confirm-data.interface';
@@ -12,6 +13,7 @@ import { PlayModalCustomComponent } from './play-modal-custom/play-modal-custom.
 export class PlayModalService {
   alert(data: PlayModalAlertData): void {
     this.dialog.open(PlayModalAlertComponent, {
+      disableClose: true,
       hasBackdrop: true,
       height: '200px',
       width: '400px',
@@ -21,6 +23,7 @@ export class PlayModalService {
 
   confirm(data: PlayModalConfirmData): Observable<boolean> {
     const ref = this.dialog.open(PlayModalConfirmComponent, {
+      disableClose: true,
       hasBackdrop: true,
       height: '200px',
       width: '400px',
@@ -30,16 +33,14 @@ export class PlayModalService {
     return ref.afterClosed();
   }
 
-  custom<TComponent>(component: ComponentType<TComponent>) {
-    const ref = this.dialog.open(PlayModalCustomComponent);
-    ref
-      .afterOpened()
-      .subscribe(() =>
-        ref.componentInstance.viewRef.createComponent(component)
-      );
-
-    return ref.afterClosed();
+  custom<T>(component: ComponentType<T>): MatDialogRef<T> {
+    return this.dialog.open(component);
   }
 
-  constructor(private dialog: MatDialog) {}
+  constructor(
+    private dialog: MatDialog,
+    private playModalLoaderService: PlayModalLoaderService
+  ) {
+    this.playModalLoaderService.loadStyles(PlayModalCustomComponent);
+  }
 }

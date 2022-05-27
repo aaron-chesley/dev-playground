@@ -33,7 +33,7 @@ export class PlayModalShowcaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.showCustom();
+    // this.showCustom();
   }
   constructor(private playModalService: PlayModalService) {}
 }

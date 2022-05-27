@@ -10,7 +10,6 @@ import { PlayModalConfirmData } from './play-modal-confirm-data.interface';
 @Component({
   selector: 'play-modal-confirm',
   templateUrl: './play-modal-confirm.component.html',
-  styleUrls: ['../_play-modal.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
