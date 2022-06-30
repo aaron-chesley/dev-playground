@@ -1,14 +1,18 @@
 import {
   HostBinding,
   Input,
-  OnChanges,
-  SimpleChanges,
   Component,
   ChangeDetectionStrategy,
   ViewEncapsulation,
+  Inject,
+  OnChanges,
 } from '@angular/core';
 import { PlayTheme } from '../play-theme.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
+import {
+  PlayButtonDefaultOptions,
+  PLAY_BUTTON_DEFAULT_OPTIONS,
+} from './play-button-default-options';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,13 +26,17 @@ export class PlayButtonComponent implements OnChanges {
   @HostBinding('class')
   className = '';
 
-  @Input() appearance: PlayButtonAppearance = 'play-outline';
+  @Input() appearance: PlayButtonAppearance;
+  @Input() theme: PlayTheme;
 
-  @Input() theme: PlayTheme = 'primary';
+  ngOnChanges() {
+    this.className = `${this.appearance} ${this.theme}`;
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.appearance || changes.color) {
-      this.className = `${this.appearance} ${this.theme}`;
-    }
+  constructor(
+    @Inject(PLAY_BUTTON_DEFAULT_OPTIONS) options: PlayButtonDefaultOptions
+  ) {
+    this.appearance = options.appearance;
+    this.theme = options.theme;
   }
 }
