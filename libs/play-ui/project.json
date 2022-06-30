@@ -1,6 +1,6 @@
 {
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
-  "root": "libs/play-ui",
   "sourceRoot": "libs/play-ui/src",
   "prefix": "dev-playground",
   "targets": {
@@ -8,7 +8,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/play-ui"],
       "options": {
-        "jestConfig": "libs/play-ui/jest.config.js",
+        "jestConfig": "libs/play-ui/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -22,15 +22,13 @@
       }
     },
     "storybook": {
-      "executor": "@nrwl/storybook:storybook",
+      "executor": "@storybook/angular:start-storybook",
       "options": {
-        "uiFramework": "@storybook/angular",
         "port": 4400,
-        "config": {
-          "configFolder": "libs/play-ui/.storybook"
-        },
-        "styles": ["libs/play-ui/.storybook/styles.scss"],
-        "projectBuildConfig": "play-ui:build-storybook"
+        "configDir": "libs/play-ui/.storybook",
+        "browserTarget": "play-ui:build-storybook",
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {
@@ -39,16 +37,14 @@
       }
     },
     "build-storybook": {
-      "executor": "@nrwl/storybook:build",
+      "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "uiFramework": "@storybook/angular",
-        "outputPath": "dist/storybook/playground-ui",
-        "config": {
-          "configFolder": "libs/play-ui/.storybook"
-        },
-        "styles": ["libs/play-ui/.storybook/styles.scss"],
-        "projectBuildConfig": "play-ui:build-storybook"
+        "outputDir": "dist/storybook/playground-ui",
+        "configDir": "libs/play-ui/.storybook",
+        "browserTarget": "play-ui:build-storybook",
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {

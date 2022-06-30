@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'play-ui',
+/* eslint-disable */
+export default {
+  displayName: 'dev-playground-demo',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/play-ui',
+  coverageDirectory: '../../coverage/apps/dev-playground-demo',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

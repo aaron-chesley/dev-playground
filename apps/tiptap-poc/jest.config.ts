@@ -1,5 +1,6 @@
-module.exports = {
-  displayName: 'storybook',
+/* eslint-disable */
+export default {
+  displayName: 'tiptap-poc',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +9,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../coverage/libs/storybook',
+  coverageDirectory: '../../coverage/apps/tiptap-poc',
   transform: {
     '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },

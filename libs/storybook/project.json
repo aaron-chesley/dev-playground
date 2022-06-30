@@ -1,6 +1,6 @@
 {
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "library",
-  "root": "libs/storybook",
   "sourceRoot": "libs/storybook/src",
   "prefix": "dev-playground",
   "targets": {
@@ -8,7 +8,7 @@
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/libs/storybook"],
       "options": {
-        "jestConfig": "libs/storybook/jest.config.js",
+        "jestConfig": "libs/storybook/jest.config.ts",
         "passWithNoTests": true
       }
     },
