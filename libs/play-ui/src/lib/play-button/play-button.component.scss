@@ -1,6 +1,6 @@
 @import '../play-ripple/play-ripple.scss';
 
-.play-btn {
+@mixin play-btn {
   position: relative;
   overflow: hidden;
   min-width: 64px;
@@ -13,7 +13,8 @@
   cursor: pointer;
 }
 
-.play-btn-flat {
+.play-flat {
+  @include play-btn;
   color: #ffffff;
   &.primary {
     background-color: var(--play-primary-color);
@@ -23,7 +24,8 @@
   }
 }
 
-.play-btn-outline {
+.play-outline {
+  @include play-btn;
   background-color: #ffffff;
   &.primary {
     color: var(--play-primary-color);
@@ -43,7 +45,7 @@
 
 }
 
-.play-btn-fab {
+@mixin play-fab {
   position: relative;
   overflow: hidden;
   display: flex;
@@ -55,10 +57,6 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  &.fab-mini {
-    height: 40px;
-    width: 40px;
-  }
   box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
   &.primary {
     background-color: var(--play-primary-color)
@@ -68,7 +66,17 @@
   }
 }
 
-.play-btn-icon {
+.play-fab {
+  @include play-fab;
+}
+
+.play-fab-mini {
+  @include play-fab;
+  height: 40px;
+  width: 40px;
+}
+
+.play-icon-btn {
   position: relative;
   overflow: hidden;
   display: flex;

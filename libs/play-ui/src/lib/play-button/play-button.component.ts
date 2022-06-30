@@ -7,7 +7,7 @@ import {
   ChangeDetectionStrategy,
   ViewEncapsulation,
 } from '@angular/core';
-import { PlayColor } from '../play-color.type';
+import { PlayTheme } from '../play-theme.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
 
 @Component({
@@ -22,31 +22,13 @@ export class PlayButtonComponent implements OnChanges {
   @HostBinding('class')
   className = '';
 
-  @Input() appearance: PlayButtonAppearance = 'outline';
+  @Input() appearance: PlayButtonAppearance = 'play-outline';
 
-  @Input() color: PlayColor = 'accent';
+  @Input() theme: PlayTheme = 'primary';
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.appearance || changes.color) {
-      switch (this.appearance) {
-        case 'flat':
-          this.className = `play-btn play-btn-flat ${this.color}`;
-          break;
-        case 'outline':
-          this.className = `play-btn play-btn-outline ${this.color}`;
-          break;
-        case 'fab':
-          this.className = `play-btn-fab ${this.color}`;
-          break;
-        case 'fabMini':
-          this.className = `play-btn-fab fab-mini ${this.color}`;
-          break;
-        case 'icon':
-          this.className = `play-btn-icon ${this.color}`;
-          break;
-        default:
-          break;
-      }
+      this.className = `${this.appearance} ${this.theme}`;
     }
   }
 }

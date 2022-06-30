@@ -1,6 +1,6 @@
 export type PlayButtonAppearance =
-  | 'flat'
-  | 'outline'
-  | 'fab'
-  | 'fabMini'
-  | 'icon';
+  | 'play-flat'
+  | 'play-outline'
+  | 'play-fab'
+  | 'play-fab-mini'
+  | 'play-icon-btn';
