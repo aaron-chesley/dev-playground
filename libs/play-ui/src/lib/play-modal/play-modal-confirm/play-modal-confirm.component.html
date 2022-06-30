@@ -3,10 +3,20 @@
   <play-card-body>{{ data?.confirmBody }}</play-card-body>
   <play-card-footer position="right">
     <play-button-group [gap]="10">
-      <button playButton appearance="outline" [mat-dialog-close]="false">
+      <button
+        playButton
+        appearance="play-outline"
+        theme="accent"
+        [mat-dialog-close]="false"
+      >
         No
       </button>
-      <button playButton appearance="flat" [mat-dialog-close]="true">
+      <button
+        playButton
+        appearance="play-flat"
+        theme="accent"
+        [mat-dialog-close]="true"
+      >
         Yes
       </button>
     </play-button-group>

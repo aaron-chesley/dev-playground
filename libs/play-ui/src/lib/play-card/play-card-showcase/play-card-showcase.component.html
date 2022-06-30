@@ -1,7 +1,7 @@
 <play-card [style.height.px]="cardHeight">
   <play-card-header *ngIf="showHeader" position="space-between">
     <span>Confirm</span>
-    <button playButton appearance="icon">
+    <button playButton appearance="play-icon-btn" theme="accent">
       <play-icon name="close"></play-icon>
     </button>
   </play-card-header>
@@ -27,8 +27,12 @@
   </play-card-body>
   <play-card-footer *ngIf="showFooter" position="right">
     <play-button-group [gap]="10">
-      <button playButton appearance="outline" color="accent">Cancel</button>
-      <button playButton appearance="flat" color="accent">Accept</button>
+      <button playButton appearance="play-outline" theme="accent">
+        Cancel
+      </button>
+      <button playButton appearance="play-flat" theme="accent" playRipple>
+        Accept
+      </button>
     </play-button-group>
   </play-card-footer>
 </play-card>
