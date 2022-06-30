@@ -5,7 +5,6 @@ play-card {
 }
 
 $play-card-padding: #{var(--play-card-padding)};
-$play-card-margin: calc($play-card-padding * -1);
 $play-card-border-radius: #{var(--play-card-border-radius)};
 $play-card-bg: #ffffff;
 $play-card-box-shadow: #{var(--play-card-box-shadow)};

@@ -6,6 +6,5 @@
   overflow: auto;
   flex-direction: column;
   box-sizing: border-box;
-  margin: 0px card.$play-card-margin;
-  padding: 0px card.$play-card-padding;
+  padding: card.$play-card-padding;
 }
