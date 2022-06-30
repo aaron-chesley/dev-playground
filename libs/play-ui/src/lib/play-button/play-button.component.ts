@@ -5,6 +5,7 @@ import {
   SimpleChanges,
   Component,
   ChangeDetectionStrategy,
+  ViewEncapsulation,
 } from '@angular/core';
 import { PlayColor } from '../play-color.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
@@ -15,6 +16,7 @@ import { PlayButtonAppearance } from './play-button-appearance.type';
   templateUrl: './play-button.component.html',
   styleUrls: ['./play-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PlayButtonComponent implements OnChanges {
   @HostBinding('class')
@@ -28,19 +30,19 @@ export class PlayButtonComponent implements OnChanges {
     if (changes.appearance || changes.color) {
       switch (this.appearance) {
         case 'flat':
-          this.className = `play-btn play-btn-flat ripple ${this.color}`;
+          this.className = `play-btn play-btn-flat ${this.color}`;
           break;
         case 'outline':
-          this.className = `play-btn play-btn-outline ripple ${this.color}`;
+          this.className = `play-btn play-btn-outline ${this.color}`;
           break;
         case 'fab':
-          this.className = `play-btn-fab ripple ${this.color}`;
+          this.className = `play-btn-fab ${this.color}`;
           break;
         case 'fabMini':
-          this.className = `play-btn-fab fab-mini ripple ${this.color}`;
+          this.className = `play-btn-fab fab-mini ${this.color}`;
           break;
         case 'icon':
-          this.className = `play-btn-icon ripple ${this.color}`;
+          this.className = `play-btn-icon ${this.color}`;
           break;
         default:
           break;

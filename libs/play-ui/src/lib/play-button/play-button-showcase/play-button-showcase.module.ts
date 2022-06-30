@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconModule } from '../../play-icon/play-icon.module';
 import { home } from '../../play-icon/play-icons';
+import { PlayRippleModule } from '../../play-ripple/play-ripple';
 import { PlayButtonModule } from '../play-button.module';
 
 import { PlayButtonShowcaseComponent } from './play-button-showcase.component';
 
 @NgModule({
-  imports: [CommonModule, PlayButtonModule, PlayIconModule],
+  imports: [CommonModule, PlayButtonModule, PlayIconModule, PlayRippleModule],
   exports: [PlayButtonShowcaseComponent],
   declarations: [PlayButtonShowcaseComponent],
   providers: [],
