@@ -4,10 +4,15 @@
 /* Globals */
 :root {
   /* Colors */
-  --play-primary-color: #fb8500;
-  --play-primary-color-lighter: #ffb703;
-  --play-accent-color: #219ebc;
-  --play-accent-color-lighter: #8ecae6;
+  --play-primary: 251, 133, 0;
+  --play-primary-color: rgba(var(--play-primary), 1);
+  --play-primary-color-lighter: rgba(var(--play-primary), .5);
+  --play-primary-color-lightest: rgba(var(--play-primary), .15);
+
+  --play-accent: 33, 158, 188;
+  --play-accent-color: rgba(var(--play-accent), 1);
+  --play-accent-color-lighter: rgba(var(--play-accent), .5);
+  --play-accent-color-lightest: rgba(var(--play-accent), .15);
   --play-success-color: #16d067;
   --play-error-color: #d02c16;
   --play-warning-color: #d0b716;
