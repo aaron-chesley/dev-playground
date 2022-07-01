@@ -1,0 +1,11 @@
+@use '../play-theme' as theme;
+
+play-checkbox {
+  /*
+  If the decision is made to expose checkbox specific css variables to consumers
+  then those variables will go here and the sass variables below should be
+  refactored to point to these css variables.
+  */
+}
+
+$play-checkbox-color: theme.$play-primary-color;

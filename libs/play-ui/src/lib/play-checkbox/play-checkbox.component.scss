@@ -1,0 +1,61 @@
+@use './play-checkbox-variables' as checkbox;
+
+.play-checkbox {
+  display: inline-block;
+}
+
+.container {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  /* Hide the browser's default checkbox */
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .play-checkbox {
+      border-color: checkbox.$play-checkbox-color;
+      &:after {
+        left: 3px;
+        top: 0px;
+        width: 3px;
+        height: 6px;
+        border: solid checkbox.$play-checkbox-color;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+    &:checked ~ .play-checkbox:after {
+      display: block;
+    }
+  }
+  /* Create a custom checkbox */
+  .play-checkbox {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    border: 2px solid #0000008a;
+    border-radius: 2px;
+    box-sizing: border-box;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  }
+}

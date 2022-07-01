@@ -1,6 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
+  Input,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -11,4 +14,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PlayCheckboxComponent {}
+export class PlayCheckboxComponent {
+  @HostBinding('class')
+  className = 'play-checkbox';
+
+  @Input() checked = false;
+}
