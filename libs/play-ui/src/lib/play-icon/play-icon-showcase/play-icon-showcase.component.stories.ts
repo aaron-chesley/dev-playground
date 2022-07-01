@@ -1520,6 +1520,11 @@ export default {
       declarations: [PlayIconShowcaseComponent],
     }),
   ],
+  argTypes: {
+    color: {
+      control: { type: 'color' },
+    },
+  },
 } as Meta<PlayIconShowcaseComponent>;
 
 const initIconsFactory = (iconService: PlayIconRegistryService) => {
@@ -3051,5 +3056,5 @@ const Template: Story<PlayIconShowcaseComponent> = (
 export const Showcase = Template.bind({});
 Showcase.args = {
   size: 40,
-  color: '#4911ee',
+  color: '#ed4646',
 };
