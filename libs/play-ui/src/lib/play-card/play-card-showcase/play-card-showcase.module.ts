@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PlayButtonModule } from '../../play-button/play-button.module';
+import { PlayCheckboxModule } from '../../play-checkbox/play-checkbox.module';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconModule } from '../../play-icon/play-icon.module';
 import { close } from '../../play-icon/play-icons';
@@ -16,6 +17,7 @@ import { PlayCardShowcaseComponent } from './play-card-showcase.component';
     PlayButtonModule,
     PlayIconModule,
     PlayRippleModule,
+    PlayCheckboxModule,
   ],
   exports: [PlayCardShowcaseComponent],
   declarations: [PlayCardShowcaseComponent],

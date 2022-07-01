@@ -1,6 +1,8 @@
 play-card {
   width: 500px;
-  ul {
-    margin-bottom: 0px;
+  play-card-body {
+    .content {
+      margin-bottom: 25px;
+    }
   }
 }
