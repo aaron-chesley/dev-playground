@@ -10,6 +10,12 @@ export default {
       imports: [PlayCheckboxShowcaseModule],
     }),
   ],
+  argTypes: {
+    labelPosition: {
+      options: ['before', 'after'],
+      control: { type: 'inline-radio' },
+    },
+  },
 } as Meta<PlayCheckboxShowcaseComponent>;
 
 const Template: Story<PlayCheckboxShowcaseComponent> = (
@@ -19,4 +25,9 @@ const Template: Story<PlayCheckboxShowcaseComponent> = (
 });
 
 export const Showcase = Template.bind({});
-Showcase.args = {};
+Showcase.args = {
+  label: 'I agree to the terms and conditions',
+  labelPosition: 'after',
+  checked: true,
+  disabled: false,
+};

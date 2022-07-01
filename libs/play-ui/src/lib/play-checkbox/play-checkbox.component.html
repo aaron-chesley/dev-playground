@@ -1,5 +1,12 @@
-<label class="container">
-  <ng-content></ng-content>
-  <input type="checkbox" [checked]="checked" />
-  <span class="play-checkbox"></span>
-</label>
+<div class="container" [style.flex-direction]="_labelPosition">
+  <input
+    type="checkbox"
+    [id]="_uniqueId"
+    [checked]="checked"
+    (change)="onChange($event)"
+    [disabled]="disabled"
+  />
+  <label [for]="_uniqueId">
+    <ng-content></ng-content>
+  </label>
+</div>
