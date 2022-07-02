@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { LabelPosition } from '../play-checkbox.component';
+import { LabelPosition } from '../../label-position.type';
 
 @Component({
   selector: 'play-checkbox-showcase',

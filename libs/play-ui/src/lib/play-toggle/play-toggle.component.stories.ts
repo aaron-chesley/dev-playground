@@ -10,11 +10,23 @@ export default {
       imports: [PlayToggleModule],
     }),
   ],
+  argTypes: {
+    labelPosition: {
+      options: ['before', 'after'],
+      control: { type: 'inline-radio' },
+    },
+  },
 } as Meta<PlayToggleComponent>;
 
 const Template: Story<PlayToggleComponent> = (args: PlayToggleComponent) => ({
   props: args,
+  template: `
+    <play-toggle [checked]="checked" [labelPosition]="labelPosition">Toggle Me</play-toggle>
+  `,
 });
 
 export const Showcase = Template.bind({});
-Showcase.args = {};
+Showcase.args = {
+  labelPosition: 'after',
+  checked: true,
+};

@@ -7,8 +7,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-
-export type LabelPosition = 'before' | 'after';
+import { LabelPosition } from '../label-position.type';
 
 @Component({
   selector: 'play-checkbox',
@@ -19,9 +18,6 @@ export type LabelPosition = 'before' | 'after';
 })
 export class PlayCheckboxComponent {
   @HostBinding('class') className = 'play-checkbox';
-
-  _labelPosition: 'row' | 'row-reverse' = 'row';
-  _uniqueId = self.crypto.randomUUID();
 
   @Input() checked = false;
   @Input() disabled = false;
@@ -34,6 +30,9 @@ export class PlayCheckboxComponent {
   }
 
   @Output() playCheckboxChange = new EventEmitter<boolean>();
+
+  _labelPosition: 'row' | 'row-reverse' = 'row';
+  _uniqueId = self.crypto.randomUUID();
 
   onChange(event: Event) {
     this.playCheckboxChange.emit((event.target as HTMLInputElement).checked);

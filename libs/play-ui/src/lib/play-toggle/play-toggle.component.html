@@ -1,1 +1,13 @@
-Play Toggle Works!
+<div class="play-toggle-wrapper" [style.flex-direction]="_labelPosition">
+  <input
+    class="play-toggle-input"
+    type="checkbox"
+    [id]="_uniqueId"
+    [checked]="checked"
+    (change)="onChange($event)"
+    [disabled]="disabled"
+  />
+  <label [for]="_uniqueId">
+    <ng-content></ng-content>
+  </label>
+</div>

@@ -1,0 +1,58 @@
+@use './play-toggle-variables' as toggle;
+
+.play-toggle {
+  display: inline-block;
+}
+
+.play-toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+input[type='checkbox'].play-toggle-input {
+  font-size: 14px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 3.5em;
+  height: 1.5em;
+  background: #ddd;
+  border-radius: 3em;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type='checkbox'].play-toggle-input:checked {
+  background: toggle.$play-toggle-color;
+}
+
+input[type='checkbox'].play-toggle-input:after {
+  position: absolute;
+  content: '';
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  background: #fff;
+  -webkit-box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 0.25em rgba(0, 0, 0, 0.3);
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+  left: 0;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type='checkbox'].play-toggle-input:checked:after {
+  left: calc(100% - 1.5em);
+}
+
+label {
+  position: relative;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 0.25rem 0;
+  user-select: none;
+}
