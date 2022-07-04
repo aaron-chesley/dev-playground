@@ -21,7 +21,7 @@ export default {
 const Template: Story<PlayToggleComponent> = (args: PlayToggleComponent) => ({
   props: args,
   template: `
-    <play-toggle [checked]="checked" [labelPosition]="labelPosition">Toggle Me</play-toggle>
+    <play-toggle [checked]="checked" [labelPosition]="labelPosition" [disabled]="disabled">Toggle Me</play-toggle>
   `,
 });
 
@@ -29,4 +29,5 @@ export const Showcase = Template.bind({});
 Showcase.args = {
   labelPosition: 'after',
   checked: true,
+  disabled: true,
 };

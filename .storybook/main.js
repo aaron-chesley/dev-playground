@@ -1,3 +1,5 @@
+process.env.NODE_ENV = "development";
+
 module.exports = {
   stories: [],
   addons: ['@storybook/addon-essentials'],

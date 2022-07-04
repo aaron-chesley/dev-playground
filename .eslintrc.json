@@ -14,7 +14,12 @@
             "depConstraints": [
               {
                 "sourceTag": "scope:dev-playground-demo",
-                "onlyDependOnLibsWithTags": ["scope:shared", "scope:angular", "type:util", "type:ui"]
+                "onlyDependOnLibsWithTags": [
+                  "scope:shared",
+                  "scope:angular",
+                  "type:util",
+                  "type:ui"
+                ]
               },
               {
                 "sourceTag": "scope:shared",
@@ -40,7 +45,17 @@
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {}
+      "rules": {
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "extendDefaults": true,
+            "types": {
+              "{}": false
+            }
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],

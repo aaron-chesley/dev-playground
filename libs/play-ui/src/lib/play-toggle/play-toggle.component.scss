@@ -23,6 +23,12 @@ input[type='checkbox'].play-toggle-input {
   outline: none;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+
+  &:disabled, &:disabled ~ label {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+  }
 }
 
 input[type='checkbox'].play-toggle-input:checked {
