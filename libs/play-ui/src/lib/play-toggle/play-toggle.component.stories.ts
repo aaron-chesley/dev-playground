@@ -29,5 +29,5 @@ export const Showcase = Template.bind({});
 Showcase.args = {
   labelPosition: 'after',
   checked: true,
-  disabled: true,
+  disabled: false,
 };

@@ -14,6 +14,13 @@ export default {
 
 const Template: Story<PlayRadioComponent> = (args: PlayRadioComponent) => ({
   props: args,
+  template: `
+  <play-radio-group>
+    <play-radio>Radio 1</play-radio>
+    <play-radio>Radio 2</play-radio>
+    <play-radio>Radio 3</play-radio>
+  </play-radio-group>
+  `,
 });
 
 export const Showcase = Template.bind({});
