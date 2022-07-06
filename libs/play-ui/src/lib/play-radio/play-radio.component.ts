@@ -21,11 +21,11 @@ const PlayRadio = LabelPositionBase();
 export class PlayRadioComponent extends PlayRadio {
   @HostBinding('class') className = 'play-radio';
 
-  @Input() name = '';
+  @Input() name = self.crypto.randomUUID();
   @Input() checked = false;
   @Input() disabled = false;
-  @Input() value: any;
-  @Output() playValueChange = new EventEmitter<any>();
+  @Input() value: unknown;
+  @Output() playValueChange = new EventEmitter<unknown>();
 
   onCheckChange(event: Event) {
     this.playValueChange.emit((event.target as HTMLInputElement).value);

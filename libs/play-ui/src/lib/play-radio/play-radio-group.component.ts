@@ -29,23 +29,23 @@ export class PlayRadioGroupComponent
   extends PlayRadioGroup
   implements AfterContentInit, OnDestroy
 {
-  static id = 0;
   @HostBinding('class') className = 'play-radio-group';
   @ContentChildren(PlayRadioComponent)
   playRadioButtons: QueryList<PlayRadioComponent> = new QueryList();
 
-  @Input() value: any;
+  @Input() value: unknown;
   @Input() name = self.crypto.randomUUID();
-  @Output() playRadioChange = new EventEmitter<any>();
+  @Output() playRadioChange = new EventEmitter<unknown>();
 
   $ngDestroy = new Subject();
 
-  get id(): number {
-    return PlayRadioGroupComponent.id;
-  }
-
   ngAfterContentInit() {
-    this.playRadioButtons.forEach((btn) => (btn.name = this.name));
+    this.playRadioButtons.forEach((btn) => {
+      btn.name = this.name;
+      if (JSON.stringify(btn.value) === JSON.stringify(this.value)) {
+        btn.checked = true;
+      }
+    });
 
     merge(...this.playRadioButtons.map((btn) => btn.playValueChange))
       .pipe(takeUntil(this.$ngDestroy))
@@ -57,10 +57,5 @@ export class PlayRadioGroupComponent
   ngOnDestroy(): void {
     this.$ngDestroy.next();
     this.$ngDestroy.complete();
-  }
-
-  constructor() {
-    super();
-    PlayRadioGroupComponent.id++;
   }
 }

@@ -7,7 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayRadioShowcaseComponent {
-  selectedValue: any = 0;
+  selectedValue = 2;
   onPlayRadioChange(val: any) {
     this.selectedValue = val;
   }
