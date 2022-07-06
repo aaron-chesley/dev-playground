@@ -1,0 +1,13 @@
+<play-radio-group
+  [value]="selectedValue"
+  (playRadioChange)="onPlayRadioChange($event)"
+>
+  <play-radio [value]="1">Radio 1</play-radio>
+  <play-radio [value]="2">Radio 2</play-radio>
+  <play-radio [value]="3">Radio 3</play-radio>
+</play-radio-group>
+
+<br />
+<span
+  >Selected Value: <strong>{{ selectedValue }}</strong></span
+>

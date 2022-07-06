@@ -2,9 +2,11 @@
   <input
     class="play-radio-input"
     type="radio"
+    [name]="name"
     [id]="_uniqueId"
     [checked]="checked"
     (change)="onCheckChange($event)"
+    [value]="value"
     [disabled]="disabled"
   />
   <label [for]="_uniqueId">

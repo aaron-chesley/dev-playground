@@ -1,12 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
+  Input,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { CheckedBase, DisabledBase, LabelPositionBase } from '../mixins/input';
+import { LabelPositionBase } from '../mixins/input';
 
-const PlayRadio = CheckedBase(DisabledBase(LabelPositionBase()));
+const PlayRadio = LabelPositionBase();
 
 @Component({
   selector: 'play-radio',
@@ -17,4 +20,14 @@ const PlayRadio = CheckedBase(DisabledBase(LabelPositionBase()));
 })
 export class PlayRadioComponent extends PlayRadio {
   @HostBinding('class') className = 'play-radio';
+
+  @Input() name = '';
+  @Input() checked = false;
+  @Input() disabled = false;
+  @Input() value: any;
+  @Output() playValueChange = new EventEmitter<any>();
+
+  onCheckChange(event: Event) {
+    this.playValueChange.emit((event.target as HTMLInputElement).value);
+  }
 }
