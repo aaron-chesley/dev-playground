@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { PlayInputTextDirective } from './play-input-text';
+import { PlayInputTextComponent } from './play-input-text.component';
 
 @NgModule({
   imports: [],
-  declarations: [PlayInputTextDirective],
-  exports: [PlayInputTextDirective],
+  declarations: [PlayInputTextComponent],
+  exports: [PlayInputTextComponent],
   providers: [],
 })
 export class PlayInputTextModule {}
