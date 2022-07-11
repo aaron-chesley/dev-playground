@@ -1,0 +1,24 @@
+<ng-container [ngSwitch]="size">
+  <h1 class="play-heading-1" *ngSwitchCase="1">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h1>
+  <h2 class="play-heading-2" *ngSwitchCase="2">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h2>
+  <h3 class="play-heading-3" *ngSwitchCase="3">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h3>
+  <h4 class="play-heading-4" *ngSwitchCase="4">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h4>
+  <h5 class="play-heading-5" *ngSwitchCase="5">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h5>
+  <h6 class="play-heading-6" *ngSwitchCase="6">
+    <ng-container *ngTemplateOutlet="heading"></ng-container>
+  </h6>
+</ng-container>
+
+<ng-template #heading>
+  <ng-content></ng-content>
+</ng-template>
