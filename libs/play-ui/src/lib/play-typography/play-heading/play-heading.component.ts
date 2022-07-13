@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   Input,
   ViewEncapsulation,
 } from '@angular/core';
@@ -13,5 +14,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayHeadingComponent {
+  @HostBinding('className') playHeading = 'play-heading';
   @Input() size: number | undefined;
 }
