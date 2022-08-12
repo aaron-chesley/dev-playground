@@ -1,13 +1,13 @@
 <play-card>
   <play-card-header>Confirm</play-card-header>
-  <play-card-body>{{ data?.confirmBody }}</play-card-body>
+  <play-card-body>{{ data.confirmBody }}</play-card-body>
   <play-card-footer position="right">
     <play-button-group [gap]="10">
       <button
         playButton
         appearance="play-outline"
         theme="accent"
-        [mat-dialog-close]="false"
+        (click)="closeDialog(false)"
       >
         No
       </button>
@@ -16,7 +16,7 @@
         appearance="play-flat"
         theme="accent"
         playRipple
-        [mat-dialog-close]="true"
+        (click)="closeDialog(true)"
       >
         Yes
       </button>

@@ -1,0 +1,16 @@
+<mat-sidenav-container
+  [hasBackdrop]="hasBackdrop"
+  (backdropClick)="backdropClick.emit()"
+>
+  <mat-sidenav
+    [mode]="mode"
+    [opened]="opened"
+    [disableClose]="disableClose"
+    [position]="position"
+  >
+    <ng-content select="play-sidenav"></ng-content>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content select="play-sidenav-content"></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

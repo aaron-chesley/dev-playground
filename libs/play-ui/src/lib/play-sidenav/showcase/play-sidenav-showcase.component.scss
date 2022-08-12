@@ -1,0 +1,20 @@
+.example-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.example-sidenav {
+  background-color: blueviolet;
+  padding: 20px;
+  color: white;
+  height: 100%;
+  width: 150px;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: teal;
+}

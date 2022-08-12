@@ -4,7 +4,7 @@ import {
   Inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { PlayModalConfirmData } from './play-modal-confirm-data.interface';
 
 @Component({
@@ -14,5 +14,12 @@ import { PlayModalConfirmData } from './play-modal-confirm-data.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayModalConfirmComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: PlayModalConfirmData) {}
+  closeDialog(value: boolean) {
+    this.dialogRef.close(value);
+  }
+
+  constructor(
+    @Inject(DIALOG_DATA) public data: PlayModalConfirmData,
+    private dialogRef: DialogRef<boolean, PlayModalConfirmComponent>
+  ) {}
 }

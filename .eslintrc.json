@@ -13,7 +13,7 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "scope:dev-playground-demo",
+                "sourceTag": "type:project",
                 "onlyDependOnLibsWithTags": [
                   "scope:shared",
                   "scope:angular",

@@ -1,0 +1,13 @@
+<play-sidenav-container
+  class="example-container"
+  [opened]="opened"
+  [hasBackdrop]="true"
+  [disableClose]="disableClose"
+  [mode]="mode"
+  (backdropClick)="onBackdropClick()"
+>
+  <play-sidenav class="example-sidenav" #sidenav>Sidenav</play-sidenav>
+  <play-sidenav-content class="example-sidenav-content">
+    <button (click)="opened = !opened">Toggle Sidenav</button>
+  </play-sidenav-content>
+</play-sidenav-container>

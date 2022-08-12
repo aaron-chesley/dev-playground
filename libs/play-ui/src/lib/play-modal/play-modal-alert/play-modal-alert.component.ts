@@ -4,7 +4,7 @@ import {
   Inject,
   ViewEncapsulation,
 } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogRef, DIALOG_DATA } from '@angular/cdk/dialog';
 import { PlayModalAlertData } from './play-modal-alert-data.interface';
 
 @Component({
@@ -14,5 +14,11 @@ import { PlayModalAlertData } from './play-modal-alert-data.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayModalAlertComponent {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: PlayModalAlertData) {}
+  constructor(
+    @Inject(DIALOG_DATA) public data: PlayModalAlertData,
+    private dialogRef: DialogRef<PlayModalAlertComponent>
+  ) {}
+  closeDialog() {
+    this.dialogRef.close();
+  }
 }
