@@ -15,10 +15,13 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/service-worker-poc/src/favicon.ico",
-          "apps/service-worker-poc/src/assets"
+          "apps/service-worker-poc/src/assets",
+          "apps/service-worker-poc/src/manifest.webmanifest"
         ],
         "styles": ["apps/service-worker-poc/src/styles.scss"],
-        "scripts": []
+        "scripts": [],
+        "serviceWorker": true,
+        "ngswConfigPath": "apps/service-worker-poc/ngsw-config.json"
       },
       "configurations": {
         "production": {
