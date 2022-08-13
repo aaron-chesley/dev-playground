@@ -4,6 +4,8 @@
     "dev-playground-demo": "apps/dev-playground-demo",
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
     "play-ui": "libs/play-ui",
+    "service-worker-poc": "apps/service-worker-poc",
+    "service-worker-poc-e2e": "apps/service-worker-poc-e2e",
     "storybook": "libs/storybook",
     "storybook-e2e": "apps/storybook-e2e",
     "tiptap-poc": "apps/tiptap-poc",
