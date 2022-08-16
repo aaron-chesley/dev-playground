@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
+import { NotificationPayload } from './notification-payload.interface';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  sendNotification(title: string, options: NotificationOptions): void {
+  sendNotification(payload: NotificationPayload): void {
     if (this.getPermissionLevel() === 'denied') {
       return;
     }
@@ -14,7 +15,7 @@ export class NotificationService {
       return;
     }
     navigator.serviceWorker.ready.then((serviceWorker) => {
-      serviceWorker.showNotification(title, options);
+      serviceWorker.showNotification(payload.title, payload.options);
     });
   }
 

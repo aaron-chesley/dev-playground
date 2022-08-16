@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NotificationService } from '@dev-playground/notifications';
+import { AppNotificationMap } from './app-notification';
 
 @Component({
   selector: 'dev-playground-root',
@@ -9,25 +10,9 @@ import { NotificationService } from '@dev-playground/notifications';
 })
 export class AppComponent {
   sendNotification() {
-    this.notificationService.sendNotification('Incoming WebRTC Call', {
-      actions: [
-        {
-          title: 'Answer Call',
-          action: 'ANSWER_CALL',
-        },
-        {
-          title: 'Reject Call',
-          action: 'REJECT_CALL',
-        },
-      ],
-      data: {
-        onActionClick: {
-          ANSWER_CALL: {
-            operation: 'focusLastFocusedOrOpen',
-          },
-        },
-      },
-    });
+    this.notificationService.sendNotification(
+      AppNotificationMap['INCOMING_CALL']
+    );
   }
 
   requestNotificationPermission() {
