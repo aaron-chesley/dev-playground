@@ -3,15 +3,22 @@ import { NotificationPayload } from './notification-payload.interface';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  sendNotification(payload: NotificationPayload): void {
+  async sendNotification(payload: NotificationPayload): Promise<void> {
     if (this.getPermissionLevel() === 'denied') {
       return;
     }
     if (this.getPermissionLevel() === 'default') {
-      alert(
-        'Permission to show notifications not granted. Please review your settings'
+      const showNotifications = confirm(
+        'We need permission to show notifications. If this is what you want click "OK"'
       );
-      return;
+
+      if (showNotifications) {
+        const permissionGranted = await this.requestPermission();
+
+        if (permissionGranted !== 'granted') {
+          return;
+        }
+      }
     }
     navigator.serviceWorker.ready.then((serviceWorker) => {
       serviceWorker.showNotification(payload.title, payload.options);
