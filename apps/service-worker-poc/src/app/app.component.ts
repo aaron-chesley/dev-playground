@@ -1,34 +1,46 @@
-import { Component, OnInit } from '@angular/core';
-import { SwPush } from '@angular/service-worker';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NotificationService } from '@dev-playground/notifications';
 
 @Component({
   selector: 'dev-playground-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit {
-  title = 'service-worker-poc';
-
-  ngOnInit() {
-    this.swPush.notificationClicks.subscribe((res) =>
-      console.log('click:', res)
-    );
-    Notification.requestPermission().then((res) => {
-      navigator.serviceWorker;
-      navigator.serviceWorker.ready.then((registration) => {
-        navigator.serviceWorker;
-        console.log('registration: ', registration);
-        registration.showNotification('Notification With Service Worker', {
-          actions: [
-            {
-              title: 'Answer Call',
-              action: 'ANSWER_CALL',
-            },
-          ],
-        });
-      });
+export class AppComponent {
+  sendNotification() {
+    this.notificationService.sendNotification('Incoming WebRTC Call', {
+      actions: [
+        {
+          title: 'Answer Call',
+          action: 'ANSWER_CALL',
+        },
+        {
+          title: 'Reject Call',
+          action: 'REJECT_CALL',
+        },
+      ],
+      data: {
+        onActionClick: {
+          default: {
+            operation: 'openWindow',
+          },
+        },
+      },
     });
   }
 
-  constructor(private swPush: SwPush) {}
+  requestNotificationPermission() {
+    this.notificationService.requestPermission().then((res) => {
+      if (res === 'granted') {
+        alert('Notifications are enabled!');
+      } else if (res === 'denied') {
+        alert(
+          'You have denied permission to show notifications. You will need to review browser settings to change this later https://support.google.com/chrome/answer/3220216?hl=en&co=GENIE.Platform%3DDesktop'
+        );
+      }
+    });
+  }
+
+  constructor(private notificationService: NotificationService) {}
 }
