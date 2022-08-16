@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { SwPush } from '@angular/service-worker';
 import { NotificationService } from '@dev-playground/notifications';
 import { AppNotificationMap } from './app-notification';
 
@@ -27,5 +28,12 @@ export class AppComponent {
     });
   }
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService,
+    private swPush: SwPush
+  ) {
+    this.swPush.notificationClicks.subscribe((res) => {
+      console.log('Action Clicked:', res.action);
+    });
+  }
 }

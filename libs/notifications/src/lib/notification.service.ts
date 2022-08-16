@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { SwPush } from '@angular/service-worker';
 import { NotificationPayload } from './notification-payload.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -40,11 +39,5 @@ export class NotificationService {
 
   getPermissionLevel(): NotificationPermission {
     return Notification.permission;
-  }
-
-  constructor(private swPush: SwPush) {
-    this.swPush.notificationClicks.subscribe((res) => {
-      console.log('Notification Clicked:', res);
-    });
   }
 }
