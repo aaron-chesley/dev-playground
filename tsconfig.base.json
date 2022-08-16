@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dev-playground/notifications": ["libs/notifications/src/index.ts"],
       "@dev-playground/play-ui": ["libs/play-ui/src/index.ts"],
       "@dev-playground/storybook": ["libs/storybook/src/index.ts"]
     }
