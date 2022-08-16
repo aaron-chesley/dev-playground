@@ -22,8 +22,8 @@ export class AppComponent {
       ],
       data: {
         onActionClick: {
-          default: {
-            operation: 'openWindow',
+          ANSWER_CALL: {
+            operation: 'focusLastFocusedOrOpen',
           },
         },
       },
