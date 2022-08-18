@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PlayNotificationPayload } from './play-notification-payload.interface';
 
 @Injectable({ providedIn: 'root' })
-export class NotificationService {
+export class PlayNotificationService {
   async sendNotification(payload: PlayNotificationPayload): Promise<void> {
     if (this.getPermissionLevel() === 'denied') {
       return;
