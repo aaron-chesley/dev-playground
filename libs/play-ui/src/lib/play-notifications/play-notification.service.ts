@@ -20,9 +20,17 @@ export class PlayNotificationService {
         }
       }
     }
-    navigator.serviceWorker.ready.then((serviceWorker) => {
+
+    const useServiceWorker = await this.shouldUseServiceWorker();
+
+    if (useServiceWorker) {
+      const serviceWorker = await navigator.serviceWorker.ready;
       serviceWorker.showNotification(payload.title, payload.options);
-    });
+    } else {
+      // Fallback to Notifications API without actions
+      const notification = new Notification(payload.title);
+      notification.onclick = () => window.focus();
+    }
   }
 
   async requestPermission(): Promise<NotificationPermission> {
@@ -35,6 +43,22 @@ export class PlayNotificationService {
         permissionResult.then(resolve, reject);
       }
     });
+  }
+
+  async shouldUseServiceWorker(): Promise<boolean> {
+    if (!('serviceWorker' in navigator)) {
+      // Browser doesn't support service workers
+      return false;
+    }
+
+    // Check if there is a service worker registered and active:
+    const swRegistration = await navigator.serviceWorker.getRegistration();
+
+    return (
+      !!swRegistration &&
+      !!swRegistration.active &&
+      swRegistration.active.state === 'activated'
+    );
   }
 
   isSupported(): boolean {
