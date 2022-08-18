@@ -251,7 +251,7 @@
     tslib "^2.3.0"
     yargs "^17.2.1"
 
-"@angular/compiler@114.2.0-next.1":
+"@angular/compiler@14.2.0-next.1":
   version "14.2.0-next.1"
   resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-14.2.0-next.1.tgz#73c0972b931a2fda077b4ce24c97a310d1d6d89f"
   integrity sha512-MqGSkG20L/uiU5IEnkVwRpxY88ox85DZNlQUbScZ8IVAPdk4Tug0ioIkYRkLSYpqlxjY/Mr/Rp0LsHJ4COiLBw==
