@@ -1,11 +1,11 @@
-import { NotificationPayload } from '@dev-playground/notifications';
+import { PlayNotificationPayload } from '@dev-playground/play-ui';
 
 export enum AppNotification {
   INCOMING_CALL = 'INCOMING_CALL',
 }
 
 export const AppNotificationMap: {
-  [key in AppNotification]: NotificationPayload;
+  [key in AppNotification]: PlayNotificationPayload;
 } = {
   INCOMING_CALL: {
     title: 'Incoming Call',

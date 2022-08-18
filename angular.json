@@ -3,7 +3,6 @@
   "projects": {
     "dev-playground-demo": "apps/dev-playground-demo",
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
-    "notifications": "libs/notifications",
     "play-ui": "libs/play-ui",
     "service-worker-poc": "apps/service-worker-poc",
     "service-worker-poc-e2e": "apps/service-worker-poc-e2e",

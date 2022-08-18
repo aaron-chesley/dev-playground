@@ -1,4 +1,4 @@
-export interface NotificationPayload {
+export interface PlayNotificationPayload {
   title: string;
   options: NotificationOptions;
 }

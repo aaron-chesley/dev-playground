@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { SwPush } from '@angular/service-worker';
-import { NotificationService } from '@dev-playground/notifications';
+import { NotificationService } from '@dev-playground/play-ui';
 import { AppNotificationMap } from './app-notification';
 
 @Component({
