@@ -10,8 +10,11 @@ import { PlayModalService } from '../play-modal.service';
   styles: [
     `
       .container {
-        height: 400px;
+        height: 300px;
         width: 200px;
+        background: white;
+        padding: 20px;
+        border-radius: 4px;
       }
     `,
   ],

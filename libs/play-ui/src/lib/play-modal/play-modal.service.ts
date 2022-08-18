@@ -1,13 +1,11 @@
-import { Dialog, DialogRef } from '@angular/cdk/dialog';
-import { ComponentType } from '@angular/cdk/portal';
+import { Dialog, DialogConfig, DialogRef } from '@angular/cdk/dialog';
+import { BasePortalOutlet, ComponentType } from '@angular/cdk/portal';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PlayModalAlertData } from './play-modal-alert/play-modal-alert-data.interface';
 import { PlayModalAlertComponent } from './play-modal-alert/play-modal-alert.component';
 import { PlayModalConfirmData } from './play-modal-confirm/play-modal-confirm-data.interface';
 import { PlayModalConfirmComponent } from './play-modal-confirm/play-modal-confirm.component';
-import { PlayModalCustomComponent } from './play-modal-custom/play-modal-custom.component';
-import { PlayModalLoaderService } from './play-modal-loader.service';
 
 @Injectable({ providedIn: 'root' })
 export class PlayModalService {
@@ -21,26 +19,31 @@ export class PlayModalService {
     });
   }
 
-  confirm(data: PlayModalConfirmData): Observable<unknown> {
-    const ref = this.dialog.open(PlayModalConfirmComponent, {
+  confirm(data: PlayModalConfirmData): Observable<boolean> {
+    const ref = this.dialog.open<
+      boolean,
+      PlayModalConfirmData,
+      PlayModalConfirmComponent
+    >(PlayModalConfirmComponent, {
       disableClose: true,
       hasBackdrop: true,
       height: '200px',
       width: '400px',
       data: data,
     });
-
-    return ref.closed;
+    return ref.closed as Observable<boolean>;
   }
 
-  custom<T>(component: ComponentType<T>): DialogRef<unknown, T> {
-    return this.dialog.open(component);
+  custom<TComponent, TData, TResult>(
+    component: ComponentType<TComponent>,
+    config: DialogConfig<
+      TData,
+      DialogRef<TResult, TComponent>,
+      BasePortalOutlet
+    > = {}
+  ): DialogRef<TResult, TComponent> {
+    return this.dialog.open(component, config);
   }
 
-  constructor(
-    private dialog: Dialog,
-    private playModalLoaderService: PlayModalLoaderService
-  ) {
-    this.playModalLoaderService.loadStyles(PlayModalCustomComponent);
-  }
+  constructor(private dialog: Dialog) {}
 }
