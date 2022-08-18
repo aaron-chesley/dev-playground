@@ -17,15 +17,7 @@ export class AppComponent {
   }
 
   requestNotificationPermission() {
-    this.notificationService.requestPermission().then((res) => {
-      if (res === 'granted') {
-        alert('Notifications are enabled!');
-      } else if (res === 'denied') {
-        alert(
-          'You have denied permission to show notifications. You will need to review browser settings to change this later https://support.google.com/chrome/answer/3220216?hl=en&co=GENIE.Platform%3DDesktop'
-        );
-      }
-    });
+    this.notificationService.requestPermission();
   }
 
   constructor(
