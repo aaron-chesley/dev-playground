@@ -9,7 +9,8 @@
     "start:tiptap-poc": "nx serve tiptap-poc",
     "start:service-worker-poc": "nx serve service-worker-poc",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "deploy-storybook": "nx build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/playground-ui"
   },
   "private": true,
   "dependencies": {
@@ -28,6 +29,7 @@
     "@angular/service-worker": "14.2.0-next.1",
     "@nrwl/angular": "14.5.5",
     "@storybook/core-server": "6.5.9",
+    "@storybook/storybook-deployer": "^2.8.12",
     "@tiptap/core": "^2.0.0-beta.174",
     "@tiptap/extension-bubble-menu": "^2.0.0-beta.55",
     "@tiptap/extension-color": "^2.0.0-beta.9",
