@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,6 +19,7 @@ import { debounceTime } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     PlayButtonModule,
@@ -55,20 +56,22 @@ export class PlayThemeShowcaseComponent implements OnInit {
 
   private primaryColorChange(primaryColor: string | null) {
     if (!primaryColor) return;
-    const lighter = tinycolor(primaryColor).brighten(25).toHexString();
-    const lightest = tinycolor(primaryColor).brighten(75).toHexString();
+    const regular = tinycolor(primaryColor).toHslString();
+    const lighter = tinycolor(primaryColor).setAlpha(0.75).toHslString();
+    const lightest = tinycolor(primaryColor).setAlpha(0.1).toHslString();
 
-    this.loadStyle('--play-primary-color', primaryColor);
+    this.loadStyle('--play-primary-color', regular);
     this.loadStyle('--play-primary-color-lighter', lighter);
     this.loadStyle('--play-primary-color-lightest', lightest);
   }
 
   private accentColorChange(accentColor: string | null) {
     if (!accentColor) return;
-    const lighter = tinycolor(accentColor).brighten(25).toHexString();
-    const lightest = tinycolor(accentColor).brighten(75).toHexString();
+    const regular = tinycolor(accentColor).toHslString();
+    const lighter = tinycolor(accentColor).setAlpha(0.75).toHslString();
+    const lightest = tinycolor(accentColor).setAlpha(0.1).toHslString();
 
-    this.loadStyle('--play-accent-color', accentColor);
+    this.loadStyle('--play-accent-color', regular);
     this.loadStyle('--play-accent-color-lighter', lighter);
     this.loadStyle('--play-accent-color-lightest', lightest);
   }
