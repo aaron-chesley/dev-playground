@@ -55,8 +55,8 @@ export class PlayThemeShowcaseComponent implements OnInit {
 
   private primaryColorChange(primaryColor: string | null) {
     if (!primaryColor) return;
-    const lighter = tinycolor(primaryColor).lighten(10).toHexString();
-    const lightest = tinycolor(primaryColor).lighten(40).toHexString();
+    const lighter = tinycolor(primaryColor).brighten(25).toHexString();
+    const lightest = tinycolor(primaryColor).brighten(75).toHexString();
 
     this.loadStyle('--play-primary-color', primaryColor);
     this.loadStyle('--play-primary-color-lighter', lighter);
@@ -65,8 +65,8 @@ export class PlayThemeShowcaseComponent implements OnInit {
 
   private accentColorChange(accentColor: string | null) {
     if (!accentColor) return;
-    const lighter = tinycolor(accentColor).lighten(10).toHexString();
-    const lightest = tinycolor(accentColor).lighten(40).toHexString();
+    const lighter = tinycolor(accentColor).brighten(25).toHexString();
+    const lightest = tinycolor(accentColor).brighten(75).toHexString();
 
     this.loadStyle('--play-accent-color', accentColor);
     this.loadStyle('--play-accent-color-lighter', lighter);
