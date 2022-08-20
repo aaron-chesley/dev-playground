@@ -4,15 +4,13 @@
 /* Globals */
 :root {
   /* Colors */
-  --play-primary: 31, 70, 144;
-  --play-primary-color: rgba(var(--play-primary), 1);
-  --play-primary-color-lighter: rgba(var(--play-primary), .5);
-  --play-primary-color-lightest: rgba(var(--play-primary), .15);
+  --play-primary-color: #fd1212;
+  --play-primary-color-lighter: #fd4545;
+  --play-primary-color-lightest: #ffdcdc;
 
-  --play-accent: 255, 165, 0;
-  --play-accent-color: rgba(var(--play-accent), 1);
-  --play-accent-color-lighter: rgba(var(--play-accent), .5);
-  --play-accent-color-lightest: rgba(var(--play-accent), .15);
+  --play-accent-color: #4cc733;
+  --play-accent-color-lighter: #6ed459;
+  --play-accent-color-lightest: #d8f4d2;
 
   --play-success-color: #16d067;
   --play-error-color: #d02c16;
@@ -36,4 +34,3 @@ $play-error-color: #{var(--play-error-color)};
 $play-warning-color: #{var(--play-warning-color)};
 
 $play-text-color: #{var(--play-text-color)};
-

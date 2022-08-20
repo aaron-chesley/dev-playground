@@ -1,0 +1,10 @@
+.colors-container {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 10px;
+  gap: 10px;
+  label {
+    display: flex;
+    flex-direction: column;
+  }
+}

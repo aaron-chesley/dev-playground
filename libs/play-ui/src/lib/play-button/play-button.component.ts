@@ -7,7 +7,7 @@ import {
   Inject,
   OnChanges,
 } from '@angular/core';
-import { PlayTheme } from '../play-theme.type';
+import { PlayTheme } from '../play-theme/play-theme.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
 import {
   PlayButtonDefaultOptions,
