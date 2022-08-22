@@ -6,11 +6,11 @@
   /* Colors */
   --play-primary-color: hsl(4, 77%, 48%);
   --play-primary-color-lighter: hsla(4, 77%, 48%, 0.75);
-  --play-primary-color-lightest: #ffc5c5;
+  --play-primary-color-lightest: hsla(4, 77%, 48%, 0.1);
 
   --play-accent-color: hsl(206, 81%, 25%);
-  --play-accent-color-lighter: hsla(206, 80%, 25%, 0.75);
-  --play-accent-color-lightest: hsla(206, 80%, 25%, 0.1);
+  --play-accent-color-lighter: hsla(206, 81%, 25%, 0.75);
+  --play-accent-color-lightest: hsla(206, 81%, 25%, 0.1);
 
   --play-success-color: #16d067;
   --play-error-color: #d02c16;

@@ -9,8 +9,15 @@ import { PlayButtonModule } from '../../play-button/play-button.module';
 import tinycolor from 'tinycolor2';
 import { PlayRippleModule } from '../../play-ripple/play-ripple';
 import { PlayButtonShowcaseModule } from '../../play-button/play-button-showcase/play-button-showcase.module';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { PLAY_CSS_VARIABLES } from '../play-variables';
 
 @Component({
   selector: 'play-theme-showcase',
@@ -28,52 +35,36 @@ import { debounceTime } from 'rxjs/operators';
   ],
 })
 export class PlayThemeShowcaseComponent implements OnInit {
-  primaryColor = new FormControl(
-    tinycolor(
-      getComputedStyle(this.document.documentElement).getPropertyValue(
-        '--play-primary-color'
-      )
-    ).toHexString()
-  );
+  colorsForm: FormGroup;
 
-  accentColor = new FormControl(
-    tinycolor(
-      getComputedStyle(this.document.documentElement).getPropertyValue(
-        '--play-accent-color'
-      )
-    ).toHexString()
-  );
+  originalOrder = (): number => 0;
 
   ngOnInit() {
-    this.primaryColor.valueChanges
-      .pipe(debounceTime(250))
-      .subscribe((color) => this.primaryColorChange(color));
+    const obj = PLAY_CSS_VARIABLES.reduce((accumulator, value) => {
+      return {
+        ...accumulator,
+        [value]: new FormControl(
+          tinycolor(
+            getComputedStyle(this.document.documentElement).getPropertyValue(
+              value
+            )
+          ).toHexString()
+        ),
+      };
+    }, {});
 
-    this.accentColor.valueChanges
-      .pipe(debounceTime(250))
-      .subscribe((color) => this.accentColorChange(color));
+    this.colorsForm = this.fb.group({ ...obj });
+
+    this.colorsForm.valueChanges.pipe(debounceTime(250)).subscribe((val) => {
+      Object.keys(val).forEach((key) => {
+        this.handleColorChange(key, this.colorsForm.value[key]);
+      });
+    });
   }
 
-  private primaryColorChange(primaryColor: string | null) {
-    if (!primaryColor) return;
-    const regular = tinycolor(primaryColor).toHslString();
-    const lighter = tinycolor(primaryColor).setAlpha(0.75).toHslString();
-    const lightest = tinycolor(primaryColor).setAlpha(0.1).toHslString();
-
-    this.loadStyle('--play-primary-color', regular);
-    this.loadStyle('--play-primary-color-lighter', lighter);
-    this.loadStyle('--play-primary-color-lightest', lightest);
-  }
-
-  private accentColorChange(accentColor: string | null) {
-    if (!accentColor) return;
-    const regular = tinycolor(accentColor).toHslString();
-    const lighter = tinycolor(accentColor).setAlpha(0.75).toHslString();
-    const lightest = tinycolor(accentColor).setAlpha(0.1).toHslString();
-
-    this.loadStyle('--play-accent-color', regular);
-    this.loadStyle('--play-accent-color-lighter', lighter);
-    this.loadStyle('--play-accent-color-lightest', lightest);
+  private handleColorChange(variableName: string, variableValue: string) {
+    const color = tinycolor(variableValue).toHslString();
+    this.loadStyle(variableName, color);
   }
 
   private loadStyle(
@@ -87,5 +78,8 @@ export class PlayThemeShowcaseComponent implements OnInit {
     );
   }
 
-  constructor(@Inject(DOCUMENT) private document: Document) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private fb: FormBuilder
+  ) {}
 }

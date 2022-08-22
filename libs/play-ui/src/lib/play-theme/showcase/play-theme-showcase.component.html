@@ -1,12 +1,17 @@
-<div class="colors-container">
-  <label
-    >Primary
-    <input [formControl]="primaryColor" type="color" />
-  </label>
-  <label
-    >Accent
-    <input [formControl]="accentColor" type="color" />
-  </label>
+<div class="colors-container" [formGroup]="colorsForm">
+  <ng-container
+    *ngFor="
+      let variableNameControl of colorsForm.controls
+        | keyvalue: this.originalOrder
+    "
+  >
+    <label
+      >{{ variableNameControl.key }}
+      <input
+        [formControl]="colorsForm.controls[variableNameControl.key]"
+        type="color"
+      />
+    </label>
+  </ng-container>
 </div>
-
 <play-button-showcase></play-button-showcase>
