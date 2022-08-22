@@ -5,6 +5,7 @@
     "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
     "play-lms": "apps/play-lms",
     "play-lms-e2e": "apps/play-lms-e2e",
+    "play-lms-ui": "libs/play-lms/play-lms-ui",
     "play-ui": "libs/play-ui",
     "service-worker-poc": "apps/service-worker-poc",
     "service-worker-poc-e2e": "apps/service-worker-poc-e2e",

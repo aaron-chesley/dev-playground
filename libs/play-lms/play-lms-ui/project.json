@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/play-lms/play-lms-ui/src",
+  "prefix": "dev-playground",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/play-lms/play-lms-ui"],
+      "options": {
+        "jestConfig": "libs/play-lms/play-lms-ui/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/play-lms/play-lms-ui/**/*.ts",
+          "libs/play-lms/play-lms-ui/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

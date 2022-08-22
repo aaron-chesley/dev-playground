@@ -17,6 +17,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@dev-playground/play-lms/play-lms-ui": [
+        "libs/play-lms/play-lms-ui/src/index.ts"
+      ],
       "@dev-playground/play-ui": ["libs/play-ui/src/index.ts"],
       "@dev-playground/storybook": ["libs/storybook/src/index.ts"]
     }
