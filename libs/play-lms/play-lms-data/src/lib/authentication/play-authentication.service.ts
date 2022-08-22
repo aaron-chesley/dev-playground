@@ -12,14 +12,15 @@ import {
   PasswordResetInstructionsPayload,
   PasswordResetPayload,
 } from './authentication.models';
+import { AuthenticationService } from './play-authentication-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class PlayAuthenticationService implements AuthenticationService {
   constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
-  setAuth(data: ServerLoginToken) {
+  setAuth(data: ServerLoginToken): void {
     this.jwtService.saveToken(data);
   }
 
@@ -52,7 +53,7 @@ export class AuthService {
     );
   }
 
-  me() {
+  me(): Observable<AuthUser> {
     return this.apiService.get('/users/me/?expand=tenant');
   }
 }
