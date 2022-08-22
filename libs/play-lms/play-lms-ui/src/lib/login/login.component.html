@@ -1,0 +1,46 @@
+<form
+  class="page-background"
+  [formGroup]="loginForm"
+  (ngSubmit)="loginClicked.emit(loginForm.getRawValue())"
+>
+  <play-card>
+    <play-card-body>
+      <img class="logo" src="logo_transparent.png" alt="logo1" />
+      <play-heading class="welcome-text" [size]="3"
+        >Log in to your account</play-heading
+      >
+
+      <label>
+        Email
+        <input
+          playInputText
+          name="email"
+          formControlName="email"
+          type="email"
+        />
+      </label>
+
+      <label>
+        Password
+        <input
+          playInputText
+          [type]="showPassword ? 'password' : 'text'"
+          formControlName="password"
+        />
+      </label>
+
+      <a class="forgot-password" (click)="forgotPasswordClicked.emit()">
+        <small>Forgot your password?</small></a
+      >
+      <button
+        playButton
+        appearance="play-flat"
+        playRipple
+        type="submit"
+        [disabled]="loading"
+      >
+        Login
+      </button>
+    </play-card-body>
+  </play-card>
+</form>

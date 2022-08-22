@@ -5,9 +5,7 @@ play-card {
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
   background-color: card.$play-card-bg;
   border-radius: card.$play-card-border-radius;
   box-shadow: card.$play-card-box-shadow;
-
 }

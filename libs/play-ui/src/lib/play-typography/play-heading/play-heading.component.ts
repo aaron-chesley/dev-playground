@@ -14,6 +14,6 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class PlayHeadingComponent {
-  @HostBinding('className') playHeading = 'play-heading';
+  @HostBinding('class') playHeading = 'play-heading';
   @Input() size: number | undefined;
 }

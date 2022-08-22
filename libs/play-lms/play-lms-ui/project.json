@@ -26,7 +26,8 @@
         "port": 4400,
         "configDir": "libs/play-lms/play-lms-ui/.storybook",
         "browserTarget": "play-lms-ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {
@@ -41,7 +42,8 @@
         "outputDir": "dist/storybook/play-lms-ui",
         "configDir": "libs/play-lms/play-lms-ui/.storybook",
         "browserTarget": "play-lms-ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {
