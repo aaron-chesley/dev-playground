@@ -17,29 +17,35 @@ export class ApiService {
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
     return this.http
-      .get(`${path}`, { params })
+      .get(`api/${path}`, { params })
       .pipe(catchError(this.formatErrors));
   }
 
   put(path: string, body: any): Observable<any> {
-    return this.http.put(`${path}`, body).pipe(catchError(this.formatErrors));
+    return this.http
+      .put(`api/${path}`, body)
+      .pipe(catchError(this.formatErrors));
   }
 
   patch(path: string, body: unknown = {}): Observable<any> {
-    return this.http.patch(`${path}`, body).pipe(catchError(this.formatErrors));
+    return this.http
+      .patch(`api/${path}`, body)
+      .pipe(catchError(this.formatErrors));
   }
 
   post(path: string, body: any): Observable<any> {
-    return this.http.post(`${path}`, body).pipe(catchError(this.formatErrors));
+    return this.http
+      .post(`api/${path}`, body)
+      .pipe(catchError(this.formatErrors));
   }
 
   delete(path: string): Observable<any> {
-    return this.http.delete(`${path}`).pipe(catchError(this.formatErrors));
+    return this.http.delete(`api/${path}`).pipe(catchError(this.formatErrors));
   }
 
   downloadFile(path: string): Observable<Blob> {
     return this.http
-      .get(`${path}`, { responseType: 'blob' })
+      .get(`api/${path}`, { responseType: 'blob' })
       .pipe(catchError(this.formatErrors));
   }
 }

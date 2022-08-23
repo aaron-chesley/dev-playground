@@ -18,7 +18,8 @@
                   "scope:shared",
                   "scope:angular",
                   "type:util",
-                  "type:ui"
+                  "type:ui",
+                  "type:feature",
                 ]
               },
               {
@@ -36,6 +37,10 @@
               {
                 "sourceTag": "type:ui",
                 "onlyDependOnLibsWithTags": ["type:ui", "type:util"]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": ["type:ui", "type:util", "type:data", "type:feature"]
               }
             ]
           }

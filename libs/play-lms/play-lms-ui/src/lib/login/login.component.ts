@@ -33,7 +33,7 @@ import {
     PlayHeadingModule,
   ],
 })
-export class LoginComponent {
+export class PlayLmsUiLoginComponent {
   @Input() loading = false;
   @Output() forgotPasswordClicked = new EventEmitter<void>();
   @Output() loginClicked = new EventEmitter<{

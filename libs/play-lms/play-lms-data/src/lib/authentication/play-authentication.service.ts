@@ -30,7 +30,7 @@ export class PlayAuthenticationService implements AuthenticationService {
   }
 
   attemptAuth(credentials: LoginPayload): Observable<AuthUser> {
-    return this.apiService.post('/auth/get_token/', credentials).pipe(
+    return this.apiService.post('auth/get_token/', credentials).pipe(
       switchMap((data: ServerLoginToken) => {
         this.setAuth(data);
         return this.me();
@@ -39,21 +39,21 @@ export class PlayAuthenticationService implements AuthenticationService {
   }
 
   refreshToken(token: string) {
-    return this.apiService.post('/auth/refresh_token/', { refresh: token });
+    return this.apiService.post('auth/refresh_token/', { refresh: token });
   }
 
   sendPasswordResetInstructions(body: PasswordResetInstructionsPayload) {
-    return this.apiService.post('/auth/password_reset/', body);
+    return this.apiService.post('auth/password_reset/', body);
   }
 
   resetPassword(path: string, body: PasswordResetPayload) {
     return this.apiService.post(
-      '/auth/password_reset_confirm/' + path + '/',
+      'auth/password_reset_confirm/' + path + '/',
       body
     );
   }
 
   me(): Observable<AuthUser> {
-    return this.apiService.get('/users/me/?expand=tenant');
+    return this.apiService.get('users/me/?expand=tenant');
   }
 }

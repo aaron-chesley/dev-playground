@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700';
+@import '@angular/cdk/overlay-prebuilt.css';
+
+html,
+body {
+  font-family: 'Roboto';
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}

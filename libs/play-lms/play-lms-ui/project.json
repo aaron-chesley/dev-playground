@@ -52,5 +52,5 @@
       }
     }
   },
-  "tags": ["scope:play-lms", "type:ui"]
+  "tags": ["type:ui"]
 }
