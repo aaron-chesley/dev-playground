@@ -28,8 +28,8 @@ import { finalize } from 'rxjs/operators';
 export class PlayLmsLoginFeatureComponent {
   private loadingSub = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.loadingSub.asObservable();
+
   attemptLogin(credentials: LoginPayload) {
-    setTimeout(() => console.log('this: ', this), 5000);
     this.loadingSub.next(true);
     this.authService
       .attemptAuth(credentials)
