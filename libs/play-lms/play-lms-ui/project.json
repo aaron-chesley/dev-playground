@@ -1,7 +1,7 @@
 {
   "projectType": "library",
   "sourceRoot": "libs/play-lms/play-lms-ui/src",
-  "prefix": "dev-playground",
+  "prefix": "playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",

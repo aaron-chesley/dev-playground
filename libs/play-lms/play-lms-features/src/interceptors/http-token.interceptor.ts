@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 
-import { JwtService } from '@dev-playground/play-lms/play-lms-data';
+import { JwtService } from '@playground/play-lms/play-lms-data';
 import { catchError } from 'rxjs/operators';
 
 @Injectable()

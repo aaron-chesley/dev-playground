@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('@dev-playground/play-lms/play-lms-features').then(
+      import('@playground/play-lms/play-lms-features').then(
         (c) => c.PlayLmsLoginFeatureComponent
       ),
   },

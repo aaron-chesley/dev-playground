@@ -3,15 +3,15 @@ import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { environment } from '@dev-playground/environment';
+import { environment } from '@playground/environment';
 import {
   AUTHENTICATION_SERVICE,
   PlayAuthenticationService,
   LoginPayload,
   PlayAuthenticationDemoService,
   AuthenticationService,
-} from '@dev-playground/play-lms/play-lms-data';
-import { PlayLmsUiLoginComponent } from '@dev-playground/play-lms/play-lms-ui';
+} from '@playground/play-lms/play-lms-data';
+import { PlayLmsUiLoginComponent } from '@playground/play-lms/play-lms-ui';
 
 @Component({
   selector: 'play-lms-login-feature',

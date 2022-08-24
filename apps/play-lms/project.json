@@ -1,7 +1,7 @@
 {
   "projectType": "application",
   "sourceRoot": "apps/play-lms/src",
-  "prefix": "dev-playground",
+  "prefix": "playground",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",

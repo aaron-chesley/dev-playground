@@ -1,4 +1,4 @@
-import { PlayNotificationPayload } from '@dev-playground/play-ui';
+import { PlayNotificationPayload } from '@playground/play-ui';
 
 export enum AppNotification {
   INCOMING_CALL = 'INCOMING_CALL',

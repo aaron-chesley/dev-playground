@@ -18,18 +18,18 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@dev-playground/environment": ["libs/environment/src/index.ts"],
-      "@dev-playground/play-lms/play-lms-data": [
+      "@playground/environment": ["libs/environment/src/index.ts"],
+      "@playground/play-lms/play-lms-data": [
         "libs/play-lms/play-lms-data/src/index.ts"
       ],
-      "@dev-playground/play-lms/play-lms-features": [
+      "@playground/play-lms/play-lms-features": [
         "libs/play-lms/play-lms-features/src/index.ts"
       ],
-      "@dev-playground/play-lms/play-lms-ui": [
+      "@playground/play-lms/play-lms-ui": [
         "libs/play-lms/play-lms-ui/src/index.ts"
       ],
-      "@dev-playground/play-ui": ["libs/play-ui/src/index.ts"],
-      "@dev-playground/storybook": ["libs/storybook/src/index.ts"]
+      "@playground/play-ui": ["libs/play-ui/src/index.ts"],
+      "@playground/storybook": ["libs/storybook/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

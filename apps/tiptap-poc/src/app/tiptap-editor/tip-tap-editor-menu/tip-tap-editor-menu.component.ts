@@ -7,7 +7,7 @@ interface Font {
 }
 
 @Component({
-  selector: 'dev-playground-tip-tap-editor-menu',
+  selector: 'playground-tip-tap-editor-menu',
   templateUrl: 'tip-tap-editor-menu.component.html',
   styleUrls: ['tip-tap-editor-menu.component.scss'],
 })

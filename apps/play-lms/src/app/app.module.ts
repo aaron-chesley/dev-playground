@@ -1,8 +1,8 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ENVIRONMENT, environment } from '@dev-playground/environment';
-import { HttpTokenInterceptor } from '@dev-playground/play-lms/play-lms-features';
+import { ENVIRONMENT, environment } from '@playground/environment';
+import { HttpTokenInterceptor } from '@playground/play-lms/play-lms-features';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';

@@ -14,7 +14,7 @@ import {
   PlayInputTextModule,
   PlayRippleModule,
   PlayHeadingModule,
-} from '@dev-playground/play-ui';
+} from '@playground/play-ui';
 
 @Component({
   selector: 'play-lms-ui-login',

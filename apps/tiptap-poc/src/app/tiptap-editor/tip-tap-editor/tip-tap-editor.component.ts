@@ -27,7 +27,7 @@ import DropCursor from '@tiptap/extension-dropcursor';
 import { FontSize } from '../custom-extensions/tip-tap-font-size';
 
 @Component({
-  selector: 'dev-playground-tip-tap-editor',
+  selector: 'playground-tip-tap-editor',
   templateUrl: 'tip-tap-editor.component.html',
   styleUrls: ['tip-tap-editor.component.scss'],
   encapsulation: ViewEncapsulation.None,
