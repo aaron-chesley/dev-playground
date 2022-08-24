@@ -1,8 +1,6 @@
 {
   "version": 2,
   "projects": {
-    "dev-playground-demo": "apps/dev-playground-demo",
-    "dev-playground-demo-e2e": "apps/dev-playground-demo-e2e",
     "environment": "libs/environment",
     "play-lms": "apps/play-lms",
     "play-lms-data": "libs/play-lms/play-lms-data",
