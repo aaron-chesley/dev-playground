@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+
+import { environment } from '@dev-playground/environment';
 import {
   AUTHENTICATION_SERVICE,
   PlayAuthenticationService,
   LoginPayload,
+  PlayAuthenticationDemoService,
+  AuthenticationService,
 } from '@dev-playground/play-lms/play-lms-data';
 import { PlayLmsUiLoginComponent } from '@dev-playground/play-lms/play-lms-ui';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'play-lms-login-feature',
@@ -21,7 +25,9 @@ import { finalize } from 'rxjs/operators';
   providers: [
     {
       provide: AUTHENTICATION_SERVICE,
-      useClass: PlayAuthenticationService,
+      useClass: environment.demoMode
+        ? PlayAuthenticationDemoService
+        : PlayAuthenticationService,
     },
   ],
 })
@@ -36,5 +42,8 @@ export class PlayLmsLoginFeatureComponent {
       .pipe(finalize(() => this.loadingSub.next(false)))
       .subscribe();
   }
-  constructor(private authService: PlayAuthenticationService) {}
+  constructor(
+    @Inject(AUTHENTICATION_SERVICE)
+    private authService: AuthenticationService
+  ) {}
 }
