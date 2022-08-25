@@ -1,17 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, switchMap } from 'rxjs/operators';
 
-import { environment } from '@playground/environment';
 import {
-  AUTHENTICATION_SERVICE,
-  PlayAuthenticationService,
   LoginPayload,
-  PlayAuthenticationDemoService,
-  AuthenticationService,
+  PlayAuthenticationService,
 } from '@playground/play-lms/play-lms-data';
 import { PlayLmsUiLoginComponent } from '@playground/play-lms/play-lms-ui';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'play-lms-login-feature',
@@ -22,14 +19,6 @@ import { PlayLmsUiLoginComponent } from '@playground/play-lms/play-lms-ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, PlayLmsUiLoginComponent],
-  providers: [
-    {
-      provide: AUTHENTICATION_SERVICE,
-      useClass: environment.demoMode
-        ? PlayAuthenticationDemoService
-        : PlayAuthenticationService,
-    },
-  ],
 })
 export class PlayLmsLoginFeatureComponent {
   private loadingSub = new BehaviorSubject<boolean>(false);
@@ -39,11 +28,18 @@ export class PlayLmsLoginFeatureComponent {
     this.loadingSub.next(true);
     this.authService
       .attemptAuth(credentials)
-      .pipe(finalize(() => this.loadingSub.next(false)))
-      .subscribe();
+      .pipe(
+        finalize(() => this.loadingSub.next(false)),
+        switchMap(() => this.authService.me())
+      )
+      .subscribe((user) =>
+        user.is_superuser
+          ? this.router.navigate(['/app/trainings'])
+          : this.router.navigate(['/app/dashboard'])
+      );
   }
   constructor(
-    @Inject(AUTHENTICATION_SERVICE)
-    private authService: AuthenticationService
+    private authService: PlayAuthenticationService,
+    private router: Router
   ) {}
 }

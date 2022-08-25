@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
 
 import { ApiService } from '../api/api.service';
 import { JwtService } from './jwt.service';
@@ -12,12 +12,11 @@ import {
   PasswordResetInstructionsPayload,
   PasswordResetPayload,
 } from './authentication.models';
-import { AuthenticationService } from './play-authentication-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlayAuthenticationService implements AuthenticationService {
+export class PlayAuthenticationService {
   constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
   setAuth(data: ServerLoginToken): void {
@@ -29,17 +28,20 @@ export class PlayAuthenticationService implements AuthenticationService {
     this.jwtService.destroyToken();
   }
 
-  attemptAuth(credentials: LoginPayload): Observable<AuthUser> {
+  attemptAuth(credentials: LoginPayload): Observable<ServerLoginToken> {
     return this.apiService.post('auth/get_token/', credentials).pipe(
-      switchMap((data: ServerLoginToken) => {
+      tap((data: ServerLoginToken) => {
         this.setAuth(data);
-        return this.me();
       })
     );
   }
 
-  refreshToken(token: string) {
-    return this.apiService.post('auth/refresh_token/', { refresh: token });
+  refreshToken(token: string): Observable<ServerLoginToken> {
+    return this.apiService.post('auth/refresh_token/', { refresh: token }).pipe(
+      tap((data: ServerLoginToken) => {
+        this.setAuth(data);
+      })
+    );
   }
 
   sendPasswordResetInstructions(body: PasswordResetInstructionsPayload) {
@@ -53,7 +55,9 @@ export class PlayAuthenticationService implements AuthenticationService {
     );
   }
 
-  me(): Observable<AuthUser> {
-    return this.apiService.get('users/me/?expand=tenant');
+  me(): Observable<AuthUser | null> {
+    return this.apiService
+      .get('users/me/?expand=tenant')
+      .pipe(catchError(() => of(null)));
   }
 }
