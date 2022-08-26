@@ -19,7 +19,7 @@
           "apps/lms/src/assets",
           {
             "glob": "**/*",
-            "input": "libs/play-lms/play-lms-ui/src/lib/assets",
+            "input": "libs/lms/lms-ui/src/lib/assets",
             "output": "/assets/"
           }
         ],

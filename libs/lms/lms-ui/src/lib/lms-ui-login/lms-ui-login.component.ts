@@ -17,9 +17,9 @@ import {
 } from '@playground/play-ui';
 
 @Component({
-  selector: 'play-lms-ui-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'lms-ui-login',
+  templateUrl: './lms-ui-login.component.html',
+  styleUrls: ['./lms-ui-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -33,7 +33,7 @@ import {
     PlayHeadingModule,
   ],
 })
-export class PlayLmsUiLoginComponent {
+export class LmsUiLoginComponent {
   @Input() loading = false;
   @Output() forgotPasswordClicked = new EventEmitter<void>();
   @Output() loginClicked = new EventEmitter<{

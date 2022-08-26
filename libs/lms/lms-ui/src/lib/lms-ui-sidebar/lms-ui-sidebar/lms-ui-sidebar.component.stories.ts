@@ -17,12 +17,12 @@ import {
   videoLibrary,
 } from '@playground/play-ui';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { PlayLmsUiSidebarComponent } from './play-lms-ui-sidebar.component';
-import { PlayLmsUiSidebarItemComponent } from '../play-lms-sidebar-item/play-lms-sidebar-item.component';
+import { LmsUiSidebarComponent } from './lms-ui-sidebar.component';
+import { LmsUiSidebarItemComponent } from '../lms-ui-sidebar-item/lms-ui-sidebar-item.component';
 
 export default {
-  title: 'PlayLmsUiSidebarComponent',
-  component: PlayLmsUiSidebarComponent,
+  title: 'LmsUiSidebarComponent',
+  component: LmsUiSidebarComponent,
   decorators: [
     moduleMetadata({
       imports: [
@@ -57,7 +57,7 @@ export default {
             children: [],
           },
         ]),
-        PlayLmsUiSidebarItemComponent,
+        LmsUiSidebarItemComponent,
         PlayIconModule,
       ],
       providers: [
@@ -85,10 +85,10 @@ export default {
       ],
     }),
   ],
-} as Meta<PlayLmsUiSidebarComponent>;
+} as Meta<LmsUiSidebarComponent>;
 
-const Template: Story<PlayLmsUiSidebarComponent> = (
-  args: PlayLmsUiSidebarComponent
+const Template: Story<LmsUiSidebarComponent> = (
+  args: LmsUiSidebarComponent
 ) => {
   const sidebarItems = [
     {
@@ -138,40 +138,40 @@ const Template: Story<PlayLmsUiSidebarComponent> = (
       sidebarItems: [1, 2, 3, 4],
     },
     template: `
-    <play-lms-ui-sidebar>
-      <play-lms-ui-sidebar-item>
+    <lms-ui-sidebar>
+      <lms-ui-sidebar-item>
         <play-icon name="supervisedUserCircle"></play-icon>
         <span>Employees</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="equalizer"></play-icon>
         <span>Reports</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="settings"></play-icon>
         <span>Settings</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="loyalty"></play-icon>
         <span>Tags</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="groupWork"></play-icon>
         <span>Teams</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="assignment"></play-icon>
         <span>Trainings</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="videoLibrary"></play-icon>
         <span>Videos</span>
-      </play-lms-ui-sidebar-item>
-      <play-lms-ui-sidebar-item>
+      </lms-ui-sidebar-item>
+      <lms-ui-sidebar-item>
         <play-icon name="logout"></play-icon>
         <span>Logout</span>
-      </play-lms-ui-sidebar-item>
-    </play-lms-ui-sidebar>
+      </lms-ui-sidebar-item>
+    </lms-ui-sidebar>
     `,
   };
 };

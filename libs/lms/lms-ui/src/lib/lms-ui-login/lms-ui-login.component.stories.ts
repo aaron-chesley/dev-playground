@@ -1,19 +1,17 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { PlayLmsUiLoginComponent } from './login.component';
+import { LmsUiLoginComponent } from './lms-ui-login.component';
 
 export default {
-  title: 'PlayLmsUiLoginComponent',
-  component: PlayLmsUiLoginComponent,
+  title: 'LmsUiLoginComponent',
+  component: LmsUiLoginComponent,
   decorators: [
     moduleMetadata({
       imports: [],
     }),
   ],
-} as Meta<PlayLmsUiLoginComponent>;
+} as Meta<LmsUiLoginComponent>;
 
-const Template: Story<PlayLmsUiLoginComponent> = (
-  args: PlayLmsUiLoginComponent
-) => ({
+const Template: Story<LmsUiLoginComponent> = (args: LmsUiLoginComponent) => ({
   props: args,
 });
 

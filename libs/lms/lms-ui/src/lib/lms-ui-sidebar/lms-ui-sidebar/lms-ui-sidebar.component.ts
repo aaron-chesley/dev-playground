@@ -8,14 +8,14 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
-  selector: 'play-lms-ui-sidebar',
-  templateUrl: './play-lms-ui-sidebar.component.html',
-  styleUrls: ['./play-lms-ui-sidebar.component.scss'],
+  selector: 'lms-ui-sidebar',
+  templateUrl: './lms-ui-sidebar.component.html',
+  styleUrls: ['./lms-ui-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [MatSidenavModule],
 })
-export class PlayLmsUiSidebarComponent implements OnInit {
+export class LmsUiSidebarComponent implements OnInit {
   drawerMode: MatDrawerMode;
   drawerOpened: boolean;
 
