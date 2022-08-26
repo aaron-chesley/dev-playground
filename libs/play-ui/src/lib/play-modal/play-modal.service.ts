@@ -6,8 +6,9 @@ import { PlayModalAlertData } from './play-modal-alert/play-modal-alert-data.int
 import { PlayModalAlertComponent } from './play-modal-alert/play-modal-alert.component';
 import { PlayModalConfirmData } from './play-modal-confirm/play-modal-confirm-data.interface';
 import { PlayModalConfirmComponent } from './play-modal-confirm/play-modal-confirm.component';
+import { PlayModalModule } from './play-modal.module';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: PlayModalModule })
 export class PlayModalService {
   alert(data: PlayModalAlertData): void {
     this.dialog.open(PlayModalAlertComponent, {

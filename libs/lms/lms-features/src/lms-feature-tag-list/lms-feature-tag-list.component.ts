@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { LmsTagService } from '@playground/lms-data';
 import { LmsUiTag, LmsUiTagListComponent } from '@playground/lms-ui';
-import { PlayModalModule } from '@playground/play-ui';
-import { Observable } from 'rxjs';
+import { PlayModalModule, PlayModalService } from '@playground/play-ui';
+import { Observable, throwError } from 'rxjs';
+import { catchError, filter, switchMap } from 'rxjs/operators';
+import { LmsFeatureTagListStore } from './lms-feature-tag-list.store';
 
 @Component({
   selector: 'lms-feature-tag-list',
@@ -19,23 +20,29 @@ export class LmsFeatureTagListComponent implements OnInit {
   tags$: Observable<LmsUiTag[]>;
 
   ngOnInit() {
-    this.fetchTags();
+    this.tags$ = this.lmsTagStore.tags$;
   }
 
-  fetchTags(): void {
-    this.tags$ = this.tagService.searchTags();
+  deleteTag(tag: LmsUiTag) {
+    this.playModalService
+      .confirm({
+        confirmBody: 'Are you sure you want to delete this tag?',
+      })
+      .pipe(
+        filter((close) => !!close),
+        switchMap(() => this.lmsTagStore.deleteTag(tag)),
+        catchError((err) => {
+          this.playModalService.alert({
+            alertBody: 'There was a problem deleting this tag',
+          });
+          return throwError(err);
+        })
+      )
+      .subscribe();
   }
 
-  async deleteTag(tag: LmsUiTag) {
-    // const shouldDelete = await this.playModalService
-    //   .confirm({ confirmBody: 'Are you sure you want to delete this tag?' })
-    //   .toPromise();
-    // if (shouldDelete) {
-    //   this.tagService.deleteTag(tag.id).subscribe(() => this.fetchTags());
-    // }
-  }
   constructor(
-    private tagService: LmsTagService
-  ) // private playModalService: PlayModalService
-  {}
+    private lmsTagStore: LmsFeatureTagListStore,
+    private playModalService: PlayModalService
+  ) {}
 }

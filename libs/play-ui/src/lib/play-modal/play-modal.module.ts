@@ -6,8 +6,5 @@ import { PlayModalConfirmModule } from './play-modal-confirm/play-modal-confirm.
 
 @NgModule({
   imports: [DialogModule, PlayModalAlertModule, PlayModalConfirmModule],
-  exports: [],
-  declarations: [],
-  providers: [],
 })
 export class PlayModalModule {}
