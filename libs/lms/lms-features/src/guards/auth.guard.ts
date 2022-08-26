@@ -29,23 +29,29 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   }
 
   canLoad(): Observable<boolean> {
-    const token = this.jwtService.getToken();
-    const isTokenExpired = this.jwtService.isExpired(token);
+    try {
+      const token = this.jwtService.getToken();
+      const isTokenExpired = this.jwtService.isExpired(token);
 
-    if (token && !isTokenExpired) {
-      return of(true);
-    }
+      if (token && !isTokenExpired) {
+        return of(true);
+      }
 
-    // If we have a non-expired refresh token, use it.
-    const refreshToken = this.jwtService.getRefreshToken();
-    const refreshTokenExpired = this.jwtService.isExpired(refreshToken);
-    if (refreshToken && !refreshTokenExpired) {
-      return this.authService
-        .refreshToken(refreshToken)
-        .pipe(map((res) => !!res));
-    } else {
-      // If our refresh token doesn't exist or is expired we need the user to login again.
-      this.router.navigate(['/login']);
+      // If we have a non-expired refresh token, use it.
+      const refreshToken = this.jwtService.getRefreshToken();
+      const refreshTokenExpired = this.jwtService.isExpired(refreshToken);
+      if (refreshToken && !refreshTokenExpired) {
+        return this.authService
+          .refreshToken(refreshToken)
+          .pipe(map((res) => !!res));
+      } else {
+        // If our refresh token doesn't exist or is expired we need the user to login again.
+        this.router.navigate(['/login']);
+        return of(false);
+      }
+    } catch (error) {
+      this.authService.purgeAuth();
+      location.reload();
       return of(false);
     }
   }
