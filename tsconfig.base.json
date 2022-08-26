@@ -19,15 +19,11 @@
     "baseUrl": ".",
     "paths": {
       "@playground/environment": ["libs/environment/src/index.ts"],
-      "@playground/play-lms/play-lms-data": [
-        "libs/play-lms/play-lms-data/src/index.ts"
+      "@playground/lms-data": ["libs/play-lms/lms-data/src/index.ts"],
+      "@playground/lms-features": [
+        "libs/play-lms/lms-features/src/index.ts"
       ],
-      "@playground/play-lms/play-lms-features": [
-        "libs/play-lms/play-lms-features/src/index.ts"
-      ],
-      "@playground/play-lms/play-lms-ui": [
-        "libs/play-lms/play-lms-ui/src/index.ts"
-      ],
+      "@playground/lms-ui": ["libs/play-lms/lms-ui/src/index.ts"],
       "@playground/play-ui": ["libs/play-ui/src/index.ts"],
       "@playground/storybook": ["libs/storybook/src/index.ts"]
     }

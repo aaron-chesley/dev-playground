@@ -1,6 +1,6 @@
 import { Component, NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from '@playground/play-lms/play-lms-features';
+import { AuthGuard } from '@playground/lms-features';
 
 function ngHTML(html: string) {
   @Component({
@@ -22,9 +22,7 @@ const routes: Routes = [
   {
     path: 'app',
     loadComponent: () =>
-      import('@playground/play-lms/play-lms-features').then(
-        (c) => c.PlayLmsSidebarComponent
-      ),
+      import('@playground/lms-features').then((c) => c.PlayLmsSidebarComponent),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
@@ -94,7 +92,7 @@ const routes: Routes = [
     path: 'login',
     canLoad: [AuthGuard],
     loadComponent: () =>
-      import('@playground/play-lms/play-lms-features').then(
+      import('@playground/lms-features').then(
         (c) => c.PlayLmsLoginFeatureComponent
       ),
   },

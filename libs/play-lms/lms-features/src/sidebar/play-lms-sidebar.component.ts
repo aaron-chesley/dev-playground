@@ -15,10 +15,7 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  AuthUser,
-  PlayAuthenticationService,
-} from '@playground/play-lms/play-lms-data';
+import { AuthUser, PlayAuthenticationService } from '@playground/lms-data';
 import { PlaySidenavModule } from '@playground/play-ui';
 
 @Component({

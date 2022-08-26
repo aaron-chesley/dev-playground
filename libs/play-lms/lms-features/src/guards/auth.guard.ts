@@ -8,10 +8,7 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  JwtService,
-  PlayAuthenticationService,
-} from '@playground/play-lms/play-lms-data';
+import { JwtService, PlayAuthenticationService } from '@playground/lms-data';
 
 @Injectable({
   providedIn: 'root',

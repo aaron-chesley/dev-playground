@@ -3,11 +3,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
 
-import {
-  LoginPayload,
-  PlayAuthenticationService,
-} from '@playground/play-lms/play-lms-data';
-import { PlayLmsUiLoginComponent } from '@playground/play-lms/play-lms-ui';
+import { LoginPayload, PlayAuthenticationService } from '@playground/lms-data';
+import { PlayLmsUiLoginComponent } from '@playground/lms-ui';
 import { Router } from '@angular/router';
 
 @Component({

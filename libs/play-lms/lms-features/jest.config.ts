@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'play-lms-data',
+  displayName: 'lms-features',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -9,7 +9,7 @@ export default {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/play-lms/play-lms-data',
+  coverageDirectory: '../../../coverage/libs/play-lms/lms-features',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
