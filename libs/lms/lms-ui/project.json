@@ -40,7 +40,7 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputDir}"],
       "options": {
-        "outputDir": "dist/storybook/play-lms-ui",
+        "outputDir": "dist/storybook/lms-ui",
         "configDir": "libs/lms/lms-ui/.storybook",
         "browserTarget": "lms-ui:build-storybook",
         "compodoc": false,

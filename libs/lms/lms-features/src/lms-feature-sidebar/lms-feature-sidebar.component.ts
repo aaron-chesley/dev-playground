@@ -19,9 +19,9 @@ import { AuthUser, LmsAuthenticationService } from '@playground/lms-data';
 import { PlaySidenavModule } from '@playground/play-ui';
 
 @Component({
-  selector: 'play-lms-sidebar',
-  templateUrl: './play-lms-sidebar.component.html',
-  styleUrls: ['./play-lms-sidebar.component.scss'],
+  selector: 'lms-feature-sidebar',
+  templateUrl: './lms-feature-sidebar.component.html',
+  styleUrls: ['./lms-feature-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
@@ -34,7 +34,7 @@ import { PlaySidenavModule } from '@playground/play-ui';
     PlaySidenavModule,
   ],
 })
-export class PlayLmsSidebarComponent implements OnInit, OnDestroy {
+export class LmsFeatureSidebarComponent implements OnInit, OnDestroy {
   @ViewChild('drawer', { static: true }) drawerRef: any;
   collapsed: boolean;
   searchText: string;

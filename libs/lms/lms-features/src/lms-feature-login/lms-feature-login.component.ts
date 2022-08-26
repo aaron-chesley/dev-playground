@@ -4,18 +4,18 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
 
 import { LoginPayload, LmsAuthenticationService } from '@playground/lms-data';
-import { PlayLmsUiLoginComponent } from '@playground/lms-ui';
+import { LmsUiLoginComponent } from '@playground/lms-ui';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'lms-feature-login',
-  template: `<play-lms-ui-login
+  template: `<lms-ui-login
     [loading]="loading$ | async"
     (loginClicked)="attemptLogin($event)"
-  ></play-lms-ui-login>`,
+  ></lms-ui-login>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayLmsUiLoginComponent],
+  imports: [CommonModule, LmsUiLoginComponent],
 })
 export class LmsLoginFeatureComponent {
   private loadingSub = new BehaviorSubject<boolean>(false);

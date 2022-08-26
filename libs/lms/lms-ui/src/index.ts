@@ -1,4 +1,4 @@
 export * from './lib/lms-ui-login/lms-ui-login.component';
-export * from './lib/lms-ui-sidebar/play-lms-sidebar/lms-ui-sidebar.component';
-export * from './lib/lms-ui-sidebar/play-lms-sidebar-item/play-lms-sidebar-item.component';
-export * from './lib/lms-ui-sidebar/play-lms-sidebar-item/play-lms-sidebar-item.interface';
+export * from './lib/lms-ui-sidebar/lms-feature-sidebar/lms-ui-sidebar.component';
+export * from './lib/lms-ui-sidebar/lms-feature-sidebar-item/lms-feature-sidebar-item.component';
+export * from './lib/lms-ui-sidebar/lms-feature-sidebar-item/lms-feature-sidebar-item.interface';

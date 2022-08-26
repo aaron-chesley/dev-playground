@@ -22,7 +22,9 @@ const routes: Routes = [
   {
     path: 'app',
     loadComponent: () =>
-      import('@playground/lms-features').then((c) => c.PlayLmsSidebarComponent),
+      import('@playground/lms-features').then(
+        (c) => c.LmsFeatureSidebarComponent
+      ),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [

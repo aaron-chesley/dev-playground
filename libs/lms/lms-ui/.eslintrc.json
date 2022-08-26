@@ -13,7 +13,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "playground",
+            "prefix": "lms-ui",
             "style": "camelCase"
           }
         ],
@@ -21,7 +21,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "play-lms-ui",
+            "prefix": "lms-ui",
             "style": "kebab-case"
           }
         ]
