@@ -50,8 +50,11 @@ const routes: Routes = [
       },
       {
         path: 'tags',
-        component: ngHTML(``),
         canLoad: [AuthGuard],
+        loadComponent: () =>
+          import('@playground/lms-features').then(
+            (c) => c.LmsFeatureTagListComponent
+          ),
       },
       {
         path: 'teams',

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Observable, of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { ApiService } from '../api/api.service';
 import { JwtService } from './jwt.service';
@@ -56,8 +56,7 @@ export class LmsAuthenticationService {
   }
 
   me(): Observable<AuthUser | null> {
-    return this.apiService
-      .get('users/me/?expand=tenant')
-      .pipe(catchError(() => of(null)));
+    return this.apiService.get('users/me/?expand=tenant');
+    // .pipe(catchError(() => of(null)));
   }
 }
