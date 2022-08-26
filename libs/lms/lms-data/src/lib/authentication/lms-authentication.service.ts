@@ -11,12 +11,12 @@ import {
   LoginPayload,
   PasswordResetInstructionsPayload,
   PasswordResetPayload,
-} from './authentication.models';
+} from './lms-authentication.models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PlayAuthenticationService {
+export class LmsAuthenticationService {
   constructor(private apiService: ApiService, private jwtService: JwtService) {}
 
   setAuth(data: ServerLoginToken): void {

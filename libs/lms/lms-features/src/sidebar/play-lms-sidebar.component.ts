@@ -15,7 +15,7 @@ import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { AuthUser, PlayAuthenticationService } from '@playground/lms-data';
+import { AuthUser, LmsAuthenticationService } from '@playground/lms-data';
 import { PlaySidenavModule } from '@playground/play-ui';
 
 @Component({
@@ -52,7 +52,7 @@ export class PlayLmsSidebarComponent implements OnInit, OnDestroy {
   constructor(
     public breakpointObserver: BreakpointObserver,
     public router: Router,
-    private authService: PlayAuthenticationService
+    private authService: LmsAuthenticationService
   ) {}
 
   ngOnInit() {

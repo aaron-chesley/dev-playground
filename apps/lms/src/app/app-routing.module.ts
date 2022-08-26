@@ -93,7 +93,7 @@ const routes: Routes = [
     canLoad: [AuthGuard],
     loadComponent: () =>
       import('@playground/lms-features').then(
-        (c) => c.PlayLmsLoginFeatureComponent
+        (c) => c.LmsLoginFeatureComponent
       ),
   },
 ];

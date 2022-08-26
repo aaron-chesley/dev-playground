@@ -3,12 +3,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { finalize, switchMap } from 'rxjs/operators';
 
-import { LoginPayload, PlayAuthenticationService } from '@playground/lms-data';
+import { LoginPayload, LmsAuthenticationService } from '@playground/lms-data';
 import { PlayLmsUiLoginComponent } from '@playground/lms-ui';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'play-lms-login-feature',
+  selector: 'lms-feature-login',
   template: `<play-lms-ui-login
     [loading]="loading$ | async"
     (loginClicked)="attemptLogin($event)"
@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, PlayLmsUiLoginComponent],
 })
-export class PlayLmsLoginFeatureComponent {
+export class LmsLoginFeatureComponent {
   private loadingSub = new BehaviorSubject<boolean>(false);
   loading$: Observable<boolean> = this.loadingSub.asObservable();
 
@@ -36,7 +36,7 @@ export class PlayLmsLoginFeatureComponent {
       );
   }
   constructor(
-    private authService: PlayAuthenticationService,
+    private authService: LmsAuthenticationService,
     private router: Router
   ) {}
 }
