@@ -1,18 +1,23 @@
+.lms-ui-sidebar-item {
+  display: block;
+  background-color: var(--play-accent-color);
+  color: var(--text-color-light);
+}
+
+.lms-ui-sidebar-item:hover,
+.active {
+  background-color: var(--play-bg-color);
+  color: var(--play-accent-color);
+}
+
 .nav-item-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   width: 100%;
   height: 50px;
-  background-color: var(--play-accent-color);
-  color: var(--text-color-light);
   text-decoration: none;
-}
-
-.nav-item-container:hover,
-.active {
-  background-color: var(--play-bg-color);
-  color: var(--play-accent-color);
+  cursor: pointer;
 }
 
 .nav-item-wrapper {

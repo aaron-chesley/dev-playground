@@ -1,105 +1,73 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ChangeDetectionStrategy,
-} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router, RouterModule } from '@angular/router';
-import { FormGroup } from '@angular/forms';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Subject, Observable } from 'rxjs';
-import { shareReplay, takeUntil } from 'rxjs/operators';
-import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map, shareReplay } from 'rxjs/operators';
 import { AuthUser, LmsAuthenticationService } from '@playground/lms-data';
-import { PlaySidenavModule } from '@playground/play-ui';
+import {
+  LmsUiSidebarComponent,
+  LmsUiSidebarItemComponent,
+} from '@playground/lms-ui';
+import {
+  assignment,
+  business,
+  dashboard,
+  equalizer,
+  groupWork,
+  history,
+  logout,
+  loyalty,
+  PlayIconModule,
+  PlayIconRegistryService,
+  settings,
+  supervisedUserCircle,
+  videoLibrary,
+} from '@playground/play-ui';
+import { RouterModule } from '@angular/router';
+import { getNavLinksFromUserType, LmsNavLink } from './lms-nav-links';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'lms-feature-sidebar',
   templateUrl: './lms-feature-sidebar.component.html',
-  styleUrls: ['./lms-feature-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
     CommonModule,
     RouterModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    PlaySidenavModule,
+    LmsUiSidebarComponent,
+    LmsUiSidebarItemComponent,
+    PlayIconModule,
   ],
 })
-export class LmsFeatureSidebarComponent implements OnInit, OnDestroy {
-  @ViewChild('drawer', { static: true }) drawerRef: any;
-  collapsed: boolean;
-  searchText: string;
-  results: any[];
-  ngUnsubscribe$: Subject<void> = new Subject<void>();
-  tenantSearchForm: FormGroup;
-  filteredTenants: Observable<any>;
-  showLoadingIndicator = false;
+export class LmsFeatureSidebarComponent implements OnInit {
   currentUser$: Observable<AuthUser>;
-
-  mobileView: boolean;
-  drawerOpened: boolean;
-  drawerMode: MatDrawerMode;
-
-  constructor(
-    public breakpointObserver: BreakpointObserver,
-    public router: Router,
-    private authService: LmsAuthenticationService
-  ) {}
+  lmsNavLinks$: Observable<LmsNavLink[]>;
 
   ngOnInit() {
-    this.manageScreenSize();
     this.currentUser$ = this.authService.me().pipe(shareReplay());
+    this.lmsNavLinks$ = this.currentUser$.pipe(map(getNavLinksFromUserType));
   }
 
-  public ngOnDestroy() {
-    this.ngUnsubscribe$.next();
-    this.ngUnsubscribe$.complete();
+  onLogoutClick() {
+    this.authService.purgeAuth();
+    location.reload();
   }
 
-  logout() {}
-
-  closeNav() {
-    if (this.mobileView) {
-      this.drawerRef['opened'] = false;
-    }
-  }
-
-  private manageScreenSize() {
-    /* Subscribe to screen size. */
-    this.breakpointObserver
-      .observe([Breakpoints.Handset, Breakpoints.TabletPortrait])
-      .pipe(takeUntil(this.ngUnsubscribe$))
-      .subscribe((result) => {
-        if (result.matches) {
-          this.mobileView = true;
-          this.drawerMode = 'over';
-          this.drawerOpened = false;
-        } else {
-          this.mobileView = false;
-          this.drawerMode = 'side';
-          this.drawerOpened = true;
-        }
-      });
-  }
-
-  displayFn(tenant: any) {
-    if (tenant) {
-      return tenant.name;
-    }
-  }
-
-  public handleDrawerClose(drawer: any) {
-    if (this.mobileView) {
-      drawer.close();
-    }
+  constructor(
+    private authService: LmsAuthenticationService,
+    private playIconService: PlayIconRegistryService
+  ) {
+    this.playIconService.registerIcons([
+      dashboard,
+      history,
+      supervisedUserCircle,
+      equalizer,
+      settings,
+      loyalty,
+      groupWork,
+      assignment,
+      videoLibrary,
+      business,
+      logout,
+    ]);
   }
 }
