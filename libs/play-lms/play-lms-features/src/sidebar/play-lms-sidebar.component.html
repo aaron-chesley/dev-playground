@@ -1,0 +1,180 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    class="sidenav"
+    #drawer
+    [mode]="drawerMode"
+    [opened]="drawerOpened"
+    role="navigation"
+  >
+    <div class="fixed-container">
+      <div class="fixed-header">
+        <img
+          class="logo"
+          src="../../assets/images/logo_transparent.png"
+          alt="logo"
+        />
+      </div>
+      <div class="scroll-content">
+        <mat-nav-list class="mat-nav-list">
+          <!-- EMPLOYEES OR ADMINISTRATORS -->
+          <ng-container *ngIf="!(currentUser$ | async)?.is_superuser">
+            <mat-divider></mat-divider>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/dashboard"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>dashboard</mat-icon>
+              Dashboard
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/history"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>history</mat-icon>
+              Training History
+            </a>
+          </ng-container>
+          <!-- ADMINSTRATORS OR SUPERUSERS -->
+          <ng-container *ngIf="(currentUser$ | async)?.is_admin">
+            <mat-divider></mat-divider>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/employees"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon
+                >supervised_user_circle</mat-icon
+              >
+              Employees
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/reports"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+              *ngIf="
+                (currentUser$ | async)?.is_admin &&
+                (currentUser$ | async)?.tenant
+              "
+            >
+              <mat-icon class="nav-link-icon" matListIcon>equalizer</mat-icon>
+              Reports
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/settings"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>settings</mat-icon>
+              Settings
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/tags"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>loyalty</mat-icon>
+              Tags
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/teams"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>group_work</mat-icon>
+              Teams
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/trainings"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>assignment</mat-icon>
+              Trainings
+            </a>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/videos"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon
+                >video_library</mat-icon
+              >
+              Videos
+            </a>
+          </ng-container>
+          <!-- SUPERUSERS -->
+          <!-- <ng-container
+            *ngIf="
+              currentUser.is_superuser &&
+              currentUser.tenant.name === 'Digital Forge LLC'
+            "
+          >
+            <mat-divider></mat-divider>
+            <a
+              class="nav-link"
+              mat-list-item
+              routerLink="/app/tenants"
+              routerLinkActive="active"
+              (click)="handleDrawerClose(drawer)"
+            >
+              <mat-icon class="nav-link-icon" matListIcon>business</mat-icon>
+              Tenants
+            </a>
+          </ng-container> -->
+        </mat-nav-list>
+      </div>
+      <div class="fixed-footer">
+        <button class="footer-button" mat-button (click)="logout()">
+          Log Out
+        </button>
+        <a class="footer-button" mat-button routerLink="/app/feedback">
+          <span>Feedback</span>
+        </a>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content
+    class="sidenav-content-container"
+    style="box-sizing: border-box"
+  >
+    <!-- <mat-progress-bar *ngIf="showLoadingIndicator" mode="indeterminate"></mat-progress-bar> -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <ng-container *ngIf="currentUser.is_superuser">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+    <form [formGroup]="tenantSearchForm" class="superuser-form">
+      <mat-form-field class="superuser-form-field">
+        <input matInput [matAutocomplete]="auto" formControlName="tenant" placeholder="Search tenants..." />
+        <mat-autocomplete [displayWith]="displayFn" #auto="matAutocomplete"
+          (optionSelected)="changeTenants({ id: tenantSearchForm.value.tenant.id })">
+          <mat-option *ngFor="let filterTenant of filteredTenants | async" [value]="filterTenant">
+            {{ filterTenant.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+    <p>{{ currentUser.tenant?.name }}</p>
+  </div>
+</ng-container> -->

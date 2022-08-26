@@ -1,0 +1,22 @@
+.nav-item-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  background-color: var(--play-accent-color);
+  color: var(--text-color-light);
+  text-decoration: none;
+}
+
+.nav-item-container:hover,
+.active {
+  background-color: var(--play-bg-color);
+  color: var(--play-accent-color);
+}
+
+.nav-item-wrapper {
+  display: flex;
+  gap: 5px;
+  padding: 0px 15px;
+}

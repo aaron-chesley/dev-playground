@@ -1,0 +1,34 @@
+.sidenav-container {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+}
+
+.sidenav {
+  min-width: 200px;
+  background-color: var(--play-accent-color);
+  border: 0px;
+  color: var(--play-text-color-light);
+}
+
+.sidenav-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.logo {
+  display: block;
+  margin-left: 10px;
+  margin-right: auto;
+  width: 150px;
+  padding: 10px 0px;
+  margin-bottom: 10px;
+}
+
+.sidenav-content {
+  background-color: var(--play-bg-color);
+}

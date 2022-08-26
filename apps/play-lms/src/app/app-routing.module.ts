@@ -21,7 +21,10 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    component: ngHTML(`<router-outlet></router-outlet>`),
+    loadComponent: () =>
+      import('@playground/play-lms/play-lms-features').then(
+        (c) => c.PlayLmsSidebarComponent
+      ),
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [

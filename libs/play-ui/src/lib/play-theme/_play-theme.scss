@@ -16,7 +16,10 @@
   --play-error-color: #d02c16;
   --play-warning-color: #d0b716;
 
-  --play-text-color: #023047;
+  --play-text-color-light: #ffffff;
+  --play-text-color-dark: #000000;
+
+  --play-bg-color: #ffffff;
 }
 
 $play-primary-color: #{var(--play-primary-color)};

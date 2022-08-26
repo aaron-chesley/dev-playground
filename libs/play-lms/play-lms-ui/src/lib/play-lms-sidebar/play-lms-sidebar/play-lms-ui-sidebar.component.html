@@ -1,0 +1,16 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    class="sidenav"
+    #drawer
+    [mode]="drawerMode"
+    [opened]="drawerOpened"
+  >
+    <section class="sidenav-wrapper">
+      <img class="logo" src="assets/logo_transparent.png" alt="logo" />
+      <ng-content select="play-lms-ui-sidebar-item"></ng-content>
+    </section>
+  </mat-sidenav>
+  <mat-sidenav-content class="sidenav-content">
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
