@@ -2,9 +2,9 @@
   "version": 2,
   "projects": {
     "environment": "libs/environment",
-    "play-lms": "apps/play-lms",
+    "lms": "apps/lms",
+    "lms-e2e": "apps/lms-e2e",
     "play-lms-data": "libs/play-lms/play-lms-data",
-    "play-lms-e2e": "apps/play-lms-e2e",
     "play-lms-features": "libs/play-lms/play-lms-features",
     "play-lms-ui": "libs/play-lms/play-lms-ui",
     "play-ui": "libs/play-ui",

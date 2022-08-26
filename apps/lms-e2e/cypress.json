@@ -6,7 +6,7 @@
   "supportFile": "./src/support/index.ts",
   "pluginsFile": false,
   "video": true,
-  "videosFolder": "../../dist/cypress/apps/play-lms-e2e/videos",
-  "screenshotsFolder": "../../dist/cypress/apps/play-lms-e2e/screenshots",
+  "videosFolder": "../../dist/cypress/apps/lms-e2e/videos",
+  "screenshotsFolder": "../../dist/cypress/apps/lms-e2e/screenshots",
   "chromeWebSecurity": false
 }

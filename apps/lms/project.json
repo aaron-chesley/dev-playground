@@ -1,21 +1,22 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "apps/play-lms/src",
+  "sourceRoot": "apps/lms/src",
   "prefix": "playground",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/play-lms",
-        "index": "apps/play-lms/src/index.html",
-        "main": "apps/play-lms/src/main.ts",
-        "polyfills": "apps/play-lms/src/polyfills.ts",
-        "tsConfig": "apps/play-lms/tsconfig.app.json",
+        "outputPath": "dist/apps/lms",
+        "index": "apps/lms/src/index.html",
+        "main": "apps/lms/src/main.ts",
+        "polyfills": "apps/lms/src/polyfills.ts",
+        "tsConfig": "apps/lms/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
-          "apps/play-lms/src/favicon.ico",
-          "apps/play-lms/src/assets",
+          "apps/lms/src/favicon.ico",
+          "apps/lms/src/assets",
           {
             "glob": "**/*",
             "input": "libs/play-lms/play-lms-ui/src/lib/assets",
@@ -23,7 +24,7 @@
           }
         ],
         "styles": [
-          "apps/play-lms/src/styles.scss",
+          "apps/lms/src/styles.scss",
           "libs/play-ui/src/lib/play-theme/_play-theme.scss"
         ],
         "scripts": []
@@ -64,14 +65,14 @@
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "options": {
-        "proxyConfig": "apps/play-lms/proxy.conf.js"
+        "proxyConfig": "apps/lms/proxy.conf.js"
       },
       "configurations": {
         "production": {
-          "browserTarget": "play-lms:build:production"
+          "browserTarget": "lms:build:production"
         },
         "development": {
-          "browserTarget": "play-lms:build:development"
+          "browserTarget": "lms:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -79,20 +80,20 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "play-lms:build"
+        "browserTarget": "lms:build"
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/play-lms/**/*.ts", "apps/play-lms/**/*.html"]
+        "lintFilePatterns": ["apps/lms/**/*.ts", "apps/lms/**/*.html"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/play-lms"],
+      "outputs": ["coverage/apps/lms"],
       "options": {
-        "jestConfig": "apps/play-lms/jest.config.ts",
+        "jestConfig": "apps/lms/jest.config.ts",
         "passWithNoTests": true
       }
     }
