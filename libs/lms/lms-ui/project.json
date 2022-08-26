@@ -1,14 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/play-lms/lms-ui/src",
+  "sourceRoot": "libs/lms/lms-ui/src",
   "prefix": "playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/play-lms/lms-ui"],
+      "outputs": ["coverage/libs/lms/lms-ui"],
       "options": {
-        "jestConfig": "libs/play-lms/lms-ui/jest.config.ts",
+        "jestConfig": "libs/lms/lms-ui/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -16,8 +16,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/play-lms/lms-ui/**/*.ts",
-          "libs/play-lms/lms-ui/**/*.html"
+          "libs/lms/lms-ui/**/*.ts",
+          "libs/lms/lms-ui/**/*.html"
         ]
       }
     },
@@ -25,7 +25,7 @@
       "executor": "@storybook/angular:start-storybook",
       "options": {
         "port": 4400,
-        "configDir": "libs/play-lms/lms-ui/.storybook",
+        "configDir": "libs/lms/lms-ui/.storybook",
         "browserTarget": "lms-ui:build-storybook",
         "compodoc": false,
         "styles": ["libs/play-ui/.storybook/styles.scss"]
@@ -41,7 +41,7 @@
       "outputs": ["{options.outputDir}"],
       "options": {
         "outputDir": "dist/storybook/play-lms-ui",
-        "configDir": "libs/play-lms/lms-ui/.storybook",
+        "configDir": "libs/lms/lms-ui/.storybook",
         "browserTarget": "lms-ui:build-storybook",
         "compodoc": false,
         "styles": ["libs/play-ui/.storybook/styles.scss"]

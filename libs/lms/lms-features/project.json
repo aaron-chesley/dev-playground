@@ -1,14 +1,14 @@
 {
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
-  "sourceRoot": "libs/play-lms/lms-data/src",
+  "sourceRoot": "libs/lms/lms-features/src",
   "prefix": "playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/play-lms/lms-data"],
+      "outputs": ["coverage/libs/lms/lms-features"],
       "options": {
-        "jestConfig": "libs/play-lms/lms-data/jest.config.ts",
+        "jestConfig": "libs/lms/lms-features/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -16,11 +16,11 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/play-lms/lms-data/**/*.ts",
-          "libs/play-lms/lms-data/**/*.html"
+          "libs/lms/lms-features/**/*.ts",
+          "libs/lms/lms-features/**/*.html"
         ]
       }
     }
   },
-  "tags": ["type:data"]
+  "tags": ["type:feature"]
 }
