@@ -1,18 +1,18 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { LmsUiTagsListComponent } from './lms-ui-tags-list.component';
+import { LmsUiTagListComponent } from './lms-ui-tag-list.component';
 
 export default {
-  title: 'LmsUiTagsListComponent',
-  component: LmsUiTagsListComponent,
+  title: 'LmsUiTagListComponent',
+  component: LmsUiTagListComponent,
   decorators: [
     moduleMetadata({
       imports: [],
     }),
   ],
-} as Meta<LmsUiTagsListComponent>;
+} as Meta<LmsUiTagListComponent>;
 
-const Template: Story<LmsUiTagsListComponent> = (
-  args: LmsUiTagsListComponent
+const Template: Story<LmsUiTagListComponent> = (
+  args: LmsUiTagListComponent
 ) => ({
   props: args,
 });

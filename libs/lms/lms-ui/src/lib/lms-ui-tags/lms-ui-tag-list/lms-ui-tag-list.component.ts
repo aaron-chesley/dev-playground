@@ -10,14 +10,14 @@ import { PlayButtonModule, PlayCardModule } from '@playground/play-ui';
 import { LmsUiTag } from '../lms-ui-tag.interface';
 
 @Component({
-  selector: 'lms-ui-tags-list',
-  templateUrl: './lms-ui-tags-list.component.html',
-  styleUrls: ['./lms-ui-tags-list.component.scss'],
+  selector: 'lms-ui-tag-list',
+  templateUrl: './lms-ui-tag-list.component.html',
+  styleUrls: ['./lms-ui-tag-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule, PlayCardModule, PlayButtonModule],
 })
-export class LmsUiTagsListComponent {
+export class LmsUiTagListComponent {
   @Input() tags: LmsUiTag[] = [];
   @Output() deleteTagClick = new EventEmitter<LmsUiTag>();
 }
