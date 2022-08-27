@@ -53,5 +53,5 @@
       }
     }
   },
-  "tags": ["scope:angular", "type:ui"]
+  "tags": ["scope:shared", "type:ui"]
 }

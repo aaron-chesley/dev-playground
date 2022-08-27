@@ -16,19 +16,14 @@
                 "sourceTag": "type:project",
                 "onlyDependOnLibsWithTags": [
                   "scope:shared",
-                  "scope:angular",
                   "type:util",
                   "type:ui",
-                  "type:feature",
+                  "type:feature"
                 ]
               },
               {
                 "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"]
-              },
-              {
-                "sourceTag": "scope:angular",
-                "onlyDependOnLibsWithTags": ["scope:shared", "scope:angular"]
               },
               {
                 "sourceTag": "type:util",
