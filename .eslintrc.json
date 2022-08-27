@@ -15,9 +15,6 @@
               {
                 "sourceTag": "type:project",
                 "onlyDependOnLibsWithTags": [
-                  "scope:shared",
-                  "type:util",
-                  "type:ui",
                   "type:feature"
                 ]
               },
