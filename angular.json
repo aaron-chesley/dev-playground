@@ -6,6 +6,7 @@
     "lms-data": "libs/lms/lms-data",
     "lms-e2e": "apps/lms-e2e",
     "lms-features": "libs/lms/lms-features",
+    "lms-util": "libs/lms/lms-util",
     "lms-ui": "libs/lms/lms-ui",
     "play-ui": "libs/play-ui",
     "service-worker-poc": "apps/service-worker-poc",
