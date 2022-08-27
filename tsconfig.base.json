@@ -20,11 +20,12 @@
     "paths": {
       "@playground/environment": ["libs/environment/src/index.ts"],
       "@playground/lms-data": ["libs/lms/lms-data/src/index.ts"],
-      "@playground/lms-features": [
-        "libs/lms/lms-features/src/index.ts"
-      ],
+      "@playground/lms-features": ["libs/lms/lms-features/src/index.ts"],
       "@playground/lms-ui": ["libs/lms/lms-ui/src/index.ts"],
       "@playground/play-ui": ["libs/play-ui/src/index.ts"],
+      "@playground/shared/shared-data": [
+        "libs/shared/shared-data/src/index.ts"
+      ],
       "@playground/storybook": ["libs/storybook/src/index.ts"]
     }
   },
