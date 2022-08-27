@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ApiService } from '../api/api.service';
+import { ApiService } from '@playground/shared/shared-data';
 
 interface LmsDataTag {
   id: string;
