@@ -16,7 +16,7 @@ import {
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[playButton]',
+  selector: 'button[playButton]',
   templateUrl: './play-button.component.html',
   styleUrls: ['./play-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

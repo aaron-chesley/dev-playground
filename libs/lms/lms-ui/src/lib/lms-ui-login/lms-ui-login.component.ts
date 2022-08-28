@@ -13,7 +13,7 @@ import {
   PlayIconModule,
   PlayInputTextModule,
   PlayRippleModule,
-  PlayHeadingModule,
+  PlayTextComponent,
 } from '@playground/play-ui';
 
 @Component({
@@ -30,7 +30,7 @@ import {
     PlayButtonModule,
     PlayIconModule,
     PlayRippleModule,
-    PlayHeadingModule,
+    PlayTextComponent,
   ],
 })
 export class LmsUiLoginComponent {

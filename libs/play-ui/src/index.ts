@@ -10,6 +10,5 @@ export * from './lib/play-modal/play-modal.service';
 export * from './lib/play-notifications/play-notification.service';
 export * from './lib/play-notifications/play-notification-payload.interface';
 export * from './lib/play-ripple/play-ripple';
-export * from './lib/play-typography/play-heading/play-heading.module';
-export * from './lib/play-typography/play-text/play-text.module';
 export * from './lib/play-sidenav/play-sidenav.module';
+export * from './lib/play-typography/play-text/play-text.component';

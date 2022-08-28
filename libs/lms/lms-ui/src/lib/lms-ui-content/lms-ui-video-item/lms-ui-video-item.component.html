@@ -7,13 +7,13 @@
   />
   <div class="video-information">
     <div class="name-duration-wrapper">
-      <play-heading [size]="4">
-        <strong>{{ video.name }}</strong>
-      </play-heading>
-      <strong>{{ video.duration }}</strong>
+      <h4 playText [size]="4">
+        <b>{{ video.name }}</b>
+      </h4>
+      <b playText [size]="5">{{ video.duration }}</b>
     </div>
     <div>
-      <small>{{ video.description }}</small>
+      <p playText [size]="5">{{ video.description }}</p>
     </div>
   </div>
 </play-card>

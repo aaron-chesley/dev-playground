@@ -1,7 +1,35 @@
-.play-text {
-  p {
-    margin: 0px;
-    font-size: 1rem;
-    font-weight: 400;
-  }
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+small {
+  margin: 0px;
+  font-weight: unset;
+}
+
+.play-1 {
+  font-size: 2rem;
+}
+
+.play-2 {
+  font-size: 1.5rem;
+}
+
+.play-3 {
+  font-size: 1.17rem;
+}
+
+.play-4 {
+  font-size: 1rem;
+}
+
+.play-5 {
+  font-size: 0.83rem;
+}
+
+.play-6 {
+  font-size: 0.67rem;
 }

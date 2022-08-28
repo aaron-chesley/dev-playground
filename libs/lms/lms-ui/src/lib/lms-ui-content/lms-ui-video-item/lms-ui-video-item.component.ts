@@ -7,7 +7,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { LmsVideo } from '@playground/lms/lms-util';
-import { PlayCardModule, PlayHeadingModule } from '@playground/play-ui';
+import { PlayCardModule, PlayTextComponent } from '@playground/play-ui';
 
 @Component({
   selector: 'lms-ui-video-item',
@@ -16,7 +16,7 @@ import { PlayCardModule, PlayHeadingModule } from '@playground/play-ui';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule, PlayCardModule, PlayHeadingModule],
+  imports: [CommonModule, PlayCardModule, PlayTextComponent],
 })
 export class LmsUiVideoItemComponent {
   @HostBinding('class.lms-ui-video-item') playCardClass = 'lms-ui-video-item';
