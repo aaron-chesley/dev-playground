@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { LmsContentItem } from '@playground/lms/lms-util';
+import {
+  PlayCardModule,
+  PlayHeadingModule,
+  PlayTextModule,
+} from '@playground/play-ui';
 
 @Component({
   selector: 'lms-ui-content-list',
@@ -7,8 +13,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   styleUrls: ['./lms-ui-content-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PlayCardModule, PlayHeadingModule],
 })
 export class LmsUiContentListComponent {
-  @Input() content: any[] = [];
+  @Input() contentItems: LmsContentItem[] = [];
 }
