@@ -1,0 +1,22 @@
+.lms-ui-video-item {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.video-thumbnail {
+  object-fit: cover;
+}
+
+.video-information {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px;
+}
+
+.name-duration-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

@@ -1,0 +1,19 @@
+<play-card class="lms-ui-video-item">
+  <img
+    [style.height.px]="imgWidth"
+    class="video-thumbnail"
+    [src]="video.thumbnail_url"
+    alt="video_thumbnail"
+  />
+  <div class="video-information">
+    <div class="name-duration-wrapper">
+      <play-heading [size]="4">
+        <strong>{{ video.name }}</strong>
+      </play-heading>
+      <strong>{{ video.duration }}</strong>
+    </div>
+    <div>
+      <small>{{ video.description }}</small>
+    </div>
+  </div>
+</play-card>
