@@ -29,8 +29,7 @@
       ],
       "@playground/shared/shared-util": [
         "libs/shared/shared-util/src/index.ts"
-      ],
-      "@playground/storybook": ["libs/storybook/src/index.ts"]
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

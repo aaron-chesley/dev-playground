@@ -13,8 +13,6 @@
     "service-worker-poc-e2e": "apps/service-worker-poc-e2e",
     "shared-data": "libs/shared/shared-data",
     "shared-util": "libs/shared/shared-util",
-    "storybook": "libs/storybook",
-    "storybook-e2e": "apps/storybook-e2e",
     "tiptap-poc": "apps/tiptap-poc",
     "tiptap-poc-e2e": "apps/tiptap-poc-e2e"
   }
