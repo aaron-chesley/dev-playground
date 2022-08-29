@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayInputTextShowcaseComponent } from './play-input-text-showcase.component';
 
 export default {
-  title: 'PlayInputTextShowcaseComponent',
+  title: 'PlayInputTextShowcase',
   component: PlayInputTextShowcaseComponent,
   decorators: [
     moduleMetadata({

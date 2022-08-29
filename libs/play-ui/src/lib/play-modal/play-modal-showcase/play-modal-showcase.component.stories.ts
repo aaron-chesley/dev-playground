@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayModalShowcaseComponent } from './play-modal-showcase.component';
 
 export default {
-  title: 'PlayModalShowcaseComponent',
+  title: 'PlayModalShowcase',
   component: PlayModalShowcaseComponent,
   decorators: [
     moduleMetadata({

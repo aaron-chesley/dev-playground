@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayRadioShowcaseComponent } from './play-radio-showcase.component';
 
 export default {
-  title: 'PlayRadioShowcaseComponent',
+  title: 'PlayRadioShowcase',
   component: PlayRadioShowcaseComponent,
   decorators: [
     moduleMetadata({

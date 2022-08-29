@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayCheckboxComponent } from './play-checkbox.component';
 
 export default {
-  title: 'PlayCheckboxComponent',
+  title: 'PlayCheckboxShowcase',
   component: PlayCheckboxComponent,
   decorators: [
     moduleMetadata({

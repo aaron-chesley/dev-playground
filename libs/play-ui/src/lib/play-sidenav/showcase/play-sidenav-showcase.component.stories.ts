@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaySidenavShowcaseComponent } from './play-sidenav-showcase.component';
 
 export default {
-  title: 'PlaySidenavShowcaseComponent',
+  title: 'PlaySidenavShowcase',
   component: PlaySidenavShowcaseComponent,
   decorators: [
     moduleMetadata({

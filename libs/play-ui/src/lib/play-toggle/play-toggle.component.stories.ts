@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayToggleComponent } from './play-toggle.component';
 
 export default {
-  title: 'PlayToggleComponent',
+  title: 'PlayToggleShowcase',
   component: PlayToggleComponent,
   decorators: [
     moduleMetadata({

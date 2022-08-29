@@ -3,7 +3,7 @@ import { PlayTypographyShowcaseComponent } from './play-typography-showcase.comp
 import { PlayTypographyShowcaseModule } from './play-typography-showcase.module';
 
 export default {
-  title: 'PlayTypographyShowcaseComponent',
+  title: 'PlayTypographyShowcase',
   component: PlayTypographyShowcaseComponent,
   decorators: [
     moduleMetadata({

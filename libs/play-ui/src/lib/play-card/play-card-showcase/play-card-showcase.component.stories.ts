@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayCardShowcaseComponent } from './play-card-showcase.component';
 
 export default {
-  title: 'PlayCardShowcaseComponent',
+  title: 'PlayCardShowcase',
   component: PlayCardShowcaseComponent,
   decorators: [
     moduleMetadata({

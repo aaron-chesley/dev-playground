@@ -2,7 +2,7 @@ import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayButtonShowcaseComponent } from './play-button-showcase.component';
 
 export default {
-  title: 'PlayButtonShowcaseComponent',
+  title: 'PlayButtonShowcase',
   component: PlayButtonShowcaseComponent,
   decorators: [
     moduleMetadata({

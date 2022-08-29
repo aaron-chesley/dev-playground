@@ -1511,7 +1511,7 @@ import {
 } from '../play-icons';
 
 export default {
-  title: 'PlayIconShowcaseComponent',
+  title: 'PlayIconShowcase',
   component: PlayIconShowcaseComponent,
   decorators: [
     moduleMetadata({
