@@ -1,4 +1,4 @@
-import { DOCUMENT } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   Component,
   ChangeDetectionStrategy,
@@ -22,6 +22,8 @@ import { PlayIconRegistryService } from './play-icon-registry.service';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayIconComponent implements OnChanges {
   private svgIcon!: SVGElement;

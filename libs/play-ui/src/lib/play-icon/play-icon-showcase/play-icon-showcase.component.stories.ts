@@ -3,7 +3,6 @@ import { APP_INITIALIZER } from '@angular/core';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayIconRegistryService } from '../play-icon-registry.service';
 import { PlayIconShowcaseComponent } from './play-icon-showcase.component';
-import { PlayIconModule } from '../play-icon.module';
 // import { PlayIconComponent } from '../play-icon/play-icon.component';
 import {
   _3dRotation,
@@ -1516,8 +1515,7 @@ export default {
   component: PlayIconShowcaseComponent,
   decorators: [
     moduleMetadata({
-      imports: [CommonModule, PlayIconModule],
-      declarations: [PlayIconShowcaseComponent],
+      imports: [CommonModule],
     }),
   ],
   argTypes: {

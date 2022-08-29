@@ -1,13 +1,12 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { PlayCheckboxComponent } from './play-checkbox.component';
-import { PlayCheckboxModule } from './play-checkbox.module';
 
 export default {
   title: 'PlayCheckboxComponent',
   component: PlayCheckboxComponent,
   decorators: [
     moduleMetadata({
-      imports: [PlayCheckboxModule],
+      imports: [],
     }),
   ],
   argTypes: {

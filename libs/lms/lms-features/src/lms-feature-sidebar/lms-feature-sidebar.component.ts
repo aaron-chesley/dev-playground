@@ -15,7 +15,7 @@ import {
   history,
   logout,
   loyalty,
-  PlayIconModule,
+  PlayIconComponent,
   PlayIconRegistryService,
   settings,
   supervisedUserCircle,
@@ -35,7 +35,7 @@ import { CommonModule } from '@angular/common';
     RouterModule,
     LmsUiSidebarComponent,
     LmsUiSidebarItemComponent,
-    PlayIconModule,
+    PlayIconComponent,
   ],
 })
 export class LmsFeatureSidebarComponent implements OnInit {

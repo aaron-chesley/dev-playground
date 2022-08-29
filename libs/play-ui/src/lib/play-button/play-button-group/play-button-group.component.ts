@@ -5,6 +5,7 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'play-button-group',
@@ -12,6 +13,8 @@ import {
   styleUrls: ['./play-button-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayButtonGroupComponent {
   @HostBinding('class') className = 'play-btn-group';

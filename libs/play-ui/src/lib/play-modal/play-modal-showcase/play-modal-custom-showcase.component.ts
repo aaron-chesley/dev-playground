@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PlayModalService } from '../play-modal.service';
+import { PlayModalModule } from '../play-modal.module';
 
 @Component({
   selector: 'play-custom-showcase',
@@ -18,6 +20,8 @@ import { PlayModalService } from '../play-modal.service';
       }
     `,
   ],
+  standalone: true,
+  imports: [CommonModule, PlayModalModule],
 })
 export class PlayCustomShowcaseComponent {
   openModal() {

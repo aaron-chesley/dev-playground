@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -24,6 +25,8 @@ const PlayRadioGroup = DisabledBase();
   styles: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayRadioGroupComponent
   extends PlayRadioGroup
@@ -37,7 +40,7 @@ export class PlayRadioGroupComponent
   @Input() name = self.crypto.randomUUID();
   @Output() playRadioChange = new EventEmitter<unknown>();
 
-  $ngDestroy = new Subject();
+  $ngDestroy = new Subject<void>();
 
   ngAfterContentInit() {
     this.playRadioButtons.forEach((btn) => {

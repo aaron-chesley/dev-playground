@@ -1,5 +1,4 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { PlayToggleModule } from './play-toggle.module';
 import { PlayToggleComponent } from './play-toggle.component';
 
 export default {
@@ -7,7 +6,7 @@ export default {
   component: PlayToggleComponent,
   decorators: [
     moduleMetadata({
-      imports: [PlayToggleModule],
+      imports: [],
     }),
   ],
   argTypes: {

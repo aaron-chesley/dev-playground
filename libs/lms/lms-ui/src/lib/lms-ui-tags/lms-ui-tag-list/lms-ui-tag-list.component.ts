@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { PlayButtonModule, PlayCardModule } from '@playground/play-ui';
+import { PlayButtonComponent, PlayCardComponent } from '@playground/play-ui';
 import { LmsUiTag } from '../lms-ui-tag.interface';
 
 @Component({
@@ -15,7 +15,7 @@ import { LmsUiTag } from '../lms-ui-tag.interface';
   styleUrls: ['./lms-ui-tag-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayCardModule, PlayButtonModule],
+  imports: [CommonModule, PlayCardComponent, PlayButtonComponent],
 })
 export class LmsUiTagListComponent {
   @Input() tags: LmsUiTag[] = [];

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,6 +18,8 @@ const PlayRadio = LabelPositionBase();
   styleUrls: ['./play-radio.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayRadioComponent extends PlayRadio {
   @HostBinding('class') className = 'play-radio';

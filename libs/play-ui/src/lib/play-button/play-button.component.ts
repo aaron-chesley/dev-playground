@@ -7,6 +7,7 @@ import {
   Inject,
   OnChanges,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { PlayTheme } from '../play-theme/play-theme.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
 import {
@@ -21,6 +22,8 @@ import {
   styleUrls: ['./play-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayButtonComponent implements OnChanges {
   @HostBinding('class')

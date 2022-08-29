@@ -8,11 +8,11 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import {
-  PlayButtonModule,
-  PlayCardModule,
-  PlayIconModule,
-  PlayInputTextModule,
-  PlayRippleModule,
+  PlayButtonComponent,
+  PlayCardComponent,
+  PlayIconComponent,
+  PlayInputTextComponent,
+  PlayRippleDirective,
   PlayTextComponent,
 } from '@playground/play-ui';
 
@@ -25,11 +25,11 @@ import {
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    PlayCardModule,
-    PlayInputTextModule,
-    PlayButtonModule,
-    PlayIconModule,
-    PlayRippleModule,
+    PlayCardComponent,
+    PlayInputTextComponent,
+    PlayButtonComponent,
+    PlayIconComponent,
+    PlayRippleDirective,
     PlayTextComponent,
   ],
 })

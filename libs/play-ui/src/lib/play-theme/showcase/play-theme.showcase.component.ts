@@ -5,10 +5,10 @@ import {
   Inject,
   OnInit,
 } from '@angular/core';
-import { PlayButtonModule } from '../../play-button/play-button.module';
+import { PlayButtonComponent } from '../../play-button/play-button.component';
 import tinycolor from 'tinycolor2';
-import { PlayRippleModule } from '../../play-ripple/play-ripple';
-import { PlayButtonShowcaseModule } from '../../play-button/play-button-showcase/play-button-showcase.module';
+import { PlayRippleDirective } from '../../play-ripple/play-ripple';
+import { PlayButtonShowcaseComponent } from '../../play-button/play-button-showcase/play-button-showcase.component';
 import {
   FormBuilder,
   FormControl,
@@ -29,9 +29,9 @@ import { PLAY_CSS_VARIABLES } from '../play-variables';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    PlayButtonModule,
-    PlayRippleModule,
-    PlayButtonShowcaseModule,
+    PlayButtonComponent,
+    PlayRippleDirective,
+    PlayButtonShowcaseComponent,
   ],
 })
 export class PlayThemeShowcaseComponent implements OnInit {

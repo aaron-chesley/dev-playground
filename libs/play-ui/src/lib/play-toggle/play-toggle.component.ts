@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,6 +15,8 @@ const PlayToggle = CheckedBase(DisabledBase(LabelPositionBase()));
   styleUrls: ['./play-toggle.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayToggleComponent extends PlayToggle {
   @HostBinding('class') className = 'play-toggle';

@@ -10,7 +10,7 @@ import {
   history,
   logout,
   loyalty,
-  PlayIconModule,
+  PlayIconComponent,
   PlayIconRegistryService,
   settings,
   supervisedUserCircle,
@@ -58,7 +58,7 @@ export default {
           },
         ]),
         LmsUiSidebarItemComponent,
-        PlayIconModule,
+        PlayIconComponent,
       ],
       providers: [
         {

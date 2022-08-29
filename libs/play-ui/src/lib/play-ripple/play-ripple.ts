@@ -1,7 +1,7 @@
-import { HostListener, NgModule } from '@angular/core';
+import { HostListener } from '@angular/core';
 import { Directive } from '@angular/core';
 
-@Directive({ selector: '[playRipple]' })
+@Directive({ selector: '[playRipple]', standalone: true })
 export class PlayRippleDirective {
   @HostListener('mousedown', ['$event']) myClick(event: MouseEvent) {
     const element = event.currentTarget as HTMLElement;
@@ -22,11 +22,3 @@ export class PlayRippleDirective {
     element.appendChild(circle);
   }
 }
-
-@NgModule({
-  imports: [],
-  exports: [PlayRippleDirective],
-  declarations: [PlayRippleDirective],
-  providers: [],
-})
-export class PlayRippleModule {}

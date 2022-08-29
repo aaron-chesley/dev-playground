@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -14,6 +15,8 @@ const PlayCheckbox = CheckedBase(DisabledBase(LabelPositionBase()));
   styleUrls: ['./play-checkbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlayCheckboxComponent extends PlayCheckbox {
   @HostBinding('class') className = 'play-checkbox';

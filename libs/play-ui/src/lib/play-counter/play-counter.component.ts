@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   AbstractControl,
@@ -18,6 +19,8 @@ import {
     </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

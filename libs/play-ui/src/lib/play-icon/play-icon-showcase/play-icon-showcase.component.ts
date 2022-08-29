@@ -1,10 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { PlayIconComponent } from '../play-icon.component';
 
 @Component({
   selector: 'play-icon-showcase',
   templateUrl: 'play-icon-showcase.component.html',
   styleUrls: ['play-icon-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [CommonModule, PlayIconComponent],
 })
 export class PlayIconShowcaseComponent {
   @Input() size = 40;
