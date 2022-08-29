@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,6 +12,8 @@ import {
   styleUrls: ['./play-sidenav.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule],
 })
 export class PlaySidenavComponent {
   @HostBinding('class.play-sidenav') showClass = true;

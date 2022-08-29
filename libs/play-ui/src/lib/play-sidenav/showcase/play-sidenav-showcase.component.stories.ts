@@ -1,5 +1,5 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
-import { PlaySidenavShowcaseModule } from './play-sidenav-showcase.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlaySidenavShowcaseComponent } from './play-sidenav-showcase.component';
 
 export default {
@@ -7,7 +7,7 @@ export default {
   component: PlaySidenavShowcaseComponent,
   decorators: [
     moduleMetadata({
-      imports: [PlaySidenavShowcaseModule],
+      imports: [BrowserAnimationsModule],
     }),
   ],
 } as Meta<PlaySidenavShowcaseComponent>;

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { PlayDrawerMode } from '../play-drawer-mode.interface';
 
 @Component({
@@ -15,6 +17,8 @@ import { PlayDrawerMode } from '../play-drawer-mode.interface';
   styleUrls: ['./play-sidenav-container.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [CommonModule, MatSidenavModule],
 })
 export class PlaySidenavContainerComponent {
   @HostBinding('class.play-sidenav-container') showClass = true;
