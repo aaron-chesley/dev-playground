@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/lms",
         "index": "apps/lms/src/index.html",
@@ -86,17 +88,24 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["apps/lms/**/*.ts", "apps/lms/**/*.html"]
+        "lintFilePatterns": [
+          "apps/lms/**/*.ts",
+          "apps/lms/**/*.html"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/lms"],
+      "outputs": [
+        "coverage/apps/lms"
+      ],
       "options": {
         "jestConfig": "apps/lms/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:project"]
+  "tags": [
+    "type:project"
+  ]
 }

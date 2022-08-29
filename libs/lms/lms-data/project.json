@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/lms/lms-data"],
+      "outputs": [
+        "coverage/libs/lms/lms-data"
+      ],
       "options": {
         "jestConfig": "libs/lms/lms-data/jest.config.ts",
         "passWithNoTests": true
@@ -22,5 +24,7 @@
       }
     }
   },
-  "tags": ["type:data"]
+  "tags": [
+    "type:data"
+  ]
 }

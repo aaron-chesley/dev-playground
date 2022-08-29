@@ -1,15 +1,15 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/lms/lms-util/src",
+  "sourceRoot": "libs/play-storybook/src",
   "prefix": "playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": [
-        "coverage/libs/lms/lms-util"
+        "coverage/libs/play-storybook"
       ],
       "options": {
-        "jestConfig": "libs/lms/lms-util/jest.config.ts",
+        "jestConfig": "libs/play-storybook/jest.config.ts",
         "passWithNoTests": true
       }
     },
@@ -17,8 +17,8 @@
       "executor": "@nrwl/linter:eslint",
       "options": {
         "lintFilePatterns": [
-          "libs/lms/lms-util/**/*.ts",
-          "libs/lms/lms-util/**/*.html"
+          "libs/play-storybook/**/*.ts",
+          "libs/play-storybook/**/*.html"
         ]
       }
     }

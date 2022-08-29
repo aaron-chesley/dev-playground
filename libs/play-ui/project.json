@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/play-ui"],
+      "outputs": [
+        "coverage/libs/play-ui"
+      ],
       "options": {
         "jestConfig": "libs/play-ui/jest.config.ts",
         "passWithNoTests": true
@@ -28,7 +30,9 @@
         "configDir": "libs/play-ui/.storybook",
         "browserTarget": "play-ui:build-storybook",
         "compodoc": false,
-        "styles": ["libs/play-ui/.storybook/styles.scss"]
+        "styles": [
+          "libs/play-ui/.storybook/styles.scss"
+        ]
       },
       "configurations": {
         "ci": {
@@ -38,13 +42,17 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputDir": "dist/storybook/playground-ui",
         "configDir": "libs/play-ui/.storybook",
         "browserTarget": "play-ui:build-storybook",
         "compodoc": false,
-        "styles": ["libs/play-ui/.storybook/styles.scss"]
+        "styles": [
+          "libs/play-ui/.storybook/styles.scss"
+        ]
       },
       "configurations": {
         "ci": {
@@ -53,5 +61,8 @@
       }
     }
   },
-  "tags": ["scope:shared", "type:ui"]
+  "tags": [
+    "scope:shared",
+    "type:ui"
+  ]
 }

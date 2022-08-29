@@ -6,7 +6,9 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/lms/lms-ui"],
+      "outputs": [
+        "coverage/libs/lms/lms-ui"
+      ],
       "options": {
         "jestConfig": "libs/lms/lms-ui/jest.config.ts",
         "passWithNoTests": true
@@ -28,7 +30,9 @@
         "configDir": "libs/lms/lms-ui/.storybook",
         "browserTarget": "lms-ui:build-storybook",
         "compodoc": false,
-        "styles": ["libs/play-ui/.storybook/styles.scss"]
+        "styles": [
+          "libs/play-ui/.storybook/styles.scss"
+        ]
       },
       "configurations": {
         "ci": {
@@ -38,13 +42,17 @@
     },
     "build-storybook": {
       "executor": "@storybook/angular:build-storybook",
-      "outputs": ["{options.outputDir}"],
+      "outputs": [
+        "{options.outputDir}"
+      ],
       "options": {
         "outputDir": "dist/storybook/lms-ui",
         "configDir": "libs/lms/lms-ui/.storybook",
         "browserTarget": "lms-ui:build-storybook",
         "compodoc": false,
-        "styles": ["libs/play-ui/.storybook/styles.scss"]
+        "styles": [
+          "libs/play-ui/.storybook/styles.scss"
+        ]
       },
       "configurations": {
         "ci": {
@@ -53,5 +61,7 @@
       }
     }
   },
-  "tags": ["type:ui"]
+  "tags": [
+    "type:ui"
+  ]
 }

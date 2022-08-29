@@ -17,12 +17,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/tiptap-poc-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/tiptap-poc-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["tiptap-poc"]
+  "implicitDependencies": [
+    "tiptap-poc"
+  ]
 }

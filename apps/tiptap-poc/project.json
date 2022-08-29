@@ -6,7 +6,9 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/tiptap-poc",
         "index": "apps/tiptap-poc/src/index.html",
@@ -18,7 +20,9 @@
           "apps/tiptap-poc/src/favicon.ico",
           "apps/tiptap-poc/src/assets"
         ],
-        "styles": ["apps/tiptap-poc/src/styles.scss"],
+        "styles": [
+          "apps/tiptap-poc/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -86,12 +90,16 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/tiptap-poc"],
+      "outputs": [
+        "coverage/apps/tiptap-poc"
+      ],
       "options": {
         "jestConfig": "apps/tiptap-poc/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": ["type:project"]
+  "tags": [
+    "type:project"
+  ]
 }
