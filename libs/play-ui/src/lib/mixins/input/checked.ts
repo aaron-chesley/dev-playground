@@ -1,4 +1,4 @@
-import { EventEmitter, Input, Output } from '@angular/core';
+import { EventEmitter, Injectable, Input, Output } from '@angular/core';
 import { Constructor } from '../constructor.type';
 
 interface CheckedBase {
@@ -10,6 +10,7 @@ interface CheckedBase {
 export function CheckedBase<TBase extends Constructor>(
   Base: TBase = class {} as any
 ) {
+  @Injectable()
   class CheckedBase extends Base implements CheckedBase {
     @Input() checked = false;
     @Output() playCheckChange = new EventEmitter<boolean>;

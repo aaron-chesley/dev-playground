@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Constructor } from '../constructor.type';
 
 interface DisabledBase {
@@ -8,6 +8,7 @@ interface DisabledBase {
 export function DisabledBase<TBase extends Constructor>(
   Base: TBase = class {} as any
 ) {
+  @Injectable()
   class DisabledBase extends Base implements DisabledBase {
     @Input() disabled = false;
   }

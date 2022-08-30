@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Constructor } from '../constructor.type';
 
 export type LabelPosition = 'before' | 'after';
@@ -12,6 +12,7 @@ interface LabelPositionBase {
 export function LabelPositionBase<TBase extends Constructor>(
   Base: TBase = class {} as any
 ) {
+  @Injectable()
   class LabelPositionBase extends Base implements LabelPositionBase {
     @Input() set labelPosition(labelPosition: LabelPosition) {
       if (labelPosition === 'after') {
