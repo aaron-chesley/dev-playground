@@ -7,6 +7,8 @@ import {
   Output,
 } from '@angular/core';
 import { PlayButtonComponent, PlayCardComponent } from '@playground/play-ui';
+import { PlayCardBodyComponent } from 'libs/play-ui/src/lib/play-card/play-card-body/play-card-body.component';
+import { PlayCardFooterComponent } from 'libs/play-ui/src/lib/play-card/play-card-footer/play-card-footer.component';
 import { LmsUiTag } from '../lms-ui-tag.interface';
 
 @Component({
@@ -15,7 +17,13 @@ import { LmsUiTag } from '../lms-ui-tag.interface';
   styleUrls: ['./lms-ui-tag-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayCardComponent, PlayButtonComponent],
+  imports: [
+    CommonModule,
+    PlayCardComponent,
+    PlayCardBodyComponent,
+    PlayCardFooterComponent,
+    PlayButtonComponent,
+  ],
 })
 export class LmsUiTagListComponent {
   @Input() tags: LmsUiTag[] = [];
