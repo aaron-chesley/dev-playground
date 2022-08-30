@@ -11,47 +11,26 @@
     "noPropertyAccessFromIndexSignature": false,
     "strictPropertyInitialization": false,
     "strictNullChecks": false,
+    "allowSyntheticDefaultImports": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@playground/environment": [
-        "libs/environment/src/index.ts"
-      ],
-      "@playground/lms-data": [
-        "libs/lms/lms-data/src/index.ts"
-      ],
-      "@playground/lms-features": [
-        "libs/lms/lms-features/src/index.ts"
-      ],
-      "@playground/lms-ui": [
-        "libs/lms/lms-ui/src/index.ts"
-      ],
-      "@playground/lms/lms-util": [
-        "libs/lms/lms-util/src/index.ts"
-      ],
-      "@playground/play-ui": [
-        "libs/play-ui/src/index.ts"
-      ],
+      "@playground/environment": ["libs/environment/src/index.ts"],
+      "@playground/lms-data": ["libs/lms/lms-data/src/index.ts"],
+      "@playground/lms-features": ["libs/lms/lms-features/src/index.ts"],
+      "@playground/lms-ui": ["libs/lms/lms-ui/src/index.ts"],
+      "@playground/lms/lms-util": ["libs/lms/lms-util/src/index.ts"],
+      "@playground/play-storybook": ["libs/play-storybook/src/index.ts"],
+      "@playground/play-ui": ["libs/play-ui/src/index.ts"],
       "@playground/shared/shared-data": [
         "libs/shared/shared-data/src/index.ts"
       ],
-      "@playground/shared/shared-util": [
-        "libs/shared/shared-util/src/index.ts"
-      ],
-      "@playground/play-storybook": [
-        "libs/play-storybook/src/index.ts"
-      ]
+      "@playground/shared/shared-util": ["libs/shared/shared-util/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

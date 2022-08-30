@@ -5,9 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/play-storybook"
-      ],
+      "outputs": ["coverage/libs/play-storybook"],
       "options": {
         "jestConfig": "libs/play-storybook/jest.config.ts",
         "passWithNoTests": true
@@ -20,6 +18,37 @@
           "libs/play-storybook/**/*.ts",
           "libs/play-storybook/**/*.html"
         ]
+      }
+    },
+    "storybook": {
+      "executor": "@storybook/angular:start-storybook",
+      "options": {
+        "port": 4400,
+        "configDir": "libs/play-storybook/.storybook",
+        "browserTarget": "play-storybook:build-storybook",
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
+      }
+    },
+    "build-storybook": {
+      "executor": "@storybook/angular:build-storybook",
+      "outputs": ["{options.outputDir}"],
+      "options": {
+        "outputDir": "dist/storybook/play-storybook",
+        "configDir": "libs/play-storybook/.storybook",
+        "browserTarget": "play-storybook:build-storybook",
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
+      },
+      "configurations": {
+        "ci": {
+          "quiet": true
+        }
       }
     }
   },

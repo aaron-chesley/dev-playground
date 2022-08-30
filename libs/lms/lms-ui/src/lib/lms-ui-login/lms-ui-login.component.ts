@@ -15,6 +15,7 @@ import {
   PlayRippleDirective,
   PlayTextComponent,
 } from '@playground/play-ui';
+import { PlayCardBodyComponent } from 'libs/play-ui/src/lib/play-card/play-card-body/play-card-body.component';
 
 @Component({
   selector: 'lms-ui-login',
@@ -26,6 +27,7 @@ import {
     CommonModule,
     ReactiveFormsModule,
     PlayCardComponent,
+    PlayCardBodyComponent,
     PlayInputTextComponent,
     PlayButtonComponent,
     PlayIconComponent,
