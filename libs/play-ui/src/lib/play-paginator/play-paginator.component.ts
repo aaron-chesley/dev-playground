@@ -3,9 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { PlayButtonComponent } from '../play-button/play-button.component';
 import { PlayIconRegistryService } from '../play-icon/play-icon-registry.service';

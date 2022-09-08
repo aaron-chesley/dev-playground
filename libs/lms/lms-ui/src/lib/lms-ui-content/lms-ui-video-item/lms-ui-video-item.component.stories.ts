@@ -22,6 +22,7 @@ const Template: Story<LmsUiVideoItemComponent> = (
 export const Primary = Template.bind({});
 Primary.args = {
   video: {
+    id: '1',
     name: 'Vindicated',
     description: 'Provided to YouTube by Universal Music Group',
     duration: '3:21',

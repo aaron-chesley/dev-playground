@@ -1,13 +1,19 @@
-<div class="content-list-wrapper">
-  <ng-container
-    *ngFor="let contentItem of contentItems"
-    [ngSwitch]="contentItem.content_type"
-  >
-    <ng-container *ngSwitchCase="'VIDEO'">
-      <lms-ui-video-item
-        class="lms-ui-content-item"
-        [video]="contentItem.video"
-      ></lms-ui-video-item>
+<div class="container">
+  <play-paginator
+    [count]="count"
+    [itemsPerPage]="itemsPerPage"
+  ></play-paginator>
+  <div class="content-list-wrapper">
+    <ng-container
+      *ngFor="let contentItem of contentItems"
+      [ngSwitch]="contentItem.content_type"
+    >
+      <ng-container *ngSwitchCase="'VIDEO'">
+        <lms-ui-video-item
+          class="lms-ui-content-item"
+          [video]="contentItem.video"
+        ></lms-ui-video-item>
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </div>
