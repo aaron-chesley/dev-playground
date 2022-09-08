@@ -26,7 +26,7 @@ export class LmsDataContentService {
     searchPath: string = ''
   ): Observable<Paginated<LmsContentItem>> {
     return this.apiService.get<Paginated<LmsContentItem>>(
-      'content/?expand=video&page_size=4&' + searchPath
+      'content/?expand=video&page_size=8&' + searchPath
     );
   }
 }
