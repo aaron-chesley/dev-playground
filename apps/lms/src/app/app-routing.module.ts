@@ -67,9 +67,12 @@ const routes: Routes = [
         canLoad: [AuthGuard],
       },
       {
-        path: 'videos',
-        component: ngHTML(``),
+        path: 'content',
         canLoad: [AuthGuard],
+        loadComponent: () =>
+          import('@playground/lms-features').then(
+            (c) => c.LmsFeatureContentListComponent
+          ),
       },
       {
         path: 'reports',

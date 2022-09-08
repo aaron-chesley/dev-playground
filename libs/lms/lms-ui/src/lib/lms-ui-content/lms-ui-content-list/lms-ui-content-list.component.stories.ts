@@ -21,9 +21,11 @@ export const Primary = Template.bind({});
 Primary.args = {
   contentItems: [
     {
+      id: '1',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '1',
         name: 'Seize The Day',
         description:
           'Seize The Day by Avenged Sevenfold from the album City of Evil © 2005',
@@ -33,9 +35,11 @@ Primary.args = {
       },
     },
     {
+      id: '2',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '2',
         name: 'Hail To The King',
         description:
           'Watch the official music video for Hail To The King by Avenged Sevenfold from the album Hail To The King.',
@@ -46,9 +50,11 @@ Primary.args = {
       },
     },
     {
+      id: '3',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '3',
         name: 'Helena',
         description:
           'Watch the official music video for Helena by My Chemical Romance from the album Three Cheers for Sweet Revenge.',
@@ -58,9 +64,11 @@ Primary.args = {
       },
     },
     {
+      id: '4',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '4',
         name: 'In Too Deep',
         description:
           'Official Music Video for In Too Deep performed by SUM 41.',
@@ -70,9 +78,11 @@ Primary.args = {
       },
     },
     {
+      id: '5',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '5',
         name: '1985',
         description: "Bowling For Soup's official music video for '1985'.",
         duration: '3:32',
@@ -81,9 +91,11 @@ Primary.args = {
       },
     },
     {
+      id: '6',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '6',
         name: 'The Taste Of Ink',
         description: 'The Taste Of Ink Music Video by The Used.',
         duration: '3:19',
@@ -92,9 +104,11 @@ Primary.args = {
       },
     },
     {
+      id: '7',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '7',
         name: 'A Decade Under the Influence',
         description:
           "Music video by Taking Back Sunday performing A Decade Under the Influence. (C) 2004 i feel like i'm taking crazy pills, Inc.",
@@ -104,9 +118,11 @@ Primary.args = {
       },
     },
     {
+      id: '8',
       content_type: 'VIDEO',
       slide: null,
       video: {
+        id: '8',
         name: 'Vindicated',
         description: 'Provided to YouTube by Universal Music Group',
         duration: '3:21',

@@ -5,3 +5,11 @@ export interface Paginated<R> {
   previous: string | null;
   results: R[];
 }
+
+export const getDefaultPaginated = (): Paginated<never> => ({
+  count: 0,
+  page_number: 1,
+  next: null,
+  previous: null,
+  results: [],
+});

@@ -1,4 +1,5 @@
 export interface LmsVideo {
+  id: string;
   name: string;
   description: string;
   duration: string;

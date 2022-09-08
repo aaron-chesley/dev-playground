@@ -14,20 +14,18 @@ export class LmsTagService {
   constructor(private apiService: ApiService) {}
 
   public createTag(body: LmsDataTag) {
-    return this.apiService.post('/tags/', body);
+    return this.apiService.post('tags/', body);
   }
 
   public updateTag(tagId: string, body: LmsDataTag) {
-    return this.apiService.put('/tags/' + tagId + '/', body);
+    return this.apiService.put('tags/' + tagId + '/', body);
   }
 
   public deleteTag(tagId: string) {
-    return this.apiService.delete('/tags/' + tagId + '/');
+    return this.apiService.delete('tags/' + tagId + '/');
   }
 
   public searchTags(searchPath: string = ''): Observable<LmsDataTag[]> {
-    return this.apiService.get<LmsDataTag[]>(
-      '/tags/?page_size=0&' + searchPath
-    );
+    return this.apiService.get<LmsDataTag[]>('tags/?page_size=0&' + searchPath);
   }
 }

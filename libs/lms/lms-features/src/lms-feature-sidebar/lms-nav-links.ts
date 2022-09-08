@@ -49,9 +49,9 @@ const lmsNavLinks: LmsNavLink[] = [
     routerLink: '/app/trainings',
   },
   {
-    title: 'Videos',
+    title: 'Content',
     icon: 'videoLibrary',
-    routerLink: '/app/videos',
+    routerLink: '/app/content',
   },
   {
     title: 'Tenants',
@@ -68,7 +68,7 @@ const getSupervisorNavLinks = (): LmsNavLink[] => {
     'Tags',
     'Teams',
     'Trainings',
-    'Videos',
+    'Content',
     'Tenants',
   ];
   return lmsNavLinks.filter((navLink) =>
@@ -86,7 +86,7 @@ const getAdminNavLinks = (): LmsNavLink[] => {
     'Tags',
     'Teams',
     'Trainings',
-    'Videos',
+    'Content',
   ];
   return lmsNavLinks.filter((navLink) => adminLinks.includes(navLink.title));
 };
