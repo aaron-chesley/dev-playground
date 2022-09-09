@@ -2,24 +2,69 @@ import { Injectable } from '@angular/core';
 import { LmsDataContentService } from '@playground/lms-data';
 import { LmsContentItem } from '@playground/lms/lms-util';
 import { getDefaultPaginated, Paginated } from '@playground/shared/shared-util';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+
+interface ContentListState {
+  contentList: Paginated<LmsContentItem>;
+  loading: boolean;
+}
 
 @Injectable({ providedIn: 'root' })
 export class LmsFeatureContentListStore {
-  private contentListSub = new BehaviorSubject<Paginated<LmsContentItem>>(
-    getDefaultPaginated()
+  private contentListStateSub = new BehaviorSubject<ContentListState>({
+    contentList: getDefaultPaginated(),
+    loading: false,
+  });
+
+  private get contentListState() {
+    return this.contentListStateSub.getValue();
+  }
+
+  // Selectors
+  readonly contentListState$ = this.contentListStateSub
+    .asObservable()
+    .pipe(shareReplay());
+
+  readonly contentList$ = this.contentListState$.pipe(
+    map((state) => state.contentList.results)
   );
-  readonly contentList$: Observable<Paginated<LmsContentItem>> =
-    this.contentListSub.asObservable().pipe(shareReplay());
 
-  private currentPageSub = new BehaviorSubject<number>(1);
-  readonly currentPage$ = this.currentPageSub.asObservable();
+  readonly currentPage$ = this.contentListState$.pipe(
+    map((state) => state.contentList.page_number)
+  );
 
-  fetchContentList() {
+  readonly count$ = this.contentListState$.pipe(
+    map((state) => state.contentList.count)
+  );
+
+  readonly loading$ = this.contentListState$.pipe(
+    map((state) => state.loading)
+  );
+
+  // Reducers
+  private patchState(state: Partial<ContentListState>) {
+    this.contentListStateSub.next({
+      ...this.contentListState,
+      ...state,
+    });
+  }
+
+  // Actions
+  private fetchContentList(searchTerm = '', pageNo = '1') {
+    this.patchState({ loading: true });
+
     this.contentService
-      .searchContent()
-      .subscribe((contentList) => this.contentListSub.next(contentList));
+      .searchContent(searchTerm, pageNo)
+      .pipe(
+        catchError((err) => {
+          this.patchState({ loading: false });
+          return throwError(() => err);
+        })
+      )
+      .subscribe((contentList) => {
+        this.patchState({ contentList: contentList, loading: false });
+      });
   }
 
   deleteContent(content: LmsContentItem) {
@@ -28,24 +73,14 @@ export class LmsFeatureContentListStore {
       .pipe(tap(() => this.fetchContentList()));
   }
 
-  nextPage() {
-    const currentPage = this.currentPageSub.getValue();
-    this.contentService
-      .searchContent('', (currentPage + 1).toString())
-      .subscribe((contentList) => {
-        this.contentListSub.next(contentList);
-        this.currentPageSub.next(currentPage + 1);
-      });
+  nextPage(): void {
+    const nextPageNo = this.contentListState.contentList.page_number + 1;
+    this.fetchContentList('', nextPageNo.toString());
   }
 
   previousPage() {
-    const currentPage = this.currentPageSub.getValue();
-    this.contentService
-      .searchContent('', (currentPage - 1).toString())
-      .subscribe((contentList) => {
-        this.contentListSub.next(contentList);
-        this.currentPageSub.next(currentPage - 1);
-      });
+    const previousPageNo = this.contentListState.contentList.page_number - 1;
+    this.fetchContentList('', previousPageNo.toString());
   }
 
   constructor(private contentService: LmsDataContentService) {

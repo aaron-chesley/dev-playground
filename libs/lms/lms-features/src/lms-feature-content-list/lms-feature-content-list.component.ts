@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { LmsUiContentListComponent } from '@playground/lms-ui';
-import { LmsContentItem } from '@playground/lms/lms-util';
-import { map, Observable } from 'rxjs';
 import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
 
 @Component({
@@ -19,12 +17,9 @@ import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
   imports: [CommonModule, LmsUiContentListComponent],
 })
 export class LmsFeatureContentListComponent {
-  currentPage$: Observable<number> = this.contentStore.currentPage$;
-  contentItems$: Observable<LmsContentItem[]> =
-    this.contentStore.contentList$.pipe(map((x) => x.results));
-  count$: Observable<number> = this.contentStore.contentList$.pipe(
-    map((x) => x.count)
-  );
+  contentItems$ = this.contentStore.contentList$;
+  currentPage$ = this.contentStore.currentPage$;
+  count$ = this.contentStore.count$;
 
   onNextPageClick() {
     this.contentStore.nextPage();

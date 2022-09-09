@@ -22,7 +22,7 @@ import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.
   imports: [CommonModule, LmsUiVideoItemComponent, PlayPaginatorComponent],
 })
 export class LmsUiContentListComponent {
-  @HostBinding('class.lms-ui-content-list') playCardClass =
+  @HostBinding('class.lms-ui-content-list') lmsUiContentListClass =
     'lms-ui-content-list';
   @Input() contentItems: LmsContentItem[] = [];
   @Input() count = 0;
