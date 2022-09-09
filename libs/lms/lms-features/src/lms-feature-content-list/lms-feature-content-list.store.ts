@@ -13,16 +13,39 @@ export class LmsFeatureContentListStore {
   readonly contentList$: Observable<Paginated<LmsContentItem>> =
     this.contentListSub.asObservable().pipe(shareReplay());
 
+  private currentPageSub = new BehaviorSubject<number>(1);
+  readonly currentPage$ = this.currentPageSub.asObservable();
+
   fetchContentList() {
     this.contentService
       .searchContent()
       .subscribe((contentList) => this.contentListSub.next(contentList));
   }
 
-  deleteContent(tag: LmsContentItem) {
+  deleteContent(content: LmsContentItem) {
     return this.contentService
-      .deleteContent(tag.id)
+      .deleteContent(content.id)
       .pipe(tap(() => this.fetchContentList()));
+  }
+
+  nextPage() {
+    const currentPage = this.currentPageSub.getValue();
+    this.contentService
+      .searchContent('', (currentPage + 1).toString())
+      .subscribe((contentList) => {
+        this.contentListSub.next(contentList);
+        this.currentPageSub.next(currentPage + 1);
+      });
+  }
+
+  previousPage() {
+    const currentPage = this.currentPageSub.getValue();
+    this.contentService
+      .searchContent('', (currentPage - 1).toString())
+      .subscribe((contentList) => {
+        this.contentListSub.next(contentList);
+        this.currentPageSub.next(currentPage - 1);
+      });
   }
 
   constructor(private contentService: LmsDataContentService) {

@@ -1,9 +1,21 @@
 <div class="play-paginator-container">
-  <button playButton appearance="play-icon-btn" theme="primary">
+  <button
+    (click)="previousPageClick.emit()"
+    playButton
+    appearance="play-icon-btn"
+    theme="primary"
+    [disabled]="currentPage <= 1"
+  >
     <play-icon name="arrowBack"></play-icon>
   </button>
   <p [size]="5">Page {{ currentPage }} of {{ totalPages }}</p>
-  <button playButton appearance="play-icon-btn" theme="primary">
+  <button
+    (click)="nextPageClick.emit()"
+    playButton
+    appearance="play-icon-btn"
+    theme="primary"
+    [disabled]="currentPage >= totalPages"
+  >
     <play-icon name="arrowForward"></play-icon>
   </button>
 </div>

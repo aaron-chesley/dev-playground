@@ -10,23 +10,24 @@ import { LmsContentItem } from '@playground/lms/lms-util';
 export class LmsDataContentService {
   constructor(private apiService: ApiService) {}
 
-  public createContent(body: LmsContentItem) {
+  createContent(body: LmsContentItem) {
     return this.apiService.post('content/', body);
   }
 
-  public updateContent(contentId: string, body: LmsContentItem) {
+  updateContent(contentId: string, body: LmsContentItem) {
     return this.apiService.put('content/' + contentId + '/', body);
   }
 
-  public deleteContent(contentId: string) {
+  deleteContent(contentId: string) {
     return this.apiService.delete('content/' + contentId + '/');
   }
 
-  public searchContent(
-    searchPath: string = ''
+  searchContent(
+    searchPath: string = '',
+    pageNumber = '1'
   ): Observable<Paginated<LmsContentItem>> {
     return this.apiService.get<Paginated<LmsContentItem>>(
-      'content/?expand=video&page_size=8&' + searchPath
+      'content/?expand=video&page_size=8&page=' + pageNumber + '&' + searchPath
     );
   }
 }

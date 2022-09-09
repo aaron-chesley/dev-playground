@@ -2,6 +2,9 @@
   <play-paginator
     [count]="count"
     [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage"
+    (nextPageClick)="nextPageClick.emit()"
+    (previousPageClick)="previousPageClick.emit()"
   ></play-paginator>
   <div class="content-list-wrapper">
     <ng-container

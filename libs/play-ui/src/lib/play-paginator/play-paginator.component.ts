@@ -2,8 +2,10 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
-  OnInit,
+  OnChanges,
+  Output,
 } from '@angular/core';
 import { PlayButtonComponent } from '../play-button/play-button.component';
 import { PlayIconRegistryService } from '../play-icon/play-icon-registry.service';
@@ -24,14 +26,17 @@ import { PlayTextComponent } from '../play-typography/play-text/play-text.compon
     PlayTextComponent,
   ],
 })
-export class PlayPaginatorComponent implements OnInit {
+export class PlayPaginatorComponent implements OnChanges {
   totalPages = 0;
 
   @Input() count = 0;
   @Input() itemsPerPage = 10;
   @Input() currentPage = 1;
 
-  ngOnInit() {
+  @Output() nextPageClick = new EventEmitter<void>();
+  @Output() previousPageClick = new EventEmitter<void>();
+
+  ngOnChanges() {
     this.setTotalPages(this.count, this.itemsPerPage);
   }
 
