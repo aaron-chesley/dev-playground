@@ -1,8 +1,7 @@
-.play-paginator-container {
-  display: flex;
+.play-paginator {
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
   height: 50px;
   border-radius: 4px;
   box-sizing: border-box;

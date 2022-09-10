@@ -3,9 +3,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
   OnChanges,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { PlayButtonComponent } from '../play-button/play-button.component';
 import { PlayIconRegistryService } from '../play-icon/play-icon-registry.service';
@@ -18,6 +20,7 @@ import { PlayTextComponent } from '../play-typography/play-text/play-text.compon
   templateUrl: './play-paginator.component.html',
   styleUrls: ['./play-paginator.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { PlayTextComponent } from '../play-typography/play-text/play-text.compon
   ],
 })
 export class PlayPaginatorComponent implements OnChanges {
+  @HostBinding('class.play-paginator') className = 'play-paginator';
   totalPages = 0;
 
   @Input() count = 0;

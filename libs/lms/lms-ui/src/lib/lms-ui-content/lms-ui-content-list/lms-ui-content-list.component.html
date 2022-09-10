@@ -1,11 +1,19 @@
 <div class="container">
-  <play-paginator
-    [count]="count"
-    [itemsPerPage]="itemsPerPage"
-    [currentPage]="currentPage"
-    (nextPageClick)="nextPageClick.emit()"
-    (previousPageClick)="previousPageClick.emit()"
-  ></play-paginator>
+  <div class="search-paginator-container">
+    <input
+      type="text"
+      playInputText
+      placeholder="Search"
+      [formControl]="_searchCtrl"
+    />
+    <play-paginator
+      [count]="count"
+      [itemsPerPage]="itemsPerPage"
+      [currentPage]="currentPage"
+      (nextPageClick)="nextPageClick.emit()"
+      (previousPageClick)="previousPageClick.emit()"
+    ></play-paginator>
+  </div>
   <div class="content-list-wrapper">
     <ng-container
       *ngFor="let contentItem of contentItems"

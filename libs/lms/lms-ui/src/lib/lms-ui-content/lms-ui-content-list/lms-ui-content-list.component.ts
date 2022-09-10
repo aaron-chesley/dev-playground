@@ -5,11 +5,18 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnDestroy,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LmsContentItem } from '@playground/lms/lms-util';
-import { PlayPaginatorComponent } from '@playground/play-ui';
+import {
+  PlayInputTextComponent,
+  PlayPaginatorComponent,
+} from '@playground/play-ui';
+import { Subject, takeUntil } from 'rxjs';
 import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.component';
 
 @Component({
@@ -19,9 +26,15 @@ import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule, LmsUiVideoItemComponent, PlayPaginatorComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    LmsUiVideoItemComponent,
+    PlayPaginatorComponent,
+    PlayInputTextComponent,
+  ],
 })
-export class LmsUiContentListComponent {
+export class LmsUiContentListComponent implements OnInit, OnDestroy {
   @HostBinding('class.lms-ui-content-list') lmsUiContentListClass =
     'lms-ui-content-list';
   @Input() contentItems: LmsContentItem[] = [];
@@ -31,4 +44,19 @@ export class LmsUiContentListComponent {
 
   @Output() nextPageClick = new EventEmitter<void>();
   @Output() previousPageClick = new EventEmitter<void>();
+  @Output() search = new EventEmitter<string>();
+
+  _ngDestroy$ = new Subject<void>();
+  _searchCtrl = new FormControl('');
+
+  ngOnInit() {
+    this._searchCtrl.valueChanges
+      .pipe(takeUntil(this._ngDestroy$))
+      .subscribe((val) => this.search.emit(val));
+  }
+
+  ngOnDestroy() {
+    this._ngDestroy$.next();
+    this._ngDestroy$.complete();
+  }
 }

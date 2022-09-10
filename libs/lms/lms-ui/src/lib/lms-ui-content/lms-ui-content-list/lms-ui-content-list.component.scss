@@ -5,6 +5,17 @@
   gap: 10px;
 }
 
+.search-paginator-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  .play-paginator {
+    box-shadow: none;
+  }
+}
+
 .content-list-wrapper {
   display: flex;
   flex-wrap: wrap;

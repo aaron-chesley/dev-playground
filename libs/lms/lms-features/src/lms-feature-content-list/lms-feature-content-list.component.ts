@@ -11,6 +11,7 @@ import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
     [count]="count$ | async"
     (nextPageClick)="onNextPageClick()"
     (previousPageClick)="onPreviousPageClick()"
+    (search)="onSearch($event)"
   ></lms-ui-content-list>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -27,6 +28,10 @@ export class LmsFeatureContentListComponent {
 
   onPreviousPageClick() {
     this.contentStore.previousPage();
+  }
+
+  onSearch(searchTerm: string) {
+    console.log(searchTerm);
   }
 
   constructor(private contentStore: LmsFeatureContentListStore) {}
