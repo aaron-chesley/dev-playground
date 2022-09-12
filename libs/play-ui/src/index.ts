@@ -16,3 +16,4 @@ export * from './lib/play-toggle/play-toggle.component';
 export * from './lib/play-radio/play-radio.component';
 export * from './lib/play-radio/play-radio-group.component';
 export * from './lib/play-paginator/play-paginator.component';
+export * from './lib/play-loading/play-loading.directive';
