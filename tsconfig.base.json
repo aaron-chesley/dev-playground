@@ -29,6 +29,9 @@
       "@playground/shared/shared-data": [
         "libs/shared/shared-data/src/index.ts"
       ],
+      "@playground/shared/shared-features": [
+        "libs/shared/shared-features/src/index.ts"
+      ],
       "@playground/shared/shared-util": ["libs/shared/shared-util/src/index.ts"]
     }
   },

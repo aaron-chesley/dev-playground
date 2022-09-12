@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/shared/shared-features/src",
+  "prefix": "playground",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/shared/shared-features"],
+      "options": {
+        "jestConfig": "libs/shared/shared-features/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/shared-features/**/*.ts",
+          "libs/shared/shared-features/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["scope:shared", "type:feature"]
+}
