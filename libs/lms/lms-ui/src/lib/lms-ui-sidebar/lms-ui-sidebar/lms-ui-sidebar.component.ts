@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnInit,
 } from '@angular/core';
 import { MatDrawerMode, MatSidenavModule } from '@angular/material/sidenav';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { PlayLoadingDirective } from '@playground/play-ui';
 
 @Component({
   selector: 'lms-ui-sidebar',
@@ -13,9 +15,10 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrls: ['./lms-ui-sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MatSidenavModule],
+  imports: [MatSidenavModule, PlayLoadingDirective],
 })
 export class LmsUiSidebarComponent implements OnInit {
+  @Input() isLoading = false;
   drawerMode: MatDrawerMode;
   drawerOpened: boolean;
 

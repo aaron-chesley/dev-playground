@@ -41,6 +41,7 @@ import { CommonModule } from '@angular/common';
 export class LmsFeatureSidebarComponent implements OnInit {
   currentUser$: Observable<AuthUser>;
   lmsNavLinks$: Observable<LmsNavLink[]>;
+  isLoading$: Observable<boolean>;
 
   ngOnInit() {
     this.currentUser$ = this.authService.me().pipe(shareReplay());

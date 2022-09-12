@@ -1,4 +1,4 @@
-<lms-ui-sidebar>
+<lms-ui-sidebar [isLoading]="isLoading$ | async">
   <lms-ui-sidebar-item
     *ngFor="let link of lmsNavLinks$ | async"
     [routerLink]="link.routerLink"

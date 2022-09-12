@@ -10,7 +10,7 @@
       <ng-content select="lms-ui-sidebar-item"></ng-content>
     </section>
   </mat-sidenav>
-  <mat-sidenav-content class="sidenav-content">
+  <mat-sidenav-content class="sidenav-content" [playLoading]="isLoading">
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
