@@ -45,7 +45,7 @@ export class PlayLoadingDirective implements OnInit, OnChanges {
     this.renderer.setStyle(loadingContainer, 'top', '0');
     this.renderer.setStyle(loadingContainer, 'left', '0');
     this.renderer.setStyle(loadingContainer, 'background', 'black');
-    this.renderer.setStyle(loadingContainer, 'opacity', '0.3');
+    this.renderer.setStyle(loadingContainer, 'opacity', '0.5');
     this.renderer.setStyle(loadingContainer, 'width', '100%');
     this.renderer.setStyle(loadingContainer, 'height', '100%');
 
@@ -67,7 +67,7 @@ export class PlayLoadingDirective implements OnInit, OnChanges {
   }
 
   ngOnChanges(simpleChanges: SimpleChanges) {
-    if (simpleChanges.appLoading) {
+    if (simpleChanges.playLoading) {
       const container = this.targetEl.nativeElement;
       const div = container.querySelector('.' + this.uid);
       if (div) {

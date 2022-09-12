@@ -24,6 +24,7 @@ import {
 import { RouterModule } from '@angular/router';
 import { getNavLinksFromUserType, LmsNavLink } from './lms-nav-links';
 import { CommonModule } from '@angular/common';
+import { HttpLoadingIndicatorService } from '@playground/shared/shared-features';
 
 @Component({
   selector: 'lms-feature-sidebar',
@@ -46,6 +47,7 @@ export class LmsFeatureSidebarComponent implements OnInit {
   ngOnInit() {
     this.currentUser$ = this.authService.me().pipe(shareReplay());
     this.lmsNavLinks$ = this.currentUser$.pipe(map(getNavLinksFromUserType));
+    this.isLoading$ = this.httpLoadingService.loading$;
   }
 
   onLogoutClick() {
@@ -55,6 +57,7 @@ export class LmsFeatureSidebarComponent implements OnInit {
 
   constructor(
     private authService: LmsAuthenticationService,
+    private httpLoadingService: HttpLoadingIndicatorService,
     private playIconService: PlayIconRegistryService
   ) {
     this.playIconService.registerIcons([
