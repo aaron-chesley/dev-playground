@@ -2,19 +2,17 @@ import { Injectable } from '@angular/core';
 import { LmsDataContentService } from '@playground/lms-data';
 import { LmsContentItem } from '@playground/lms/lms-util';
 import { getDefaultPaginated, Paginated } from '@playground/shared/shared-util';
-import { BehaviorSubject, throwError } from 'rxjs';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
 
 interface ContentListState {
   contentList: Paginated<LmsContentItem>;
-  loading: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
 export class LmsFeatureContentListStore {
   private contentListStateSub = new BehaviorSubject<ContentListState>({
     contentList: getDefaultPaginated(),
-    loading: false,
   });
 
   private get contentListState() {
@@ -38,10 +36,6 @@ export class LmsFeatureContentListStore {
     map((state) => state.contentList.count)
   );
 
-  readonly loading$ = this.contentListState$.pipe(
-    map((state) => state.loading)
-  );
-
   // Reducers
   private patchState(state: Partial<ContentListState>) {
     this.contentListStateSub.next({
@@ -52,18 +46,10 @@ export class LmsFeatureContentListStore {
 
   // Actions
   private fetchContentList(searchTerm = '', pageNo = '1') {
-    this.patchState({ loading: true });
-
     this.contentService
       .searchContent(searchTerm, pageNo)
-      .pipe(
-        catchError((err) => {
-          this.patchState({ loading: false });
-          return throwError(() => err);
-        })
-      )
       .subscribe((contentList) => {
-        this.patchState({ contentList: contentList, loading: false });
+        this.patchState({ contentList: contentList });
       });
   }
 
@@ -73,7 +59,7 @@ export class LmsFeatureContentListStore {
       .pipe(tap(() => this.fetchContentList()));
   }
 
-  nextPage(): void {
+  nextPage() {
     const nextPageNo = this.contentListState.contentList.page_number + 1;
     this.fetchContentList('', nextPageNo.toString());
   }
