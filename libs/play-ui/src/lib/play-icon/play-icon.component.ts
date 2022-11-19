@@ -8,6 +8,8 @@ import {
   Inject,
   OnChanges,
   SimpleChanges,
+  ViewEncapsulation,
+  HostBinding,
 } from '@angular/core';
 import { PlayIconRegistryService } from './play-icon-registry.service';
 
@@ -16,16 +18,18 @@ import { PlayIconRegistryService } from './play-icon-registry.service';
   template: ``,
   styles: [
     `
-      :host {
+      .play-icon {
         display: flex;
       }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule],
 })
 export class PlayIconComponent implements OnChanges {
+  @HostBinding('class') className = 'play-icon';
   private svgIcon!: SVGElement;
 
   @Input() name = '';
