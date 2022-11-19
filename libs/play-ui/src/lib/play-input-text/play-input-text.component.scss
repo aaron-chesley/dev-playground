@@ -5,11 +5,12 @@
   height: 2rem;
   box-sizing: border-box;
   font-size: 1rem;
+  outline: none;
   &:focus {
-    outline-color: var(--play-primary-color);
+    border-color: var(--play-primary-color);
   }
 }
 
 .play-input-text.ng-invalid.ng-touched {
-  border: 2px solid var(--play-error-color);
+  border-color: var(--play-error-color);
 }
