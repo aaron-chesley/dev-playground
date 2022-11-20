@@ -1,21 +1,36 @@
 .play-form-field {
   display: inline-flex;
-  flex-direction: row;
-  border: 1px solid #a6a6a6;
-  border-radius: 4px;
-  box-sizing: border-box;
-  &:focus-within {
-    border-color: var(--play-primary-color);
+  flex-direction: column;
+
+  .play-form-field-label {
+    padding: 0px 0px 2px 0px;
   }
-}
 
-.play-form-field > .play-input-text {
-  border: none;
-}
+  .play-input-wrapper {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #a6a6a6;
+    border-radius: 4px;
+    box-sizing: border-box;
+    &:focus-within {
+      border-color: var(--play-primary-color);
+    }
 
-.play-form-field > .play-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-right: 5px;
+    .play-input-text {
+      display: flex;
+      flex: 1;
+      border: none;
+    }
+
+    .play-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: 5px;
+    }
+  }
+
+  .play-form-field-error {
+    padding: 2px 0px 0px 0px;
+  }
 }
