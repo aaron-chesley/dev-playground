@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconComponent } from '../../play-icon/play-icon.component';
 import { search } from '../../play-icon/play-icons';
@@ -14,6 +16,8 @@ import { PlayFormFieldComponent } from '../play-form-field.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CommonModule,
+    ReactiveFormsModule,
     PlayFormFieldComponent,
     PlayFormFieldLabelComponent,
     PlayInputTextComponent,
@@ -22,6 +26,7 @@ import { PlayFormFieldComponent } from '../play-form-field.component';
   ],
 })
 export class PlayFormFieldShowcaseComponent {
+  emailControl = new FormControl('', [Validators.email]);
   constructor(private playIconService: PlayIconRegistryService) {
     this.playIconService.registerIcons([search]);
   }

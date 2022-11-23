@@ -1,6 +1,8 @@
 <play-form-field>
   <play-form-field-label>Name:</play-form-field-label>
-  <input playInputText />
+  <input playInputText [formControl]="emailControl" />
   <play-icon name="search"></play-icon>
-  <play-form-field-error>Error in the string provided</play-form-field-error>
+  <play-form-field-error *ngIf="emailControl.invalid"
+    >Error in the string provided</play-form-field-error
+  >
 </play-form-field>
