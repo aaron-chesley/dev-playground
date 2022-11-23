@@ -26,7 +26,7 @@ import { PlayFormFieldComponent } from '../play-form-field.component';
   ],
 })
 export class PlayFormFieldShowcaseComponent {
-  emailControl = new FormControl('', [Validators.email]);
+  emailControl = new FormControl('', [Validators.email, Validators.required]);
   constructor(private playIconService: PlayIconRegistryService) {
     this.playIconService.registerIcons([search]);
   }

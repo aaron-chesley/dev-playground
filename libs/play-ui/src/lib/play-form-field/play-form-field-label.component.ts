@@ -12,7 +12,6 @@ import { PlayTextComponent } from '../play-typography/play-text/play-text.compon
   styles: [
     `
       .play-form-field-label {
-        font-weight: 500;
       }
     `,
   ],

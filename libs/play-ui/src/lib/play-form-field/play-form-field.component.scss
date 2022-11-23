@@ -34,3 +34,7 @@
     padding: 2px 0px 0px 0px;
   }
 }
+
+.play-form-field.ng-invalid.ng-dirty > .play-input-wrapper {
+  border-color: var(--play-error-color);
+}
