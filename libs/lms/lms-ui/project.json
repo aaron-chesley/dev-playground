@@ -11,7 +11,8 @@
       ],
       "options": {
         "jestConfig": "libs/lms/lms-ui/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/lms/lms-ui/tsconfig.lib.json"
       }
     },
     "lint": {

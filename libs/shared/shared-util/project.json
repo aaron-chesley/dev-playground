@@ -10,7 +10,8 @@
       ],
       "options": {
         "jestConfig": "libs/shared/shared-util/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/shared/shared-util/tsconfig.lib.json"
       }
     },
     "lint": {

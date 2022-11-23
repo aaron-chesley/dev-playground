@@ -11,7 +11,8 @@
       ],
       "options": {
         "jestConfig": "libs/play-ui/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/play-ui/tsconfig.lib.json"
       }
     },
     "lint": {

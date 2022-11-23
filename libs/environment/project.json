@@ -10,7 +10,8 @@
       ],
       "options": {
         "jestConfig": "libs/environment/jest.config.ts",
-        "passWithNoTests": true
+        "passWithNoTests": true,
+        "tsConfig": "libs/environment/tsconfig.lib.json"
       }
     },
     "lint": {
