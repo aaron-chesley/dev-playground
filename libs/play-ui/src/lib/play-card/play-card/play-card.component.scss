@@ -1,11 +1,9 @@
-@use '../play-card-variables' as card;
-
 :host {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   width: 100%;
-  background-color: card.$play-card-bg;
-  border-radius: card.$play-card-border-radius;
-  box-shadow: card.$play-card-box-shadow;
+  background-color: var(--play-card-bg);
+  border-radius: var(--play-card-border-radius);
+  box-shadow: var(--play-card-box-shadow);
 }

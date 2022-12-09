@@ -1,5 +1,3 @@
-@use './play-checkbox-variables' as checkbox;
-
 .play-checkbox {
   display: inline-block;
 }
@@ -9,7 +7,7 @@
   align-items: center;
 }
 
-input[type="checkbox"] {
+input[type='checkbox'] {
   position: relative;
   width: 16px;
   height: 16px;
@@ -35,13 +33,14 @@ input[type="checkbox"] {
   }
   &:checked {
     color: white;
-    border-color: checkbox.$play-checkbox-color;
-    background: checkbox.$play-checkbox-color;
+    border-color: var(--play-primary-color);
+    background: var(--play-primary-color);
     &::before {
       opacity: 1;
     }
   }
-  &:disabled, &:disabled ~ label {
+  &:disabled,
+  &:disabled ~ label {
     opacity: 0.3;
     cursor: default;
     pointer-events: none;

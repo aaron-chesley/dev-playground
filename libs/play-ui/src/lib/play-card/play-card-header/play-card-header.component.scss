@@ -1,11 +1,9 @@
-@use '../play-card-variables' as card;
-
 :host {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: 0px card.$play-card-padding;
+  padding: 0px var(--play-card-padding);
   border-bottom: 1px solid #00000024;
   font-size: 1.5rem;
-  min-height: card.$play-header-height;
+  min-height: var(--play-card-header-height);
 }
