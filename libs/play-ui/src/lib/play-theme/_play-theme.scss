@@ -1,17 +1,23 @@
 /* Globals */
 :root {
   /* Colors */
-  --play-primary-color: hsl(4, 77%, 48%);
-  --play-primary-color-lighter: hsla(4, 77%, 48%, 0.75);
-  --play-primary-color-lightest: hsla(4, 77%, 48%, 0.1);
+  --play-primary-color-base: 146;
+  --play-primary-color-darkest: hsla(var(--play-primary-color-base), 50%, 10%, 100%);
+  --play-primary-color-darker: hsla(var(--play-primary-color-base), 50%, 35%, 100%);
+  --play-primary-color: hsla(var(--play-primary-color-base), 50%, 50%, 100%);
+  --play-primary-color-lighter: hsla(var(--play-primary-color-base), 50%, 75%, 100%);
+  --play-primary-color-lightest: hsla(var(--play-primary-color-base), 50%, 90%, 100%);
 
-  --play-accent-color: hsl(206, 81%, 25%);
-  --play-accent-color-lighter: hsla(206, 81%, 25%, 0.75);
-  --play-accent-color-lightest: hsla(206, 81%, 25%, 0.1);
+  --play-accent-color-base: 210;
+  --play-accent-color-darkest: hsla(var(--play-accent-color-base), 50%, 10%, 100%);
+  --play-accent-color-darker: hsla(var(--play-accent-color-base), 50%, 35%, 100%);
+  --play-accent-color: hsla(var(--play-accent-color-base), 50%, 50%, 100%);
+  --play-accent-color-lighter: hsla(var(--play-accent-color-base), 50%, 75%, 100%);
+  --play-accent-color-lightest: hsla(var(--play-accent-color-base), 50%, 90%, 100%);
 
   --play-success-color: #16d067;
   --play-error-color: #d02c16;
-  --play-warning-color: #d0b716;
+  --play-warning-color: #f5e057;
 
   --play-text-color-light: #ffffff;
   --play-text-color-dark: #000000;
@@ -23,7 +29,7 @@
 play-card {
   --play-card-padding: 25px;
   --play-card-border-radius: 4px;
-  --play-card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124,
-    0 1px 3px #0000001f;
+  --play-card-bg: #FFFFFF;
+  --play-card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124, 0 1px 3px #0000001f;
   --play-card-header-height: 64px;
 }
