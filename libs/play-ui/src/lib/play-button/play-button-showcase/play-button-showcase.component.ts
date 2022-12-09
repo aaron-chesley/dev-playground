@@ -3,7 +3,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconComponent } from '../../play-icon/play-icon.component';
 import { home } from '../../play-icon/play-icons';
-import { PlayRippleDirective } from '../../play-ripple/play-ripple';
 import { PlayButtonComponent } from '../play-button.component';
 
 @Component({
@@ -12,12 +11,7 @@ import { PlayButtonComponent } from '../play-button.component';
   styleUrls: ['./play-button-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    CommonModule,
-    PlayButtonComponent,
-    PlayIconComponent,
-    PlayRippleDirective,
-  ],
+  imports: [CommonModule, PlayButtonComponent, PlayIconComponent],
 })
 export class PlayButtonShowcaseComponent {
   constructor(private iconService: PlayIconRegistryService) {

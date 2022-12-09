@@ -14,6 +14,7 @@ import {
   PlayButtonDefaultOptions,
   PLAY_BUTTON_DEFAULT_OPTIONS,
 } from './play-button-default-options';
+import { PlayRippleDirective } from '../play-ripple/play-ripple';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -22,12 +23,12 @@ import {
   styleUrls: ['./play-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  hostDirectives: [PlayRippleDirective],
   standalone: true,
   imports: [CommonModule],
 })
 export class PlayButtonComponent implements OnChanges {
-  @HostBinding('class')
-  className = '';
+  @HostBinding('class') className = '';
 
   @Input() appearance: PlayButtonAppearance;
   @Input() theme: PlayTheme;

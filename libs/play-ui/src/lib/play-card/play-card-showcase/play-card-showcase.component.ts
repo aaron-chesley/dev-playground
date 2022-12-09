@@ -6,7 +6,6 @@ import { PlayCheckboxComponent } from '../../play-checkbox/play-checkbox.compone
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
 import { PlayIconComponent } from '../../play-icon/play-icon.component';
 import { close } from '../../play-icon/play-icons';
-import { PlayRippleDirective } from '../../play-ripple/play-ripple';
 import { PlayCardBodyComponent } from '../play-card-body/play-card-body.component';
 import { PlayCardFooterComponent } from '../play-card-footer/play-card-footer.component';
 import { PlayCardHeaderComponent } from '../play-card-header/play-card-header.component';
@@ -27,7 +26,6 @@ import { PlayCardComponent } from '../play-card/play-card.component';
     PlayButtonComponent,
     PlayButtonGroupComponent,
     PlayIconComponent,
-    PlayRippleDirective,
     PlayCheckboxComponent,
   ],
 })

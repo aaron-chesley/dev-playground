@@ -12,7 +12,6 @@ import {
   PlayCardComponent,
   PlayIconComponent,
   PlayInputTextComponent,
-  PlayRippleDirective,
   PlayTextComponent,
 } from '@playground/play-ui';
 import { PlayCardBodyComponent } from 'libs/play-ui/src/lib/play-card/play-card-body/play-card-body.component';
@@ -31,7 +30,6 @@ import { PlayCardBodyComponent } from 'libs/play-ui/src/lib/play-card/play-card-
     PlayInputTextComponent,
     PlayButtonComponent,
     PlayIconComponent,
-    PlayRippleDirective,
     PlayTextComponent,
   ],
 })

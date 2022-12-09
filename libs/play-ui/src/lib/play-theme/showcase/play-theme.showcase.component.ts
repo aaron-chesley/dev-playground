@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { PlayButtonComponent } from '../../play-button/play-button.component';
 import tinycolor from 'tinycolor2';
-import { PlayRippleDirective } from '../../play-ripple/play-ripple';
 import { PlayButtonShowcaseComponent } from '../../play-button/play-button-showcase/play-button-showcase.component';
 import {
   FormBuilder,
@@ -30,7 +29,6 @@ import { PLAY_CSS_VARIABLES } from '../play-variables';
     ReactiveFormsModule,
     FormsModule,
     PlayButtonComponent,
-    PlayRippleDirective,
     PlayButtonShowcaseComponent,
   ],
 })

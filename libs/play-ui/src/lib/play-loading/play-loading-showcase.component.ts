@@ -19,7 +19,7 @@ import { PlayLoadingDirective } from './play-loading.directive';
         ahead and try it.
       </play-card-body>
       <play-card-footer position="right">
-        <button playButton appearance="play-flat" theme="primary" playRipple>
+        <button playButton appearance="play-flat" theme="primary">
           Click Here
         </button>
       </play-card-footer>
