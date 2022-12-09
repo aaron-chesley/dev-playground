@@ -4,7 +4,6 @@ import {
   Component,
   HostBinding,
   Input,
-  ViewEncapsulation,
 } from '@angular/core';
 
 @Component({
@@ -12,7 +11,6 @@ import {
   templateUrl: './play-card-footer.component.html',
   styleUrls: ['./play-card-footer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule],
 })

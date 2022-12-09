@@ -4,7 +4,6 @@ import {
   Component,
   HostBinding,
   Input,
-  ViewEncapsulation,
 } from '@angular/core';
 
 @Component({
@@ -12,7 +11,6 @@ import {
   templateUrl: './play-card-header.component.html',
   styleUrls: ['./play-card-header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [CommonModule],
 })

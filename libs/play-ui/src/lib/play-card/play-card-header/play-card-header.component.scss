@@ -1,6 +1,6 @@
 @use '../play-card-variables' as card;
 
-.play-card-header {
+:host {
   display: flex;
   align-items: center;
   box-sizing: border-box;
