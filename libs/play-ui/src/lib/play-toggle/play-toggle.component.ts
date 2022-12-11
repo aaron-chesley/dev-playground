@@ -2,12 +2,13 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
+  Input,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { CheckedBase, DisabledBase, LabelPositionBase } from '../mixins/input';
-
-const PlayToggle = CheckedBase(DisabledBase(LabelPositionBase()));
+import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
   selector: 'play-toggle',
@@ -18,6 +19,19 @@ const PlayToggle = CheckedBase(DisabledBase(LabelPositionBase()));
   standalone: true,
   imports: [CommonModule],
 })
-export class PlayToggleComponent extends PlayToggle {
+export class PlayToggleComponent {
   @HostBinding('class') className = 'play-toggle';
+  @Input() set labelPosition(labelPosition: LabelPosition) {
+    this._labelPosition = getLabelPosition(labelPosition);
+  }
+  @Input() checked = false;
+  @Input() disabled = false;
+  @Output() playCheckChange = new EventEmitter<boolean>();
+
+  _labelPosition = 'row';
+  _uniqueId = self.crypto.randomUUID();
+
+  onCheckChange(event: Event) {
+    this.playCheckChange.emit((event.target as HTMLInputElement).checked);
+  }
 }

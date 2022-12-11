@@ -14,10 +14,7 @@ import {
 } from '@angular/core';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { DisabledBase } from '../mixins/input';
 import { PlayRadioComponent } from './play-radio.component';
-
-const PlayRadioGroup = DisabledBase();
 
 @Component({
   selector: 'play-radio-group',
@@ -28,16 +25,14 @@ const PlayRadioGroup = DisabledBase();
   standalone: true,
   imports: [CommonModule],
 })
-export class PlayRadioGroupComponent
-  extends PlayRadioGroup
-  implements AfterContentInit, OnDestroy
-{
+export class PlayRadioGroupComponent implements AfterContentInit, OnDestroy {
   @HostBinding('class') className = 'play-radio-group';
   @ContentChildren(PlayRadioComponent)
   playRadioButtons: QueryList<PlayRadioComponent> = new QueryList();
 
   @Input() value: unknown;
   @Input() name = self.crypto.randomUUID();
+  @Input() disabled = false;
   @Output() playRadioChange = new EventEmitter<unknown>();
 
   $ngDestroy = new Subject<void>();

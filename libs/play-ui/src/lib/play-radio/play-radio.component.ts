@@ -8,9 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { LabelPositionBase } from '../mixins/input';
-
-const PlayRadio = LabelPositionBase();
+import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
   selector: 'play-radio',
@@ -21,14 +19,20 @@ const PlayRadio = LabelPositionBase();
   standalone: true,
   imports: [CommonModule],
 })
-export class PlayRadioComponent extends PlayRadio {
+export class PlayRadioComponent {
   @HostBinding('class') className = 'play-radio';
 
   @Input() name = self.crypto.randomUUID();
+  @Input() set labelPosition(labelPosition: LabelPosition) {
+    this._labelPosition = getLabelPosition(labelPosition);
+  }
   @Input() checked = false;
   @Input() disabled = false;
   @Input() value: unknown;
   @Output() playValueChange = new EventEmitter<unknown>();
+
+  _labelPosition = 'row';
+  _uniqueId = self.crypto.randomUUID();
 
   onCheckChange(event: Event) {
     this.playValueChange.emit((event.target as HTMLInputElement).value);
