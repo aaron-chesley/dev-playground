@@ -1,23 +1,24 @@
 /* Globals */
 :root {
   /* Colors */
-  --play-primary-color-base: 146;
-  --play-primary-color-darkest: hsla(var(--play-primary-color-base), 50%, 10%, 100%);
-  --play-primary-color-darker: hsla(var(--play-primary-color-base), 50%, 35%, 100%);
-  --play-primary-color: hsla(var(--play-primary-color-base), 50%, 50%, 100%);
-  --play-primary-color-lighter: hsla(var(--play-primary-color-base), 50%, 75%, 100%);
-  --play-primary-color-lightest: hsla(var(--play-primary-color-base), 50%, 90%, 100%);
+  /* https://hypejunction.github.io/color-wizard/ */
+  --play-primary-color-base: 208;
+  --play-primary-color-darkest: hsl(var(--play-primary-color-base), 80%, 23%);
+  --play-primary-color-darker: hsl(var(--play-primary-color-base), 80%, 41%);
+  --play-primary-color: hsl(var(--play-primary-color-base), 80%, 50%);
+  --play-primary-color-lighter: hsl(var(--play-primary-color-base), 80%, 77%);
+  --play-primary-color-lightest: hsl(var(--play-primary-color-base), 80%, 94%);
 
-  --play-accent-color-base: 210;
-  --play-accent-color-darkest: hsla(var(--play-accent-color-base), 50%, 10%, 100%);
-  --play-accent-color-darker: hsla(var(--play-accent-color-base), 50%, 35%, 100%);
-  --play-accent-color: hsla(var(--play-accent-color-base), 50%, 50%, 100%);
-  --play-accent-color-lighter: hsla(var(--play-accent-color-base), 50%, 75%, 100%);
-  --play-accent-color-lightest: hsla(var(--play-accent-color-base), 50%, 90%, 100%);
+  --play-accent-color-base: 24;
+  --play-accent-color-darkest: hsl(var(--play-accent-color-base), 80%, 23%);
+  --play-accent-color-darker: hsl(var(--play-accent-color-base), 80%, 41%);
+  --play-accent-color: hsl(var(--play-accent-color-base), 80%, 50%);
+  --play-accent-color-lighter: hsl(var(--play-accent-color-base), 80%, 77%);
+  --play-accent-color-lightest: hsl(var(--play-accent-color-base), 80%, 94%);
 
-  --play-success-color: #16d067;
-  --play-error-color: #d02c16;
-  --play-warning-color: #f5e057;
+  --play-success-color: hsl(131, 80%, 50%);
+  --play-error-color: hsl(0, 80%, 50%);
+  --play-warning-color: hsl(39, 80%, 50%);
 
   --play-text-color-light: #ffffff;
   --play-text-color-dark: #000000;
