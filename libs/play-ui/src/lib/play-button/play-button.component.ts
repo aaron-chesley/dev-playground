@@ -7,7 +7,6 @@ import {
   Inject,
   OnChanges,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PlayTheme } from '../play-theme/play-theme.type';
 import { PlayButtonAppearance } from './play-button-appearance.type';
 import {
@@ -25,7 +24,7 @@ import { PlayRippleDirective } from '../play-ripple/play-ripple';
   encapsulation: ViewEncapsulation.None,
   hostDirectives: [PlayRippleDirective],
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
 })
 export class PlayButtonComponent implements OnChanges {
   @HostBinding('class') className = '';

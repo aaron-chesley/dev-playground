@@ -14,6 +14,7 @@ import {
 } from '@angular/core';
 import { merge, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { v4 as uuidv4 } from 'uuid';
 import { PlayRadioComponent } from './play-radio.component';
 
 @Component({
@@ -31,7 +32,7 @@ export class PlayRadioGroupComponent implements AfterContentInit, OnDestroy {
   playRadioButtons: QueryList<PlayRadioComponent> = new QueryList();
 
   @Input() value: unknown;
-  @Input() name = self.crypto.randomUUID();
+  @Input() name = uuidv4();
   @Input() disabled = false;
   @Output() playRadioChange = new EventEmitter<unknown>();
 

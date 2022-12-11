@@ -35,7 +35,7 @@ export class PlayPaginatorComponent implements OnChanges {
 
   @Input() count = 0;
   @Input() itemsPerPage = 10;
-  @Input() currentPage = 1;
+  @Input() currentPage = 0;
 
   @Output() nextPageClick = new EventEmitter<void>();
   @Output() previousPageClick = new EventEmitter<void>();

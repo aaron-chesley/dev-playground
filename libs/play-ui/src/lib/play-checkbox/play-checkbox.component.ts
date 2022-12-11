@@ -8,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
@@ -29,7 +30,7 @@ export class PlayCheckboxComponent {
   @Output() playCheckChange = new EventEmitter<boolean>();
 
   _labelPosition = 'row';
-  _uniqueId = self.crypto.randomUUID();
+  _uniqueId = uuidv4();
 
   onCheckChange(event: Event) {
     this.playCheckChange.emit((event.target as HTMLInputElement).checked);

@@ -8,6 +8,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
@@ -22,7 +23,7 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
 export class PlayRadioComponent {
   @HostBinding('class') className = 'play-radio';
 
-  @Input() name = self.crypto.randomUUID();
+  @Input() name = uuidv4();
   @Input() set labelPosition(labelPosition: LabelPosition) {
     this._labelPosition = getLabelPosition(labelPosition);
   }
@@ -32,7 +33,7 @@ export class PlayRadioComponent {
   @Output() playValueChange = new EventEmitter<unknown>();
 
   _labelPosition = 'row';
-  _uniqueId = self.crypto.randomUUID();
+  _uniqueId = uuidv4();
 
   onCheckChange(event: Event) {
     this.playValueChange.emit((event.target as HTMLInputElement).value);
