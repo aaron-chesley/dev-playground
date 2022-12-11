@@ -2,14 +2,14 @@
   <input
     class="play-radio-input"
     type="radio"
-    [name]="name"
-    [id]="_uniqueId"
-    [checked]="checked"
+    [name]="_name"
+    [id]="id"
+    [checked]="value === _selectedValue"
     (change)="onCheckChange($event)"
     [value]="value"
     [disabled]="disabled"
   />
-  <label [for]="_uniqueId">
+  <label [for]="id">
     <ng-content></ng-content>
   </label>
 </div>

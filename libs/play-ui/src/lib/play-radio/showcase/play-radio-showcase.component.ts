@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { PlayRadioGroupComponent } from '../play-radio-group.component';
 import { PlayRadioComponent } from '../play-radio.component';
 
@@ -9,7 +8,7 @@ import { PlayRadioComponent } from '../play-radio.component';
   styleUrls: ['./play-radio-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayRadioComponent, PlayRadioGroupComponent],
+  imports: [PlayRadioComponent, PlayRadioGroupComponent],
 })
 export class PlayRadioShowcaseComponent {
   selectedValue = 2;

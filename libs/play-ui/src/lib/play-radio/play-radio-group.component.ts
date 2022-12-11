@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -24,7 +23,6 @@ import { PlayRadioComponent } from './play-radio.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule],
 })
 export class PlayRadioGroupComponent implements AfterContentInit, OnDestroy {
   @HostBinding('class') className = 'play-radio-group';
@@ -36,17 +34,15 @@ export class PlayRadioGroupComponent implements AfterContentInit, OnDestroy {
   @Input() disabled = false;
   @Output() playRadioChange = new EventEmitter<unknown>();
 
-  $ngDestroy = new Subject<void>();
+  private $ngDestroy = new Subject<void>();
 
   ngAfterContentInit() {
     this.playRadioButtons.forEach((btn) => {
-      btn.name = this.name;
-      if (JSON.stringify(btn.value) === JSON.stringify(this.value)) {
-        btn.checked = true;
-      }
+      btn._name = this.name;
+      btn._selectedValue = this.value;
     });
 
-    merge(...this.playRadioButtons.map((btn) => btn.playValueChange))
+    merge(...this.playRadioButtons.map((btn) => btn._playValueChange))
       .pipe(takeUntil(this.$ngDestroy))
       .subscribe((value) => {
         this.playRadioChange.emit(value);
