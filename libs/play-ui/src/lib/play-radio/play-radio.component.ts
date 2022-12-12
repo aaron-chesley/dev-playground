@@ -21,7 +21,7 @@ import { PlayRadioGroupService } from './play-radio-group.service';
   imports: [CommonModule],
 })
 export class PlayRadioComponent {
-  @HostBinding('class') className = 'play-radio';
+  @HostBinding('class.play-radio') className = 'play-radio';
 
   @Input() value: unknown;
   @Input() id = uuidv4();

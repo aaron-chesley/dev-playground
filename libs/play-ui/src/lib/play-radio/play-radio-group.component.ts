@@ -16,7 +16,14 @@ import { PlayRadioGroupService } from './play-radio-group.service';
 @Component({
   selector: 'play-radio-group',
   template: ` <ng-content select="play-radio"></ng-content> `,
-  styles: [],
+  styles: [
+    `
+      .play-radio-group {
+        display: inline-flex;
+        flex-direction: column;
+      }
+    `,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
