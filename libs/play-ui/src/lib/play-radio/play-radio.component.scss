@@ -1,22 +1,30 @@
+@use '../play-theme/mixins' as mixins;
+
 .play-radio {
   display: inline-flex;
 }
 
 .play-radio-wrapper {
+  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.5em;
+
+  &.disabled {
+    @include mixins.disabled();
+  }
 
   .play-radio-input {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
     font: inherit;
-    color: var(--play-accent-color);
+    color: var(--play-primary-color);
     width: 1em;
     height: 1em;
-    border: 0.1em solid var(--play-accent-color);
+    border: 0.1em solid var(--play-primary-color);
     border-radius: 50%;
+    cursor: inherit;
 
     display: grid;
     place-content: center;
@@ -28,7 +36,7 @@
       border-radius: 50%;
       transform: scale(0);
       transition: 120ms transform ease-in-out;
-      box-shadow: inset 1em 1em var(--play-accent-color);
+      box-shadow: inset 1em 1em var(--play-primary-color);
       /* Windows High Contrast Mode */
       background-color: CanvasText;
     }
@@ -38,7 +46,7 @@
     }
 
     &:focus {
-      outline: max(2px, 0.1em) solid var(--play-accent-color);
+      outline: max(2px, 0.1em) solid var(--play-primary-color);
       outline-offset: max(2px, 0.1em);
     }
   }

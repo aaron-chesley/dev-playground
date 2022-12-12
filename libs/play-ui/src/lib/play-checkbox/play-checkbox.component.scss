@@ -1,3 +1,5 @@
+@use '../play-theme/mixins' as mixins;
+
 .play-checkbox {
   display: inline-block;
 }
@@ -41,9 +43,7 @@ input[type='checkbox'] {
   }
   &:disabled,
   &:disabled ~ label {
-    opacity: 0.3;
-    cursor: default;
-    pointer-events: none;
+    @include mixins.disabled;
   }
 }
 

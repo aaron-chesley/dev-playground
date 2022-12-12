@@ -1,4 +1,5 @@
-@import '../play-ripple/play-ripple.scss';
+@use '../play-theme/mixins' as mixins;
+@use '../play-ripple/play-ripple.scss';
 
 @mixin play-btn {
   position: relative;
@@ -12,6 +13,9 @@
   border-radius: 0.25rem;
   background: none;
   cursor: pointer;
+  &:disabled {
+    @include mixins.disabled;
+  }
 }
 
 .play-btn {
@@ -81,6 +85,9 @@
   &.accent {
     background-color: var(--play-accent-color);
   }
+  &:disabled {
+    @include mixins.disabled;
+  }
 }
 
 .play-fab {
@@ -118,10 +125,4 @@
       background-color: var(--play-accent-color-lightest);
     }
   }
-}
-
-:disabled {
-  opacity: 0.3;
-  cursor: default;
-  pointer-events: none;
 }

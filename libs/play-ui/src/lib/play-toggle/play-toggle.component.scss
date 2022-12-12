@@ -1,3 +1,5 @@
+@use '../play-theme/mixins' as mixins;
+
 .play-toggle {
   display: inline-block;
 }
@@ -24,9 +26,7 @@ input[type='checkbox'].play-toggle-input {
 
   &:disabled,
   &:disabled ~ label {
-    opacity: 0.3;
-    cursor: default;
-    pointer-events: none;
+    @include mixins.disabled;
   }
 }
 

@@ -5,8 +5,8 @@
       (playRadioChange)="onPlayRadio1Change($event)"
     >
       <play-radio [value]="'1'" labelPosition="before">Radio 1</play-radio>
-      <play-radio [value]="'2'">Radio 2</play-radio>
-      <play-radio [value]="'3'">Radio 3</play-radio>
+      <play-radio [value]="'2'" labelPosition="before">Radio 2</play-radio>
+      <play-radio [value]="'3'" labelPosition="before">Radio 3</play-radio>
     </play-radio-group>
     <br />
     <span
@@ -20,7 +20,7 @@
       [value]="selectedValue2"
       (playRadioChange)="onPlayRadio2Change($event)"
     >
-      <play-radio [value]="'1'">Radio 1</play-radio>
+      <play-radio [disabled]="true" [value]="'1'">Radio 1 Disabled</play-radio>
       <play-radio [value]="'2'">Radio 2</play-radio>
       <play-radio [value]="'3'">Radio 3</play-radio>
     </play-radio-group>

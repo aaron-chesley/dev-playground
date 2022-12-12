@@ -1,4 +1,9 @@
-<div class="play-radio-wrapper" [style.flex-direction]="_labelPosition">
+<label
+  class="play-radio-wrapper"
+  [class.disabled]="disabled"
+  [for]="id"
+  [style.flex-direction]="_labelPosition"
+>
   <input
     class="play-radio-input"
     type="radio"
@@ -9,7 +14,5 @@
     [value]="value"
     [disabled]="disabled"
   />
-  <label [for]="id">
-    <ng-content></ng-content>
-  </label>
-</div>
+  <ng-content></ng-content>
+</label>
