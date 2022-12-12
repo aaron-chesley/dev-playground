@@ -1,12 +1,18 @@
-<div class="container" [style.flex-direction]="_labelPosition">
+<label
+  class="play-checkbox-wrapper"
+  [class.disabled]="disabled"
+  [style.flex-direction]="_labelPosition"
+  [for]="_uniqueId"
+>
   <input
+    class="play-checkbox-input"
     type="checkbox"
     [id]="_uniqueId"
     [checked]="checked"
     (change)="onCheckChange($event)"
     [disabled]="disabled"
   />
-  <label [for]="_uniqueId">
+  <span>
     <ng-content></ng-content>
-  </label>
-</div>
+  </span>
+</label>

@@ -5,10 +5,10 @@
 }
 
 .play-radio-wrapper {
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5em;
+  cursor: pointer;
 
   &.disabled {
     @include mixins.disabled();
@@ -25,7 +25,6 @@
     border: 0.1em solid var(--play-primary-color);
     border-radius: 50%;
     cursor: inherit;
-
     display: grid;
     place-content: center;
 

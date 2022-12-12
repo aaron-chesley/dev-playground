@@ -22,7 +22,9 @@ const Template: Story<PlayCheckboxComponent> = (
 ) => ({
   props: args,
   template: `
-    <play-checkbox [checked]="checked" [labelPosition]="labelPosition" [disabled]="disabled">I agree to the terms and conditions</play-checkbox>
+    <div style="padding: 10px;">
+      <play-checkbox [checked]="checked" [labelPosition]="labelPosition" [disabled]="disabled">I agree to the terms and conditions</play-checkbox>
+    </div>
   `,
 });
 
