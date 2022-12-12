@@ -4,9 +4,42 @@
 
 .play-radio-wrapper {
   display: flex;
+  align-items: center;
   gap: 5px;
 
   .play-radio-input {
-    margin: 0px 0px 0px 0px;
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: var(--play-accent-color);
+    width: 1em;
+    height: 1em;
+    border: 0.1em solid var(--play-accent-color);
+    border-radius: 50%;
+
+    display: grid;
+    place-content: center;
+
+    &::before {
+      content: '';
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--play-accent-color);
+      /* Windows High Contrast Mode */
+      background-color: CanvasText;
+    }
+
+    &:checked::before {
+      transform: scale(1);
+    }
+
+    &:focus {
+      outline: max(2px, 0.1em) solid var(--play-accent-color);
+      outline-offset: max(2px, 0.1em);
+    }
   }
 }

@@ -21,6 +21,8 @@ import { PlayRadioGroupService } from './play-radio-group.service';
       .play-radio-group {
         display: inline-flex;
         flex-direction: column;
+        font-size: 1rem;
+        gap: 5px;
       }
     `,
   ],
