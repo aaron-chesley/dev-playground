@@ -1,13 +1,15 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   HostBinding,
   Input,
   ViewEncapsulation,
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { v4 as uuidv4 } from 'uuid';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
+import { PlayRadioGroupService } from './play-radio-group.service';
 
 @Component({
   selector: 'play-radio',
@@ -16,6 +18,7 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
+  imports: [CommonModule],
 })
 export class PlayRadioComponent {
   @HostBinding('class') className = 'play-radio';
@@ -27,12 +30,18 @@ export class PlayRadioComponent {
     this._labelPosition = getLabelPosition(labelPosition);
   }
 
-  _playValueChange = new EventEmitter<unknown>();
   _labelPosition = 'row';
-  _name = '';
-  _selectedValue: unknown;
+  _name$: Observable<string>;
+  _selectedValue$: Observable<unknown>;
 
   onCheckChange(event: Event) {
-    this._playValueChange.emit((event.target as HTMLInputElement).value);
+    this.radioService.setSelectedValue(
+      (event.target as HTMLInputElement).value
+    );
+  }
+
+  constructor(private radioService: PlayRadioGroupService) {
+    this._selectedValue$ = this.radioService.getSelectedValue();
+    this._name$ = this.radioService.getRadioGroupName();
   }
 }

@@ -1,20 +1,17 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
-  ContentChildren,
   EventEmitter,
   HostBinding,
   Input,
+  OnChanges,
   OnDestroy,
   Output,
-  QueryList,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { merge, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { v4 as uuidv4 } from 'uuid';
-import { PlayRadioComponent } from './play-radio.component';
+import { Subject, takeUntil } from 'rxjs';
+import { PlayRadioGroupService } from './play-radio-group.service';
 
 @Component({
   selector: 'play-radio-group',
@@ -23,34 +20,36 @@ import { PlayRadioComponent } from './play-radio.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
+  providers: [PlayRadioGroupService],
 })
-export class PlayRadioGroupComponent implements AfterContentInit, OnDestroy {
+export class PlayRadioGroupComponent implements OnChanges, OnDestroy {
   @HostBinding('class') className = 'play-radio-group';
-  @ContentChildren(PlayRadioComponent)
-  playRadioButtons: QueryList<PlayRadioComponent> = new QueryList();
 
   @Input() value: unknown;
-  @Input() name = uuidv4();
+  @Input() name: string;
   @Input() disabled = false;
   @Output() playRadioChange = new EventEmitter<unknown>();
 
   private $ngDestroy = new Subject<void>();
 
-  ngAfterContentInit() {
-    this.playRadioButtons.forEach((btn) => {
-      btn._name = this.name;
-      btn._selectedValue = this.value;
-    });
-
-    merge(...this.playRadioButtons.map((btn) => btn._playValueChange))
-      .pipe(takeUntil(this.$ngDestroy))
-      .subscribe((value) => {
-        this.playRadioChange.emit(value);
-      });
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.value) {
+      this.radioService.setSelectedValue(changes.value.currentValue);
+    }
+    if (changes.name) {
+      this.radioService.setRadioGroupName(changes.name.currentValue);
+    }
   }
 
   ngOnDestroy(): void {
     this.$ngDestroy.next();
     this.$ngDestroy.complete();
+  }
+
+  constructor(private radioService: PlayRadioGroupService) {
+    this.radioService
+      .getSelectedValue()
+      .pipe(takeUntil(this.$ngDestroy))
+      .subscribe((value) => this.playRadioChange.emit(value));
   }
 }

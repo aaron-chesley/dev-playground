@@ -11,8 +11,14 @@ import { PlayRadioComponent } from '../play-radio.component';
   imports: [PlayRadioComponent, PlayRadioGroupComponent],
 })
 export class PlayRadioShowcaseComponent {
-  selectedValue = 2;
-  onPlayRadioChange(val: any) {
-    this.selectedValue = val;
+  showLastOne = false;
+  selectedValue1 = '1';
+  onPlayRadio1Change(val: any) {
+    this.selectedValue1 = val;
+  }
+
+  selectedValue2 = '2';
+  onPlayRadio2Change(val: any) {
+    this.selectedValue2 = val;
   }
 }

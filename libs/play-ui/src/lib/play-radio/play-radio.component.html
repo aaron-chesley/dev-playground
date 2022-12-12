@@ -2,9 +2,9 @@
   <input
     class="play-radio-input"
     type="radio"
-    [name]="_name"
+    [name]="_name$ | async"
     [id]="id"
-    [checked]="value === _selectedValue"
+    [checked]="value === (_selectedValue$ | async)"
     (change)="onCheckChange($event)"
     [value]="value"
     [disabled]="disabled"
