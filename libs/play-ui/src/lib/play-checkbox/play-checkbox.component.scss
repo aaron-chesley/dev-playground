@@ -10,10 +10,6 @@
   gap: 0.5em;
   cursor: pointer;
 
-  &.disabled {
-    @include mixins.disabled;
-  }
-
   .play-checkbox-input {
     -webkit-appearance: none;
     appearance: none;
@@ -44,10 +40,15 @@
     &:checked::before {
       transform: scale(1);
     }
+  }
 
-    &:focus {
-      outline: max(2px, 0.1em) solid var(--play-primary-color-lighter);
-      outline-offset: max(2px, 0.1em);
-    }
+  &:active > .play-checkbox-input,
+  &:focus-within > .play-checkbox-input {
+    outline: max(2px, 0.1em) solid var(--play-primary-color-lighter);
+    outline-offset: max(2px, 0.1em);
+  }
+
+  &.disabled {
+    @include mixins.disabled;
   }
 }
