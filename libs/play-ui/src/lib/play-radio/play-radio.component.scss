@@ -45,7 +45,7 @@
     }
 
     &:focus {
-      outline: max(2px, 0.1em) solid var(--play-primary-color);
+      outline: max(2px, 0.1em) solid var(--play-primary-color-lighter);
       outline-offset: max(2px, 0.1em);
     }
   }

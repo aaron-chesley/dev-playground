@@ -30,8 +30,8 @@
 
     &::before {
       content: '';
-      width: 0.5em;
-      height: 0.5em;
+      width: 0.6em;
+      height: 0.6em;
       transform: scale(0);
       transition: 120ms transform ease-in-out;
       box-shadow: inset 1em 1em var(--play-primary-color);
@@ -46,7 +46,7 @@
     }
 
     &:focus {
-      outline: max(2px, 0.1em) solid var(--play-primary-color);
+      outline: max(2px, 0.1em) solid var(--play-primary-color-lighter);
       outline-offset: max(2px, 0.1em);
     }
   }
