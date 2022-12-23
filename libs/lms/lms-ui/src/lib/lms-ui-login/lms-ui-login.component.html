@@ -6,10 +6,12 @@
   <play-card>
     <play-card-body>
       <img class="logo" src="assets/logo_transparent.png" alt="logo1" />
-      <h3 playText [size]="3" class="welcome-text">Log in to your account</h3>
+      <h3 playText [size]="3" class="welcome-text" i18n>
+        Log in to your account
+      </h3>
 
       <label>
-        Email
+        <span i18n>Email</span>
         <input
           playInputText
           name="email"
@@ -19,7 +21,7 @@
       </label>
 
       <label>
-        Password
+        <span i18n>Password</span>
         <input
           playInputText
           [type]="showPassword ? 'password' : 'text'"
@@ -28,13 +30,14 @@
       </label>
 
       <a class="forgot-password" (click)="forgotPasswordClicked.emit()">
-        <small>Forgot your password?</small></a
+        <small i18n>Forgot your password?</small></a
       >
       <button
         playButton
         appearance="play-flat"
         type="submit"
         [disabled]="loading"
+        i18n
       >
         Login
       </button>

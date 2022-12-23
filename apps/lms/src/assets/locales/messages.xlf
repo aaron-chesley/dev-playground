@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="288459814199251484" datatype="html">
+        <source> Log in to your account </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4768749765465246664" datatype="html">
+        <source>Email</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1431416938026210429" datatype="html">
+        <source>Password</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2012659005494284050" datatype="html">
+        <source>Forgot your password?</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1908285951500318953" datatype="html">
+        <source> Login </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2017752774024619206" datatype="html">
+        <source>Training History</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6570363013146073520" datatype="html">
+        <source>Dashboard</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3537701360947660901" datatype="html">
+        <source>Employees</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1868606282505332204" datatype="html">
+        <source>Reports</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4930506384627295710" datatype="html">
+        <source>Settings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7886570921510760899" datatype="html">
+        <source>Tags</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9008968878373693685" datatype="html">
+        <source>Teams</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2844412312370547322" datatype="html">
+        <source>Trainings</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6205355627445317276" datatype="html">
+        <source>Content</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1042208234973336773" datatype="html">
+        <source>Tenants</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../../../dist/apps/lms/main.fdc260deb8e5a621.js</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

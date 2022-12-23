@@ -9,52 +9,52 @@ export interface LmsNavLink {
 
 const lmsNavLinks: LmsNavLink[] = [
   {
-    title: 'Training History',
+    title: $localize`Training History`,
     icon: 'history',
     routerLink: '/app/history',
   },
   {
-    title: 'Dashboard',
+    title: $localize`Dashboard`,
     icon: 'dashboard',
     routerLink: '/app/dashboard',
   },
   {
-    title: 'Employees',
+    title: $localize`Employees`,
     icon: 'supervisedUserCircle',
     routerLink: '/app/employees',
   },
   {
-    title: 'Reports',
+    title: $localize`Reports`,
     icon: 'equalizer',
     routerLink: '/app/reports',
   },
   {
-    title: 'Settings',
+    title: $localize`Settings`,
     icon: 'settings',
     routerLink: '/app/settings',
   },
   {
-    title: 'Tags',
+    title: $localize`Tags`,
     icon: 'loyalty',
     routerLink: '/app/tags',
   },
   {
-    title: 'Teams',
+    title: $localize`Teams`,
     icon: 'groupWork',
     routerLink: '/app/teams',
   },
   {
-    title: 'Trainings',
+    title: $localize`Trainings`,
     icon: 'assignment',
     routerLink: '/app/trainings',
   },
   {
-    title: 'Content',
+    title: $localize`Content`,
     icon: 'videoLibrary',
     routerLink: '/app/content',
   },
   {
-    title: 'Tenants',
+    title: $localize`Tenants`,
     icon: 'business',
     routerLink: '/app/tenants',
   },
