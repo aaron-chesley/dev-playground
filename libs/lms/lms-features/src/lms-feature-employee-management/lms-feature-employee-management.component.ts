@@ -9,21 +9,14 @@ import { LmsFeatureEmployeeManagementStore } from './lms-feature-employee-manage
   selector: 'lms-feature-employee-management',
   template: `<lms-ui-employee-table
     [employees]="employees$ | async"
-    [selectAll]="selectAll$ | async"
-    (toggleSelectAll)="onToggleSelectAll()"
   ></lms-ui-employee-table>`,
   standalone: true,
   imports: [CommonModule, LmsUiEmployeeTableComponent],
 })
 export class LmsFeatureEmployeeManagementComponent {
   employees$: Observable<LmsEmployee[]>;
-  selectAll$: Observable<boolean>;
 
-  onToggleSelectAll() {
-    this.store.toggleSelectAll();
-  }
   constructor(private store: LmsFeatureEmployeeManagementStore) {
     this.employees$ = this.store.employees$;
-    this.selectAll$ = this.store.selectAll$;
   }
 }

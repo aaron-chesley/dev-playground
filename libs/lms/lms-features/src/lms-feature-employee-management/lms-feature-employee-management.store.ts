@@ -6,7 +6,6 @@ import { map, shareReplay } from 'rxjs/operators';
 
 interface EmployeeManagementState {
   employees: LmsEmployee[];
-  selectAll: boolean;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -14,7 +13,6 @@ export class LmsFeatureEmployeeManagementStore {
   private employeeManagementStateSub =
     new BehaviorSubject<EmployeeManagementState>({
       employees: [],
-      selectAll: false,
     });
 
   private get employeeMangementState() {
@@ -33,11 +31,6 @@ export class LmsFeatureEmployeeManagementStore {
 
   readonly employeeCount$ = this.employees$.pipe(
     map((employees) => employees.length),
-    shareReplay()
-  );
-
-  readonly selectAll$ = this.employeeMangementState$.pipe(
-    map((state) => state.selectAll),
     shareReplay()
   );
 
@@ -60,11 +53,6 @@ export class LmsFeatureEmployeeManagementStore {
     this.employeeService.get(employee.id).subscribe((employees) => {
       // this.patchState({ employees: employees });
     });
-  }
-
-  toggleSelectAll(): void {
-    const state = this.employeeMangementState;
-    this.patchState({ selectAll: !state.selectAll });
   }
 
   deleteEmployee(employee: LmsEmployee) {

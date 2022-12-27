@@ -12,8 +12,8 @@
       <tr>
         <th>
           <play-checkbox
-            (click)="toggleSelectAll.emit()"
-            [checked]="selectAll"
+            (click)="toggleSelectAll()"
+            [checked]="employees.length === selection.selected.length"
           ></play-checkbox>
         </th>
         <th>Name</th>
