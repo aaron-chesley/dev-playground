@@ -27,19 +27,23 @@ export class LmsAuthenticationService {
   }
 
   attemptAuth(credentials: LoginPayload): Observable<ServerLoginToken> {
-    return this.apiService.post('auth/get_token/', credentials).pipe(
-      tap((data: ServerLoginToken) => {
-        this.setAuth(data);
-      })
-    );
+    return this.apiService
+      .post<ServerLoginToken>('auth/get_token/', credentials)
+      .pipe(
+        tap((data: ServerLoginToken) => {
+          this.setAuth(data);
+        })
+      );
   }
 
   refreshToken(token: string): Observable<ServerLoginToken> {
-    return this.apiService.post('auth/refresh_token/', { refresh: token }).pipe(
-      tap((data: ServerLoginToken) => {
-        this.setAuth(data);
-      })
-    );
+    return this.apiService
+      .post<ServerLoginToken>('auth/refresh_token/', { refresh: token })
+      .pipe(
+        tap((data: ServerLoginToken) => {
+          this.setAuth(data);
+        })
+      );
   }
 
   sendPasswordResetInstructions(body: PasswordResetInstructionsPayload) {

@@ -1,0 +1,42 @@
+.employee-table-container {
+  overflow: auto;
+  height: 100%;
+  box-sizing: border-box;
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+
+      th {
+        background-color: var(--play-bg-color);
+      }
+    }
+
+    td {
+      padding: 8px;
+    }
+    th {
+      text-align: left;
+      padding: 8px;
+    }
+
+    td:nth-child(1),
+    th:nth-child(1) {
+      text-align: center;
+      width: 30px;
+    }
+
+    tr:nth-child(odd) {
+      background-color: var(--play-primary-color-lightest);
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--play-bg-color);
+    }
+  }
+}

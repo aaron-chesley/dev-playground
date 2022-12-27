@@ -45,8 +45,11 @@ const routes: Routes = [
       },
       {
         path: 'employees',
-        component: ngHTML(``),
         canLoad: [AuthGuard],
+        loadComponent: () =>
+          import('@playground/lms-features').then(
+            (c) => c.LmsFeatureEmployeeManagementComponent
+          ),
       },
       {
         path: 'tags',
