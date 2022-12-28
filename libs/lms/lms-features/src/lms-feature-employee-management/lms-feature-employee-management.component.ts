@@ -11,12 +11,14 @@ import { LmsFeatureEmployeeManagementStore } from './lms-feature-employee-manage
     [employees]="employees$ | async"
   ></lms-ui-employee-table>`,
   standalone: true,
+  providers: [LmsFeatureEmployeeManagementStore],
   imports: [CommonModule, LmsUiEmployeeTableComponent],
 })
 export class LmsFeatureEmployeeManagementComponent {
   employees$: Observable<LmsEmployee[]>;
 
   constructor(private store: LmsFeatureEmployeeManagementStore) {
+    this.store.fetchEmployees();
     this.employees$ = this.store.employees$;
   }
 }
