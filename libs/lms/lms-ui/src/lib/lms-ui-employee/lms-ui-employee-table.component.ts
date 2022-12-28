@@ -6,12 +6,16 @@ import {
   Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CdkTableModule } from '@angular/cdk/table';
+import { SelectionModel } from '@angular/cdk/collections';
 import { LmsEmployee } from '@playground/lms/lms-util';
 import {
+  check,
   PlayButtonComponent,
   PlayCheckboxComponent,
+  PlayIconComponent,
+  PlayIconRegistryService,
 } from '@playground/play-ui';
-import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'lms-ui-employee-table',
@@ -19,7 +23,13 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./lms-ui-employee-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayCheckboxComponent, PlayButtonComponent],
+  imports: [
+    CommonModule,
+    CdkTableModule,
+    PlayCheckboxComponent,
+    PlayButtonComponent,
+    PlayIconComponent,
+  ],
 })
 export class LmsUiEmployeeTableComponent {
   @Input() employees: LmsEmployee[] = [];
@@ -27,7 +37,19 @@ export class LmsUiEmployeeTableComponent {
   @Output() toggleSelectAll = new EventEmitter<void>();
   @Output() toggleEmployeeSelected = new EventEmitter<LmsEmployee>();
 
+  displayedColumns: string[] = [
+    'select',
+    'name',
+    'email',
+    'date_hired',
+    'is_admin',
+  ];
+
   trackByEmployeeFn(index: number, employee: LmsEmployee) {
     return employee.id;
+  }
+
+  constructor(private playIconService: PlayIconRegistryService) {
+    this.playIconService.registerIcons([check]);
   }
 }

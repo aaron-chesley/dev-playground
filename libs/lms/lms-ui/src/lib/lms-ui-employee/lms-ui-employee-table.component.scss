@@ -1,61 +1,47 @@
-$padding: 5px;
-
-.container {
+:host {
   display: flex;
   flex-direction: column;
   height: 100%;
+}
+
+.actions-container {
+  display: flex;
+  height: 50px;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid lightgrey;
   box-sizing: border-box;
+  // background-color: #fafafa;
+}
 
-  .action-bar {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    width: 100%;
-    box-sizing: border-box;
-    padding: $padding;
-  }
+.table-container {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+  box-sizing: border-box;
+}
 
-  .employee-table-container {
-    display: flex;
-    flex: 1;
-    overflow: auto;
-    box-sizing: border-box;
-    padding: $padding;
+.employee-table {
+  width: 100%;
+  border-spacing: 0px;
+}
 
-    table {
-      border-collapse: collapse;
-      width: 100%;
+.cdk-table-sticky {
+  background-color: white;
+}
 
-      thead {
-        // position: sticky;
-        // top: 0;
-        // z-index: 1;
+.cdk-cell,
+.cdk-header-cell {
+  padding: 5px;
+  box-sizing: border-box;
+  text-align: left;
+}
 
-        th {
-          background-color: var(--play-bg-color);
-        }
-      }
+.cdk-row:nth-child(odd) {
+  background-color: var(--play-primary-color-lightest);
+}
 
-      th,
-      td {
-        border: 1px solid #dddddd;
-        padding: 8px;
-        text-align: left;
-      }
-
-      td:nth-child(1),
-      th:nth-child(1) {
-        text-align: center;
-        width: 30px;
-      }
-
-      tr:nth-child(odd) {
-        background-color: var(--play-primary-color-lightest);
-      }
-
-      tr:nth-child(even) {
-        background-color: var(--play-bg-color);
-      }
-    }
-  }
+.cdk-column-select {
+  width: 30px;
+  text-align: center;
 }
