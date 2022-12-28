@@ -7,7 +7,10 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LmsEmployee } from '@playground/lms/lms-util';
-import { PlayCheckboxComponent } from '@playground/play-ui';
+import {
+  PlayButtonComponent,
+  PlayCheckboxComponent,
+} from '@playground/play-ui';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -16,7 +19,7 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./lms-ui-employee-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, PlayCheckboxComponent],
+  imports: [CommonModule, PlayCheckboxComponent, PlayButtonComponent],
 })
 export class LmsUiEmployeeTableComponent {
   @Input() employees: LmsEmployee[] = [];

@@ -1,40 +1,43 @@
-<div class="employee-table-container">
-  <!-- <div style="display: flex; position: sticky; top: 0; z-index: 1">
-    <select style="width: 100%" name="cars" id="employeeActions">
+<div class="container">
+  <div class="action-bar">
+    <button playButton appearance="play-flat">Add Tags</button>
+    <!-- <select name="cars" id="employeeActions">
       <option value="volvo">Volvo</option>
       <option value="saab">Saab</option>
       <option value="mercedes">Mercedes</option>
       <option value="audi">Audi</option>
-    </select>
-  </div> -->
-  <table>
-    <thead>
-      <tr>
-        <th>
-          <play-checkbox
-            (click)="toggleSelectAll.emit()"
-            [checked]="employees.length === selectedEmployees.selected.length"
-          ></play-checkbox>
-        </th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Date Hired</th>
-        <th>Admin</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let employee of employees; trackBy: trackByEmployeeFn">
-        <td>
-          <play-checkbox
-            (click)="toggleEmployeeSelected.emit(employee)"
-            [checked]="selectedEmployees.isSelected(employee)"
-          ></play-checkbox>
-        </td>
-        <td>{{ employee.first_name }} {{ employee.last_name }}</td>
-        <td>{{ employee.email }}</td>
-        <td>{{ employee.date_hired | date }}</td>
-        <td>{{ employee.is_admin }}</td>
-      </tr>
-    </tbody>
-  </table>
+    </select> -->
+  </div>
+  <div class="employee-table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            <play-checkbox
+              (click)="toggleSelectAll.emit()"
+              [checked]="employees.length === selectedEmployees.selected.length"
+            ></play-checkbox>
+          </th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Date Hired</th>
+          <th>Admin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees; trackBy: trackByEmployeeFn">
+          <td>
+            <play-checkbox
+              (click)="toggleEmployeeSelected.emit(employee)"
+              [checked]="selectedEmployees.isSelected(employee)"
+            ></play-checkbox>
+          </td>
+          <td>{{ employee.first_name }} {{ employee.last_name }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.date_hired | date }}</td>
+          <td>{{ employee.is_admin }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
