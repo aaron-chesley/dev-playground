@@ -20,16 +20,9 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class LmsUiEmployeeTableComponent {
   @Input() employees: LmsEmployee[] = [];
-
-  selection = new SelectionModel<LmsEmployee>(true, []);
-
-  toggleSelectAll() {
-    if (this.employees.length === this.selection.selected.length) {
-      this.selection.clear();
-    } else {
-      this.selection.setSelection(...this.employees);
-    }
-  }
+  @Input() selectedEmployees: SelectionModel<LmsEmployee>;
+  @Output() toggleSelectAll = new EventEmitter<void>();
+  @Output() toggleEmployeeSelected = new EventEmitter<LmsEmployee>();
 
   trackByEmployeeFn(index: number, employee: LmsEmployee) {
     return employee.id;
