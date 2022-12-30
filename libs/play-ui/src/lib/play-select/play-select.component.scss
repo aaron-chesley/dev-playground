@@ -1,0 +1,13 @@
+.play-select-input {
+  cursor: pointer;
+}
+
+.play-select-list {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #ccc;
+  border-radius: 4px;
+  width: 100%;
+  background: #fff;
+  box-sizing: border-box;
+}

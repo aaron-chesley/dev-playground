@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewChild,
+  ElementRef,
+  ViewContainerRef,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { OverlayModule } from '@angular/cdk/overlay';
 import { PlayFormFieldLabelComponent } from '../play-form-field/play-form-field-label.component';
 import { PlayFormFieldComponent } from '../play-form-field/play-form-field.component';
 import { PlayIconRegistryService } from '../play-icon/play-icon-registry.service';
@@ -13,6 +21,8 @@ import { PlayInputTextComponent } from '../play-input-text/play-input-text.compo
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CommonModule,
+    OverlayModule,
     PlayFormFieldComponent,
     PlayFormFieldLabelComponent,
     PlayIconComponent,
@@ -20,6 +30,11 @@ import { PlayInputTextComponent } from '../play-input-text/play-input-text.compo
   ],
 })
 export class PlaySelectComponent {
+  isOpen = false;
+
+  @ViewChild('input', { read: ElementRef<HTMLElement> })
+  selectInput: ElementRef<HTMLElement>;
+
   constructor(private iconService: PlayIconRegistryService) {
     this.iconService.registerIcons([arrowDropDown]);
   }

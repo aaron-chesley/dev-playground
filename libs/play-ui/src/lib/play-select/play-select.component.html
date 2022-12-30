@@ -1,5 +1,24 @@
-<play-form-field>
-  <play-form-field-label>Select a car:</play-form-field-label>
-  <input readonly playInputText value="Volvo" />
-  <play-icon name="arrowDropDown"></play-icon>
-</play-form-field>
+<input
+  class="play-select-input"
+  readonly
+  value="Volvo"
+  (click)="isOpen = !isOpen"
+  playInputText
+  cdkOverlayOrigin
+  #input
+  #trigger="cdkOverlayOrigin"
+/>
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayWidth]="selectInput?.nativeElement.offsetWidth"
+  (backdropClick)="isOpen = false"
+>
+  <div class="play-select-list">
+    <ng-content select="play-select-option"></ng-content>
+  </div>
+</ng-template>
