@@ -1,6 +1,26 @@
-<play-select>
-  <play-select-option>Option 1</play-select-option>
-  <play-select-option>Option 2</play-select-option>
-  <play-select-option>Option 3</play-select-option>
-  <play-select-option>Option 4</play-select-option>
-</play-select>
+<div style="display: flex; gap: 50px; padding: 25px">
+  <div style="display: flex; flex-direction: column; gap: 25px">
+    <play-select [formControl]="favoriteAnimal">
+      <play-select-option value="Dog">Dog</play-select-option>
+      <play-select-option value="Cat">Cat</play-select-option>
+      <play-select-option value="Bird">Bird</play-select-option>
+      <play-select-option value="Mouse">Mouse</play-select-option>
+    </play-select>
+
+    <span>Reactive Forms: {{ favoriteAnimal.value }}</span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 25px">
+    <play-select
+      [value]="favoriteFruit"
+      (playSelectChange)="onPlaySelectChange($event)"
+    >
+      <play-select-option value="Apple">Apple</play-select-option>
+      <play-select-option value="Banana">Banana</play-select-option>
+      <play-select-option value="Mango">Mango</play-select-option>
+      <play-select-option value="Peach">Peach</play-select-option>
+    </play-select>
+
+    <span>Standard: {{ favoriteFruit }}</span>
+  </div>
+</div>

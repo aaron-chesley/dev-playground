@@ -40,8 +40,8 @@ export class PlayCheckboxComponent implements ControlValueAccessor {
   _labelPosition = 'row';
   _uniqueId = uuidv4();
 
-  onChange: any = () => {};
-  onTouched: any = () => {};
+  onChange: any = () => ({});
+  onTouched: any = () => ({});
   set value(val: boolean) {
     this.checked = val;
     this.onChange(val);
@@ -54,7 +54,7 @@ export class PlayCheckboxComponent implements ControlValueAccessor {
   registerOnChange(onChange: any): void {
     this.onChange = onChange;
   }
-  registerOnTouched(onTouched: Function): void {
+  registerOnTouched(onTouched: any): void {
     this.onTouched = onTouched;
   }
 

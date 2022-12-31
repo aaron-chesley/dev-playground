@@ -1,13 +1,11 @@
 <input
   class="play-select-input"
   readonly
-  value="Volvo"
-  (click)="isOpen = !isOpen"
-  playInputText
+  [value]="value"
   cdkOverlayOrigin
-  #input
   #trigger="cdkOverlayOrigin"
 />
+<play-icon class="play-select-icon" name="arrowDropDown"></play-icon>
 
 <ng-template
   cdkConnectedOverlay
@@ -15,7 +13,8 @@
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isOpen"
-  [cdkConnectedOverlayWidth]="selectInput?.nativeElement.offsetWidth"
+  [cdkConnectedOverlayWidth]="elRef.nativeElement.getBoundingClientRect().width"
+  [cdkConnectedOverlayOffsetX]="-1"
   (backdropClick)="isOpen = false"
 >
   <div class="play-select-list">
