@@ -15,6 +15,10 @@
     font-size: 1rem;
     outline: none;
     border: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='48' width='48'%3E%3Cpath d='m24 30-10-9.95h20Z'/%3E%3C/svg%3E");
+    background-size: 1.5em 1.5em;
+    background-repeat: no-repeat;
+    background-position: right;
   }
 }
 
@@ -36,6 +40,13 @@
   border-color: var(--play-primary-color);
   border-bottom-right-radius: 0px;
   border-bottom-left-radius: 0px;
+
+  .play-select-input {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='48' width='48'%3E%3Cpath d='m14 28 10-10.05L34 28Z'/%3E%3C/svg%3E");
+    background-size: 1.5em 1.5em;
+    background-repeat: no-repeat;
+    background-position: right;
+  }
 }
 
 :host.ng-invalid.ng-touched {

@@ -15,6 +15,8 @@ import {
   PlayCheckboxComponent,
   PlayIconComponent,
   PlayIconRegistryService,
+  PlaySelectComponent,
+  PlaySelectOptionComponent,
 } from '@playground/play-ui';
 
 @Component({
@@ -29,6 +31,8 @@ import {
     PlayCheckboxComponent,
     PlayButtonComponent,
     PlayIconComponent,
+    PlaySelectComponent,
+    PlaySelectOptionComponent,
   ],
 })
 export class LmsUiEmployeeTableComponent {

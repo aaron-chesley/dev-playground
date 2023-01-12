@@ -12,9 +12,6 @@ import {
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { PlayIconRegistryService } from '../play-icon/play-icon-registry.service';
-import { PlayIconComponent } from '../play-icon/play-icon.component';
-import { arrowDropDown } from '../play-icon/play-icons';
 
 @Component({
   selector: 'play-select',
@@ -22,7 +19,7 @@ import { arrowDropDown } from '../play-icon/play-icons';
   styleUrls: ['./play-select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, OverlayModule, PlayIconComponent],
+  imports: [CommonModule, OverlayModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -32,8 +29,9 @@ import { arrowDropDown } from '../play-icon/play-icons';
   ],
 })
 export class PlaySelectComponent implements ControlValueAccessor {
-  @Input() value: any;
+  @Input() value: any = '';
   @Input() disabled = false;
+  @Input() placeholder: string;
   @Output() playSelectChange = new EventEmitter<any>();
   isOpen = false;
 
@@ -47,7 +45,7 @@ export class PlaySelectComponent implements ControlValueAccessor {
 
   @HostListener('focusout', ['$event.target.value'])
   onFocusout() {
-    setTimeout(() => this.onTouched());
+    this.onTouched();
   }
 
   onChange: any = () => ({});
@@ -74,10 +72,7 @@ export class PlaySelectComponent implements ControlValueAccessor {
   }
 
   constructor(
-    private iconService: PlayIconRegistryService,
     public elRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef
-  ) {
-    this.iconService.registerIcons([arrowDropDown]);
-  }
+  ) {}
 }
