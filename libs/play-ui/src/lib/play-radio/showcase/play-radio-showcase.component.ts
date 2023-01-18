@@ -13,11 +13,11 @@ import { PlayRadioComponent } from '../play-radio.component';
 export class PlayRadioShowcaseComponent {
   showLastOne = false;
   selectedValue1 = '1';
+  selectedValue2 = '2';
   onPlayRadio1Change(val: any) {
     this.selectedValue1 = val;
   }
 
-  selectedValue2 = '2';
   onPlayRadio2Change(val: any) {
     this.selectedValue2 = val;
   }

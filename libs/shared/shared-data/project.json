@@ -5,9 +5,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/shared/shared-data"
-      ],
+      "outputs": ["coverage/libs/shared/shared-data"],
       "options": {
         "jestConfig": "libs/shared/shared-data/jest.config.ts",
         "passWithNoTests": true,
@@ -24,8 +22,5 @@
       }
     }
   },
-  "tags": [
-    "scope:shared",
-    "type:data"
-  ]
+  "tags": ["type:data"]
 }
