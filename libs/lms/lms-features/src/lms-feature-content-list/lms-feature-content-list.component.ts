@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { LmsUiContentListComponent } from '@playground/lms-ui';
+import {
+  LmsUiContentCreateComponent,
+  LmsUiContentListComponent,
+} from '@playground/lms-ui';
+import { LmsContentItemCreate } from '@playground/lms/lms-util';
+import { PlayModalModule, PlayModalService } from '@playground/play-ui';
+import { filter } from 'rxjs';
 import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
 
 @Component({
@@ -12,10 +18,11 @@ import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
     (nextPageClick)="onNextPageClick()"
     (previousPageClick)="onPreviousPageClick()"
     (search)="onSearch($event)"
+    (createNewContent)="onCreateNewContent()"
   ></lms-ui-content-list>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, LmsUiContentListComponent],
+  imports: [CommonModule, LmsUiContentListComponent, PlayModalModule],
 })
 export class LmsFeatureContentListComponent {
   contentItems$ = this.contentStore.contentList$;
@@ -34,5 +41,19 @@ export class LmsFeatureContentListComponent {
     console.log(searchTerm);
   }
 
-  constructor(private contentStore: LmsFeatureContentListStore) {}
+  onCreateNewContent() {
+    this.modalService
+      .custom<LmsUiContentCreateComponent, null, LmsContentItemCreate>(
+        LmsUiContentCreateComponent
+      )
+      .closed.pipe(filter(Boolean))
+      .subscribe((contentItem) => {
+        this.contentStore.createContent(contentItem);
+      });
+  }
+
+  constructor(
+    private contentStore: LmsFeatureContentListStore,
+    private modalService: PlayModalService
+  ) {}
 }

@@ -6,3 +6,5 @@ export interface LmsVideo {
   video_url: string;
   thumbnail_url: string;
 }
+
+export type LmsVideoCreate = Omit<LmsVideo, 'id'>;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiService } from '@playground/shared/shared-data';
 import { Paginated } from '@playground/shared/shared-util';
-import { LmsContentItem } from '@playground/lms/lms-util';
+import { LmsContentItem, LmsContentItemCreate } from '@playground/lms/lms-util';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { LmsContentItem } from '@playground/lms/lms-util';
 export class LmsDataContentService {
   constructor(private apiService: ApiService) {}
 
-  createContent(body: LmsContentItem) {
+  createContent(body: LmsContentItemCreate) {
     return this.apiService.post('content/', body);
   }
 

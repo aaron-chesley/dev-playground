@@ -13,6 +13,7 @@ import {
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LmsContentItem } from '@playground/lms/lms-util';
 import {
+  PlayButtonComponent,
   PlayInputTextComponent,
   PlayPaginatorComponent,
 } from '@playground/play-ui';
@@ -32,6 +33,7 @@ import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.
     LmsUiVideoItemComponent,
     PlayPaginatorComponent,
     PlayInputTextComponent,
+    PlayButtonComponent,
   ],
 })
 export class LmsUiContentListComponent implements OnInit, OnDestroy {
@@ -45,6 +47,7 @@ export class LmsUiContentListComponent implements OnInit, OnDestroy {
   @Output() nextPageClick = new EventEmitter<void>();
   @Output() previousPageClick = new EventEmitter<void>();
   @Output() search = new EventEmitter<string>();
+  @Output() createNewContent = new EventEmitter();
 
   _ngDestroy$ = new Subject<void>();
   _searchCtrl = new FormControl('');

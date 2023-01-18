@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LmsDataContentService } from '@playground/lms-data';
-import { LmsContentItem } from '@playground/lms/lms-util';
+import { LmsContentItem, LmsContentItemCreate } from '@playground/lms/lms-util';
 import { getDefaultPaginated, Paginated } from '@playground/shared/shared-util';
 import { BehaviorSubject } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
@@ -57,6 +57,10 @@ export class LmsFeatureContentListStore {
     return this.contentService
       .deleteContent(content.id)
       .pipe(tap(() => this.fetchContentList()));
+  }
+
+  createContent(content: LmsContentItemCreate) {
+    this.contentService.createContent(content).subscribe();
   }
 
   nextPage() {

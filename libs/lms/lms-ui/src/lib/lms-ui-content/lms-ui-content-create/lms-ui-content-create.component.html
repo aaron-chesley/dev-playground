@@ -1,4 +1,4 @@
-<play-stepper #cdkStepper [linear]="true">
+<!-- <play-stepper #cdkStepper [linear]="true">
   <cdk-step>
     <ng-template cdkStepLabel>
       <span>Personal Details</span>
@@ -11,4 +11,29 @@
     </ng-template>
     <p>This is any content of "Step 2"</p>
   </cdk-step>
-</play-stepper>
+</play-stepper> -->
+
+<play-card>
+  <play-card-header>Create New Content</play-card-header>
+  <play-card-body>body</play-card-body>
+  <play-card-footer position="right">
+    <play-button-group [gap]="10">
+      <button
+        playButton
+        appearance="play-outline"
+        theme="accent"
+        (click)="closeDialog()"
+      >
+        No
+      </button>
+      <button
+        playButton
+        appearance="play-flat"
+        theme="accent"
+        (click)="closeDialog()"
+      >
+        Yes
+      </button>
+    </play-button-group>
+  </play-card-footer>
+</play-card>

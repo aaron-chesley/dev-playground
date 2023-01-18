@@ -13,6 +13,14 @@
       (nextPageClick)="nextPageClick.emit()"
       (previousPageClick)="previousPageClick.emit()"
     ></play-paginator>
+    <button
+      playButton
+      appearance="play-outline"
+      theme="primary"
+      (click)="createNewContent.emit()"
+    >
+      Create
+    </button>
   </div>
   <div class="content-list-wrapper">
     <ng-container
