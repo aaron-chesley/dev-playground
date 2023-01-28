@@ -1,0 +1,8 @@
+<div class="accordion-item" (click)="toggle()">
+  <div class="accordion-item-header">
+    <ng-content select="[header]"></ng-content>
+  </div>
+  <div class="accordion-item-content" *ngIf="isOpen">
+    <ng-content select="[content]"></ng-content>
+  </div>
+</div>

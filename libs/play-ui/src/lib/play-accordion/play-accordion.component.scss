@@ -1,0 +1,13 @@
+.accordion-container {
+  display: inline-flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+}
+
+.play-accordion-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
