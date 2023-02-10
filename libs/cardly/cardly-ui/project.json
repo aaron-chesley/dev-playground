@@ -29,7 +29,8 @@
         "port": 4400,
         "configDir": "libs/cardly/cardly-ui/.storybook",
         "browserTarget": "cardly-ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {
@@ -44,7 +45,8 @@
         "outputDir": "dist/storybook/cardly-ui",
         "configDir": "libs/cardly/cardly-ui/.storybook",
         "browserTarget": "cardly-ui:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "styles": ["libs/play-ui/.storybook/styles.scss"]
       },
       "configurations": {
         "ci": {
