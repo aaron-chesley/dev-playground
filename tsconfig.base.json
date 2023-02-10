@@ -20,8 +20,9 @@
     "baseUrl": ".",
     "paths": {
       "@playground/cardly-ui": ["libs/cardly/cardly-ui/src/index.ts"],
-      "@playground/cardly-util": [
-        "libs/cardly/cardly-util/src/index.ts"
+      "@playground/cardly-util": ["libs/cardly/cardly-util/src/index.ts"],
+      "@playground/cardly-data": [
+        "libs/cardly/cardly-data/src/index.ts"
       ],
       "@playground/environment": ["libs/environment/src/index.ts"],
       "@playground/lms-data": ["libs/lms/lms-data/src/index.ts"],

@@ -1,8 +1,9 @@
 {
   "version": 2,
   "projects": {
-    "cardly-util": "libs/cardly/cardly-util",
+    "cardly-data": "libs/cardly/cardly-data",
     "cardly-ui": "libs/cardly/cardly-ui",
+    "cardly-util": "libs/cardly/cardly-util",
     "environment": "libs/environment",
     "lms": "apps/lms",
     "lms-data": "libs/lms/lms-data",
