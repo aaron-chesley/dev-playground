@@ -71,6 +71,15 @@ export class PlaySelectComponent implements ControlValueAccessor {
     this.cdr.detectChanges();
   }
 
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.elRef.nativeElement.classList.add('disabled');
+    } else {
+      this.elRef.nativeElement.classList.remove('disabled');
+    }
+    this.disabled = isDisabled;
+  }
+
   constructor(
     public elRef: ElementRef<HTMLElement>,
     private cdr: ChangeDetectorRef

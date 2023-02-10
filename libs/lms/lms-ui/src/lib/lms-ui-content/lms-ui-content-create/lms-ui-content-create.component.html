@@ -15,7 +15,37 @@
 
 <play-card>
   <play-card-header>Create New Content</play-card-header>
-  <play-card-body>body</play-card-body>
+  <play-card-body [formGroup]="form">
+    <play-select formControlName="content_type">
+      <play-select-option value="VIDEO">Video</play-select-option>
+      <play-select-option value="SLIDE">Slide</play-select-option>
+    </play-select>
+    <ng-container
+      *ngIf="form.value.content_type === 'VIDEO'"
+      formGroupName="video"
+    >
+      <play-form-field>
+        <play-form-field-label>Name:</play-form-field-label>
+        <input playInputText formControlName="name" />
+      </play-form-field>
+      <play-form-field>
+        <play-form-field-label>Description:</play-form-field-label>
+        <input playInputText formControlName="description" />
+      </play-form-field>
+      <play-form-field>
+        <play-form-field-label>Duration:</play-form-field-label>
+        <input placeholder="hh:mm" playInputText formControlName="duration" />
+      </play-form-field>
+      <play-form-field>
+        <play-form-field-label>Video url:</play-form-field-label>
+        <input playInputText formControlName="video_url" />
+      </play-form-field>
+      <play-form-field>
+        <play-form-field-label>Thumbnail url:</play-form-field-label>
+        <input playInputText formControlName="thumbnail_url" />
+      </play-form-field>
+    </ng-container>
+  </play-card-body>
   <play-card-footer position="right">
     <play-button-group [gap]="10">
       <button
@@ -24,7 +54,7 @@
         theme="accent"
         (click)="closeDialog()"
       >
-        No
+        Cancel
       </button>
       <button
         playButton
@@ -32,7 +62,7 @@
         theme="accent"
         (click)="closeDialog()"
       >
-        Yes
+        Create
       </button>
     </play-button-group>
   </play-card-footer>

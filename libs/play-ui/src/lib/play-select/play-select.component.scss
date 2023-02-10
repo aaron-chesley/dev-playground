@@ -1,3 +1,5 @@
+@use '../play-theme/mixins' as mixins;
+
 :host {
   display: inline-flex;
   align-items: center;
@@ -47,6 +49,10 @@
     background-repeat: no-repeat;
     background-position: right;
   }
+}
+
+:host.disabled {
+  @include mixins.disabled;
 }
 
 :host.ng-invalid.ng-touched {

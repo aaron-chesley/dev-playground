@@ -24,3 +24,6 @@ export * from './lib/play-stepper/play-stepper.component';
 export * from './lib/play-checkbox/play-checkbox.component';
 export * from './lib/play-select/play-select.component';
 export * from './lib/play-select/play-select-option.component';
+export * from './lib/play-form-field/play-form-field.component';
+export * from './lib/play-form-field/play-form-field-label.component';
+export * from './lib/play-form-field/play-form-field-error.component';

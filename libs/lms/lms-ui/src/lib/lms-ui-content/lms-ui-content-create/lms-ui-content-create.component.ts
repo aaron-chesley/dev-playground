@@ -6,7 +6,13 @@ import {
   HostBinding,
   ViewEncapsulation,
 } from '@angular/core';
-import { LmsContentItemCreate } from '@playground/lms/lms-util';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { LmsContentItemCreate, LmsContentType } from '@playground/lms/lms-util';
 import {
   PlayButtonComponent,
   PlayButtonGroupComponent,
@@ -14,7 +20,29 @@ import {
   PlayCardComponent,
   PlayCardFooterComponent,
   PlayCardHeaderComponent,
+  PlayFormFieldComponent,
+  PlayFormFieldLabelComponent,
+  PlayInputTextComponent,
+  PlaySelectComponent,
+  PlaySelectOptionComponent,
 } from '@playground/play-ui';
+
+interface LmsUiContentCreateForm {
+  content_type: FormControl<LmsContentType>;
+  slide: FormControl<{
+    description: string;
+    name: string;
+    thumbnail_url: string;
+    url: string;
+  } | null>;
+  video: FormGroup<{
+    description: FormControl<string>;
+    duration: FormControl<string>;
+    name: FormControl<string>;
+    thumbnail_url: FormControl<string>;
+    video_url: FormControl<string>;
+  } | null>;
+}
 
 @Component({
   selector: 'lms-ui-content-create',
@@ -25,36 +53,46 @@ import {
   standalone: true,
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     PlayCardComponent,
     PlayCardHeaderComponent,
     PlayCardBodyComponent,
     PlayCardFooterComponent,
     PlayButtonComponent,
     PlayButtonGroupComponent,
+    PlayFormFieldComponent,
+    PlayFormFieldLabelComponent,
+    PlayInputTextComponent,
+    PlaySelectComponent,
+    PlaySelectOptionComponent,
   ],
 })
 export class LmsUiContentCreateComponent {
   @HostBinding('class.lms-ui-content-create') lmsUiContentCreateClass =
     'lms-ui-content-create';
 
+  form = this.fb.group<LmsUiContentCreateForm>({
+    content_type: this.fb.control('VIDEO'),
+    slide: this.fb.control(null),
+    video: this.fb.group({
+      description: this.fb.control('My Cool Description'),
+      duration: this.fb.control('02:29'),
+      name: this.fb.control('My Cool name'),
+      thumbnail_url: this.fb.control('https://picsum.photos/200'),
+      video_url: this.fb.control('https://www.youtube.com/watch?v=9bZkp7q19f0'),
+    }),
+  });
+
   closeDialog() {
-    this.dialogRef.close({
-      content_type: 'VIDEO',
-      slide: null,
-      video: {
-        description: '23423',
-        duration: '23423',
-        name: '32423432',
-        thumbnail_url: '23423',
-        video_url: '234234',
-      },
-    });
+    const value = this.form.getRawValue();
+    this.dialogRef.close(value);
   }
 
   constructor(
     private dialogRef: DialogRef<
       LmsContentItemCreate,
       LmsUiContentCreateComponent
-    >
+    >,
+    private fb: FormBuilder
   ) {}
 }
