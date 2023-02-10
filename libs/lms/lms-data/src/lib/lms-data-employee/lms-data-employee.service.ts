@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpParams } from '@angular/common/http';
 import { ApiService } from '@playground/shared/shared-data';
-import { LmsContentItem, LmsEmployee } from '@playground/lms/lms-util';
+import { LmsContentItem, LmsEmployee } from '@playground/lms-util';
 
 @Injectable({
   providedIn: 'root',

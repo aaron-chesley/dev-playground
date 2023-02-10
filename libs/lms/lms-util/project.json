@@ -1,4 +1,5 @@
 {
+  "name": "lms-util",
   "projectType": "library",
   "sourceRoot": "libs/lms/lms-util/src",
   "prefix": "playground",

@@ -1,13 +1,12 @@
 {
+  "name": "environment",
   "projectType": "library",
   "sourceRoot": "libs/environment/src",
   "prefix": "playground",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/environment"
-      ],
+      "outputs": ["coverage/libs/environment"],
       "options": {
         "jestConfig": "libs/environment/jest.config.ts",
         "passWithNoTests": true,

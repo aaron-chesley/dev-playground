@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { LmsDataContentService } from '@playground/lms-data';
-import { LmsContentItem, LmsContentItemCreate } from '@playground/lms/lms-util';
+import { LmsContentItem, LmsContentItemCreate } from '@playground/lms-util';
 import { getDefaultPaginated, Paginated } from '@playground/shared/shared-util';
 import { BehaviorSubject } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';

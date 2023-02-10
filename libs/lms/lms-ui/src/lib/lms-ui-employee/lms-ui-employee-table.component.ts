@@ -8,7 +8,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { SelectionModel } from '@angular/cdk/collections';
-import { LmsEmployee } from '@playground/lms/lms-util';
+import { LmsEmployee } from '@playground/lms-util';
 import {
   check,
   PlayButtonComponent,

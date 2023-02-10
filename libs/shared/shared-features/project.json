@@ -1,4 +1,5 @@
 {
+  "name": "shared-features",
   "projectType": "library",
   "sourceRoot": "libs/shared/shared-features/src",
   "prefix": "playground",

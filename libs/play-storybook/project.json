@@ -1,4 +1,5 @@
 {
+  "name": "play-storybook",
   "projectType": "library",
   "sourceRoot": "libs/play-storybook/src",
   "prefix": "playground",

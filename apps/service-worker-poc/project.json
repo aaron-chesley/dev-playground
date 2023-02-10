@@ -1,4 +1,5 @@
 {
+  "name": "service-worker-poc",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/service-worker-poc/src",
@@ -6,9 +7,7 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": [
-        "{options.outputPath}"
-      ],
+      "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/service-worker-poc",
         "index": "apps/service-worker-poc/src/index.html",
@@ -21,9 +20,7 @@
           "apps/service-worker-poc/src/assets",
           "apps/service-worker-poc/src/manifest.webmanifest"
         ],
-        "styles": [
-          "apps/service-worker-poc/src/styles.scss"
-        ],
+        "styles": ["apps/service-worker-poc/src/styles.scss"],
         "scripts": [],
         "serviceWorker": true,
         "ngswConfigPath": "apps/service-worker-poc/ngsw-config.json"
@@ -92,16 +89,12 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/apps/service-worker-poc"
-      ],
+      "outputs": ["coverage/apps/service-worker-poc"],
       "options": {
         "jestConfig": "apps/service-worker-poc/jest.config.ts",
         "passWithNoTests": true
       }
     }
   },
-  "tags": [
-    "type:project"
-  ]
+  "tags": ["type:project"]
 }

@@ -6,7 +6,7 @@ import {
   Input,
   ViewEncapsulation,
 } from '@angular/core';
-import { LmsVideo } from '@playground/lms/lms-util';
+import { LmsVideo } from '@playground/lms-util';
 import { PlayCardComponent, PlayTextComponent } from '@playground/play-ui';
 
 @Component({

@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { LmsContentItem } from '@playground/lms/lms-util';
+import { LmsContentItem } from '@playground/lms-util';
 import {
   PlayButtonComponent,
   PlayInputTextComponent,

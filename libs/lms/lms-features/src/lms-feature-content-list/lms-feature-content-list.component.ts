@@ -4,7 +4,7 @@ import {
   LmsUiContentCreateComponent,
   LmsUiContentListComponent,
 } from '@playground/lms-ui';
-import { LmsContentItemCreate } from '@playground/lms/lms-util';
+import { LmsContentItemCreate } from '@playground/lms-util';
 import { PlayModalModule, PlayModalService } from '@playground/play-ui';
 import { filter } from 'rxjs';
 import { LmsFeatureContentListStore } from './lms-feature-content-list.store';

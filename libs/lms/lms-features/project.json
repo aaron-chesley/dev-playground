@@ -1,4 +1,5 @@
 {
+  "name": "lms-features",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/lms/lms-features/src",
@@ -6,9 +7,7 @@
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/lms/lms-features"
-      ],
+      "outputs": ["coverage/libs/lms/lms-features"],
       "options": {
         "jestConfig": "libs/lms/lms-features/jest.config.ts",
         "passWithNoTests": true,
@@ -25,7 +24,5 @@
       }
     }
   },
-  "tags": [
-    "type:feature"
-  ]
+  "tags": ["type:feature"]
 }

@@ -12,7 +12,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { LmsContentItemCreate, LmsContentType } from '@playground/lms/lms-util';
+import { LmsContentItemCreate, LmsContentType } from '@playground/lms-util';
 import {
   PlayButtonComponent,
   PlayButtonGroupComponent,
