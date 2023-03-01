@@ -1,0 +1,64 @@
+<ng-container *ngIf="game.state !== GameState.POSTGAME" (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
+  
+  <div class="scum-player-card-list">
+    <div *ngFor="let player of game.players" class="scum-player-card" [class.is-my-turn]="player.user | isUsersTurn : game.currentPlayerId">
+      <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
+        <play-icon *ngIf="player.pass" name="localParking" color="red" [size]="50"></play-icon>
+        <play-icon *ngIf="!player.cards.length" name="emojiEvents" color="gold" [size]="50"></play-icon>
+      </div>
+      <div class="player-name">{{ player.user.displayName }}</div>
+      <div class="stat-wrapper">
+        <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
+        <span>{{ player.score }}</span>
+      </div>
+      <div class="stat-wrapper">
+        <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
+        <span>{{ player.cards.length }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="start-container" *ngIf="game.state === GameState.PREGAME">
+    <button *ngIf="(user | me : game.players).user.id === game.gameOwnerId" playButton appearance="play-flat" theme="primary" [disabled]="game.players.length < 4" (click)="startGame.emit()">Start</button>
+    <small>Waiting for enough players...</small>
+  </div>
+
+  <div class="start-container" *ngIf="game.state === GameState.CARD_SWAP">
+    <button playButton appearance="play-flat" theme="primary" (click)="confirmSwapSelection.emit()" [disabled]="user | me : game.players | disableCardSwapConfirmBtn : stagedCards">Confirm Selection</button>
+    <small>Waiting for players to swap cards...</small>
+    <small *ngIf="(user | me : game.players).rank === ScumRank.PRESIDENT && !game.presidentTraded">Pick two cards to give to Scum.</small>
+    <small *ngIf="(user | me : game.players).rank === ScumRank.VICE_PRESIDENT && !game.vicePresidentTraded">Pick one card to give to Vice Scum.</small>
+  </div>
+
+  <div class="pass-container" *ngIf="game.state === GameState.IN_PROGRESS && user.id === game.currentPlayerId">
+    <play-button-group [gap]="5">
+      <button playButton appearance="play-flat" theme="primary" (click)="passTurn.emit()">Pass</button>
+      <button playButton appearance="play-flat" (click)="confirmStagedCardsSelection.emit()" [disabled]="stagedCards | disableStagedCardsConfirmBtn : game.currentCardStackSize">Confirm</button>
+    </play-button-group>
+  </div>
+
+  <div class="discard-container" [@listAnimation]="game.discardPile.length" *ngIf="game.state === GameState.IN_PROGRESS">
+    <div class="card-container" *ngFor="let card of game.discardPile">
+      <div class="card">
+        <cardly-playing-card [card]="card"></cardly-playing-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="staged-container" [@listAnimation]="stagedCards.length">
+    <div class="card-container" *ngFor="let card of stagedCards; let i = index">
+      <div class="card">
+        <cardly-playing-card [card]="card" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
+      </div>
+    </div>
+  </div>
+
+  <div class="hand-container" [@listAnimation]="(user | me : game.players).cards.length">
+    <div class="card-container" *ngFor="let card of (user | me : game.players).cards; let i = index">
+      <div class="card">
+        <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
+      </div>
+    </div>
+  </div>
+
+</ng-container>
