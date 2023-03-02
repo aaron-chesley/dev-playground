@@ -29,9 +29,9 @@ import { OverlayModule } from '@angular/cdk/overlay';
   ],
 })
 export class PlaySelectComponent implements ControlValueAccessor {
-  @Input() value: any = '';
+  @Input() value: any = null;
   @Input() disabled = false;
-  @Input() placeholder: string;
+  @Input() placeholder = '';
   @Output() playSelectChange = new EventEmitter<any>();
   isOpen = false;
 
