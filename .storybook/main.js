@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   stories: ['../**/*.stories.@(js|mdx)'],
-  addons: ['@storybook/addon-essentials'],
+
   staticDirs: [
     path.resolve(__dirname, '../libs/cardly/cardly-ui/src/lib/shared/assets'),
   ],
