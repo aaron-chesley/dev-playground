@@ -3,8 +3,6 @@ export default {
   displayName: 'play-storybook',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {},
-  coverageDirectory: '../../coverage/libs/play-storybook',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

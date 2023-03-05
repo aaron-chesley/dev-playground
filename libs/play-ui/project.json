@@ -10,8 +10,7 @@
       "outputs": ["coverage/libs/play-ui"],
       "options": {
         "jestConfig": "libs/play-ui/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/play-ui/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

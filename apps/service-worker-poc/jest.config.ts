@@ -3,8 +3,6 @@ export default {
   displayName: 'service-worker-poc',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  globals: {},
-  coverageDirectory: '../../coverage/apps/service-worker-poc',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

@@ -9,8 +9,7 @@
       "outputs": ["coverage/libs/shared/shared-data"],
       "options": {
         "jestConfig": "libs/shared/shared-data/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/shared/shared-data/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

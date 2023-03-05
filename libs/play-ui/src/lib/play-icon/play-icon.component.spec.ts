@@ -8,7 +8,7 @@ describe('PlayIconComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PlayIconComponent],
+      declarations: [],
     }).compileComponents();
   });
 

@@ -10,8 +10,7 @@
       "outputs": ["coverage/libs/lms/lms-data"],
       "options": {
         "jestConfig": "libs/lms/lms-data/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/lms/lms-data/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {

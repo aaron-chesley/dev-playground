@@ -9,8 +9,7 @@
       "outputs": ["coverage/libs/play-storybook"],
       "options": {
         "jestConfig": "libs/play-storybook/jest.config.ts",
-        "passWithNoTests": true,
-        "tsConfig": "libs/play-storybook/tsconfig.lib.json"
+        "passWithNoTests": true
       }
     },
     "lint": {
