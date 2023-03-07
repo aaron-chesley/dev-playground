@@ -1,6 +1,6 @@
-import { RulebookVariable } from './rulebook-variable.interface';
+import { RulebookVariable } from './kls-rulebook-variable.interface';
 
-export interface Market {
+export interface KlsMarket {
   id: string;
   ticker_name: string;
   create_date: string;

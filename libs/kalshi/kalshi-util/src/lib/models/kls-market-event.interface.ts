@@ -1,7 +1,7 @@
-import { Market } from './market.interface';
-import { SettlementSource } from './settlement-source.interface';
+import { KlsMarket } from './kls-market.interface';
+import { SettlementSource } from './kls-settlement-source.interface';
 
-export interface MarketEvent {
+export interface KlsMarketEvent {
   ticker: string;
   series_ticker: string;
   target_datetime: string;
@@ -18,5 +18,5 @@ export interface MarketEvent {
   metrics_tags: string[];
   mini_title: string;
   sub_title: string;
-  markets: Market[];
+  markets: KlsMarket[];
 }
