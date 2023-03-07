@@ -18,7 +18,7 @@ export class KalshiServer {
       console.log('WebSocket server listening on port', port);
     });
 
-    this.startScraping();
+    // this.startScraping();
   }
 
   private async startScraping() {
