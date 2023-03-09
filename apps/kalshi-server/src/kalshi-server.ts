@@ -33,7 +33,12 @@ export class KalshiServer {
           this.KALSHI_MARKET_URL
         )
         .then((response) => {
-          this.broadcast(JSON.stringify(response));
+          this.broadcast(
+            JSON.stringify({
+              messageType: '[Kalshi Api] Market Data Update',
+              payload: response,
+            })
+          );
         });
     }, 5000);
   }

@@ -1,1 +1,2 @@
-export * from './lib/kalshi-features/kalshi-features.component';
+export * from './lib/kalshi-feature/kalshi-feat.component';
+export * from './lib/kalshi.routes';
