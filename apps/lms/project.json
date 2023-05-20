@@ -17,6 +17,7 @@
         "index": "apps/lms/src/index.html",
         "main": "apps/lms/src/main.ts",
         "polyfills": "apps/lms/src/polyfills.ts",
+        "tsConfig": "apps/lms/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           "apps/lms/src/favicon.ico",

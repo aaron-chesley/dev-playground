@@ -1,9 +1,8 @@
 import { AuthUser } from '@playground/lms-data';
-import { PlayIconName } from '@playground/play-ui';
 
 export interface LmsNavLink {
   title: string;
-  icon: PlayIconName;
+  icon: string;
   routerLink: string;
 }
 
