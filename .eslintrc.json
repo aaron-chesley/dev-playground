@@ -15,7 +15,8 @@
               {
                 "sourceTag": "type:project",
                 "onlyDependOnLibsWithTags": [
-                  "type:feature"
+                  "type:feature",
+                  "type:util"
                 ]
               },
               {

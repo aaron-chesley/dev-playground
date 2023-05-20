@@ -10,7 +10,7 @@ export const KALSHI_ROUTES: Routes = [
     path: '',
     providers: [
       provideState('kalshi', kalshiReducer),
-      provideEffects(KalshiEffects),
+      // provideEffects(KalshiEffects),
     ],
     component: KlsFeatComponent,
   },

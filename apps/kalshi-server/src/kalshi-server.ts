@@ -1,68 +1,47 @@
-import * as WebSocket from 'ws';
-import * as http from 'http';
-import * as puppeteer from 'puppeteer';
+import axios from 'axios';
+import express from 'express';
+import { KlsLoginResponse } from '@playground/kalshi-util';
+import { KalshiWebsocket } from './kalshi-websocket';
 
 export class KalshiServer {
-  private server: http.Server;
-  private wss: WebSocket.Server;
-  private browser: puppeteer.Browser;
-  private page: puppeteer.Page;
-  private scrapingInterval: ReturnType<typeof setInterval>;
-  private readonly KALSHI_HOMEPAGE = 'https://kalshi.com';
-  private readonly KALSHI_MARKET_URL = `https://trading-api.kalshi.com/v1/events/INXW-23MAR10`;
+  private readonly app = express();
+  private readonly httpServer = this.app.listen(8080);
+  private kalshiSocket: KalshiWebsocket;
+  // private readonly KALSHI_API_ROOT = 'https://demo-api.kalshi.co/trade-api/v2';
+  // private KALSHI_SOCKET_ADDRESS = 'wss://demo-api.kalshi.co/trade-api/ws/v2';
+  private readonly KALSHI_API_ROOT =
+    'https://trading-api.kalshi.com/trade-api/v2';
+  private KALSHI_SOCKET_ADDRESS =
+    'wss://trading-api.kalshi.com/trade-api/ws/v2';
+  private readonly LOGIN_EMAIL = '';
+  private readonly LOGIN_PASSWORD = '';
+  public loginDetails: KlsLoginResponse;
+  // public loginDetails: KlsLoginResponse = {
+  //   member_id: '',
+  //   token:
+  //     '',
+  // };
 
-  constructor(port: number) {
-    this.server = http.createServer();
-    this.wss = new WebSocket.Server({ server: this.server });
-    this.server.listen(port, () => {
-      console.log('WebSocket server listening on port', port);
-    });
-
-    this.startScraping();
+  constructor() {
+    this.login();
   }
 
-  private async startScraping() {
-    this.cleanupScraper();
-    this.browser = await puppeteer.launch();
-    this.page = await this.browser.newPage();
-    await this.page.goto(this.KALSHI_HOMEPAGE, { waitUntil: 'networkidle2' });
-    this.scrapingInterval = setInterval(() => {
-      this.page
-        .evaluate(
-          (url) => fetch(url).then((response) => response.json()),
-          this.KALSHI_MARKET_URL
-        )
-        .then((response) => {
-          this.broadcast(
-            JSON.stringify({
-              messageType: '[Kalshi Api] Market Data Update',
-              payload: response,
-            })
-          );
-        });
-    }, 5000);
-  }
-
-  private broadcast(message: string) {
-    this.wss.clients.forEach((client) => {
-      client.send(message);
-    });
-  }
-
-  private async cleanupScraper() {
-    if (this.scrapingInterval) {
-      clearInterval(this.scrapingInterval);
-    }
-    if (this.page) {
-      await this.page.close();
-    }
-    if (this.browser) {
-      await this.browser.close();
-    }
+  private async login() {
+    const res = await axios.post<KlsLoginResponse>(
+      `${this.KALSHI_API_ROOT}/login`,
+      {
+        email: this.LOGIN_EMAIL,
+        password: this.LOGIN_PASSWORD,
+      }
+    );
+    this.loginDetails = res.data;
+    this.kalshiSocket = new KalshiWebsocket(
+      this.KALSHI_SOCKET_ADDRESS,
+      this.loginDetails.token
+    );
   }
 
   private close() {
-    this.wss.close();
-    this.server.close();
+    this.httpServer.close();
   }
 }
