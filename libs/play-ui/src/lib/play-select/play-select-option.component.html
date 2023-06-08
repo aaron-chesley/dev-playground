@@ -1,0 +1,9 @@
+<play-checkbox *ngIf="multiple; else singleSelectionTemplate">
+  <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
+</play-checkbox>
+<ng-template #singleSelectionTemplate>
+  <ng-container *ngTemplateOutlet="tempOutlet"></ng-container>
+</ng-template>
+<ng-template #tempOutlet>
+  <ng-content></ng-content>
+</ng-template>

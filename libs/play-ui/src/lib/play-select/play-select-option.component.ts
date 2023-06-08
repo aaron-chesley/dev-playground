@@ -4,45 +4,35 @@ import {
   HostListener,
   Input,
   HostBinding,
+  ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PlaySelectComponent } from './play-select.component';
+import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
+import { NgIf, NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'play-select-option',
-  template: `<ng-content></ng-content>`,
-  styles: [
-    `
-      :host {
-        display: inline-flex;
-        padding: 5px;
-        cursor: pointer;
-        box-sizing: border-box;
-      }
-      :host:hover {
-        background-color: var(--play-primary-color-lightest);
-      }
-      :host.play-select-option-active {
-        background-color: var(--play-primary-color-lighter);
-      }
-    `,
-  ],
+  templateUrl: './play-select-option.component.html',
+  styleUrls: ['./play-select-option.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule],
+  imports: [NgTemplateOutlet, NgIf, PlayCheckboxComponent],
 })
 export class PlaySelectOptionComponent {
   @Input() value: any;
+  multiple = true;
 
+  @HostBinding('class') className = 'play-select-option';
   @HostBinding('class.play-select-option-active') get activeClass() {
-    return this.playSelect.value === this.value;
+    return false;
+    // return this.playSelect.value === this.value;
   }
   @HostListener('click', ['$event']) onClick() {
     // this.playSelect.writeValue(this.value);
     // this.playSelect.playSelectChange.emit(this.value);
     // this.playSelect.isOpen = false;
-    this.playSelect.valueChanged(this.value);
+    // this.playSelect.valueChanged(this.value);
   }
 
-  constructor(private playSelect: PlaySelectComponent) {}
+  constructor() {}
 }
