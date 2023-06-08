@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +8,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { v4 as uuidv4 } from 'uuid';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
@@ -19,7 +17,6 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -29,6 +26,7 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
   ],
 })
 export class PlayCheckboxComponent implements ControlValueAccessor {
+  PlayCheckboxComponent = PlayCheckboxComponent;
   @HostBinding('class') className = 'play-checkbox';
   @Input() set labelPosition(labelPosition: LabelPosition) {
     this._labelPosition = getLabelPosition(labelPosition);
@@ -37,8 +35,9 @@ export class PlayCheckboxComponent implements ControlValueAccessor {
   @Input() disabled = false;
   @Output() playCheckChange = new EventEmitter<boolean>();
 
+  static _id = 0;
+  _identifier = `play-checkbox-${PlayCheckboxComponent._id}`;
   _labelPosition = 'row';
-  _uniqueId = uuidv4();
 
   onChange: any = () => ({});
   onTouched: any = () => ({});
@@ -62,5 +61,8 @@ export class PlayCheckboxComponent implements ControlValueAccessor {
     const value = (event.target as HTMLInputElement).checked;
     this.onChange(value);
     this.playCheckChange.emit((event.target as HTMLInputElement).checked);
+  }
+  constructor() {
+    PlayCheckboxComponent._id += 1;
   }
 }

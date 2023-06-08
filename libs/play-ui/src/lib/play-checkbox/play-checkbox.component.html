@@ -1,16 +1,21 @@
-<label
+<div
   class="play-checkbox-wrapper"
   [class.disabled]="disabled"
   [style.flex-direction]="_labelPosition"
-  [for]="_uniqueId"
 >
   <input
     class="play-checkbox-input"
     type="checkbox"
-    [id]="_uniqueId"
+    [id]="_identifier"
     [checked]="checked"
     (change)="onCheckChange($event)"
     [disabled]="disabled"
   />
-  <ng-content></ng-content>
-</label>
+  <label
+    class="play-checkbox-label"
+    [for]="_identifier"
+    [style.padding-left]="_labelPosition === 'row' ? '.5em' : '0'"
+    [style.padding-right]="_labelPosition === 'row-reverse' ? '.5em' : '0'"
+    ><ng-content></ng-content
+  ></label>
+</div>

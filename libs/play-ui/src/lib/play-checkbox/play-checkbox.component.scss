@@ -7,7 +7,6 @@
 .play-checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 0.5em;
   cursor: pointer;
 
   .play-checkbox-input {
@@ -40,6 +39,10 @@
     &:checked::before {
       transform: scale(1);
     }
+  }
+
+  .play-checkbox-label {
+    cursor: inherit;
   }
 
   &:active > .play-checkbox-input,
