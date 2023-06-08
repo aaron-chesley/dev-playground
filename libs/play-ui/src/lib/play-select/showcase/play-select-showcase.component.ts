@@ -18,8 +18,11 @@ import { PlaySelectComponent } from '../play-select.component';
   ],
 })
 export class PlaySelectShowcaseComponent {
-  favoriteAnimal = new FormControl('', Validators.required);
-  favoriteFruit = 'Banana';
+  animalOptions = ['Dog', 'Cat', 'Bird', 'Mouse'];
+  favoriteAnimal = new FormControl(this.animalOptions[0], Validators.required);
+
+  fruitOptions = ['Apple', 'Banana', 'Orange', 'Grape'];
+  favoriteFruit = this.fruitOptions[0];
 
   onPlaySelectChange(event: string) {
     this.favoriteFruit = event;
