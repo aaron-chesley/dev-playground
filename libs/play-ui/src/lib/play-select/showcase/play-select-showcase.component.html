@@ -1,5 +1,5 @@
 <div style="display: flex; gap: 50px; padding: 25px">
-  <div style="display: flex; flex-direction: column; gap: 25px">
+  <div style="display: flex; flex-direction: column; gap: 25px; width: 200px">
     <play-select [formControl]="favoriteAnimal" [multiple]="true">
       <play-select-option
         *ngFor="let option of animalOptions"
@@ -11,7 +11,7 @@
     <span>Reactive Forms: {{ favoriteAnimal.value }}</span>
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 25px">
+  <div style="display: flex; flex-direction: column; gap: 25px; width: 200px">
     <play-select
       [value]="favoriteFruit"
       (playSelectChange)="onPlaySelectChange($event)"

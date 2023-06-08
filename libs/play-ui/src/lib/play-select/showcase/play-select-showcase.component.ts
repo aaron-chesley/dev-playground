@@ -33,7 +33,10 @@ export class PlaySelectShowcaseComponent {
     'Elephant',
     'Giraffe',
   ];
-  favoriteAnimal = new FormControl(this.animalOptions[0], Validators.required);
+  favoriteAnimal = new FormControl(
+    { value: this.animalOptions[0], disabled: false },
+    { validators: [Validators.required] }
+  );
 
   fruitOptions = ['Apple', 'Banana', 'Orange', 'Grape'];
   favoriteFruit = this.fruitOptions[0];

@@ -42,11 +42,15 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @Input() multiple = false;
   @Output() playSelectChange = new EventEmitter<any>();
   isOpen = false;
-  selection: SelectionModel<unknown>;
+  selection: SelectionModel<any>;
   destroyRef = inject(DestroyRef);
 
   @HostBinding('class.open') get isOpenClass() {
     return this.isOpen;
+  }
+
+  @HostBinding('class.disabled') get disabledClass() {
+    return this.disabled;
   }
 
   @HostListener('click', ['$event']) click() {
@@ -58,6 +62,13 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     setTimeout(() => {
       this.onTouched();
     });
+  }
+
+  get label(): string {
+    if (this.multiple) {
+      return this.selection.selected.length + ' selected';
+    }
+    return this.selection.selected[0];
   }
 
   ngOnInit() {
@@ -95,15 +106,6 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
       this.isOpen = false;
     }
     this.cdr.detectChanges();
-  }
-
-  setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.elRef.nativeElement.classList.add('disabled');
-    } else {
-      this.elRef.nativeElement.classList.remove('disabled');
-    }
-    this.disabled = isDisabled;
   }
 
   constructor(
