@@ -32,6 +32,7 @@ export class PlaySelectComponent implements ControlValueAccessor {
   @Input() value: any = null;
   @Input() disabled = false;
   @Input() placeholder = '';
+  @Input() multiple = false;
   @Output() playSelectChange = new EventEmitter<any>();
   isOpen = false;
 
@@ -45,7 +46,9 @@ export class PlaySelectComponent implements ControlValueAccessor {
 
   @HostListener('focusout', ['$event.target.value'])
   onFocusout() {
-    this.onTouched();
+    setTimeout(() => {
+      this.onTouched();
+    });
   }
 
   onChange: any = () => ({});
