@@ -4,15 +4,15 @@
   cursor: pointer;
   box-sizing: border-box;
 
-  .play-select-option-active {
-    background-color: var(--play-primary-color-lighter);
-  }
-
-  &:hover {
+  &:hover:not(.play-select-option-active) {
     background-color: var(--play-primary-color-lightest);
   }
 
   .play-checkbox {
     pointer-events: none;
   }
+}
+
+.play-select-option-active {
+  background-color: var(--play-primary-color-lighter);
 }

@@ -8,6 +8,8 @@ import {
 } from '@angular/core';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
 import { NgIf, NgTemplateOutlet } from '@angular/common';
+import { PlayOptionService } from './showcase/play-option.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'play-select-option',
@@ -20,19 +22,19 @@ import { NgIf, NgTemplateOutlet } from '@angular/common';
 })
 export class PlaySelectOptionComponent {
   @Input() value: any;
-  multiple = true;
+  multiple = false;
+  selection: SelectionModel<unknown>;
 
   @HostBinding('class') className = 'play-select-option';
   @HostBinding('class.play-select-option-active') get activeClass() {
-    return false;
-    // return this.playSelect.value === this.value;
+    return !this.multiple && this.selection.isSelected(this.value);
   }
   @HostListener('click', ['$event']) onClick() {
-    // this.playSelect.writeValue(this.value);
-    // this.playSelect.playSelectChange.emit(this.value);
-    // this.playSelect.isOpen = false;
-    // this.playSelect.valueChanged(this.value);
+    this.playOptionService.toggleSelection(this.value);
   }
 
-  constructor() {}
+  constructor(private playOptionService: PlayOptionService) {
+    this.selection = this.playOptionService.selection;
+    this.multiple = this.playOptionService.allowMultiple;
+  }
 }

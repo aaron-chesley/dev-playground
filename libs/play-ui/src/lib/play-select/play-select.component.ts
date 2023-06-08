@@ -8,10 +8,16 @@ import {
   HostBinding,
   ElementRef,
   ChangeDetectorRef,
+  OnInit,
+  inject,
+  DestroyRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PlayOptionService } from './showcase/play-option.service';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'play-select',
@@ -26,15 +32,18 @@ import { OverlayModule } from '@angular/cdk/overlay';
       useExisting: PlaySelectComponent,
       multi: true,
     },
+    PlayOptionService,
   ],
 })
-export class PlaySelectComponent implements ControlValueAccessor {
+export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @Input() value: any = null;
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() multiple = false;
   @Output() playSelectChange = new EventEmitter<any>();
   isOpen = false;
+  selection: SelectionModel<unknown>;
+  destroyRef = inject(DestroyRef);
 
   @HostBinding('class.open') get isOpenClass() {
     return this.isOpen;
@@ -51,11 +60,24 @@ export class PlaySelectComponent implements ControlValueAccessor {
     });
   }
 
+  ngOnInit() {
+    this.selection = this.playOptionService.selection;
+    this.playOptionService.allowMultiple = this.multiple;
+    if (this.value !== null && this.value !== undefined) {
+      this.playOptionService.toggleSelection(this.value);
+    }
+    this.selection.changed
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((a) => {
+        this.valueChanged(this.selection.selected);
+      });
+  }
+
   onChange: any = () => ({});
   onTouched: any = () => ({});
 
   writeValue(value: any): void {
-    this.value = value;
+    this.playOptionService.toggleSelection(value);
   }
 
   registerOnChange(onChange: any): void {
@@ -66,11 +88,12 @@ export class PlaySelectComponent implements ControlValueAccessor {
     this.onTouched = onTouched;
   }
 
-  valueChanged(value: any) {
+  valueChanged(value: any[]) {
     this.onChange(value);
-    this.value = value;
     this.playSelectChange.emit(value);
-    this.isOpen = false;
+    if (!this.multiple) {
+      this.isOpen = false;
+    }
     this.cdr.detectChanges();
   }
 
@@ -85,6 +108,7 @@ export class PlaySelectComponent implements ControlValueAccessor {
 
   constructor(
     public elRef: ElementRef<HTMLElement>,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private playOptionService: PlayOptionService
   ) {}
 }
