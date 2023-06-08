@@ -66,7 +66,7 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
 
   get label(): string {
     if (this.multiple) {
-      return this.selection.selected.length + ' selected';
+      return `${this.selection.selected.length} selected`;
     }
     return this.selection.selected[0];
   }
