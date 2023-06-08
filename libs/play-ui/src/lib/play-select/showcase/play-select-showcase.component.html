@@ -1,6 +1,6 @@
 <div style="display: flex; gap: 50px; padding: 25px">
   <div style="display: flex; flex-direction: column; gap: 25px">
-    <play-select [formControl]="favoriteAnimal">
+    <play-select [formControl]="favoriteAnimal" [multiple]="true">
       <play-select-option
         *ngFor="let option of animalOptions"
         [value]="option"
