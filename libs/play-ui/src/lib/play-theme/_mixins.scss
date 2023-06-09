@@ -2,3 +2,19 @@
   opacity: 0.4;
   pointer-events: none;
 }
+
+@mixin play-scrollbar {
+  &::-webkit-scrollbar {
+    width: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background: darken(#f9f9f9, 5%);
+    border-radius: 0px 0px 5px 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 40px;
+    background: #c4c4c4;
+    border: 3px solid darken(#f9f9f9, 5%);
+    border-radius: 6px;
+  }
+}

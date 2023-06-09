@@ -1,5 +1,5 @@
 <div style="display: flex; gap: 50px; padding: 25px">
-  <div style="display: flex; flex-direction: column; gap: 25px; width: 200px">
+  <div style="display: flex; flex-direction: column; gap: 25px; width: 12em">
     <play-select
       [formControl]="favoriteAnimal"
       [multiple]="true"
@@ -13,7 +13,7 @@
     <span>Reactive Forms: {{ favoriteAnimal.value }}</span>
   </div>
 
-  <div style="display: flex; flex-direction: column; gap: 25px; width: 200px">
+  <div style="display: flex; flex-direction: column; gap: 25px; width: 12em">
     <play-select
       [value]="favoriteFruit"
       (playSelectChange)="onPlaySelectChange($event)"

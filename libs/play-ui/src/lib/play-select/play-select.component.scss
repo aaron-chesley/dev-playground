@@ -50,7 +50,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-y: auto;
   max-height: 300px;
   border: solid 1px #a6a6a6;
   border-top: none;
@@ -60,12 +59,25 @@
   margin-top: 1px;
   padding: 5px 0px;
   box-sizing: border-box;
+  // *** Cdk related overrides ***//
+  contain: unset !important;
+  // **************************** //
+  @include mixins.play-scrollbar;
+
+  .cdk-virtual-scroll-content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
 
   .play-select-option {
     display: inline-flex;
     padding: 5px;
     cursor: pointer;
     box-sizing: border-box;
+
+    .play-checkbox {
+      flex: 1;
+    }
 
     &:hover:not(.play-select-option-active) {
       background-color: var(--play-primary-color-lightest);

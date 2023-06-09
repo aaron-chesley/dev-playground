@@ -20,6 +20,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @Component({
   selector: 'play-select',
@@ -28,7 +29,12 @@ import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component'
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   encapsulation: ViewEncapsulation.None,
-  imports: [CommonModule, OverlayModule, PlayCheckboxComponent],
+  imports: [
+    CommonModule,
+    OverlayModule,
+    PlayCheckboxComponent,
+    ScrollingModule,
+  ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -18,10 +18,15 @@
   [cdkConnectedOverlayOffsetX]="-1"
   (backdropClick)="isOpen = false"
 >
-  <ul class="play-select-list">
+  <cdk-virtual-scroll-viewport
+    minBufferPx="275"
+    maxBufferPx="275"
+    itemSize="29.2"
+    class="play-select-list"
+  >
     <ng-container *ngIf="multiple; else singleValueTemplate">
       <li
-        *ngFor="let option of options"
+        *cdkVirtualFor="let option of options"
         class="play-select-option"
         (click)="toggleOption(option)"
       >
@@ -36,7 +41,7 @@
 
     <ng-template #singleValueTemplate>
       <li
-        *ngFor="let option of options"
+        *cdkVirtualFor="let option of options"
         class="play-select-option"
         [class.play-select-option-active]="selection.isSelected(option)"
         (click)="toggleOption(option)"
@@ -47,5 +52,5 @@
         ></template>
       </li>
     </ng-template>
-  </ul>
+  </cdk-virtual-scroll-viewport>
 </ng-template>
