@@ -41,7 +41,7 @@
       "executor": "@storybook/angular:build-storybook",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputDir": "dist/storybook/playground-ui",
+        "outputDir": "dist/storybook/play-ui",
         "configDir": "libs/play-ui/.storybook",
         "browserTarget": "play-ui:build-storybook",
         "compodoc": false,

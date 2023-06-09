@@ -7,7 +7,8 @@
     "lms:build": "nx build lms && yarn lms:i18n",
     "lms:i18n": "localize-extract -r . -s \"dist/apps/lms/*.js\" -f xlf -o apps/lms/src/locales/messages.xlf",
     "test": "nx test",
-    "deploy-storybook": "nx storybook build --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/playground-ui"
+    "deploy-full-storybook": "nx run play-storybook:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-storybook",
+    "deploy-play-ui-storybook": "nx run play-ui:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-ui"
   },
   "private": true,
   "dependencies": {
