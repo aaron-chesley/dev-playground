@@ -16,7 +16,6 @@ import {
   PlayIconComponent,
   PlayIconRegistryService,
   PlaySelectComponent,
-  PlaySelectOptionComponent,
 } from '@playground/play-ui';
 
 @Component({
@@ -32,7 +31,6 @@ import {
     PlayButtonComponent,
     PlayIconComponent,
     PlaySelectComponent,
-    PlaySelectOptionComponent,
   ],
 })
 export class LmsUiEmployeeTableComponent {

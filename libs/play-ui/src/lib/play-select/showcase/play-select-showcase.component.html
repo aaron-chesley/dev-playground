@@ -1,11 +1,13 @@
 <div style="display: flex; gap: 50px; padding: 25px">
   <div style="display: flex; flex-direction: column; gap: 25px; width: 200px">
-    <play-select [formControl]="favoriteAnimal" [multiple]="true">
-      <play-select-option
-        *ngFor="let option of animalOptions"
-        [value]="option"
-        >{{ option }}</play-select-option
-      >
+    <play-select
+      [formControl]="favoriteAnimal"
+      [multiple]="true"
+      [options]="animalOptions"
+    >
+      <ng-template let-option template="option">
+        {{ option }}
+      </ng-template>
     </play-select>
 
     <span>Reactive Forms: {{ favoriteAnimal.value }}</span>
@@ -15,12 +17,11 @@
     <play-select
       [value]="favoriteFruit"
       (playSelectChange)="onPlaySelectChange($event)"
+      [options]="fruitOptions"
     >
-      <play-select-option
-        *ngFor="let option of fruitOptions"
-        [value]="option"
-        >{{ option }}</play-select-option
-      >
+      <ng-template let-option template="option">
+        {{ option }}
+      </ng-template>
     </play-select>
 
     <span>Standard: {{ favoriteFruit }}</span>

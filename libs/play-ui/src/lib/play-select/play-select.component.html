@@ -18,7 +18,34 @@
   [cdkConnectedOverlayOffsetX]="-1"
   (backdropClick)="isOpen = false"
 >
-  <div class="play-select-list">
-    <ng-content select="play-select-option"></ng-content>
-  </div>
+  <ul class="play-select-list">
+    <ng-container *ngIf="multiple; else singleValueTemplate">
+      <li
+        *ngFor="let option of options"
+        class="play-select-option"
+        (click)="toggleOption(option)"
+      >
+        <play-checkbox [checked]="selection.isSelected(option)">
+          <template
+            [ngTemplateOutlet]="template"
+            [ngTemplateOutletContext]="{ $implicit: option }"
+          ></template>
+        </play-checkbox>
+      </li>
+    </ng-container>
+
+    <ng-template #singleValueTemplate>
+      <li
+        *ngFor="let option of options"
+        class="play-select-option"
+        [class.play-select-option-active]="selection.isSelected(option)"
+        (click)="toggleOption(option)"
+      >
+        <template
+          [ngTemplateOutlet]="template"
+          [ngTemplateOutletContext]="{ $implicit: option }"
+        ></template>
+      </li>
+    </ng-template>
+  </ul>
 </ng-template>

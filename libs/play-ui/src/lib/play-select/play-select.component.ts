@@ -7,17 +7,19 @@ import {
   HostListener,
   HostBinding,
   ElementRef,
-  ChangeDetectorRef,
   OnInit,
   inject,
   DestroyRef,
+  ContentChild,
+  TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { PlayOptionService } from './showcase/play-option.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
 
 @Component({
   selector: 'play-select',
@@ -25,14 +27,14 @@ import { SelectionModel } from '@angular/cdk/collections';
   styleUrls: ['./play-select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [CommonModule, OverlayModule],
+  encapsulation: ViewEncapsulation.None,
+  imports: [CommonModule, OverlayModule, PlayCheckboxComponent],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: PlaySelectComponent,
       multi: true,
     },
-    PlayOptionService,
   ],
 })
 export class PlaySelectComponent implements OnInit, ControlValueAccessor {
@@ -40,23 +42,25 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @Input() disabled = false;
   @Input() placeholder = '';
   @Input() multiple = false;
+  @Input() options: any[] = [];
   @Output() playSelectChange = new EventEmitter<any>();
+
   isOpen = false;
-  selection: SelectionModel<any>;
+  selection: SelectionModel<any> = new SelectionModel<any>(true, []);
   destroyRef = inject(DestroyRef);
 
+  @ContentChild(TemplateRef) template: TemplateRef<any>;
+
+  @HostBinding('class') className = 'play-select';
   @HostBinding('class.open') get isOpenClass() {
     return this.isOpen;
   }
-
   @HostBinding('class.disabled') get disabledClass() {
     return this.disabled;
   }
-
   @HostListener('click', ['$event']) click() {
     this.isOpen = !this.isOpen;
   }
-
   @HostListener('focusout', ['$event.target.value'])
   onFocusout() {
     setTimeout(() => {
@@ -72,15 +76,18 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.selection = this.playOptionService.selection;
-    this.playOptionService.allowMultiple = this.multiple;
     if (this.value !== null && this.value !== undefined) {
-      this.playOptionService.toggleSelection(this.value);
+      this.toggleOption(this.value);
     }
+
     this.selection.changed
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((a) => {
-        this.valueChanged(this.selection.selected);
+        this.onChange(this.selection.selected);
+        this.playSelectChange.emit(this.selection.selected);
+        if (!this.multiple) {
+          this.isOpen = false;
+        }
       });
   }
 
@@ -88,7 +95,7 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   onTouched: any = () => ({});
 
   writeValue(value: any): void {
-    this.playOptionService.toggleSelection(value);
+    this.toggleOption(value);
   }
 
   registerOnChange(onChange: any): void {
@@ -99,18 +106,13 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     this.onTouched = onTouched;
   }
 
-  valueChanged(value: any[]) {
-    this.onChange(value);
-    this.playSelectChange.emit(value);
-    if (!this.multiple) {
-      this.isOpen = false;
+  toggleOption(option: any) {
+    if (this.multiple) {
+      this.selection.toggle(option);
+    } else {
+      this.selection.setSelection(option);
     }
-    this.cdr.detectChanges();
   }
 
-  constructor(
-    public elRef: ElementRef<HTMLElement>,
-    private cdr: ChangeDetectorRef,
-    private playOptionService: PlayOptionService
-  ) {}
+  constructor(public elRef: ElementRef<HTMLElement>) {}
 }

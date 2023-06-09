@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PlaySelectOptionComponent } from '../play-select-option.component';
 import { PlaySelectComponent } from '../play-select.component';
 
 @Component({
@@ -10,12 +9,7 @@ import { PlaySelectComponent } from '../play-select.component';
   styleUrls: ['./play-select-showcase.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    PlaySelectComponent,
-    PlaySelectOptionComponent,
-  ],
+  imports: [CommonModule, ReactiveFormsModule, PlaySelectComponent],
 })
 export class PlaySelectShowcaseComponent {
   animalOptions = [

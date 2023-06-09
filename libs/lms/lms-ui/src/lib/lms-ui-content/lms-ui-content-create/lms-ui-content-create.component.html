@@ -17,8 +17,8 @@
   <play-card-header>Create New Content</play-card-header>
   <play-card-body [formGroup]="form">
     <play-select formControlName="content_type">
-      <play-select-option value="VIDEO">Video</play-select-option>
-      <play-select-option value="SLIDE">Slide</play-select-option>
+      <!-- <play-select-option value="VIDEO">Video</play-select-option>
+      <play-select-option value="SLIDE">Slide</play-select-option> -->
     </play-select>
     <ng-container
       *ngIf="form.value.content_type === 'VIDEO'"

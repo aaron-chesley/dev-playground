@@ -24,7 +24,6 @@ import {
   PlayFormFieldLabelComponent,
   PlayInputTextComponent,
   PlaySelectComponent,
-  PlaySelectOptionComponent,
 } from '@playground/play-ui';
 
 interface LmsUiContentCreateForm {
@@ -64,7 +63,6 @@ interface LmsUiContentCreateForm {
     PlayFormFieldLabelComponent,
     PlayInputTextComponent,
     PlaySelectComponent,
-    PlaySelectOptionComponent,
   ],
 })
 export class LmsUiContentCreateComponent {
