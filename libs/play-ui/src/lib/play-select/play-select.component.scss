@@ -29,6 +29,8 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow-y: auto;
+  max-height: 300px;
   border: solid 1px #a6a6a6;
   border-top: none;
   border-bottom-left-radius: 4px;
