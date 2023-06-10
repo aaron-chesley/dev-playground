@@ -2,14 +2,14 @@
 :root {
   /* Colors */
   /* https://hypejunction.github.io/color-wizard/ */
-  --play-primary-color-base: 208;
+  --play-primary-color-base: 0;
   --play-primary-color-darkest: hsl(var(--play-primary-color-base), 80%, 23%);
   --play-primary-color-darker: hsl(var(--play-primary-color-base), 80%, 41%);
   --play-primary-color: hsl(var(--play-primary-color-base), 80%, 50%);
   --play-primary-color-lighter: hsl(var(--play-primary-color-base), 80%, 77%);
   --play-primary-color-lightest: hsl(var(--play-primary-color-base), 80%, 94%);
 
-  --play-accent-color-base: 24;
+  --play-accent-color-base: 210;
   --play-accent-color-darkest: hsl(var(--play-accent-color-base), 80%, 23%);
   --play-accent-color-darker: hsl(var(--play-accent-color-base), 80%, 41%);
   --play-accent-color: hsl(var(--play-accent-color-base), 80%, 50%);
