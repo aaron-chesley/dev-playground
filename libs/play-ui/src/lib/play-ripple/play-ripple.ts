@@ -10,7 +10,7 @@ export class PlayRippleDirective {
     private playRippleService: PlayRippleService
   ) {}
 
-  @HostListener('click', ['$event'])
+  @HostListener('mousedown', ['$event'])
   onClick(event: MouseEvent) {
     const ripple = this.renderer.createElement('div');
     this.renderer.addClass(ripple, 'ripple');
