@@ -1,24 +1,34 @@
-import { HostListener } from '@angular/core';
+import { ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { Directive } from '@angular/core';
 
 @Directive({ selector: '[playRipple]', standalone: true })
 export class PlayRippleDirective {
-  @HostListener('mousedown', ['$event']) myClick(event: MouseEvent) {
-    const element = event.currentTarget as HTMLElement;
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
 
-    const circle = document.createElement('span');
-    const diameter = Math.max(element.clientWidth, element.clientHeight);
-    const radius = diameter / 2;
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent) {
+    const ripple = this.renderer.createElement('div');
+    this.renderer.addClass(ripple, 'ripple');
 
-    circle.style.width = circle.style.height = `${diameter}px`;
-    circle.style.left = `${event.clientX - (element.offsetLeft + radius)}px`;
-    circle.style.top = `${event.clientY - (element.offsetTop + radius)}px`;
-    circle.classList.add('ripple');
-    const ripple = element.getElementsByClassName('ripple')[0];
-    if (ripple) {
-      ripple.remove();
-    }
+    const rect = this.elementRef.nativeElement.getBoundingClientRect();
+    const size = Math.max(
+      this.elementRef.nativeElement.clientWidth,
+      this.elementRef.nativeElement.clientHeight
+    );
 
-    element.appendChild(circle);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+
+    this.renderer.setStyle(ripple, 'left', `${x}px`);
+    this.renderer.setStyle(ripple, 'top', `${y}px`);
+    this.renderer.setStyle(ripple, 'width', `${size}px`);
+    this.renderer.setStyle(ripple, 'height', `${size}px`);
+
+    this.renderer.appendChild(this.elementRef.nativeElement, ripple);
+
+    this.renderer.addClass(ripple, 'ripple-effect');
+    setTimeout(() => {
+      this.renderer.removeChild(this.elementRef.nativeElement, ripple);
+    }, 1000);
   }
 }

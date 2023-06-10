@@ -16,7 +16,6 @@ import {
 import { PlayRippleDirective } from '../play-ripple/play-ripple';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'button[playButton]',
   templateUrl: './play-button.component.html',
   styleUrls: ['./play-button.component.scss'],
