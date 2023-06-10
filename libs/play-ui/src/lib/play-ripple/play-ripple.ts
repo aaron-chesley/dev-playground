@@ -1,9 +1,14 @@
 import { ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { Directive } from '@angular/core';
+import { PlayRippleService } from './play-ripple.service';
 
 @Directive({ selector: '[playRipple]', standalone: true })
 export class PlayRippleDirective {
-  constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
+  constructor(
+    private elementRef: ElementRef,
+    private renderer: Renderer2,
+    private playRippleService: PlayRippleService
+  ) {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
