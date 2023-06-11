@@ -14,12 +14,7 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import {
-  AsyncPipe,
-  CommonModule,
-  NgIf,
-  NgTemplateOutlet,
-} from '@angular/common';
+import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
 import {
   ControlValueAccessor,
   FormControl,
@@ -29,6 +24,7 @@ import {
 import { OverlayModule } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectionModel } from '@angular/cdk/collections';
+import { shareReplay } from 'rxjs/operators';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PlayInputTextComponent } from '../play-input-text/play-input-text.component';
@@ -65,6 +61,9 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder = '';
   @Input() multiple = false;
   @Input() options: any[] = [];
+  @Input() itemSize = 29.2;
+  @Input() maxViewportHeight = 200;
+  @Input() showSearch = false;
   @Output() playSelectChange = new EventEmitter<any>();
 
   isOpen = false;
@@ -72,6 +71,7 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   destroyRef = inject(DestroyRef);
   searchCtrl = new FormControl('');
   filteredOptions$: Observable<any[]>;
+  viewportHeight$: Observable<number>;
 
   @ContentChild(TemplateRef) template: TemplateRef<any>;
 
@@ -114,6 +114,19 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
           );
         }
         return this.options;
+      }),
+      shareReplay(1)
+    );
+
+    this.viewportHeight$ = this.filteredOptions$.pipe(
+      map((options) => {
+        const margin = 1;
+        const padding = 10;
+        // parseFloat(getComputedStyle(parentElement).fontSize);
+        const height = options.length * this.itemSize;
+        return height + margin + padding > this.maxViewportHeight
+          ? this.maxViewportHeight
+          : height + margin + padding;
       })
     );
   }
