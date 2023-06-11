@@ -14,13 +14,25 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AsyncPipe,
+  CommonModule,
+  NgIf,
+  NgTemplateOutlet,
+} from '@angular/common';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PlayInputTextComponent } from '../play-input-text/play-input-text.component';
+import { Observable, debounceTime, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'play-select',
@@ -30,10 +42,14 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   standalone: true,
   encapsulation: ViewEncapsulation.None,
   imports: [
-    CommonModule,
+    AsyncPipe,
+    NgTemplateOutlet,
+    NgIf,
+    ReactiveFormsModule,
     OverlayModule,
-    PlayCheckboxComponent,
     ScrollingModule,
+    PlayCheckboxComponent,
+    PlayInputTextComponent,
   ],
   providers: [
     {
@@ -54,6 +70,8 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   isOpen = false;
   selection: SelectionModel<any> = new SelectionModel<any>(true, []);
   destroyRef = inject(DestroyRef);
+  searchCtrl = new FormControl('');
+  filteredOptions$: Observable<any[]>;
 
   @ContentChild(TemplateRef) template: TemplateRef<any>;
 
@@ -82,19 +100,22 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit() {
-    if (this.value !== null && this.value !== undefined) {
+    if (this.value !== undefined && this.value !== null) {
       this.toggleOption(this.value);
     }
 
-    this.selection.changed
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((a) => {
-        this.onChange(this.selection.selected);
-        this.playSelectChange.emit(this.selection.selected);
-        if (!this.multiple) {
-          this.isOpen = false;
+    this.filteredOptions$ = this.searchCtrl.valueChanges.pipe(
+      debounceTime(300),
+      startWith(''),
+      map((value) => {
+        if (value) {
+          return this.options.filter((option) =>
+            option.toLowerCase().includes(value.toLowerCase())
+          );
         }
-      });
+        return this.options;
+      })
+    );
   }
 
   onChange: any = () => ({});
@@ -117,7 +138,10 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
       this.selection.toggle(option);
     } else {
       this.selection.setSelection(option);
+      this.isOpen = false;
     }
+    this.onChange(this.selection.selected);
+    this.playSelectChange.emit(this.selection.selected);
   }
 
   constructor(public elRef: ElementRef<HTMLElement>) {}

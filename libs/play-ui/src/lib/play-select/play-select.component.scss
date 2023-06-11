@@ -50,6 +50,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  min-height: 29px;
   max-height: 300px;
   border: solid 1px #a6a6a6;
   border-top: none;
@@ -60,18 +61,28 @@
   padding: 5px 0px;
   box-sizing: border-box;
   // *** Cdk related overrides ***//
-  contain: unset !important;
+  // contain: unset !important;
   // **************************** //
   @include mixins.play-scrollbar;
 
-  .cdk-virtual-scroll-content-wrapper {
-    display: flex;
-    flex-direction: column;
+  // .cdk-virtual-scroll-content-wrapper {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+
+  .play-select-search-input {
+    width: 100%;
+    border: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin: 10px 0px 5px 0px;
+    box-sizing: border-box;
   }
 
   .play-select-option {
     display: inline-flex;
     padding: 5px;
+    width: 100%;
     cursor: pointer;
     box-sizing: border-box;
 

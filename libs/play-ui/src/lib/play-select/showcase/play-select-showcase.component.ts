@@ -12,7 +12,9 @@ import { PlaySelectComponent } from '../play-select.component';
   imports: [CommonModule, ReactiveFormsModule, PlaySelectComponent],
 })
 export class PlaySelectShowcaseComponent {
-  animalOptions = getRandomStringArray(5000);
+  animalOptions = Array(100000)
+    .fill(0)
+    .map((_, i) => `Item # ${i}`);
   favoriteAnimal = new FormControl(
     { value: this.animalOptions[0], disabled: false },
     { validators: [Validators.required] }
@@ -24,15 +26,4 @@ export class PlaySelectShowcaseComponent {
   onPlaySelectChange(event: string) {
     this.favoriteFruit = event;
   }
-}
-
-function getRandomStringArray(num: number): string[] {
-  const arr: string[] = [];
-  while (arr.length < num) {
-    const str = Math.random().toString(10).substr(2, 10);
-    if (!arr.includes(str)) {
-      arr.push(str);
-    }
-  }
-  return arr;
 }

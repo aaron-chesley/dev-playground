@@ -24,9 +24,16 @@
     itemSize="29.2"
     class="play-select-list"
   >
+    <input
+      class="play-select-search-input"
+      playInputText
+      [formControl]="searchCtrl"
+      type="text"
+      placeholder="Search..."
+    />
     <ng-container *ngIf="multiple; else singleValueTemplate">
       <li
-        *cdkVirtualFor="let option of options"
+        *cdkVirtualFor="let option of filteredOptions$ | async"
         class="play-select-option"
         (click)="toggleOption(option)"
       >
@@ -41,7 +48,7 @@
 
     <ng-template #singleValueTemplate>
       <li
-        *cdkVirtualFor="let option of options"
+        *cdkVirtualFor="let option of filteredOptions$ | async"
         class="play-select-option"
         [class.play-select-option-active]="selection.isSelected(option)"
         (click)="toggleOption(option)"
