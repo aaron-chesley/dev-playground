@@ -32,34 +32,36 @@
       [itemSize]="itemSize"
       class="play-select-list"
     >
-      <ng-container *ngIf="multiple; else singleValueTemplate">
-        <li
-          *cdkVirtualFor="let option of filteredOptions$ | async"
-          class="play-select-option"
-          (click)="toggleOption(option)"
-        >
-          <play-checkbox [checked]="selection.isSelected(option)">
+      <ul>
+        <ng-container *ngIf="multiple; else singleValueTemplate">
+          <li
+            *cdkVirtualFor="let option of filteredOptions$ | async"
+            class="play-select-option"
+            (click)="toggleOption(option)"
+          >
+            <play-checkbox [checked]="selection.isSelected(option)">
+              <template
+                [ngTemplateOutlet]="template"
+                [ngTemplateOutletContext]="{ $implicit: option }"
+              ></template>
+            </play-checkbox>
+          </li>
+        </ng-container>
+
+        <ng-template #singleValueTemplate>
+          <li
+            *cdkVirtualFor="let option of filteredOptions$ | async"
+            class="play-select-option"
+            [class.play-select-option-active]="selection.isSelected(option)"
+            (click)="toggleOption(option)"
+          >
             <template
               [ngTemplateOutlet]="template"
               [ngTemplateOutletContext]="{ $implicit: option }"
             ></template>
-          </play-checkbox>
-        </li>
-      </ng-container>
-
-      <ng-template #singleValueTemplate>
-        <li
-          *cdkVirtualFor="let option of filteredOptions$ | async"
-          class="play-select-option"
-          [class.play-select-option-active]="selection.isSelected(option)"
-          (click)="toggleOption(option)"
-        >
-          <template
-            [ngTemplateOutlet]="template"
-            [ngTemplateOutletContext]="{ $implicit: option }"
-          ></template>
-        </li>
-      </ng-template>
+          </li>
+        </ng-template>
+      </ul>
     </cdk-virtual-scroll-viewport>
   </div>
 </ng-template>

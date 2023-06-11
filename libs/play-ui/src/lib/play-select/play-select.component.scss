@@ -70,6 +70,10 @@
     .cdk-virtual-scroll-content-wrapper {
       padding: 5px 0px;
       box-sizing: border-box;
+
+      ul {
+        padding: 0px;
+      }
     }
 
     .play-select-option {
