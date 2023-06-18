@@ -26,7 +26,6 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectionModel } from '@angular/cdk/collections';
 import { shareReplay, take } from 'rxjs/operators';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
@@ -37,6 +36,12 @@ import {
 import { PlayInputTextComponent } from '../play-input-text/play-input-text.component';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { A11yModule } from '@angular/cdk/a11y';
+
+const isNumberOrLetterOrBackspaceKey = (event: KeyboardEvent): boolean => {
+  const key = event.key;
+  const letterOrNumberRegex = /^[a-zA-Z0-9]$/;
+  return letterOrNumberRegex.test(key) || key === 'Backspace';
+};
 
 @Component({
   selector: 'play-select',
@@ -77,7 +82,6 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
 
   isOpen = false;
   selection: SelectionModel<any> = new SelectionModel<any>(true, []);
-  destroyRef = inject(DestroyRef);
   searchCtrl = new FormControl('');
   filteredOptions$: Observable<any[]>;
   viewportHeight$: Observable<number>;
@@ -196,8 +200,10 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   }
 
   onOverlayKeydown(event: KeyboardEvent) {
-    // event  .preventDefault();
-    event.stopImmediatePropagation();
+    if (isNumberOrLetterOrBackspaceKey(event)) {
+      return;
+    }
+
     if (event.key === 'ArrowDown') {
       this.focusNextOption();
     } else if (event.key === 'ArrowUp') {
@@ -210,6 +216,7 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
         this.toggleOption(this.options[index]);
       }
     }
+    event.preventDefault();
   }
 
   private focusNextOption() {

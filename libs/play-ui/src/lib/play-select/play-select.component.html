@@ -37,6 +37,7 @@
       [style.height.px]="viewportHeight$ | async"
       [itemSize]="itemSize"
       class="play-select-list"
+      [style.margin-top.px]="showSearch ? 0 : 1"
     >
       <ul #visibleScrollViewport>
         <li
