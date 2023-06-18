@@ -6,9 +6,12 @@
   [disabled]="disabled"
   cdkOverlayOrigin
   #trigger="cdkOverlayOrigin"
+  onselectstart="return false;"
+  onfocus="this.selectionStart = this.selectionEnd = -1;"
 />
 
 <ng-template
+  #overlayTemplate="cdkConnectedOverlay"
   cdkConnectedOverlay
   cdkConnectedOverlayHasBackdrop="true"
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
@@ -16,7 +19,9 @@
   [cdkConnectedOverlayOpen]="isOpen"
   [cdkConnectedOverlayWidth]="elRef.nativeElement.getBoundingClientRect().width"
   [cdkConnectedOverlayOffsetX]="-1"
+  (attach)="onOverlayAttach()"
   (backdropClick)="isOpen = false"
+  (overlayKeydown)="onOverlayKeydown($event)"
 >
   <div class="play-virtual-scroll-wrapper">
     <input
@@ -28,39 +33,40 @@
       placeholder="Search..."
     />
     <cdk-virtual-scroll-viewport
+      #virtualScrollViewport
       [style.height.px]="viewportHeight$ | async"
       [itemSize]="itemSize"
       class="play-select-list"
     >
-      <ul>
-        <ng-container *ngIf="multiple; else singleValueTemplate">
-          <li
-            *cdkVirtualFor="let option of filteredOptions$ | async"
-            class="play-select-option"
-            (click)="toggleOption(option)"
-          >
-            <play-checkbox [checked]="selection.isSelected(option)">
-              <template
-                [ngTemplateOutlet]="template"
-                [ngTemplateOutletContext]="{ $implicit: option }"
-              ></template>
-            </play-checkbox>
-          </li>
-        </ng-container>
-
-        <ng-template #singleValueTemplate>
-          <li
-            *cdkVirtualFor="let option of filteredOptions$ | async"
-            class="play-select-option"
-            [class.play-select-option-active]="selection.isSelected(option)"
-            (click)="toggleOption(option)"
+      <ul #visibleScrollViewport>
+        <li
+          *cdkVirtualFor="let option of filteredOptions$ | async; let i = index"
+          #listOptionRefs
+          class="play-select-option"
+          [class.play-select-option-active]="
+            !multiple && selection.isSelected(option)
+          "
+          (click)="toggleOption(option)"
+          [attr.index]="i"
+          tabindex="0"
+        >
+          <play-checkbox
+            *ngIf="multiple; else singleValueTemplate"
+            [checked]="selection.isSelected(option)"
           >
             <template
               [ngTemplateOutlet]="template"
               [ngTemplateOutletContext]="{ $implicit: option }"
             ></template>
-          </li>
-        </ng-template>
+          </play-checkbox>
+
+          <ng-template #singleValueTemplate>
+            <template
+              [ngTemplateOutlet]="template"
+              [ngTemplateOutletContext]="{ $implicit: option }"
+            ></template>
+          </ng-template>
+        </li>
       </ul>
     </cdk-virtual-scroll-viewport>
   </div>

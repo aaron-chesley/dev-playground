@@ -13,22 +13,30 @@ import {
   ContentChild,
   TemplateRef,
   ViewEncapsulation,
+  ViewChildren,
+  QueryList,
+  ViewChild,
+  Inject,
 } from '@angular/core';
-import { AsyncPipe, NgIf, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgIf, NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { OverlayModule } from '@angular/cdk/overlay';
+import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SelectionModel } from '@angular/cdk/collections';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, take } from 'rxjs/operators';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
-import { ScrollingModule } from '@angular/cdk/scrolling';
+import {
+  CdkVirtualScrollViewport,
+  ScrollingModule,
+} from '@angular/cdk/scrolling';
 import { PlayInputTextComponent } from '../play-input-text/play-input-text.component';
 import { Observable, debounceTime, map, startWith } from 'rxjs';
+import { A11yModule } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'play-select',
@@ -43,6 +51,7 @@ import { Observable, debounceTime, map, startWith } from 'rxjs';
     NgIf,
     ReactiveFormsModule,
     OverlayModule,
+    A11yModule,
     ScrollingModule,
     PlayCheckboxComponent,
     PlayInputTextComponent,
@@ -72,8 +81,17 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   searchCtrl = new FormControl('');
   filteredOptions$: Observable<any[]>;
   viewportHeight$: Observable<number>;
+  isFocused = false;
 
   @ContentChild(TemplateRef) template: TemplateRef<any>;
+  @ViewChildren('listOptionRefs') listOptionRefs: QueryList<
+    ElementRef<HTMLElement>
+  >;
+  @ViewChild('overlayTemplate', { static: true }) overlayTemplate: OverlayRef;
+  @ViewChild('virtualScrollViewport', { static: false })
+  virtualScrollViewport: CdkVirtualScrollViewport;
+  @ViewChild('visibleScrollViewport', { static: false })
+  visibleScrollViewport: ElementRef<HTMLElement>;
 
   @HostBinding('class') className = 'play-select';
   @HostBinding('class.open') get isOpenClass() {
@@ -82,14 +100,27 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @HostBinding('class.disabled') get disabledClass() {
     return this.disabled;
   }
-  @HostListener('click', ['$event']) click() {
-    this.isOpen = !this.isOpen;
+  @HostListener('click', ['$event'])
+  @HostListener('window:keydown.enter', ['$event'])
+  @HostListener('window:keydown.space', ['$event'])
+  click() {
+    if (this.isFocused) {
+      this.isOpen = !this.isOpen;
+    }
   }
+  @HostListener('focusin', ['$event.target.value']) onFocusin() {
+    this.isFocused = true;
+  }
+
   @HostListener('focusout', ['$event.target.value'])
   onFocusout() {
+    this.isFocused = false;
     setTimeout(() => {
       this.onTouched();
     });
+  }
+  @HostListener('window:keydown.tab', ['$event']) onTab() {
+    this.isOpen = false;
   }
 
   get label(): string {
@@ -157,5 +188,74 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     this.playSelectChange.emit(this.selection.selected);
   }
 
-  constructor(public elRef: ElementRef<HTMLElement>) {}
+  onOverlayAttach() {
+    // Do nothing.
+    // setTimeout(() => {
+    //   this.listOptionRefs.first.nativeElement.focus();
+    // });
+  }
+
+  onOverlayKeydown(event: KeyboardEvent) {
+    // event  .preventDefault();
+    event.stopImmediatePropagation();
+    if (event.key === 'ArrowDown') {
+      this.focusNextOption();
+    } else if (event.key === 'ArrowUp') {
+      this.focusPreviousOption();
+    } else if (event.key === 'Enter' || event.key === ' ') {
+      const index: number = parseInt(
+        this.document.activeElement.getAttribute('index')
+      );
+      if (index >= 0) {
+        this.toggleOption(this.options[index]);
+      }
+    }
+  }
+
+  private focusNextOption() {
+    if (
+      this.visibleScrollViewport.nativeElement.contains(
+        this.document.activeElement
+      )
+    ) {
+      const nextElement = this.document.activeElement
+        .nextElementSibling as HTMLElement;
+      if (nextElement) {
+        nextElement.focus();
+      } else {
+        this.virtualScrollViewport.scrollToIndex(0);
+      }
+    } else {
+      (
+        this.visibleScrollViewport.nativeElement
+          .firstElementChild as HTMLElement
+      ).focus();
+    }
+  }
+
+  private focusPreviousOption() {
+    if (
+      this.visibleScrollViewport.nativeElement.contains(
+        this.document.activeElement
+      )
+    ) {
+      const previousElement = this.document.activeElement
+        .previousElementSibling as HTMLElement;
+      if (previousElement) {
+        previousElement.focus();
+      } else {
+        this.virtualScrollViewport.scrollToIndex(this.options.length - 1);
+      }
+    } else {
+      (
+        this.visibleScrollViewport.nativeElement
+          .firstElementChild as HTMLElement
+      ).focus();
+    }
+  }
+
+  constructor(
+    public elRef: ElementRef<HTMLElement>,
+    @Inject(DOCUMENT) private document: Document
+  ) {}
 }

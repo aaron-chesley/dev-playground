@@ -23,6 +23,10 @@
     background-position: right;
     text-overflow: ellipsis;
   }
+  &:hover:not(.play-select-disabled),
+  &:focus-within:not(.play-select-disabled) {
+    border-color: var(--play-primary-color);
+  }
 }
 
 .play-select.open {
@@ -82,12 +86,17 @@
       width: 100%;
       cursor: pointer;
       box-sizing: border-box;
+      outline: none;
 
       .play-checkbox {
         flex: 1;
       }
 
       &:hover:not(.play-select-option-active) {
+        background-color: var(--play-primary-color-lightest);
+      }
+
+      &:focus:not(.play-select-option-active) {
         background-color: var(--play-primary-color-lightest);
       }
 
