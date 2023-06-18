@@ -1,9 +1,9 @@
 <div style="display: flex; gap: 50px; padding: 25px">
   <div style="display: flex; flex-direction: column; gap: 25px; width: 14em">
     <play-select
-      [formControl]="favoriteAnimal"
+      [formControl]="favoriteItems"
       [multiple]="true"
-      [options]="animalOptions"
+      [options]="itemOptions"
       [showSearch]="true"
     >
       <ng-template let-option template="option">
@@ -11,13 +11,13 @@
       </ng-template>
     </play-select>
 
-    <span>Reactive Forms: {{ favoriteAnimal.value }}</span>
+    <span>Reactive Forms: {{ favoriteItems.value }}</span>
   </div>
 
   <div style="display: flex; flex-direction: column; gap: 25px; width: 14em">
     <play-select
       [value]="favoriteFruit"
-      (playSelectChange)="onPlaySelectChange($event)"
+      (playSelectChange)="onFruitPlaySelectChange($event)"
       [options]="fruitOptions"
     >
       <ng-template let-option template="option">
@@ -30,15 +30,15 @@
 
   <div style="display: flex; flex-direction: column; gap: 25px; width: 14em">
     <play-select
-      [value]="favoriteFruit"
-      (playSelectChange)="onPlaySelectChange($event)"
-      [options]="fruitOptions.slice(0, 1)"
+      [value]="favoriteAnimal"
+      (playSelectChange)="onAnimalPlaySelectChange($event)"
+      [options]="animalOptions"
     >
       <ng-template let-option template="option">
         {{ option }}
       </ng-template>
     </play-select>
 
-    <span>Standard: {{ favoriteFruit }}</span>
+    <span>Standard: {{ favoriteAnimal }}</span>
   </div>
 </div>

@@ -12,18 +12,25 @@ import { PlaySelectComponent } from '../play-select.component';
   imports: [CommonModule, ReactiveFormsModule, PlaySelectComponent],
 })
 export class PlaySelectShowcaseComponent {
-  animalOptions = Array(100000)
+  itemOptions = Array(100000)
     .fill(0)
     .map((_, i) => `Item # ${i}`);
-  favoriteAnimal = new FormControl(
-    { value: this.animalOptions[0], disabled: false },
-    { validators: [Validators.required] }
+  favoriteItems = new FormControl(
+    { value: this.itemOptions[0], disabled: false }
+    // { validators: [Validators.required] }
   );
 
   fruitOptions = ['Apple', 'Banana', 'Orange', 'Grape'];
   favoriteFruit = this.fruitOptions[0];
 
-  onPlaySelectChange(event: string) {
+  animalOptions = ['Dog'];
+  favoriteAnimal = this.animalOptions[0];
+
+  onFruitPlaySelectChange(event: string) {
     this.favoriteFruit = event;
+  }
+
+  onAnimalPlaySelectChange(event: string) {
+    this.favoriteAnimal = event;
   }
 }

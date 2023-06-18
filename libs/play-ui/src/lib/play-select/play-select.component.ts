@@ -27,7 +27,7 @@ import {
 } from '@angular/forms';
 import { OverlayModule, OverlayRef } from '@angular/cdk/overlay';
 import { SelectionModel } from '@angular/cdk/collections';
-import { shareReplay, take } from 'rxjs/operators';
+import { shareReplay } from 'rxjs/operators';
 import { PlayCheckboxComponent } from '../play-checkbox/play-checkbox.component';
 import {
   CdkVirtualScrollViewport,
@@ -37,10 +37,13 @@ import { PlayInputTextComponent } from '../play-input-text/play-input-text.compo
 import { Observable, debounceTime, map, startWith } from 'rxjs';
 import { A11yModule } from '@angular/cdk/a11y';
 
-const isNumberOrLetterOrBackspaceKey = (event: KeyboardEvent): boolean => {
+const isValidHtmlInputValue = (event: KeyboardEvent): boolean => {
   const key = event.key;
-  const letterOrNumberRegex = /^[a-zA-Z0-9]$/;
-  return letterOrNumberRegex.test(key) || key === 'Backspace';
+  const validHtmlInputValuesRegex =
+    /^(?=.{1}$)[a-zA-Z0-9\s\-_"'.,:;!?()@#$%^&*+=<>{}\[\]\\/]$/;
+  return (
+    validHtmlInputValuesRegex.test(key) || key === 'Backspace' || key === ' '
+  );
 };
 
 @Component({
@@ -70,6 +73,13 @@ const isNumberOrLetterOrBackspaceKey = (event: KeyboardEvent): boolean => {
   ],
 })
 export class PlaySelectComponent implements OnInit, ControlValueAccessor {
+  isOpen = false;
+  selection: SelectionModel<any> = new SelectionModel<any>(true, []);
+  searchCtrl = new FormControl('');
+  filteredOptions$: Observable<any[]>;
+  viewportHeight$: Observable<number>;
+  isFocused = false;
+
   @Input() value: any = null;
   @Input() disabled = false;
   @Input() placeholder = '';
@@ -78,24 +88,21 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @Input() itemSize = 29.2;
   @Input() maxViewportHeight = 200;
   @Input() showSearch = false;
+  @Input() filterFn = (option: any, searchTerm: string) => {
+    return option.toLowerCase().includes(searchTerm.toLowerCase());
+  };
+  @Input() searchDebounceTime = 300;
   @Output() playSelectChange = new EventEmitter<any>();
 
-  isOpen = false;
-  selection: SelectionModel<any> = new SelectionModel<any>(true, []);
-  searchCtrl = new FormControl('');
-  filteredOptions$: Observable<any[]>;
-  viewportHeight$: Observable<number>;
-  isFocused = false;
-
   @ContentChild(TemplateRef) template: TemplateRef<any>;
-  @ViewChildren('listOptionRefs') listOptionRefs: QueryList<
-    ElementRef<HTMLElement>
-  >;
   @ViewChild('overlayTemplate', { static: true }) overlayTemplate: OverlayRef;
   @ViewChild('virtualScrollViewport', { static: false })
   virtualScrollViewport: CdkVirtualScrollViewport;
   @ViewChild('visibleScrollViewport', { static: false })
   visibleScrollViewport: ElementRef<HTMLElement>;
+  @ViewChildren('listOptionRefs') listOptionRefs: QueryList<
+    ElementRef<HTMLElement>
+  >;
 
   @HostBinding('class') className = 'play-select';
   @HostBinding('class.open') get isOpenClass() {
@@ -104,26 +111,26 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   @HostBinding('class.disabled') get disabledClass() {
     return this.disabled;
   }
-  @HostListener('click', ['$event'])
-  @HostListener('window:keydown.enter', ['$event'])
-  @HostListener('window:keydown.space', ['$event'])
+  @HostListener('click')
+  @HostListener('window:keydown.enter')
+  @HostListener('window:keydown.space')
   click() {
     if (this.isFocused) {
       this.isOpen = !this.isOpen;
     }
   }
-  @HostListener('focusin', ['$event.target.value']) onFocusin() {
+  @HostListener('focusin') onFocusin() {
     this.isFocused = true;
   }
 
-  @HostListener('focusout', ['$event.target.value'])
+  @HostListener('focusout')
   onFocusout() {
     this.isFocused = false;
     setTimeout(() => {
       this.onTouched();
     });
   }
-  @HostListener('window:keydown.tab', ['$event']) onTab() {
+  @HostListener('window:keydown.tab') onTab() {
     this.isOpen = false;
   }
 
@@ -140,13 +147,11 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     }
 
     this.filteredOptions$ = this.searchCtrl.valueChanges.pipe(
-      debounceTime(300),
+      debounceTime(this.searchDebounceTime),
       startWith(''),
       map((value) => {
         if (value) {
-          return this.options.filter((option) =>
-            option.toLowerCase().includes(value.toLowerCase())
-          );
+          return this.options.filter((option) => this.filterFn(option, value));
         }
         return this.options;
       }),
@@ -193,14 +198,13 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   }
 
   onOverlayAttach() {
-    // Do nothing.
-    // setTimeout(() => {
-    //   this.listOptionRefs.first.nativeElement.focus();
-    // });
+    setTimeout(() => {
+      this.listOptionRefs.first.nativeElement.focus();
+    });
   }
 
   onOverlayKeydown(event: KeyboardEvent) {
-    if (isNumberOrLetterOrBackspaceKey(event)) {
+    if (isValidHtmlInputValue(event)) {
       return;
     }
 
@@ -255,8 +259,7 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
       }
     } else {
       (
-        this.visibleScrollViewport.nativeElement
-          .firstElementChild as HTMLElement
+        this.visibleScrollViewport.nativeElement.lastElementChild as HTMLElement
       ).focus();
     }
   }
