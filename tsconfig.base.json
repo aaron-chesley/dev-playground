@@ -24,12 +24,6 @@
       "@playground/cardly-ui": ["libs/cardly/cardly-ui/src/index.ts"],
       "@playground/cardly-util": ["libs/cardly/cardly-util/src/index.ts"],
       "@playground/environment": ["libs/environment/src/index.ts"],
-      "@playground/kalshi-data": ["libs/kalshi/kalshi-data/src/index.ts"],
-      "@playground/kalshi-features": [
-        "libs/kalshi/kalshi-features/src/index.ts"
-      ],
-      "@playground/kalshi-ui": ["libs/kalshi/kalshi-ui/src/index.ts"],
-      "@playground/kalshi-util": ["libs/kalshi/kalshi-util/src/index.ts"],
       "@playground/lms-data": ["libs/lms/lms-data/src/index.ts"],
       "@playground/lms-features": ["libs/lms/lms-features/src/index.ts"],
       "@playground/lms-ui": ["libs/lms/lms-ui/src/index.ts"],
