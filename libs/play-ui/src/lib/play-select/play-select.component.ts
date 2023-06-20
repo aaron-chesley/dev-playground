@@ -8,8 +8,6 @@ import {
   HostBinding,
   ElementRef,
   OnInit,
-  inject,
-  DestroyRef,
   ContentChild,
   TemplateRef,
   ViewEncapsulation,
@@ -203,64 +201,67 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     });
   }
 
+  get activeElement(): HTMLElement | null {
+    return this.document.activeElement as HTMLElement;
+  }
+
+  get nextSiblingElement(): HTMLElement | null {
+    return this.activeElement.nextElementSibling as HTMLElement;
+  }
+
+  get previousSiblingElement(): HTMLElement | null {
+    return this.activeElement.previousElementSibling as HTMLElement;
+  }
+
+  get activeElementIndex(): number {
+    return parseInt(this.activeElement.getAttribute('index'));
+  }
+
   onOverlayKeydown(event: KeyboardEvent) {
-    if (isValidHtmlInputValue(event)) {
-      return;
-    }
-
-    if (event.key === 'ArrowDown') {
-      this.focusNextOption();
-    } else if (event.key === 'ArrowUp') {
-      this.focusPreviousOption();
-    } else if (event.key === 'Enter' || event.key === ' ') {
-      const index: number = parseInt(
-        this.document.activeElement.getAttribute('index')
-      );
-      if (index >= 0) {
-        this.toggleOption(this.options[index]);
-      }
-    }
+    if (isValidHtmlInputValue(event)) return;
     event.preventDefault();
-  }
-
-  private focusNextOption() {
-    if (
-      this.visibleScrollViewport.nativeElement.contains(
-        this.document.activeElement
-      )
-    ) {
-      const nextElement = this.document.activeElement
-        .nextElementSibling as HTMLElement;
-      if (nextElement) {
-        nextElement.focus();
-      } else {
-        this.virtualScrollViewport.scrollToIndex(0);
-      }
-    } else {
-      (
-        this.visibleScrollViewport.nativeElement
-          .firstElementChild as HTMLElement
-      ).focus();
+    event.stopPropagation();
+    if (event.key === 'ArrowDown') {
+      this.listOptionRefs.first.nativeElement.focus();
+    } else if (event.key === 'ArrowUp') {
+      this.listOptionRefs.last.nativeElement.focus();
+    } else if (event.key === 'Tab' || event.key === 'Escape') {
+      this.isOpen = false;
     }
   }
 
-  private focusPreviousOption() {
-    if (
-      this.visibleScrollViewport.nativeElement.contains(
-        this.document.activeElement
-      )
-    ) {
-      const previousElement = this.document.activeElement
-        .previousElementSibling as HTMLElement;
-      if (previousElement) {
-        previousElement.focus();
+  onVirtualScrollKeydown(event: KeyboardEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.visibleScrollViewport.nativeElement.contains(this.activeElement)) {
+      if (event.key === 'ArrowDown') {
+        if (this.activeElementIndex === this.options.length - 1) {
+          this.virtualScrollViewport.scrollToIndex(0);
+        } else {
+          this.nextSiblingElement.focus();
+        }
+      } else if (event.key === 'ArrowUp') {
+        if (this.activeElementIndex === 0) {
+          this.virtualScrollViewport.scrollToIndex(this.options.length - 1);
+        } else {
+          this.previousSiblingElement.focus();
+        }
+      } else if (event.key === 'Enter' || event.key === ' ') {
+        const index: number = parseInt(
+          this.document.activeElement.getAttribute('index')
+        );
+        if (index > -1) {
+          this.toggleOption(this.options[index]);
+        } else {
+          console.log('unhandled flow 1');
+        }
+      } else if (event.key === 'Tab' || event.key === 'Escape') {
+        this.isOpen = false;
       } else {
-        this.virtualScrollViewport.scrollToIndex(this.options.length - 1);
+        console.log('unhandled flow 2');
       }
     } else {
-      (
-        this.visibleScrollViewport.nativeElement.lastElementChild as HTMLElement
-      ).focus();
+      console.log('unhandled flow 3');
     }
   }
 

@@ -38,6 +38,7 @@
       [itemSize]="itemSize"
       class="play-select-list"
       [style.margin-top.px]="showSearch ? 0 : 1"
+      (keydown)="onVirtualScrollKeydown($event)"
     >
       <ul #visibleScrollViewport>
         <li
