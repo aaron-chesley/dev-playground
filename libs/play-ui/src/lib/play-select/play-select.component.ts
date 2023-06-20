@@ -139,6 +139,10 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
     return this.selection.selected[0];
   }
 
+  get overlayWidth(): number {
+    return this.elRef.nativeElement.getBoundingClientRect().width;
+  }
+
   ngOnInit() {
     if (this.value !== undefined && this.value !== null) {
       this.toggleOption(this.value);

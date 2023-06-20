@@ -17,7 +17,7 @@
   cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
   [cdkConnectedOverlayOrigin]="trigger"
   [cdkConnectedOverlayOpen]="isOpen"
-  [cdkConnectedOverlayWidth]="elRef.nativeElement.getBoundingClientRect().width"
+  [cdkConnectedOverlayWidth]="overlayWidth"
   [cdkConnectedOverlayOffsetX]="-1"
   (attach)="onOverlayAttach()"
   (backdropClick)="isOpen = false"
