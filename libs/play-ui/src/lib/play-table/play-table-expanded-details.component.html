@@ -1,0 +1,63 @@
+<cdk-table [dataSource]="dataSource" multiTemplateDataRows>
+  <ng-container
+    *ngFor="let column of columns; let columnIndex = index"
+    [cdkColumnDef]="column.key"
+    [sticky]="columnIndex === 0"
+  >
+    <cdk-header-cell *cdkHeaderCellDef> {{ column.label }} </cdk-header-cell>
+    <cdk-cell *cdkCellDef="let row">
+      <ng-container [ngSwitch]="column.key">
+        <ng-container *ngSwitchCase="'callInfo'">{{
+          row.callInfo
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'id'">{{ row.id }}</ng-container>
+        <ng-container *ngSwitchCase="'duration'">{{
+          row.duration
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'callingParty'">{{
+          row.callingParty
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'receivingParty'">{{
+          row.receivingParty
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'dnis'">{{ row.dnis }}</ng-container>
+        <ng-container *ngSwitchCase="'callerName'">{{
+          row.callerName
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'location'">{{
+          row.location
+        }}</ng-container>
+        <ng-container *ngSwitchCase="'group'">{{ row.group }}</ng-container>
+        <ng-container *ngSwitchCase="'skill'">{{ row.skill }}</ng-container>
+        <ng-container *ngSwitchCase="'startTimestamp'">{{
+          row.startTimestamp
+        }}</ng-container>
+        <div *ngSwitchDefault>Default Case</div>
+      </ng-container>
+    </cdk-cell>
+  </ng-container>
+
+  <!-- Secondary Column -->
+  <ng-container cdkColumnDef="secondary">
+    <cdk-cell
+      [style.display]="expandedRow === row ? 'table-cell' : 'none'"
+      [attr.colspan]="columns.length"
+      *cdkCellDef="let row"
+    >
+      <ng-container *ngIf="row.rows?.length > 0">
+        <play-table-expanded-details
+          [rows]="row.rows"
+          [columns]="columns"
+          [level]="level + 1"
+        ></play-table-expanded-details>
+      </ng-container>
+    </cdk-cell>
+  </ng-container>
+
+  <cdk-row
+    style="cursor: pointer"
+    *cdkRowDef="let row; columns: displayedColumns"
+    (click)="onRowClick(row)"
+  ></cdk-row>
+  <cdk-row *cdkRowDef="let row; columns: ['secondary']"></cdk-row>
+</cdk-table>
