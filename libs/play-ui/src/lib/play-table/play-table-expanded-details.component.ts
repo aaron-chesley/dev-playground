@@ -6,7 +6,14 @@ import {
   NgSwitchCase,
   NgSwitchDefault,
 } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { PlayTableColumn, PlayTableRow } from './play-table.interface';
 import { PlayTableDataSource } from './play-table.component';
 
@@ -27,7 +34,9 @@ import { PlayTableDataSource } from './play-table.component';
     NgFor,
   ],
 })
-export class PlayTableExpandedDetailsComponent implements OnInit {
+export class PlayTableExpandedDetailsComponent
+  implements OnInit, AfterViewInit
+{
   @Input() columns: PlayTableColumn[];
   @Input() rows: PlayTableRow[];
   @Input() level: number;
@@ -36,7 +45,14 @@ export class PlayTableExpandedDetailsComponent implements OnInit {
   expandedRow: PlayTableRow | null;
   ngOnInit() {
     this.dataSource.data.next(this.rows);
-    console.log('columns: ', this.columns);
+  }
+
+  ngAfterViewInit() {
+    this.elRef.nativeElement
+      .querySelectorAll('.cdk-column-callInfo')
+      .forEach((cell: any) => {
+        this.renderer.setStyle(cell, 'padding-left', `${this.level * 30}px`);
+      });
   }
 
   get displayedColumns(): string[] {
@@ -50,4 +66,6 @@ export class PlayTableExpandedDetailsComponent implements OnInit {
       this.expandedRow = row;
     }
   }
+
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {}
 }

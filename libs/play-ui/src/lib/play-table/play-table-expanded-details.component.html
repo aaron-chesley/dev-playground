@@ -44,7 +44,7 @@
       [attr.colspan]="columns.length"
       *cdkCellDef="let row"
     >
-      <ng-container *ngIf="row.rows?.length > 0">
+      <ng-container *ngIf="expandedRow">
         <play-table-expanded-details
           [rows]="row.rows"
           [columns]="columns"

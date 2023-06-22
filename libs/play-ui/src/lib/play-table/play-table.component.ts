@@ -55,7 +55,7 @@ export class PlayTableDataSource extends DataSource<any> {
 export class PlayTableComponent implements OnInit {
   expandedRow: PlayTableRow | null;
   dataSource = new PlayTableDataSource();
-  level = 1;
+  level = 0;
   @Input() columns: PlayTableColumn[] = [];
   @Input() rows: PlayTableRow[] = [];
 
