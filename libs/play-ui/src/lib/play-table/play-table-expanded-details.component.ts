@@ -21,7 +21,7 @@ import { PlayTableDataSource } from './play-table.component';
   selector: 'play-table-expanded-details',
   templateUrl: './play-table-expanded-details.component.html',
   styleUrls: [
-    // './play-table.component.scss',
+    './common-columns.scss',
     './play-table-expanded-details.component.scss',
   ],
   standalone: true,

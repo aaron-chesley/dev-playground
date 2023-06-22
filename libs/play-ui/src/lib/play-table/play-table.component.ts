@@ -9,13 +9,6 @@ import {
   NgSwitchCase,
   NgSwitchDefault,
 } from '@angular/common';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { PlayTableExpandedDetailsComponent } from './play-table-expanded-details.component';
 
 export class PlayTableDataSource extends DataSource<any> {
@@ -30,17 +23,7 @@ export class PlayTableDataSource extends DataSource<any> {
 @Component({
   selector: 'play-table',
   templateUrl: './play-table.component.html',
-  styleUrls: ['./play-table.component.scss'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({ height: '0px', minHeight: '0' })),
-      state('expanded', style({ height: '*' })),
-      transition(
-        'expanded <=> collapsed',
-        animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')
-      ),
-    ]),
-  ],
+  styleUrls: ['./common-columns.scss', './play-table.component.scss'],
   standalone: true,
   imports: [
     NgIf,
