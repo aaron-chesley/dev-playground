@@ -79,6 +79,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'content/:id',
+        canLoad: [AuthGuard],
+        loadComponent: () =>
+          import('@playground/lms-features').then(
+            (c) => c.LmsFeatureContentDetailComponent
+          ),
+      },
+      {
         path: 'reports',
         component: ngHTML(``),
         canLoad: [AuthGuard],

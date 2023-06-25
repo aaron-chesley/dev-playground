@@ -348,6 +348,14 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/youtube-player@^16.1.2":
+  version "16.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/youtube-player/-/youtube-player-16.1.2.tgz#05f9fccd951fa70983804be12c62afd2957b79a3"
+  integrity sha512-stuoHdVRnYshzroWEZ13FK1Kr+VlBkOIOIs4541XtDDdiGXRvXfZVn2Nsv2tKtxKDG8KXYXFnUD+Shk2AY5RXQ==
+  dependencies:
+    "@types/youtube" "^0.0.42"
+    tslib "^2.3.0"
+
 "@assemblyscript/loader@^0.10.1":
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/@assemblyscript/loader/-/loader-0.10.1.tgz#70e45678f06c72fa2e350e8553ec4a4d72b92e06"
@@ -4732,6 +4740,11 @@
   integrity sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==
   dependencies:
     "@types/node" "*"
+
+"@types/youtube@^0.0.42":
+  version "0.0.42"
+  resolved "https://registry.yarnpkg.com/@types/youtube/-/youtube-0.0.42.tgz#c3568e3e82e04cbd00cac3b66564ebcd21fd9d90"
+  integrity sha512-Nqo3HMPFPcNyZ7HNFZJjpH+N4yXqpxBItG+41e7nL9zednovMRZMXWj36CctSznbBcbj6ucvkJDo5iZ8SKqLIw==
 
 "@typescript-eslint/eslint-plugin@~5.59.6":
   version "5.59.6"

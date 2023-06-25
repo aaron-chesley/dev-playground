@@ -7,6 +7,7 @@ export interface LmsContentItem {
   content_type: LmsContentType;
   video: LmsVideo | null;
   slide: LmsSlide | null;
+  assessment?: any;
 }
 export interface LmsContentItemCreate {
   content_type: LmsContentType;

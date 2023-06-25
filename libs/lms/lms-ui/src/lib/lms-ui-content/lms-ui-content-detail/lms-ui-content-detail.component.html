@@ -1,0 +1,12 @@
+<play-card>
+  <play-card-body>
+    <youtube-player
+      [videoId]="content.video.video_url | youTubeId"
+      suggestedQuality="highres"
+      [height]="600"
+      [startSeconds]="43"
+      [endSeconds]="60"
+    >
+    </youtube-player>
+  </play-card-body>
+</play-card>
