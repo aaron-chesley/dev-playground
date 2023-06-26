@@ -32,5 +32,30 @@ Primary.args = {
       video_url: 'https://youtu.be/-B2yzG6Gj0A',
       thumbnail_url: 'https://i.ytimg.com/vi/-B2yzG6Gj0A/maxresdefault.jpg',
     },
+    assessment: {
+      questions: [
+        {
+          question: 'What is the name of the song?',
+          answers: [
+            {
+              answer: 'Seize The Day',
+              is_correct: true,
+            },
+            {
+              answer: 'Seize The Night',
+              is_correct: false,
+            },
+            {
+              answer: 'Seize The Afternoon',
+              is_correct: false,
+            },
+            {
+              answer: 'Seize The Evening',
+              is_correct: false,
+            },
+          ],
+        },
+      ],
+    },
   },
 };
