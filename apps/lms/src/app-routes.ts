@@ -1,5 +1,5 @@
-import { Component, NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { Routes } from '@angular/router';
 import { AuthGuard } from '@playground/lms-features';
 
 function ngHTML(html: string) {
@@ -14,7 +14,7 @@ function ngHTML(html: string) {
   return _HTMLComponent;
 }
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     redirectTo: '/app/dashboard',
@@ -117,9 +117,3 @@ const routes: Routes = [
       ),
   },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}
