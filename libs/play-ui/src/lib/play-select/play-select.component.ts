@@ -195,8 +195,13 @@ export class PlaySelectComponent implements OnInit, ControlValueAccessor {
       this.selection.setSelection(option);
       this.isOpen = false;
     }
-    this.onChange(this.selection.selected);
-    this.playSelectChange.emit(this.selection.selected);
+
+    const change =
+      this.selection.selected.length === 1
+        ? this.selection.selected[0]
+        : this.selection.selected;
+    this.onChange(change);
+    this.playSelectChange.emit(change);
   }
 
   onOverlayAttach() {
