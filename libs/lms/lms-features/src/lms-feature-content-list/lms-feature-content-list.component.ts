@@ -4,10 +4,11 @@ import {
   LmsUiContentCreateComponent,
   LmsUiContentListComponent,
 } from '@playground/lms-ui';
-import { LmsContentItemCreate } from '@playground/lms-util';
+import { LmsContentItem, LmsContentItemCreate } from '@playground/lms-util';
 import { PlayModalModule, PlayModalService } from '@playground/play-ui';
 import { filter } from 'rxjs';
 import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'lms-feature-content-list',
@@ -19,6 +20,7 @@ import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
     (previousPageClick)="onPreviousPageClick()"
     (search)="onSearch($event)"
     (createNewContent)="onCreateNewContent()"
+    (contentItemClick)="onContentItemClick($event)"
   ></lms-ui-content-list>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -52,8 +54,16 @@ export class LmsFeatureContentListComponent {
       });
   }
 
+  onContentItemClick(contentItem: LmsContentItem) {
+    this.router.navigate([contentItem.id], {
+      relativeTo: this.route,
+    });
+  }
+
   constructor(
     private contentStore: LmsFeatureContentListStore,
-    private modalService: PlayModalService
+    private modalService: PlayModalService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 }

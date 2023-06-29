@@ -14,6 +14,10 @@ export interface LmsAssessment {
   questions: LmsAssessmentQuestion[];
 }
 
+export const getLmsAssessment = (): LmsAssessment => ({
+  questions: [],
+});
+
 export interface LmsAssessmentAnswerForm {
   answer: FormControl<string>;
   is_correct: FormControl<boolean>;

@@ -31,6 +31,7 @@
         <lms-ui-video-item
           class="lms-ui-content-item"
           [video]="contentItem.video"
+          (click)="contentItemClick.emit(contentItem)"
         ></lms-ui-video-item>
       </ng-container>
     </ng-container>

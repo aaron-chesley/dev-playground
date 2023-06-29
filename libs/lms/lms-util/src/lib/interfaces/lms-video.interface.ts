@@ -9,6 +9,15 @@ export interface LmsVideo {
   thumbnail_url: string;
 }
 
+export const getLmsVideo = (): LmsVideo => ({
+  id: '',
+  name: '',
+  description: '',
+  duration: '00:00',
+  video_url: '',
+  thumbnail_url: '',
+});
+
 export interface LmsVideoForm {
   id: FormControl<string>;
   name: FormControl<string>;

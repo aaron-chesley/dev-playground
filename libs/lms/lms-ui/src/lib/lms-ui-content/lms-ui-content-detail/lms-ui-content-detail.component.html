@@ -1,11 +1,5 @@
 <play-card>
-  <play-card-body>
-    <youtube-player
-      [videoId]="content.video.video_url | youTubeId"
-      suggestedQuality="highres"
-      [height]="600"
-    >
-    </youtube-player>
+  <play-card-body *ngIf="videoContentForm">
     <form [formGroup]="videoContentForm">
       <ng-container formGroupName="video">
         <play-form-field>
@@ -59,5 +53,11 @@
         </ng-container>
       </ng-container>
     </form>
+    <youtube-player
+      [videoId]="content.video.video_url | youTubeId"
+      suggestedQuality="highres"
+      [height]="600"
+    >
+    </youtube-player>
   </play-card-body>
 </play-card>

@@ -16,11 +16,6 @@ function ngHTML(html: string) {
 
 export const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/app/dashboard',
-    pathMatch: 'full',
-  },
-  {
     path: 'app',
     loadComponent: () =>
       import('@playground/lms-features').then(
@@ -83,7 +78,7 @@ export const routes: Routes = [
         canLoad: [AuthGuard],
         loadComponent: () =>
           import('@playground/lms-features').then(
-            (c) => c.LmsFeatureContentDetailComponent
+            (c) => c.LmsFeatureContentDetailsComponent
           ),
       },
       {
@@ -115,5 +110,10 @@ export const routes: Routes = [
       import('@playground/lms-features').then(
         (c) => c.LmsLoginFeatureComponent
       ),
+  },
+  {
+    path: '',
+    redirectTo: '/app/dashboard',
+    pathMatch: 'full',
   },
 ];

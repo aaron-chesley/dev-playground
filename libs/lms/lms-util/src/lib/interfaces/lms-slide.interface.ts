@@ -6,6 +6,12 @@ export interface LmsSlide {
   description: string;
 }
 
+export const getLmsSlide = (): LmsSlide => ({
+  id: '',
+  name: '',
+  description: '',
+});
+
 export interface LmsSlideForm {
   id: FormControl<string>;
   name: FormControl<string>;
