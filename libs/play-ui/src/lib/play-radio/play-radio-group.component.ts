@@ -12,6 +12,7 @@ import {
 } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { PlayRadioGroupService } from './play-radio-group.service';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'play-radio-group',
@@ -29,9 +30,18 @@ import { PlayRadioGroupService } from './play-radio-group.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  providers: [PlayRadioGroupService],
+  providers: [
+    PlayRadioGroupService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: PlayRadioGroupComponent,
+      multi: true,
+    },
+  ],
 })
-export class PlayRadioGroupComponent implements OnChanges, OnDestroy {
+export class PlayRadioGroupComponent
+  implements OnChanges, OnDestroy, ControlValueAccessor
+{
   @HostBinding('class') className = 'play-radio-group';
 
   @Input() value: unknown;
@@ -40,6 +50,22 @@ export class PlayRadioGroupComponent implements OnChanges, OnDestroy {
   @Output() playRadioChange = new EventEmitter<unknown>();
 
   private $ngDestroy = new Subject<void>();
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  writeValue(value: unknown): void {
+    this.value = value;
+    this.radioService.setSelectedValue(value);
+  }
+
+  registerOnChange(onChange: any): void {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouched: any): void {
+    this.onTouched = onTouched;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value) {
@@ -59,6 +85,9 @@ export class PlayRadioGroupComponent implements OnChanges, OnDestroy {
     this.radioService
       .getSelectedValue()
       .pipe(takeUntil(this.$ngDestroy))
-      .subscribe((value) => this.playRadioChange.emit(value));
+      .subscribe((value) => {
+        this.onChange(value);
+        this.playRadioChange.emit(value);
+      });
   }
 }

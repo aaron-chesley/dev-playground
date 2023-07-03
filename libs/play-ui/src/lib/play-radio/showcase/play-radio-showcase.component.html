@@ -29,4 +29,19 @@
       >Selected Value: <strong>{{ selectedValue2 }}</strong></span
     >
   </div>
+  <br />
+  <br />
+
+  <div style="display: flex; flex-direction: column">
+    <play-radio-group [formControl]="radioFormControl">
+      <play-radio [value]="options[0]">Radio 1</play-radio>
+      <play-radio [value]="options[1]">Radio 2</play-radio>
+      <play-radio [value]="options[2]">Radio 3</play-radio>
+    </play-radio-group>
+    <br />
+    <span
+      >Reactive Forms Selected Value:
+      <strong>{{ radioFormControl.value }}</strong></span
+    >
+  </div>
 </div>
