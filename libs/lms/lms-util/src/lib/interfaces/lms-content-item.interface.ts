@@ -1,4 +1,4 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { LmsContentType } from '../types/lms-content-type.type';
 import {
   LmsSlide,
@@ -24,6 +24,7 @@ export interface LmsContentItem {
   video: LmsVideo | null;
   slide: LmsSlide | null;
   assessment: LmsAssessment;
+  tags: string[];
 }
 
 export const getLmsContentItem = (
@@ -47,6 +48,7 @@ export const getLmsContentItem = (
         }
       : null,
   assessment: item.assessment ?? getLmsAssessment(),
+  tags: item.tags ?? [],
 });
 
 export interface LmsContentItemForm {
@@ -55,6 +57,7 @@ export interface LmsContentItemForm {
   video: FormGroup<LmsVideoForm | null>;
   slide: FormGroup<LmsSlideForm> | null;
   assessment: FormGroup<LmsAssessmentForm>;
+  tags: FormArray<FormControl<string>>;
 }
 export interface LmsContentItemCreate {
   content_type: LmsContentType;

@@ -1,5 +1,18 @@
 youtube-player {
+  flex: 1;
   iframe {
-    width: 100%;
+    // width: 100%;
   }
+}
+
+.video-details {
+  flex-direction: column;
+  flex: 1;
+}
+
+.question-input {
+  flex: 1;
+}
+
+.play-group {
 }

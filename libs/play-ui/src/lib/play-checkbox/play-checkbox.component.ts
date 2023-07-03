@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'play-checkbox',
@@ -24,6 +25,7 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
       multi: true,
     },
   ],
+  imports: [NgIf],
 })
 export class PlayCheckboxComponent implements ControlValueAccessor {
   PlayCheckboxComponent = PlayCheckboxComponent;

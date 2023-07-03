@@ -68,9 +68,9 @@
 @mixin play-fab {
   position: relative;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
   height: 60px;
   width: 60px;
   min-width: 40px;

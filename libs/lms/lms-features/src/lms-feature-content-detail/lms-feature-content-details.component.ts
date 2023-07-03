@@ -15,6 +15,7 @@ interface ContentDetailsState {
   selector: 'lms-feature-content-detail',
   template: `<lms-ui-content-detail
     [content]="content$ | async"
+    (saveContent)="saveContent($event)"
   ></lms-ui-content-detail>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -69,6 +70,13 @@ export class LmsFeatureContentDetailsComponent implements OnInit {
           loading: false,
         };
       });
+  }
+
+  saveContent(content: LmsContentItem) {
+    this.contentDetailsState = { loading: true };
+    this.contentService.updateContent(content).subscribe(() => {
+      this.contentDetailsState = { loading: false };
+    });
   }
 
   ngOnInit() {

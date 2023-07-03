@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
   Input,
   OnChanges,
   OnInit,
+  Output,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -19,10 +21,15 @@ import {
   PlayButtonComponent,
   PlayCardBodyComponent,
   PlayCardComponent,
+  PlayCheckboxComponent,
   PlayFormFieldComponent,
   PlayFormFieldErrorComponent,
   PlayFormFieldLabelComponent,
+  PlayGroupComponent,
+  PlayIconComponent,
+  PlayIconRegistryService,
   PlayInputTextComponent,
+  removeCircleOutline,
 } from '@playground/play-ui';
 import { LmsContentItem, LmsContentItemForm } from '@playground/lms-util';
 import { YouTubeIdPipe } from '../youtube-id.pipe';
@@ -49,6 +56,9 @@ import { NgFor, NgIf } from '@angular/common';
     PlayFormFieldErrorComponent,
     PlayInputTextComponent,
     PlayButtonComponent,
+    PlayGroupComponent,
+    PlayCheckboxComponent,
+    PlayIconComponent,
   ],
 })
 export class LmsUiContentDetailComponent implements OnInit, OnChanges {
@@ -57,6 +67,7 @@ export class LmsUiContentDetailComponent implements OnInit, OnChanges {
 
   @Input() content: LmsContentItem;
   @Input() loading: boolean;
+  @Output() saveContent = new EventEmitter<LmsContentItem>();
 
   videoContentForm: FormGroup<LmsContentItemForm>;
 
@@ -64,6 +75,10 @@ export class LmsUiContentDetailComponent implements OnInit, OnChanges {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.body.appendChild(tag);
+  }
+
+  onSaveContent() {
+    this.saveContent.emit(this.videoContentForm.getRawValue());
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -87,6 +102,9 @@ export class LmsUiContentDetailComponent implements OnInit, OnChanges {
           description: this.fb.control(''),
         }),
         assessment: getLmsAssessmentForm(this.content.assessment),
+        tags: this.fb.array(
+          this.content.tags.map((tag) => this.fb.control(tag))
+        ),
       });
     }
   }
@@ -108,6 +126,11 @@ export class LmsUiContentDetailComponent implements OnInit, OnChanges {
         answers: this.fb.array([]),
       })
     );
+    let i = 0;
+    while (i < 4) {
+      this.addAnswer(this.questions().length - 1);
+      i++;
+    }
   }
 
   removeQuestion(questionIndex: number) {
@@ -127,5 +150,10 @@ export class LmsUiContentDetailComponent implements OnInit, OnChanges {
     this.answers(questionIndex).removeAt(answerIndex);
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private iconService: PlayIconRegistryService
+  ) {
+    this.iconService.registerIcons([removeCircleOutline]);
+  }
 }
