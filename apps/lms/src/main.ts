@@ -1,40 +1,40 @@
-import { enableProdMode } from '@angular/core';
-import { loadTranslations } from '@angular/localize';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideRouter, RouterOutlet } from '@angular/router';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptors,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { routes } from './app-routes';
+import { HttpTokenInterceptor } from '@playground/lms-features';
+import { HttpLoadingInterceptor } from '@playground/shared/shared-features';
 
-import { AppModule } from './app/app.module';
-import { environment } from '@playground/environment';
+@Component({
+  selector: 'playground-root',
+  template: `<router-outlet></router-outlet>`,
+  standalone: true,
+  imports: [RouterOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AppComponent {}
 
-if (environment.production) {
-  enableProdMode();
-}
-
-const availableLocales = ['en', 'es'];
-const localeMappings: { [key: string]: string } = { en: 'en', es: 'es' };
-
-let locale = 'en';
-if (locale in localeMappings) {
-  locale = localeMappings[locale];
-}
-
-if (locale === availableLocales[0]) {
-  platformBrowserDynamic()
-    .bootstrapModule(AppModule)
-    .catch((err) => console.error(err));
-} else {
-  fetch(`assets/locales/messages.${locale}.json`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-      }
-
-      return response.json();
-    })
-    .then((result) => {
-      loadTranslations(result);
-
-      platformBrowserDynamic()
-        .bootstrapModule(AppModule)
-        .catch((err) => console.error(err));
-    });
-}
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpTokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpLoadingInterceptor,
+      multi: true,
+    },
+    provideAnimations(),
+  ],
+});

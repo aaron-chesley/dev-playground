@@ -1,50 +1,41 @@
-<!-- <play-stepper #cdkStepper [linear]="true">
-  <cdk-step>
-    <ng-template cdkStepLabel>
-      <span>Personal Details</span>
-    </ng-template>
-    <p>This is any content of "Step 1"</p>
-  </cdk-step>
-  <cdk-step>
-    <ng-template cdkStepLabel>
-      <span>Public Details</span>
-    </ng-template>
-    <p>This is any content of "Step 2"</p>
-  </cdk-step>
-</play-stepper> -->
-
 <play-card>
   <play-card-header>Create New Content</play-card-header>
   <play-card-body [formGroup]="form">
-    <play-select formControlName="content_type">
-      <!-- <play-select-option value="VIDEO">Video</play-select-option>
-      <play-select-option value="SLIDE">Slide</play-select-option> -->
-    </play-select>
-    <ng-container
-      *ngIf="form.value.content_type === 'VIDEO'"
-      formGroupName="video"
-    >
-      <play-form-field>
-        <play-form-field-label>Name:</play-form-field-label>
-        <input playInputText formControlName="name" />
-      </play-form-field>
-      <play-form-field>
-        <play-form-field-label>Description:</play-form-field-label>
-        <input playInputText formControlName="description" />
-      </play-form-field>
-      <play-form-field>
-        <play-form-field-label>Duration:</play-form-field-label>
-        <input placeholder="hh:mm" playInputText formControlName="duration" />
-      </play-form-field>
-      <play-form-field>
-        <play-form-field-label>Video url:</play-form-field-label>
-        <input playInputText formControlName="video_url" />
-      </play-form-field>
-      <play-form-field>
-        <play-form-field-label>Thumbnail url:</play-form-field-label>
-        <input playInputText formControlName="thumbnail_url" />
-      </play-form-field>
-    </ng-container>
+    <play-group direction="column">
+      <play-select
+        formControlName="content_type"
+        [options]="contentTypeOptions"
+      >
+        <ng-template let-option template="option">
+          {{ option }}
+        </ng-template>
+      </play-select>
+      <ng-container
+        *ngIf="form.value.content_type === 'VIDEO'"
+        formGroupName="video"
+      >
+        <play-form-field>
+          <play-form-field-label>Name:</play-form-field-label>
+          <input playInputText formControlName="name" />
+        </play-form-field>
+        <play-form-field>
+          <play-form-field-label>Description:</play-form-field-label>
+          <input playInputText formControlName="description" />
+        </play-form-field>
+        <play-form-field>
+          <play-form-field-label>Duration:</play-form-field-label>
+          <input placeholder="hh:mm" playInputText formControlName="duration" />
+        </play-form-field>
+        <play-form-field>
+          <play-form-field-label>Video url:</play-form-field-label>
+          <input playInputText formControlName="video_url" />
+        </play-form-field>
+        <play-form-field>
+          <play-form-field-label>Thumbnail url:</play-form-field-label>
+          <input playInputText formControlName="thumbnail_url" />
+        </play-form-field>
+      </ng-container>
+    </play-group>
   </play-card-body>
   <play-card-footer position="right">
     <play-button-group [gap]="10">
@@ -60,7 +51,7 @@
         playButton
         appearance="play-flat"
         theme="accent"
-        (click)="closeDialog()"
+        (click)="saveAndCloseDialog()"
       >
         Create
       </button>

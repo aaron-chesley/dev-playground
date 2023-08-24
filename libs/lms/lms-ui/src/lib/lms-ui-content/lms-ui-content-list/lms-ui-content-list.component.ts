@@ -48,6 +48,7 @@ export class LmsUiContentListComponent implements OnInit, OnDestroy {
   @Output() previousPageClick = new EventEmitter<void>();
   @Output() search = new EventEmitter<string>();
   @Output() createNewContent = new EventEmitter();
+  @Output() contentItemClick = new EventEmitter<LmsContentItem>();
 
   _ngDestroy$ = new Subject<void>();
   _searchCtrl = new FormControl('');

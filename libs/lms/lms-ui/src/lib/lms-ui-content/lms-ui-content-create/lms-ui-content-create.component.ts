@@ -12,7 +12,11 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { LmsContentItemCreate, LmsContentType } from '@playground/lms-util';
+import {
+  LMS_CONTENT_TYPES,
+  LmsContentItemCreate,
+  LmsContentType,
+} from '@playground/lms-util';
 import {
   PlayButtonComponent,
   PlayButtonGroupComponent,
@@ -22,6 +26,7 @@ import {
   PlayCardHeaderComponent,
   PlayFormFieldComponent,
   PlayFormFieldLabelComponent,
+  PlayGroupComponent,
   PlayInputTextComponent,
   PlaySelectComponent,
 } from '@playground/play-ui';
@@ -63,11 +68,14 @@ interface LmsUiContentCreateForm {
     PlayFormFieldLabelComponent,
     PlayInputTextComponent,
     PlaySelectComponent,
+    PlayGroupComponent,
   ],
 })
 export class LmsUiContentCreateComponent {
   @HostBinding('class.lms-ui-content-create') lmsUiContentCreateClass =
     'lms-ui-content-create';
+
+  contentTypeOptions = [...LMS_CONTENT_TYPES];
 
   form = this.fb.group<LmsUiContentCreateForm>({
     content_type: this.fb.control('VIDEO'),
@@ -82,6 +90,10 @@ export class LmsUiContentCreateComponent {
   });
 
   closeDialog() {
+    this.dialogRef.close();
+  }
+
+  saveAndCloseDialog() {
     const value = this.form.getRawValue();
     this.dialogRef.close(value);
   }

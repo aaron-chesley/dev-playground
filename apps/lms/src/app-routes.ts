@@ -1,5 +1,5 @@
-import { Component, NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { Routes } from '@angular/router';
 import { AuthGuard } from '@playground/lms-features';
 
 function ngHTML(html: string) {
@@ -14,12 +14,7 @@ function ngHTML(html: string) {
   return _HTMLComponent;
 }
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: '/app/dashboard',
-    pathMatch: 'full',
-  },
+export const routes: Routes = [
   {
     path: 'app',
     loadComponent: () =>
@@ -79,6 +74,14 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'content/:id',
+        canLoad: [AuthGuard],
+        loadComponent: () =>
+          import('@playground/lms-features').then(
+            (c) => c.LmsFeatureContentDetailsComponent
+          ),
+      },
+      {
         path: 'reports',
         component: ngHTML(``),
         canLoad: [AuthGuard],
@@ -108,10 +111,9 @@ const routes: Routes = [
         (c) => c.LmsLoginFeatureComponent
       ),
   },
+  {
+    path: '',
+    redirectTo: '/app/dashboard',
+    pathMatch: 'full',
+  },
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

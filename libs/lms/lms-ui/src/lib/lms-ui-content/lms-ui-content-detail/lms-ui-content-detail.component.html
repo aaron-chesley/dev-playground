@@ -1,0 +1,125 @@
+<form
+  style="padding: 20px; box-sizing: border-box"
+  *ngIf="videoContentForm"
+  [formGroup]="videoContentForm"
+>
+  <play-group direction="column">
+    <play-group>
+      <youtube-player
+        [videoId]="content.video.video_url | youTubeId"
+        suggestedQuality="highres"
+        [height]="400"
+      >
+      </youtube-player>
+      <play-group class="video-details" direction="column">
+        <ng-container formGroupName="video">
+          <play-form-field>
+            <play-form-field-label>Name:</play-form-field-label>
+            <input playInputText formControlName="name" />
+          </play-form-field>
+          <play-form-field>
+            <play-form-field-label>Description:</play-form-field-label>
+            <input playInputText formControlName="description" />
+          </play-form-field>
+          <play-form-field>
+            <play-form-field-label>Duration:</play-form-field-label>
+            <input playInputText formControlName="duration" />
+          </play-form-field>
+          <play-form-field>
+            <play-form-field-label>Video Url:</play-form-field-label>
+            <input playInputText formControlName="video_url" />
+          </play-form-field>
+          <play-form-field>
+            <play-form-field-label>Thumbnail Url:</play-form-field-label>
+            <input playInputText formControlName="thumbnail_url" />
+          </play-form-field>
+        </ng-container>
+      </play-group>
+    </play-group>
+    <ng-container formGroupName="assessment">
+      <ng-container formArrayName="questions">
+        <play-group gap="5rem">
+          <ng-container
+            *ngFor="
+              let question of questions().controls;
+              let questionIndex = index
+            "
+            [formGroupName]="questionIndex"
+          >
+            <play-group direction="column">
+              <play-group>
+                <!-- <span>{{ questionIndex + 1 }}</span> -->
+                <input
+                  class="question-input"
+                  playInputText
+                  formControlName="question"
+                  placeholder="Question..."
+                />
+                <button
+                  playButton
+                  appearance="play-icon-btn"
+                  (click)="removeQuestion(questionIndex)"
+                >
+                  <play-icon name="removeCircleOutline"></play-icon>
+                </button>
+              </play-group>
+              <ng-container formArrayName="answers">
+                <ng-container
+                  *ngFor="
+                    let answer of answers(questionIndex).controls;
+                    let answerIndex = index
+                  "
+                  [formGroupName]="answerIndex"
+                >
+                  <play-group>
+                    <input
+                      playInputText
+                      type="text"
+                      formControlName="answer"
+                      placeholder="Answer..."
+                    />
+                    <play-checkbox formControlName="is_correct">
+                    </play-checkbox>
+                    <button
+                      playButton
+                      appearance="play-icon-btn"
+                      (click)="removeAnswer(questionIndex, answerIndex)"
+                    >
+                      <play-icon name="removeCircleOutline"></play-icon>
+                    </button>
+                  </play-group>
+                </ng-container>
+                <button
+                  type="button"
+                  playButton
+                  appearance="play-outline"
+                  (click)="addAnswer(questionIndex)"
+                >
+                  Add Answer
+                </button>
+              </ng-container>
+            </play-group>
+          </ng-container>
+        </play-group>
+      </ng-container>
+    </ng-container>
+    <button
+      type="button"
+      playButton
+      appearance="play-flat"
+      (click)="addQuestion()"
+    >
+      Add Question
+    </button>
+  </play-group>
+  <button
+    style="position: fixed; bottom: 30%; right: 25px; color: white"
+    type="submit"
+    [disabled]="!videoContentForm.dirty || videoContentForm.invalid"
+    playButton
+    appearance="play-fab"
+    (click)="onSaveContent()"
+  >
+    Save
+  </button>
+</form>
