@@ -11,14 +11,11 @@
     (change)="onCheckChange($event)"
     [disabled]="disabled"
   />
-  <div #label>
     <label
-      *ngIf="label.children.length"
       class="play-checkbox-label"
       [for]="_identifier"
       [style.padding-left]="_labelPosition === 'row' ? '.5em' : '0'"
       [style.padding-right]="_labelPosition === 'row-reverse' ? '.5em' : '0'"
       ><ng-content></ng-content
     ></label>
-  </div>
 </div>
