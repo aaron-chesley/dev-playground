@@ -20,6 +20,8 @@ import { PlayIconRegistryService } from './play-icon-registry.service';
     `
       .play-icon {
         display: flex;
+        justify-content: center;
+        align-items: center;
       }
     `,
   ],
