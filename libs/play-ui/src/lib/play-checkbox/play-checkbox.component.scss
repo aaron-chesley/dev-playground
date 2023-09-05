@@ -43,6 +43,9 @@
 
   .play-checkbox-label {
     cursor: inherit;
+    &:empty {
+      display: none;
+    }
   }
 
   &:active > .play-checkbox-input,
