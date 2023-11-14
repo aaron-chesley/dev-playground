@@ -9,12 +9,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/environment"],
       "options": {
-        "jestConfig": "libs/environment/jest.config.ts",
-        "passWithNoTests": true
+        "tsConfig": "libs/environment/tsconfig.lib.json",
+        "jestConfig": "libs/environment/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/environment/**/*.ts",

@@ -9,12 +9,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/shared/shared-data"],
       "options": {
-        "jestConfig": "libs/shared/shared-data/jest.config.ts",
-        "passWithNoTests": true
+        "tsConfig": "libs/shared/shared-data/tsconfig.lib.json",
+        "jestConfig": "libs/shared/shared-data/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/shared/shared-data/**/*.ts",

@@ -9,12 +9,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/play-storybook"],
       "options": {
-        "jestConfig": "libs/play-storybook/jest.config.ts",
-        "passWithNoTests": true
+        "tsConfig": "libs/play-storybook/tsconfig.lib.json",
+        "jestConfig": "libs/play-storybook/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/play-storybook/**/*.ts",

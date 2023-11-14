@@ -74,10 +74,10 @@
       },
       "configurations": {
         "production": {
-          "browserTarget": "lms:build:production"
+          "buildTarget": "lms:build:production"
         },
         "development": {
-          "browserTarget": "lms:build:development"
+          "buildTarget": "lms:build:development"
         }
       },
       "defaultConfiguration": "development"
@@ -85,11 +85,11 @@
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
       "options": {
-        "browserTarget": "lms:build"
+        "buildTarget": "lms:build"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": ["apps/lms/**/*.ts", "apps/lms/**/*.html"]
       }
@@ -98,8 +98,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/apps/lms"],
       "options": {
-        "jestConfig": "apps/lms/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "apps/lms/jest.config.ts"
       }
     }
   },

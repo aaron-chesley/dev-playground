@@ -9,12 +9,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/cardly/cardly-features/jest.config.ts",
-        "passWithNoTests": true
+        "tsConfig": "libs/cardly/cardly-features/tsconfig.lib.json",
+        "jestConfig": "libs/cardly/cardly-features/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": [

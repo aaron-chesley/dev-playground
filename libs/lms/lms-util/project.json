@@ -9,12 +9,12 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/libs/lms/lms-util"],
       "options": {
-        "jestConfig": "libs/lms/lms-util/jest.config.ts",
-        "passWithNoTests": true
+        "tsConfig": "libs/lms/lms-util/tsconfig.lib.json",
+        "jestConfig": "libs/lms/lms-util/jest.config.ts"
       }
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
+      "executor": "@nx/eslint:lint",
       "options": {
         "lintFilePatterns": [
           "libs/lms/lms-util/**/*.ts",
