@@ -1,4 +1,4 @@
-import { Card, CardlyUser } from './cardly';
+import { Card, CardlyUser, DeckOfCards } from './cardly';
 
 export interface ScumPlayer {
   user: CardlyUser;
@@ -43,46 +43,54 @@ export enum ScumGameState {
 }
 
 export class ScumGamee {
-  private players: string[] = [];
+  private players: ScumPlayer[] = [];
   private currentPlayerIndex: number = 0;
-  private deck: string[] = [];
-  private hands: { [player: string]: string[] } = {};
-  private president: string | null = null;
-  private vicePresident: string | null = null;
-  private scum: string | null = null;
-  private viceScum: string | null = null;
 
-  constructor(players: string[]) {
-    this.players = players;
-    this.initializeGame();
+  constructor(users: CardlyUser[]) {
+    this.initializeGame(users);
   }
 
-  private initializeGame(): void {
-    this.deck = this.generateDeck();
-    // this.shuffleDeck();
-    // this.dealCards();
-    // this.assignInitialRanks();
+  private initializeGame(users: CardlyUser[]): void {
+    this.initializePlayers(users);
+    this.setupPlayerHands();
   }
 
-  private generateDeck(): string[] {
-    // Generate a standard 52-card deck (you might want to consider Jokers if your variation includes them)
-    const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
-    const ranks = [
-      '2',
-      '3',
-      '4',
-      '5',
-      '6',
-      '7',
-      '8',
-      '9',
-      '10',
-      'J',
-      'Q',
-      'K',
-      'A',
-    ];
-    return [];
-    // return suits.flatMap((suit) => ranks.map((rank) => `${rank} of ${suit}`));
+  private initializePlayers(users: CardlyUser[]): void {
+    this.players = users.map((user) => ({
+      user,
+      rank: ScumRank.PEASANT,
+      cards: [],
+      score: 0,
+      pass: false,
+      playedAtleastOneCardInSubRound: false,
+    }));
+
+    // Shuffle players on the initial round.
+    this.players.sort(() => Math.random() - 0.5);
+  }
+
+  private setupPlayerHands(): void {
+    // Determine how many decks of cards are needed by dividing the number of players by 4. If there is a remainder, add 1 to the number of decks.
+    const numberOfDecks = Math.ceil(this.players.length / 4);
+
+    // Create a deck of cards for each deck needed.
+    const deck = new DeckOfCards({ numOfDecks: numberOfDecks });
+    deck.shuffle();
+    const cards = deck.getCards();
+
+    // Deal cards to each player.
+    let iterator = 0;
+    while (cards.length > 0) {
+      this.players[iterator].cards.push(cards.pop());
+      iterator++;
+      if (iterator >= this.players.length) {
+        iterator = 0;
+      }
+    }
+
+    // Sort players hands by card value.
+    this.players.forEach((player) => {
+      player.cards.sort((a, b) => a.rank.value - b.rank.value);
+    });
   }
 }

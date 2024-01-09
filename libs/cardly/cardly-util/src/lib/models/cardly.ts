@@ -30,26 +30,27 @@ export interface DeckOfCardsConfig {
     displayValue: string;
   };
   acesHigh: boolean;
+  numOfDecks: number;
 }
 
+const defaultDeckOfCardsConfig: DeckOfCardsConfig = {
+  jokers: {
+    include: false,
+    numToInclude: 2,
+    value: 0,
+    displayValue: '',
+  },
+  acesHigh: true,
+  numOfDecks: 1,
+};
 export class DeckOfCards {
   private suits: Suit[] = [Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES];
   private ranks: Rank[] = [];
 
   private deck: Card[] = [];
 
-  private readonly defaultConfig: DeckOfCardsConfig = {
-    jokers: {
-      include: false,
-      numToInclude: 2,
-      value: 0,
-      displayValue: '',
-    },
-    acesHigh: true,
-  };
-
-  constructor(config?: DeckOfCardsConfig) {
-    this.initializeDeck(config || this.defaultConfig);
+  constructor(config?: Partial<DeckOfCardsConfig>) {
+    this.initializeDeck({ ...defaultDeckOfCardsConfig, ...config });
   }
 
   private initializeDeck(config: DeckOfCardsConfig): void {
@@ -87,6 +88,11 @@ export class DeckOfCards {
         });
       }
     }
+
+    // Create the number of decks specified in the config.
+    this.deck = this.deck.concat(
+      ...Array.from({ length: config.numOfDecks - 1 }, () => this.deck),
+    );
   }
 
   //http://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
