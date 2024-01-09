@@ -1,10 +1,10 @@
 <ng-container *ngIf="game.state !== GameState.POSTGAME" (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
-  
+
   <div class="scum-player-card-list">
     <div *ngFor="let player of game.players" class="scum-player-card" [class.is-my-turn]="player.user | isUsersTurn : game.currentPlayerId">
       <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
-        <play-icon *ngIf="player.pass" name="localParking" color="red" [size]="50"></play-icon>
-        <play-icon *ngIf="!player.cards.length" name="emojiEvents" color="gold" [size]="50"></play-icon>
+        <play-icon *ngIf="GameState.IN_PROGRESS === game.state && player.pass" name="localParking" color="red" [size]="50"></play-icon>
+        <play-icon *ngIf="GameState.IN_PROGRESS === game.state && !player.cards.length" name="emojiEvents" color="gold" [size]="50"></play-icon>
       </div>
       <div class="player-name">{{ player.user.displayName }}</div>
       <div class="stat-wrapper">
@@ -19,8 +19,8 @@
   </div>
 
   <div class="start-container" *ngIf="game.state === GameState.PREGAME">
-    <button *ngIf="(user | me : game.players).user.id === game.gameOwnerId" playButton appearance="play-flat" theme="primary" [disabled]="game.players.length < 4" (click)="startGame.emit()">Start</button>
-    <small>Waiting for enough players...</small>
+    <button *ngIf="game.players.length >= 4 && (user | me : game.players).user.id === game.gameOwnerId" playButton appearance="play-flat" theme="primary" (click)="startGame.emit()">Start</button>
+    <small *ngIf="game.players.length < 4">Waiting for enough players...</small>
   </div>
 
   <div class="start-container" *ngIf="game.state === GameState.CARD_SWAP">

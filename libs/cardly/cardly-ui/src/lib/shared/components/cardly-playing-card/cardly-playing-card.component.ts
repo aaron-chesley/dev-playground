@@ -22,44 +22,44 @@ export class CardlyPlayingCardComponent {
   getImg() {
     let imgUrl = `/cards/${this.card.suit}/`;
 
-    switch (this.card.rank) {
-      case Rank.TWO:
+    switch (this.card.rank.displayValue) {
+      case '2':
         imgUrl += '2';
         break;
-      case Rank.THREE:
+      case '3':
         imgUrl += '3';
         break;
-      case Rank.FOUR:
+      case '4':
         imgUrl += '4';
         break;
-      case Rank.FIVE:
+      case '5':
         imgUrl += '5';
         break;
-      case Rank.SIX:
+      case '6':
         imgUrl += '6';
         break;
-      case Rank.SEVEN:
+      case '7':
         imgUrl += '7';
         break;
-      case Rank.EIGHT:
+      case '8':
         imgUrl += '8';
         break;
-      case Rank.NINE:
+      case '9':
         imgUrl += '9';
         break;
-      case Rank.TEN:
+      case '10':
         imgUrl += '10';
         break;
-      case Rank.JACK:
+      case 'J':
         imgUrl += 'jack';
         break;
-      case Rank.QUEEN:
+      case 'Q':
         imgUrl += 'queen';
         break;
-      case Rank.KING:
+      case 'K':
         imgUrl += 'king';
         break;
-      case Rank.ACE:
+      case 'A':
         imgUrl += 'ace';
         break;
       default:

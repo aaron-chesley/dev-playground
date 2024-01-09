@@ -41,6 +41,8 @@
 .discard-container {
   position: absolute;
   bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   width: 50%;
@@ -49,13 +51,18 @@
 .start-container {
   position: absolute;
   bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
+  width: 170px;
 }
 
 .pass-container {
   position: absolute;
   bottom: 35%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: row;
 }
@@ -63,6 +70,8 @@
 .staged-container {
   position: absolute;
   bottom: 17%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
   width: 50%;

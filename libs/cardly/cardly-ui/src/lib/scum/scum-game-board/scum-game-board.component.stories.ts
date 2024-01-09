@@ -1,7 +1,12 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ScumGameState, Suit } from '@playground/cardly-util';
+import { ScumGameState } from '@playground/cardly-util';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { ScumGameBoardComponent } from './scum-game-board.component';
+import {
+  user,
+  gameWithoutGameState,
+  players,
+} from './scum-game-board.component.stories.utils';
 
 export default {
   title: 'ScumGameBoardComponent',
@@ -14,7 +19,7 @@ export default {
 } as Meta<ScumGameBoardComponent>;
 
 const Template: Story<ScumGameBoardComponent> = (
-  args: ScumGameBoardComponent
+  args: ScumGameBoardComponent,
 ) => ({
   props: args,
   template: `
@@ -23,176 +28,45 @@ const Template: Story<ScumGameBoardComponent> = (
   </div>`,
 });
 
-export const Primary = Template.bind({});
-Primary.args = {
+export const PreGameWaitingForPlayers = Template.bind({});
+PreGameWaitingForPlayers.args = {
+  user: { ...user },
   game: {
-    id: '8sd76f8ds6f',
-    gameOwnerId: '1',
-    subRoundWinnerId: '1',
-    roundWinnerId: '1',
-    presidentTraded: false,
-    vicePresidentTraded: false,
-    gameWinnerId: '1',
-    pointsToWin: 8,
-    state: ScumGameState.IN_PROGRESS,
-    players: [
-      {
-        user: {
-          id: '1',
-          displayName: 'Aaron',
-          avatar: 'https://i.pravatar.cc/300',
-        },
-        rank: 0,
-        cards: [
-          {
-            show: true,
-            suit: Suit.DIAMONDS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.CLUBS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.HEARTS,
-            rank: 6,
-          },
-        ],
-        score: 0,
-        pass: false,
-        playedAtleastOneCardInSubRound: false,
-      },
-      {
-        user: {
-          id: '2',
-          displayName: 'Bethany',
-          avatar: 'https://i.pravatar.cc/300',
-        },
-        rank: 0,
-        cards: [
-          {
-            show: true,
-            suit: Suit.DIAMONDS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.CLUBS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.HEARTS,
-            rank: 6,
-          },
-        ],
-        score: 0,
-        pass: false,
-        playedAtleastOneCardInSubRound: false,
-      },
-      {
-        user: {
-          id: '3',
-          displayName: 'Georgia',
-          avatar: 'https://i.pravatar.cc/300',
-        },
-        rank: 0,
-        cards: [
-          {
-            show: true,
-            suit: Suit.DIAMONDS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.CLUBS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.HEARTS,
-            rank: 6,
-          },
-        ],
-        score: 0,
-        pass: false,
-        playedAtleastOneCardInSubRound: false,
-      },
-      {
-        user: {
-          id: '4',
-          displayName: 'Hazel',
-          avatar: 'https://i.pravatar.cc/300',
-        },
-        rank: 0,
-        cards: [
-          {
-            show: true,
-            suit: Suit.DIAMONDS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.CLUBS,
-            rank: 6,
-          },
-          {
-            show: true,
-            suit: Suit.HEARTS,
-            rank: 6,
-          },
-        ],
-        score: 0,
-        pass: false,
-        playedAtleastOneCardInSubRound: false,
-      },
-    ],
-    playersFinishedOrder: [],
-    discardPile: [
-      {
-        show: true,
-        suit: Suit.DIAMONDS,
-        rank: 8,
-      },
-      {
-        show: true,
-        suit: Suit.HEARTS,
-        rank: 11,
-      },
-      {
-        show: true,
-        suit: Suit.SPADES,
-        rank: 13,
-      },
-    ],
-    lastPlayerToDiscardId: '1',
+    ...gameWithoutGameState,
+    state: ScumGameState.PREGAME,
+    players: [...players.slice(0, 2)],
+  },
+  stagedCards: [],
+};
+
+export const PreGameReadyToStart = Template.bind({});
+PreGameReadyToStart.args = {
+  user: { ...user },
+  game: {
+    ...gameWithoutGameState,
+    state: ScumGameState.PREGAME,
+  },
+  stagedCards: [],
+};
+
+export const InProgressRound1CleanBoard = Template.bind({});
+InProgressRound1CleanBoard.args = {
+  user: { ...user },
+  game: {
+    ...gameWithoutGameState,
     currentPlayerId: '1',
-    currentCardStackSize: 0,
+    state: ScumGameState.IN_PROGRESS,
   },
+  stagedCards: [],
+};
 
-  user: {
-    id: '1',
-    displayName: 'Aaron',
-    avatar: 'https://i.pravatar.cc/300',
+export const InProgressStagedCards = Template.bind({});
+InProgressStagedCards.args = {
+  user: { ...user },
+  game: {
+    ...gameWithoutGameState,
+    currentPlayerId: '1',
+    state: ScumGameState.IN_PROGRESS,
   },
-
-  stagedCards: [
-    {
-      show: true,
-      suit: Suit.DIAMONDS,
-      rank: 6,
-    },
-    {
-      show: true,
-      suit: Suit.CLUBS,
-      rank: 6,
-    },
-    {
-      show: true,
-      suit: Suit.HEARTS,
-      rank: 6,
-    },
-  ],
+  stagedCards: [players[0].cards[0], players[0].cards[1]],
 };

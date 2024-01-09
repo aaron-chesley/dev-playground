@@ -8,13 +8,18 @@ import { Card } from '@playground/cardly-util';
 })
 export class DisableStagedCardsConfirmBtnPipe implements PipeTransform {
   transform(stagedCards: Card[], currentCardStackSize: number): boolean {
-    const noCardsStaged = stagedCards.length === 0;
-    const stagedCardsEqualCurrentCardStackSize =
-      stagedCards.length === currentCardStackSize;
-    if (noCardsStaged || !stagedCardsEqualCurrentCardStackSize) {
-      return true;
+    const disableConfirmBtn = true;
+    const doNotDisableConfirmBtn = false;
+
+    const isFirstTurnOfRound = currentCardStackSize === 0;
+
+    if (
+      (isFirstTurnOfRound && stagedCards.length > 0) ||
+      (!isFirstTurnOfRound && stagedCards.length === currentCardStackSize)
+    ) {
+      return doNotDisableConfirmBtn;
     }
 
-    return false;
+    return disableConfirmBtn;
   }
 }

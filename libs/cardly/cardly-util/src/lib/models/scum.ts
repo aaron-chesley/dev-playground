@@ -41,3 +41,48 @@ export enum ScumGameState {
   IN_PROGRESS = 'IN_PROGRESS',
   POSTGAME = 'POSTGAME',
 }
+
+export class ScumGamee {
+  private players: string[] = [];
+  private currentPlayerIndex: number = 0;
+  private deck: string[] = [];
+  private hands: { [player: string]: string[] } = {};
+  private president: string | null = null;
+  private vicePresident: string | null = null;
+  private scum: string | null = null;
+  private viceScum: string | null = null;
+
+  constructor(players: string[]) {
+    this.players = players;
+    this.initializeGame();
+  }
+
+  private initializeGame(): void {
+    this.deck = this.generateDeck();
+    // this.shuffleDeck();
+    // this.dealCards();
+    // this.assignInitialRanks();
+  }
+
+  private generateDeck(): string[] {
+    // Generate a standard 52-card deck (you might want to consider Jokers if your variation includes them)
+    const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
+    const ranks = [
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '10',
+      'J',
+      'Q',
+      'K',
+      'A',
+    ];
+    return [];
+    // return suits.flatMap((suit) => ranks.map((rank) => `${rank} of ${suit}`));
+  }
+}
