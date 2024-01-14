@@ -54,7 +54,7 @@ export class ScumGame {
 
   public playCards(payload: { userId: string; cardsInPlay: Card[] }): void {
     let { userId, cardsInPlay } = payload;
-    let { currentUserTurnId, numOfCardsRequiredToPlay } = this.subRound;
+    let { currentUserTurnId, numOfCardsRequiredToPlay, discardPile } = this.subRound;
     let { hands } = this.round;
 
     if (this.phase !== ScumGamePhase.IN_PROGRESS) {
@@ -73,8 +73,15 @@ export class ScumGame {
       console.error('Cannot play turn without playing the correct number of cards.');
       return;
     }
-    if (!haveSameProperty(cardsInPlay, 'rank')) {
-      console.error('Cannot play turn without playing cards of the same rank.');
+    if (!cardsInPlay.every((card) => card.rank === cardsInPlay[0].rank)) {
+      console.error('All cards must be of the same rank.');
+      return;
+    }
+    if (
+      discardPile.length &&
+      cardsInPlay.some((card) => card.numericalRank < discardPile[discardPile.length - 1].numericalRank)
+    ) {
+      console.error('All cards must be of equa or greater numerical rank than the last card played.');
       return;
     }
     if (!this.areCardsBeingPlayedInPlayersHand(cardsInPlay, hands[userId].cards)) {

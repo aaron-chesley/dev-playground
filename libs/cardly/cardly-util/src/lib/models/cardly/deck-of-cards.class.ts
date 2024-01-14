@@ -48,52 +48,67 @@ export class DeckOfCards {
     ];
 
     this.suits.forEach((suit) =>
-      this.ranks.forEach((rank) => {
+      this.ranks.forEach((rank, rankIndex) => {
         let order: number;
+        let numericalRank: number;
         switch (rank) {
           case Rank.TWO:
             order = 2;
+            numericalRank = 2;
             break;
           case Rank.THREE:
             order = 3;
+            numericalRank = 3;
             break;
           case Rank.FOUR:
             order = 4;
+            numericalRank = 4;
             break;
           case Rank.FIVE:
             order = 5;
+            numericalRank = 5;
             break;
           case Rank.SIX:
             order = 6;
+            numericalRank = 6;
             break;
           case Rank.SEVEN:
             order = 7;
+            numericalRank = 7;
             break;
           case Rank.EIGHT:
             order = 8;
+            numericalRank = 8;
             break;
           case Rank.NINE:
             order = 9;
+            numericalRank = 9;
             break;
           case Rank.TEN:
             order = 10;
+            numericalRank = 10;
             break;
           case Rank.JACK:
             order = 11;
+            numericalRank = 11;
             break;
           case Rank.QUEEN:
             order = 12;
+            numericalRank = 12;
             break;
           case Rank.KING:
             order = 13;
+            numericalRank = 13;
             break;
           case Rank.ACE:
             order = config.acesHigh ? 14 : 1;
+            numericalRank = config.acesHigh ? 14 : 1;
             break;
         }
 
         this.deck.push({
           rank: rank,
+          numericalRank: numericalRank,
           suit: suit,
           order: order,
         });
@@ -104,6 +119,7 @@ export class DeckOfCards {
       for (let i = 0; i < config.jokers.numToInclude; i++) {
         this.deck.push({
           rank: Rank.JOKER,
+          numericalRank: null,
           suit: null,
           order: Math.max(...this.deck.filter((card) => card.rank !== Rank.JOKER).map((card) => card.order)) + 1,
         });
