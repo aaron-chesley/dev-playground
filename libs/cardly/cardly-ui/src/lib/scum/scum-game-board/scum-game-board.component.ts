@@ -8,13 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  Card,
-  CardlyUser,
-  ScumGame,
-  ScumGameState,
-  ScumRank,
-} from '@playground/cardly-util';
+import { Card, CardlyUser, ScumGamePhase, ScumRank } from '@playground/cardly-util';
 import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playing-card/cardly-playing-card.component';
 import {
   emojiEvents,
@@ -24,12 +18,9 @@ import {
   PlayIconComponent,
   PlayIconRegistryService,
 } from '@playground/play-ui';
-import { MePipe } from '../../shared/pipes/me.pipe';
-import { DisableStagedCardsConfirmBtnPipe } from '../../shared/pipes/disable-staged-cards-confirm-btn.pipe';
-import { IsUsersTurnPipe } from '../../shared/pipes/is-users-turn.pipe';
-import { DisableCardSwapConfirmBtnPipe } from '../../shared/pipes/disable-card-swap-confirm-btn.pipe';
 import { cardlyPlayingCards, cardlyScore } from '../../cardly-icons';
 import { fadeAnimation, listAnimation } from '../../animations';
+import { ScumGameState } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-game-state.interface';
 
 @Component({
   selector: 'scum-game-board',
@@ -44,22 +35,18 @@ import { fadeAnimation, listAnimation } from '../../animations';
     CardlyPlayingCardComponent,
     PlayButtonComponent,
     PlayButtonGroupComponent,
-    MePipe,
-    DisableStagedCardsConfirmBtnPipe,
-    DisableCardSwapConfirmBtnPipe,
-    IsUsersTurnPipe,
     PlayButtonComponent,
     PlayButtonGroupComponent,
     PlayIconComponent,
   ],
 })
 export class ScumGameBoardComponent {
-  GameState = ScumGameState;
+  GamePhase = ScumGamePhase;
   ScumRank = ScumRank;
   @HostBinding('class.scum-game-board') class = 'scum-game-board';
-  @Input() game: ScumGame;
+  @Input() game: ScumGameState;
   @Input() user: CardlyUser;
-  @Input() stagedCards: Card[];
+  @Input() stagedCardIndices: number[];
   @Output() onSwipeLeft = new EventEmitter();
   @Output() onSwipeRight = new EventEmitter();
   @Output() startGame = new EventEmitter();
@@ -69,12 +56,63 @@ export class ScumGameBoardComponent {
   @Output() unstageCard = new EventEmitter<number>();
   @Output() confirmStagedCardsSelection = new EventEmitter();
 
+  get gamePhase(): ScumGamePhase {
+    return this.game.phase;
+  }
+
+  get hand(): Card[] {
+    return this.game.hand;
+  }
+
+  get players(): ScumGameState['players'] {
+    return this.game.players;
+  }
+
+  get currentUserTurnId(): string {
+    return this.game.currentUserTurnId;
+  }
+
+  get isMyTurn(): boolean {
+    return this.currentUserTurnId && this.currentUserTurnId === this.user.id;
+  }
+
+  get gameOwnerUserId(): string {
+    return this.game.gameOwnerUserId;
+  }
+
+  get discardPile(): Card[] {
+    return this.game.discardPile;
+  }
+
+  get numOfCardsRequiredToPlay(): number {
+    return this.game.numOfCardsRequiredToPlay;
+  }
+
+  get president(): CardlyUser {
+    return this.players[0].user;
+  }
+
+  get vicePresident(): CardlyUser {
+    return this.players[1].user;
+  }
+
+  get scum(): CardlyUser {
+    return this.players[this.players.length - 1].user;
+  }
+
+  get viceScum(): CardlyUser {
+    return this.players[this.players.length - 2].user;
+  }
+
+  get presidentTraded(): boolean {
+    return this.game.presidentTraded;
+  }
+
+  get vicePresidentTraded(): boolean {
+    return this.game.vicePresidentTraded;
+  }
+
   constructor(private playIconService: PlayIconRegistryService) {
-    this.playIconService.registerIcons([
-      localParking,
-      emojiEvents,
-      cardlyScore,
-      cardlyPlayingCards,
-    ]);
+    this.playIconService.registerIcons([localParking, emojiEvents, cardlyScore, cardlyPlayingCards]);
   }
 }

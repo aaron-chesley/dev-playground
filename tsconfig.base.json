@@ -19,7 +19,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cardly/cardly-features": ["libs/cardly/cardly-features/src/index.ts"],
+      "@cardly/cardly-features": ["libs/cardly/cardly-features/src/lib/index.ts"],
       "@playground/cardly-data": ["libs/cardly/cardly-data/src/index.ts"],
       "@playground/cardly-ui": ["libs/cardly/cardly-ui/src/index.ts"],
       "@playground/cardly-util": ["libs/cardly/cardly-util/src/index.ts"],
@@ -30,13 +30,10 @@
       "@playground/lms-util": ["libs/lms/lms-util/src/index.ts"],
       "@playground/play-storybook": ["libs/play-storybook/src/index.ts"],
       "@playground/play-ui": ["libs/play-ui/src/index.ts"],
-      "@playground/shared/shared-data": [
-        "libs/shared/shared-data/src/index.ts"
-      ],
-      "@playground/shared/shared-features": [
-        "libs/shared/shared-features/src/index.ts"
-      ],
-      "@playground/shared/shared-util": ["libs/shared/shared-util/src/index.ts"]
+      "@playground/shared/shared-data": ["libs/shared/shared-data/src/index.ts"],
+      "@playground/shared/shared-features": ["libs/shared/shared-features/src/index.ts"],
+      "@playground/shared/util/array": ["libs/shared/shared-util/src/lib/array-util/index.ts"],
+      "@playground/shared/util/pagination": ["libs/shared/shared-util/src/lib/pagination-util/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

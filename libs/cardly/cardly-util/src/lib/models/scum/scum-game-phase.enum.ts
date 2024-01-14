@@ -1,0 +1,6 @@
+export enum ScumGamePhase {
+  PREGAME = 'PREGAME',
+  CARD_SWAP = 'CARD_SWAP',
+  IN_PROGRESS = 'IN_PROGRESS',
+  POSTGAME = 'POSTGAME',
+}

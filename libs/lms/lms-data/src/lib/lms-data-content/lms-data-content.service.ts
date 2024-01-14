@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { ApiService } from '@playground/shared/shared-data';
-import { Paginated } from '@playground/shared/shared-util';
 import {
   LmsContentItem,
   LmsContentItemCreate,
   getLmsContentItem,
 } from '@playground/lms-util';
+import { Paginated } from '@playground/shared/util/pagination';
 
 @Injectable({
   providedIn: 'root',
@@ -32,16 +32,16 @@ export class LmsDataContentService {
       .pipe(
         map((item) => {
           return getLmsContentItem(item, item.content_type);
-        })
+        }),
       );
   }
 
   searchContent(
     searchPath: string = '',
-    pageNumber = '1'
+    pageNumber = '1',
   ): Observable<Paginated<LmsContentItem>> {
     return this.apiService.get<Paginated<LmsContentItem>>(
-      'content/?expand=video&page_size=8&page=' + pageNumber + '&' + searchPath
+      'content/?expand=video&page_size=8&page=' + pageNumber + '&' + searchPath,
     );
   }
 }

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { LmsDataContentService } from '@playground/lms-data';
 import { LmsContentItem, LmsContentItemCreate } from '@playground/lms-util';
-import { getDefaultPaginated, Paginated } from '@playground/shared/shared-util';
+import {
+  Paginated,
+  getDefaultPaginated,
+} from '@playground/shared/util/pagination';
 import { BehaviorSubject } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 
@@ -25,15 +28,15 @@ export class LmsFeatureContentListStore {
     .pipe(shareReplay());
 
   readonly contentList$ = this.contentListState$.pipe(
-    map((state) => state.contentList.results)
+    map((state) => state.contentList.results),
   );
 
   readonly currentPage$ = this.contentListState$.pipe(
-    map((state) => state.contentList.page_number)
+    map((state) => state.contentList.page_number),
   );
 
   readonly count$ = this.contentListState$.pipe(
-    map((state) => state.contentList.count)
+    map((state) => state.contentList.count),
   );
 
   // Reducers

@@ -55,7 +55,10 @@
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 10px;
   width: 170px;
+  color: white;
 }
 
 .pass-container {
@@ -97,7 +100,7 @@ $margin-bottom: 5px;
   flex-direction: column;
   align-items: center;
   width: 112px;
-  height: 147px;
+  height: 155px;
   box-sizing: border-box;
   padding: 10px;
   color: white;
@@ -111,7 +114,6 @@ $margin-bottom: 5px;
   height: $avatar-icon-size;
   width: $avatar-icon-size;
   background-size: cover;
-  margin-bottom: $margin-bottom;
   border-radius: 50%;
 }
 
@@ -134,4 +136,10 @@ $margin-bottom: 5px;
 
 .is-my-turn {
   background: transparentize($color: #000000, $amount: 0.6%) !important;
+}
+
+.card-is-staged {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
 }
