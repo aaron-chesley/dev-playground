@@ -16,6 +16,7 @@ import {
   PlayIconRegistryService,
   PlaySelectComponent,
 } from '@playground/play-ui';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'lms-ui-employee-table',
@@ -24,6 +25,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    DatePipe,
     CdkTableModule,
     PlayCheckboxComponent,
     PlayButtonComponent,
