@@ -4,6 +4,7 @@ import { ScumHand } from './scum-hand.interface';
 import { ScumSubRound, getScumSubRound } from './scum-sub-round.interface';
 import { ScumRound, getScumRound } from './scum-round.interface';
 import { ScumGameState } from './scum-game-state.interface';
+import { randomId } from '@playground/shared/util/id';
 
 export class ScumGame {
   public readonly gameId: string;
@@ -18,7 +19,7 @@ export class ScumGame {
   private vicePresidentTraded: boolean = false;
 
   constructor(user: CardlyUser) {
-    this.gameId = Math.random().toString(36).substr(2, 9);
+    this.gameId = randomId();
     this.gameOwnerUserId = user.id;
     this.phase = ScumGamePhase.PREGAME;
     this.addUserToGame(user);

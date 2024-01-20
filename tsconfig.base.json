@@ -33,6 +33,7 @@
       "@playground/shared/shared-data": ["libs/shared/shared-data/src/index.ts"],
       "@playground/shared/shared-features": ["libs/shared/shared-features/src/index.ts"],
       "@playground/shared/util/array": ["libs/shared/shared-util/src/lib/array-util/index.ts"],
+      "@playground/shared/util/id": ["libs/shared/shared-util/src/lib/id-util/index.ts"],
       "@playground/shared/util/pagination": ["libs/shared/shared-util/src/lib/pagination-util/index.ts"]
     }
   },

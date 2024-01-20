@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CardlyUser } from '@playground/cardly-util';
+import { randomId } from '@playground/shared/util/id';
 
 @Injectable({ providedIn: 'root' })
 export class CardlyAuthenticationService {
@@ -9,7 +10,7 @@ export class CardlyAuthenticationService {
     if (this.user === null) {
       const name = window.prompt('Enter your name');
       const user = {
-        id: crypto.randomUUID(),
+        id: randomId(),
         displayName: name ?? 'Anonymous',
         avatar: 'https://i.pravatar.cc/300',
       };

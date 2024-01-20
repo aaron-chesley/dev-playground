@@ -139,7 +139,7 @@ export class CardlyServer {
       });
     });
 
-    this.server.listen(3000, () => {
+    this.server.listen(3000, '0.0.0.0', () => {
       console.log('WebSocket server listening on port 3000');
     });
   }
