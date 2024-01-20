@@ -24,14 +24,15 @@
   (overlayKeydown)="onOverlayKeydown($event)"
 >
   <div class="play-virtual-scroll-wrapper">
-    <input
-      *ngIf="showSearch"
-      class="play-select-search-input"
-      playInputText
-      [formControl]="searchCtrl"
-      type="text"
-      placeholder="Search..."
-    />
+    @if (showSearch) {
+      <input
+        class="play-select-search-input"
+        playInputText
+        [formControl]="searchCtrl"
+        type="text"
+        placeholder="Search..."
+      />
+    }
     <cdk-virtual-scroll-viewport
       #virtualScrollViewport
       [style.height.px]="viewportHeight$ | async"
@@ -45,29 +46,18 @@
           *cdkVirtualFor="let option of filteredOptions$ | async; let i = index"
           #listOptionRefs
           class="play-select-option"
-          [class.play-select-option-active]="
-            !multiple && selection.isSelected(option)
-          "
+          [class.play-select-option-active]="!multiple && selection.isSelected(option)"
           (click)="toggleOption(option)"
           [attr.index]="i"
           tabindex="0"
         >
-          <play-checkbox
-            *ngIf="multiple; else singleValueTemplate"
-            [checked]="selection.isSelected(option)"
-          >
-            <template
-              [ngTemplateOutlet]="template"
-              [ngTemplateOutletContext]="{ $implicit: option }"
-            ></template>
-          </play-checkbox>
-
-          <ng-template #singleValueTemplate>
-            <template
-              [ngTemplateOutlet]="template"
-              [ngTemplateOutletContext]="{ $implicit: option }"
-            ></template>
-          </ng-template>
+          @if (multiple) {
+            <play-checkbox [checked]="selection.isSelected(option)">
+              <template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: option }"></template>
+            </play-checkbox>
+          } @else {
+            <template [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: option }"></template>
+          }
         </li>
       </ul>
     </cdk-virtual-scroll-viewport>

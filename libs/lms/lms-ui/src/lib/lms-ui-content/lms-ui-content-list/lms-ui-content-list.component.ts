@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -28,7 +27,6 @@ import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     LmsUiVideoItemComponent,
     PlayPaginatorComponent,

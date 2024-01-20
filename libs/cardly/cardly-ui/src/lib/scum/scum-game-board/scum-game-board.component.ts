@@ -7,7 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgStyle } from '@angular/common';
 import { Card, CardlyUser, ScumGamePhase, ScumGameState, ScumRank } from '@playground/cardly-util';
 import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playing-card/cardly-playing-card.component';
 import {
@@ -30,7 +30,7 @@ import { fadeAnimation, listAnimation } from '../../animations';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    CommonModule,
+    NgStyle,
     CardlyPlayingCardComponent,
     PlayButtonComponent,
     PlayButtonGroupComponent,

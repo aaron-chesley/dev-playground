@@ -1,16 +1,12 @@
 <div class="tags-list-wrapper">
-  <play-card class="lms-card" *ngFor="let tag of tags">
-    <play-card-body>
-      <span>{{ tag.name }}</span>
-    </play-card-body>
-    <play-card-footer>
-      <button
-        playButton
-        appearance="play-outline"
-        (click)="deleteTagClick.emit(tag)"
-      >
-        Delete
-      </button>
-    </play-card-footer>
-  </play-card>
+  @for (tag of tags; track tag) {
+    <play-card class="lms-card">
+      <play-card-body>
+        <span>{{ tag.name }}</span>
+      </play-card-body>
+      <play-card-footer>
+        <button playButton appearance="play-outline" (click)="deleteTagClick.emit(tag)">Delete</button>
+      </play-card-footer>
+    </play-card>
+  }
 </div>

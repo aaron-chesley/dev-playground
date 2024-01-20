@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PlayIconRegistryService } from '../../play-icon/play-icon-registry.service';
@@ -16,7 +15,6 @@ import { PlayFormFieldComponent } from '../play-form-field.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     PlayFormFieldComponent,
     PlayFormFieldLabelComponent,

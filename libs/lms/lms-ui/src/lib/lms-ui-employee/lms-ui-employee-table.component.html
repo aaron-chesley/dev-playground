@@ -35,9 +35,7 @@
     <!-- Name Column -->
     <ng-container cdkColumnDef="name">
       <th cdk-header-cell *cdkHeaderCellDef>Name</th>
-      <td cdk-cell *cdkCellDef="let employee">
-        {{ employee.first_name }} {{ employee.last_name }}
-      </td>
+      <td cdk-cell *cdkCellDef="let employee">{{ employee.first_name }} {{ employee.last_name }}</td>
     </ng-container>
 
     <!-- Email Column -->
@@ -60,7 +58,9 @@
     <ng-container cdkColumnDef="is_admin">
       <th cdk-header-cell *cdkHeaderCellDef>Is Admin</th>
       <td cdk-cell *cdkCellDef="let employee">
-        <play-icon *ngIf="employee.is_admin" name="check"></play-icon>
+        @if (employee.is_admin) {
+          <play-icon name="check"></play-icon>
+        }
       </td>
     </ng-container>
 

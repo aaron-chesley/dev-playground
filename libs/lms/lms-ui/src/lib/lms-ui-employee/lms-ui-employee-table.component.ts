@@ -5,7 +5,6 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { CdkTableModule } from '@angular/cdk/table';
 import { SelectionModel } from '@angular/cdk/collections';
 import { LmsEmployee } from '@playground/lms-util';
@@ -25,7 +24,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     CdkTableModule,
     PlayCheckboxComponent,
     PlayButtonComponent,

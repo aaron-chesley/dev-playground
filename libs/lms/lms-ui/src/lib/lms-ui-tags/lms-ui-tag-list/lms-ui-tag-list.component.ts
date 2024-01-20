@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -18,7 +17,6 @@ import { LmsUiTag } from '../lms-ui-tag.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     PlayCardComponent,
     PlayCardBodyComponent,
     PlayCardFooterComponent,

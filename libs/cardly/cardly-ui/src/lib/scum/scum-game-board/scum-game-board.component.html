@@ -1,80 +1,108 @@
-<ng-container *ngIf="gamePhase !== GamePhase.POSTGAME; else postGame" (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
+@if (gamePhase !== GamePhase.POSTGAME) {
+  <ng-container (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
+    <div class="scum-player-card-list">
+      @for (player of players; track player.user.id; let i = $index) {
+        <div class="scum-player-card" [class.is-my-turn]="currentUserTurnId === players[i].user.id">
+          <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
+            @if (GamePhase.IN_PROGRESS === gamePhase && player.passed) {
+              <play-icon name="localParking" color="red" [size]="50"></play-icon>
+            }
+            @if (GamePhase.IN_PROGRESS === gamePhase && !player.numOfCards) {
+              <play-icon name="emojiEvents" color="gold" [size]="50"></play-icon>
+            }
+          </div>
+          <div class="player-name">{{ player.user.displayName }}</div>
+          <div class="stat-wrapper">
+            <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
+            <span>{{ 0 }}</span>
+          </div>
+          <div class="stat-wrapper">
+            <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
+            <span>{{ player.numOfCards }}</span>
+          </div>
+        </div>
+      }
+    </div>
 
-  <div class="scum-player-card-list">
-    @for (player of players; track player.user.id; let i = $index) {
-      <div class="scum-player-card" [class.is-my-turn]="currentUserTurnId === players[i].user.id">
-        <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
-          <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && player.passed" name="localParking" color="red" [size]="50"></play-icon>
-          <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && !player.numOfCards" name="emojiEvents" color="gold" [size]="50"></play-icon>
-        </div>
-        <div class="player-name">{{ player.user.displayName }}</div>
-        <div class="stat-wrapper">
-          <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
-          <span>{{ 0 }}</span>
-        </div>
-        <div class="stat-wrapper">
-          <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
-          <span>{{ player.numOfCards }}</span>
-        </div>
+    @if (GamePhase.PREGAME === gamePhase) {
+      <div class="start-container">
+        @if (game.players.length >= 4 && user.id === gameOwnerUserId) {
+          <button playButton appearance="play-flat" theme="primary" (click)="startGame.emit()">Start</button>
+        }
+        <small>Waiting for players...</small>
       </div>
     }
-  </div>
 
-  <div class="start-container" *ngIf="GamePhase.PREGAME === gamePhase">
-    <button *ngIf="game.players.length >= 4 && user.id === gameOwnerUserId" playButton appearance="play-flat" theme="primary" (click)="startGame.emit()">Start</button>
-    <small>Waiting for players...</small>
-  </div>
-
-  <div class="start-container" *ngIf="GamePhase.CARD_SWAP === gamePhase">
-    <button playButton appearance="play-flat" theme="primary" *ngIf="user.id === president.id && !presidentTraded" (click)="swapCards.emit()" [disabled]="false">Confirm Selection</button>
-    <button playButton appearance="play-flat" theme="primary" *ngIf="user.id === vicePresident.id && !vicePresidentTraded" (click)="swapCards.emit()" [disabled]="false">Confirm Selection</button>
-    <small>Card swap in progress...</small>
-    <small *ngIf="user.id === president.id && !presidentTraded">Pick two cards to give to Scum.</small>
-    <small *ngIf="user.id === vicePresident.id && !vicePresidentTraded">Pick one card to give to Vice Scum.</small>
-  </div>
-
-  <div class="pass-container" *ngIf="GamePhase.IN_PROGRESS === gamePhase && user.id === currentUserTurnId">
-    <play-button-group [gap]="5">
-      <button playButton appearance="play-flat" theme="primary" (click)="passTurn.emit(user.id)">Pass</button>
-      <button playButton appearance="play-flat" (click)="confirmStagedCardsSelection.emit()" [disabled]="false">Confirm</button>
-    </play-button-group>
-  </div>
-
-  <div class="discard-container" [@listAnimation]="game.discardPile.length" *ngIf="GamePhase.IN_PROGRESS === gamePhase">
-    @for (card of game.discardPile; track $index) {
-      <div class="card-container">
-        <div class="card">
-          <cardly-playing-card [card]="card"></cardly-playing-card>
-        </div>
+    @if (GamePhase.CARD_SWAP === gamePhase) {
+      <div class="start-container">
+        @if (user.id === president.id && !presidentTraded) {
+          <button playButton appearance="play-flat" theme="primary" (click)="swapCards.emit()" [disabled]="false">
+            Confirm Selection
+          </button>
+        }
+        @if (user.id === vicePresident.id && !vicePresidentTraded) {
+          <button playButton appearance="play-flat" theme="primary" (click)="swapCards.emit()" [disabled]="false">
+            Confirm Selection
+          </button>
+        }
+        <small>Card swap in progress...</small>
+        @if (user.id === president.id && !presidentTraded) {
+          <small>Pick two cards to give to Scum.</small>
+        }
+        @if (user.id === vicePresident.id && !vicePresidentTraded) {
+          <small>Pick one card to give to Vice Scum.</small>
+        }
       </div>
     }
-  </div>
 
-  <div class="staged-container" [@listAnimation]="stagedCardIndices.length">
-    @for (cardIndex of stagedCardIndices; track i; let i = $index) {
-      <div class="card-container">
-        <div class="card">
-          <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
-        </div>
+    @if (GamePhase.IN_PROGRESS === gamePhase && user.id === currentUserTurnId) {
+      <div class="pass-container">
+        <play-button-group [gap]="5">
+          <button playButton appearance="play-flat" theme="primary" (click)="passTurn.emit(user.id)">Pass</button>
+          <button playButton appearance="play-flat" (click)="confirmStagedCardsSelection.emit()" [disabled]="false">
+            Confirm
+          </button>
+        </play-button-group>
       </div>
     }
-  </div>
 
-  <div class="hand-container" [@listAnimation]="hand.length">
-    @for (card of hand; track i; let i = $index) {
-      <div class="card-container">
-        <div class="card" [class.card-is-staged]="stagedCardIndices.includes(i)">
-          <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
-        </div>
+    @if (GamePhase.IN_PROGRESS === gamePhase) {
+      <div class="discard-container" [@listAnimation]="game.discardPile.length">
+        @for (card of game.discardPile; track $index) {
+          <div class="card-container">
+            <div class="card">
+              <cardly-playing-card [card]="card"></cardly-playing-card>
+            </div>
+          </div>
+        }
       </div>
     }
-  </div>
 
-</ng-container>
+    <div class="staged-container" [@listAnimation]="stagedCardIndices.length">
+      @for (cardIndex of stagedCardIndices; track i; let i = $index) {
+        <div class="card-container">
+          <div class="card">
+            <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
+          </div>
+        </div>
+      }
+    </div>
 
-<ng-template #postGame>
+    <div class="hand-container" [@listAnimation]="hand.length">
+      @for (card of hand; track i; let i = $index) {
+        <div class="card-container">
+          <div class="card" [class.card-is-staged]="stagedCardIndices.includes(i)">
+            <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
+          </div>
+        </div>
+      }
+    </div>
+  </ng-container>
+} @else {
   <div class="post-round-container">
-    <button *ngIf="user.id === gameOwnerUserId" playButton appearance="play-flat" theme="primary" (click)="startNewRound.emit()">Start New Round</button>
+    @if (user.id === gameOwnerUserId) {
+      <button playButton appearance="play-flat" theme="primary" (click)="startNewRound.emit()">Start New Round</button>
+    }
     <table class="round-finished-table">
       <thead>
         <tr>
@@ -92,4 +120,4 @@
       </tbody>
     </table>
   </div>
-</ng-template>
+}

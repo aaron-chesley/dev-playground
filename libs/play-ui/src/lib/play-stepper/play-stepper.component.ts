@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,6 +5,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'play-stepper',
@@ -14,7 +14,7 @@ import { CdkStepper, CdkStepperModule } from '@angular/cdk/stepper';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [CommonModule, CdkStepperModule],
+  imports: [NgTemplateOutlet, CdkStepperModule],
   providers: [{ provide: CdkStepper, useExisting: PlayStepperComponent }],
 })
 export class PlayStepperComponent extends CdkStepper {

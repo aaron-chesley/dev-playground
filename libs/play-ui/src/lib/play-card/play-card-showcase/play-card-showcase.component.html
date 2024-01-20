@@ -1,18 +1,18 @@
 <play-card [style.height.px]="cardHeight">
-  <play-card-header *ngIf="showHeader" position="space-between">
-    <span>Confirm</span>
-    <button playButton appearance="play-icon-btn" theme="accent">
-      <play-icon name="close"></play-icon>
-    </button>
-  </play-card-header>
+  @if (showHeader) {
+    <play-card-header position="space-between">
+      <span>Confirm</span>
+      <button playButton appearance="play-icon-btn" theme="accent">
+        <play-icon name="close"></play-icon>
+      </button>
+    </play-card-header>
+  }
   <play-card-body>
     <div class="content">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error culpa,
-      possimus consequatur nemo cupiditate nesciunt ad repellendus vero officia
-      distinctio id sunt nobis. Eligendi fuga facilis repudiandae similique.
-      Eos, ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit.
-      Distinctio ab asperiores praesentium ipsum ratione! Illum, culpa accusamus
-      at enim eius officia delectus nostrum fugit natus, ullam ea eum nemo.
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error culpa, possimus consequatur nemo cupiditate
+      nesciunt ad repellendus vero officia distinctio id sunt nobis. Eligendi fuga facilis repudiandae similique. Eos,
+      ducimus! Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ab asperiores praesentium ipsum
+      ratione! Illum, culpa accusamus at enim eius officia delectus nostrum fugit natus, ullam ea eum nemo.
     </div>
     <play-checkbox>
       <strong>
@@ -21,12 +21,12 @@
       </strong>
     </play-checkbox>
   </play-card-body>
-  <play-card-footer *ngIf="showFooter" position="right">
-    <play-button-group [gap]="10">
-      <button playButton appearance="play-outline" theme="accent">
-        Cancel
-      </button>
-      <button playButton appearance="play-flat" theme="accent">Accept</button>
-    </play-button-group>
-  </play-card-footer>
+  @if (showFooter) {
+    <play-card-footer position="right">
+      <play-button-group [gap]="10">
+        <button playButton appearance="play-outline" theme="accent">Cancel</button>
+        <button playButton appearance="play-flat" theme="accent">Accept</button>
+      </play-button-group>
+    </play-card-footer>
+  }
 </play-card>

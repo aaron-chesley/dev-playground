@@ -1,4 +1,4 @@
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT, KeyValuePipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -25,7 +25,7 @@ import { PLAY_CSS_VARIABLES } from '../play-variables';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
+    KeyValuePipe,
     ReactiveFormsModule,
     FormsModule,
     PlayButtonComponent,

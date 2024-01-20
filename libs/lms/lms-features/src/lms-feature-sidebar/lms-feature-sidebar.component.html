@@ -1,12 +1,10 @@
 <lms-ui-sidebar [isLoading]="isLoading$ | async">
-  <lms-ui-sidebar-item
-    *ngFor="let link of lmsNavLinks$ | async"
-    [routerLink]="link.routerLink"
-    routerLinkActive="active"
-  >
-    <play-icon [name]="link.icon"></play-icon>
-    <span>{{ link.title }}</span>
-  </lms-ui-sidebar-item>
+  @for (link of lmsNavLinks$ | async; track link) {
+    <lms-ui-sidebar-item [routerLink]="link.routerLink" routerLinkActive="active">
+      <play-icon [name]="link.icon"></play-icon>
+      <span>{{ link.title }}</span>
+    </lms-ui-sidebar-item>
+  }
   <lms-ui-sidebar-item (click)="onLogoutClick()">
     <play-icon name="logout"></play-icon>
     <span>Logout</span>

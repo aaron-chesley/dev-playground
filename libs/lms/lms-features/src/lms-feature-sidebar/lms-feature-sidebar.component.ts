@@ -23,7 +23,6 @@ import {
 } from '@playground/play-ui';
 import { RouterModule } from '@angular/router';
 import { getNavLinksFromUserType, LmsNavLink } from './lms-nav-links';
-import { CommonModule } from '@angular/common';
 import { HttpLoadingIndicatorService } from '@playground/shared/shared-features';
 
 @Component({
@@ -32,7 +31,6 @@ import { HttpLoadingIndicatorService } from '@playground/shared/shared-features'
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     RouterModule,
     LmsUiSidebarComponent,
     LmsUiSidebarItemComponent,

@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { PlayButtonGroupComponent } from '../../play-button/play-button-group/play-button-group.component';
 import { PlayButtonComponent } from '../../play-button/play-button.component';
@@ -18,7 +17,6 @@ import { PlayCardComponent } from '../play-card/play-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    CommonModule,
     PlayCardComponent,
     PlayCardHeaderComponent,
     PlayCardBodyComponent,

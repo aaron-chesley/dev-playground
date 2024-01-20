@@ -2,7 +2,9 @@
   <div class="accordion-item-header">
     <ng-content select="[header]"></ng-content>
   </div>
-  <div class="accordion-item-content" *ngIf="isOpen">
-    <ng-content select="[content]"></ng-content>
-  </div>
+  @if (isOpen) {
+    <div class="accordion-item-content">
+      <ng-content select="[content]"></ng-content>
+    </div>
+  }
 </div>

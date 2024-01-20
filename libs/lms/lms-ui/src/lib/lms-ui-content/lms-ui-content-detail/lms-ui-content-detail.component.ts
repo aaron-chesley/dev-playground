@@ -34,7 +34,6 @@ import {
 import { LmsContentItem, LmsContentItemForm } from '@playground/lms-util';
 import { YouTubeIdPipe } from '../youtube-id.pipe';
 import { getLmsAssessmentForm } from 'libs/lms/lms-util/src/lib/interfaces/lms-assessment.interface';
-import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'lms-ui-content-detail',
@@ -44,8 +43,6 @@ import { NgFor, NgIf } from '@angular/common';
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    NgFor,
-    NgIf,
     ReactiveFormsModule,
     YouTubePlayerModule,
     PlayCardComponent,

@@ -1,11 +1,6 @@
 <div class="container">
   <div class="search-paginator-container">
-    <input
-      type="text"
-      playInputText
-      placeholder="Search"
-      [formControl]="_searchCtrl"
-    />
+    <input type="text" playInputText placeholder="Search" [formControl]="_searchCtrl" />
     <play-paginator
       [count]="count"
       [itemsPerPage]="itemsPerPage"
@@ -13,27 +8,19 @@
       (nextPageClick)="nextPageClick.emit()"
       (previousPageClick)="previousPageClick.emit()"
     ></play-paginator>
-    <button
-      playButton
-      appearance="play-outline"
-      theme="primary"
-      (click)="createNewContent.emit()"
-    >
-      Create
-    </button>
+    <button playButton appearance="play-outline" theme="primary" (click)="createNewContent.emit()">Create</button>
   </div>
   <div class="content-list-wrapper">
-    <ng-container
-      *ngFor="let contentItem of contentItems"
-      [ngSwitch]="contentItem.content_type"
-    >
-      <ng-container *ngSwitchCase="'VIDEO'">
-        <lms-ui-video-item
-          class="lms-ui-content-item"
-          [video]="contentItem.video"
-          (click)="contentItemClick.emit(contentItem)"
-        ></lms-ui-video-item>
-      </ng-container>
-    </ng-container>
+    @for (contentItem of contentItems; track contentItem) {
+      @switch (contentItem.content_type) {
+        @case ('VIDEO') {
+          <lms-ui-video-item
+            class="lms-ui-content-item"
+            [video]="contentItem.video"
+            (click)="contentItemClick.emit(contentItem)"
+          ></lms-ui-video-item>
+        }
+      }
+    }
   </div>
 </div>

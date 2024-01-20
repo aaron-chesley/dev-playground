@@ -7,18 +7,15 @@
 
   <footer class="example-step-navigation-bar">
     <button class="example-nav-button" cdkStepperPrevious>&larr;</button>
-    <button
-      class="example-step"
-      [class.example-active]="selectedIndex === i"
-      *ngFor="let step of steps; let i = index"
-      (click)="selectStepByIndex(i)"
-    >
-      <ng-container
-        *ngIf="step.stepLabel; else defaultStepLabel"
-        [ngTemplateOutlet]="step.stepLabel.template"
-      ></ng-container>
-      <ng-template #defaultStepLabel>Step {{ i + 1 }}</ng-template>
-    </button>
+    @for (step of steps; track step; let i = $index) {
+      <button class="example-step" [class.example-active]="selectedIndex === i" (click)="selectStepByIndex(i)">
+        @if (step.stepLabel) {
+          <ng-container [ngTemplateOutlet]="step.stepLabel.template"></ng-container>
+        } @else {
+          Step {{ i + 1 }}
+        }
+      </button>
+    }
     <button class="example-nav-button" cdkStepperNext>&rarr;</button>
   </footer>
 </section>

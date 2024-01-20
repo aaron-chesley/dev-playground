@@ -16,7 +16,7 @@ import {
   ViewChild,
   Inject,
 } from '@angular/core';
-import { AsyncPipe, NgIf, NgTemplateOutlet, DOCUMENT } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet, DOCUMENT } from '@angular/common';
 import {
   ControlValueAccessor,
   FormControl,
@@ -54,7 +54,6 @@ const isValidHtmlInputValue = (event: KeyboardEvent): boolean => {
   imports: [
     AsyncPipe,
     NgTemplateOutlet,
-    NgIf,
     ReactiveFormsModule,
     OverlayModule,
     A11yModule,

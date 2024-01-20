@@ -1,17 +1,9 @@
 <div class="colors-container" [formGroup]="colorsForm">
-  <ng-container
-    *ngFor="
-      let variableNameControl of colorsForm.controls
-        | keyvalue: this.originalOrder
-    "
-  >
+  @for (variableNameControl of colorsForm.controls | keyvalue: this.originalOrder; track variableNameControl) {
     <label
       >{{ variableNameControl.key }}
-      <input
-        [formControl]="colorsForm.controls[variableNameControl.key]"
-        type="color"
-      />
+      <input [formControl]="colorsForm.controls[variableNameControl.key]" type="color" />
     </label>
-  </ng-container>
+  }
 </div>
 <play-button-showcase></play-button-showcase>

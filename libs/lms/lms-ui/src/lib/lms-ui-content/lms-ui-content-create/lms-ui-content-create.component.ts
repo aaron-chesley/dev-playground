@@ -1,5 +1,4 @@
 import { DialogRef } from '@angular/cdk/dialog';
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -56,7 +55,6 @@ interface LmsUiContentCreateForm {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
-    CommonModule,
     ReactiveFormsModule,
     PlayCardComponent,
     PlayCardHeaderComponent,
