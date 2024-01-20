@@ -8,7 +8,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Card, CardlyUser, ScumGamePhase, ScumRank } from '@playground/cardly-util';
+import { Card, CardlyUser, ScumGamePhase, ScumGameState, ScumRank } from '@playground/cardly-util';
 import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playing-card/cardly-playing-card.component';
 import {
   emojiEvents,
@@ -20,7 +20,6 @@ import {
 } from '@playground/play-ui';
 import { cardlyPlayingCards, cardlyScore } from '../../cardly-icons';
 import { fadeAnimation, listAnimation } from '../../animations';
-import { ScumGameState } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-game-state.interface';
 
 @Component({
   selector: 'scum-game-board',
@@ -51,10 +50,11 @@ export class ScumGameBoardComponent {
   @Output() onSwipeRight = new EventEmitter();
   @Output() startGame = new EventEmitter();
   @Output() passTurn = new EventEmitter();
-  @Output() confirmSwapSelection = new EventEmitter();
   @Output() stageCard = new EventEmitter<number>();
   @Output() unstageCard = new EventEmitter<number>();
   @Output() confirmStagedCardsSelection = new EventEmitter();
+  @Output() startNewRound = new EventEmitter();
+  @Output() swapCards = new EventEmitter();
 
   get gamePhase(): ScumGamePhase {
     return this.game.phase;
@@ -110,6 +110,10 @@ export class ScumGameBoardComponent {
 
   get vicePresidentTraded(): boolean {
     return this.game.vicePresidentTraded;
+  }
+
+  get playerFinishOrder(): CardlyUser[] {
+    return this.game.finishOrderIds.map((id) => this.players.find((player) => player.user.id === id).user);
   }
 
   constructor(private playIconService: PlayIconRegistryService) {

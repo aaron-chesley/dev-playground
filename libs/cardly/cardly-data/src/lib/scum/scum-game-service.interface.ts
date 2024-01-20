@@ -4,11 +4,8 @@ import { Observable } from 'rxjs';
 
 export interface ScumGameService {
   gameState$: Observable<ScumGameState>;
-  stagedCardIndices$: Observable<number[]>;
   addPlayerToGame(user: CardlyUser): void;
   startGame(): void;
   playCards(): void;
   passTurn(userId: string): void;
-  stageCard(cardIndex: number): void;
-  unstageCard(cardIndex: number): void;
 }

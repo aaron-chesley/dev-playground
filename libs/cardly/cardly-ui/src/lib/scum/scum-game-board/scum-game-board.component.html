@@ -1,21 +1,23 @@
-<ng-container *ngIf="gamePhase !== GamePhase.POSTGAME" (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
+<ng-container *ngIf="gamePhase !== GamePhase.POSTGAME; else postGame" (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
 
   <div class="scum-player-card-list">
-    <div *ngFor="let player of players; let i = index" class="scum-player-card" [class.is-my-turn]="currentUserTurnId === players[i].user.id">
-      <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
-        <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && player.passed" name="localParking" color="red" [size]="50"></play-icon>
-        <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && !player.numOfCards" name="emojiEvents" color="gold" [size]="50"></play-icon>
+    @for (player of players; track player.user.id; let i = $index) {
+      <div class="scum-player-card" [class.is-my-turn]="currentUserTurnId === players[i].user.id">
+        <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
+          <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && player.passed" name="localParking" color="red" [size]="50"></play-icon>
+          <play-icon *ngIf="GamePhase.IN_PROGRESS === gamePhase && !player.numOfCards" name="emojiEvents" color="gold" [size]="50"></play-icon>
+        </div>
+        <div class="player-name">{{ player.user.displayName }}</div>
+        <div class="stat-wrapper">
+          <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
+          <span>{{ 0 }}</span>
+        </div>
+        <div class="stat-wrapper">
+          <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
+          <span>{{ player.numOfCards }}</span>
+        </div>
       </div>
-      <div class="player-name">{{ player.user.displayName }}</div>
-      <div class="stat-wrapper">
-        <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
-        <span>{{ 0 }}</span>
-      </div>
-      <div class="stat-wrapper">
-        <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
-        <span>{{ player.numOfCards }}</span>
-      </div>
-    </div>
+    }
   </div>
 
   <div class="start-container" *ngIf="GamePhase.PREGAME === gamePhase">
@@ -24,8 +26,9 @@
   </div>
 
   <div class="start-container" *ngIf="GamePhase.CARD_SWAP === gamePhase">
-    <button playButton appearance="play-flat" theme="primary" (click)="confirmSwapSelection.emit()" [disabled]="false">Confirm Selection</button>
-    <small>Waiting for players to swap cards...</small>
+    <button playButton appearance="play-flat" theme="primary" *ngIf="user.id === president.id && !presidentTraded" (click)="swapCards.emit()" [disabled]="false">Confirm Selection</button>
+    <button playButton appearance="play-flat" theme="primary" *ngIf="user.id === vicePresident.id && !vicePresidentTraded" (click)="swapCards.emit()" [disabled]="false">Confirm Selection</button>
+    <small>Card swap in progress...</small>
     <small *ngIf="user.id === president.id && !presidentTraded">Pick two cards to give to Scum.</small>
     <small *ngIf="user.id === vicePresident.id && !vicePresidentTraded">Pick one card to give to Vice Scum.</small>
   </div>
@@ -38,27 +41,55 @@
   </div>
 
   <div class="discard-container" [@listAnimation]="game.discardPile.length" *ngIf="GamePhase.IN_PROGRESS === gamePhase">
-    <div class="card-container" *ngFor="let card of game.discardPile">
-      <div class="card">
-        <cardly-playing-card [card]="card"></cardly-playing-card>
+    @for (card of game.discardPile; track $index) {
+      <div class="card-container">
+        <div class="card">
+          <cardly-playing-card [card]="card"></cardly-playing-card>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <div class="staged-container" [@listAnimation]="stagedCardIndices.length">
-    <div class="card-container" *ngFor="let cardIndex of stagedCardIndices; let i = index">
-      <div class="card">
-        <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
+    @for (cardIndex of stagedCardIndices; track i; let i = $index) {
+      <div class="card-container">
+        <div class="card">
+          <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
   <div class="hand-container" [@listAnimation]="hand.length">
-    <div class="card-container" *ngFor="let card of hand; let i = index">
-      <div class="card" [class.card-is-staged]="stagedCardIndices.includes(i)">
-        <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
+    @for (card of hand; track i; let i = $index) {
+      <div class="card-container">
+        <div class="card" [class.card-is-staged]="stagedCardIndices.includes(i)">
+          <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
+        </div>
       </div>
-    </div>
+    }
   </div>
 
 </ng-container>
+
+<ng-template #postGame>
+  <div class="post-round-container">
+    <button *ngIf="user.id === gameOwnerUserId" playButton appearance="play-flat" theme="primary" (click)="startNewRound.emit()">Start New Round</button>
+    <table class="round-finished-table">
+      <thead>
+        <tr>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (user of playerFinishOrder; track i; let i = $index) {
+          <tr>
+            <td>{{ user.displayName }}</td>
+            <td>{{ i + 1 }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</ng-template>

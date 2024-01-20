@@ -8,7 +8,8 @@
     "lms:i18n": "localize-extract -r . -s \"dist/apps/lms/*.js\" -f xlf -o apps/lms/src/locales/messages.xlf",
     "test": "nx test",
     "deploy-full-storybook": "nx run play-storybook:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-storybook",
-    "deploy-play-ui-storybook": "nx run play-ui:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-ui"
+    "deploy-play-ui-storybook": "nx run play-ui:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-ui",
+    "start-cardly-server": "nx serve cardly-server"
   },
   "private": true,
   "dependencies": {
@@ -35,10 +36,13 @@
     "@storybook/storybook-deployer": "^2.8.16",
     "axios": "^1.6.1",
     "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "puppeteer": "^21.5.1",
     "rxjs": "^7.8.1",
+    "socket.io": "^4.7.4",
+    "socket.io-client": "^4.7.4",
     "tinycolor2": "^1.6.0",
     "tslib": "^2.6.2",
     "uuid": "^9.0.1",
@@ -55,6 +59,7 @@
     "@angular/compiler-cli": "^17.0.2",
     "@angular/language-service": "^17.0.2",
     "@nx/cypress": "17.1.2",
+    "@nx/esbuild": "17.1.2",
     "@nx/eslint": "17.1.2",
     "@nx/eslint-plugin": "17.1.2",
     "@nx/jest": "17.1.2",

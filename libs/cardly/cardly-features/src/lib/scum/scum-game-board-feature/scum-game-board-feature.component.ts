@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScumGameBoardComponent } from '@playground/cardly-ui';
-import { ScumGameDemoService, demoCardlyUsers } from '@playground/cardly-data';
+import { CardlyAuthenticationService, ScumGameStateService } from '@playground/cardly-data';
 import { AsyncPipe } from '@angular/common';
-import { Card, CardlyUser } from '@playground/cardly-util';
-import { Observable, map } from 'rxjs';
-import { ScumGameState } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-game-state.interface';
+import { CardlyUser, ScumGameState } from '@playground/cardly-util';
+import { Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'scum-game-board-feature',
@@ -15,8 +15,10 @@ import { ScumGameState } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-
     (startGame)="startGame()"
     (stageCard)="stageCard($event)"
     (unstageCard)="unstageCard($event)"
-    (passTurn)="passTurn($event)"
+    (passTurn)="passTurn()"
     (confirmStagedCardsSelection)="confirmStagedCardsSelection()"
+    (startNewRound)="startNewRound()"
+    (swapCards)="swapCards()"
   ></scum-game-board>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -28,35 +30,45 @@ export class ScumGameBoardFeatureComponent {
   stagedCardIndices$: Observable<number[]>;
 
   startGame(): void {
-    this.scumGameService.startGame();
+    this.state.startGame(this.activatedRoute.snapshot.params.gameId);
   }
 
   stageCard(cardIndex: number): void {
-    this.scumGameService.stageCard(cardIndex);
+    this.state.stageCard(cardIndex);
   }
 
   unstageCard(cardIndex: number): void {
-    this.scumGameService.unstageCard(cardIndex);
+    this.state.unstageCard(cardIndex);
   }
 
-  passTurn(userId: string): void {
-    this.scumGameService.passTurn(userId);
+  passTurn(): void {
+    this.state.passTurn(this.activatedRoute.snapshot.params.gameId);
   }
 
   confirmStagedCardsSelection(): void {
-    this.scumGameService.playCards();
+    this.state.playCards(this.activatedRoute.snapshot.params.gameId);
   }
 
-  constructor(private scumGameService: ScumGameDemoService) {
-    this.gameState$ = this.scumGameService.gameState$;
-    this.stagedCardIndices$ = this.scumGameService.stagedCardIndices$;
-    this.currentUser$ = this.gameState$.pipe(
-      map((gameState) => {
-        // return demoCardlyUsers[1];
-        return gameState.currentUserTurnId
-          ? demoCardlyUsers.find((user) => user.id === gameState.currentUserTurnId)
-          : demoCardlyUsers[0];
-      }),
-    );
+  startNewRound(): void {
+    this.state.startNewRound(this.activatedRoute.snapshot.params.gameId);
+  }
+
+  swapCards(): void {
+    this.state.swapCards(this.activatedRoute.snapshot.params.gameId);
+  }
+
+  private subscribeToGameUpdates(): void {
+    this.state.subscribeToGameUpdates(this.activatedRoute.snapshot.params.gameId);
+  }
+
+  constructor(
+    private state: ScumGameStateService,
+    private authService: CardlyAuthenticationService,
+    private activatedRoute: ActivatedRoute,
+  ) {
+    this.gameState$ = this.state.gameState$;
+    this.stagedCardIndices$ = this.state.stagedCardIndices$;
+    this.currentUser$ = of(this.authService.getUser());
+    this.subscribeToGameUpdates();
   }
 }

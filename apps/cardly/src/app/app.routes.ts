@@ -8,6 +8,10 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'scum',
+    loadComponent: () => import('@cardly/cardly-features').then((c) => c.ScumLobbyFeatureComponent),
+  },
+  {
+    path: 'scum/:gameId',
     loadComponent: () => import('@cardly/cardly-features').then((c) => c.ScumGameBoardFeatureComponent),
   },
 ];
