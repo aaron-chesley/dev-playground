@@ -8,7 +8,15 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { NgStyle } from '@angular/common';
-import { Card, CardlyUser, ScumGamePhase, ScumGameState, ScumRank } from '@playground/cardly-util';
+import {
+  Card,
+  CardlyUser,
+  ScumDiscardPile,
+  ScumGamePhase,
+  ScumGameUI,
+  ScumPlayerUI,
+  ScumRank,
+} from '@playground/cardly-util';
 import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playing-card/cardly-playing-card.component';
 import {
   emojiEvents,
@@ -43,7 +51,7 @@ export class ScumGameBoardComponent {
   GamePhase = ScumGamePhase;
   ScumRank = ScumRank;
   @HostBinding('class.scum-game-board') class = 'scum-game-board';
-  @Input() game: ScumGameState;
+  @Input() game: ScumGameUI;
   @Input() user: CardlyUser;
   @Input() stagedCardIndices: number[];
   @Output() onSwipeLeft = new EventEmitter();
@@ -64,8 +72,16 @@ export class ScumGameBoardComponent {
     return this.game.hand;
   }
 
-  get players(): ScumGameState['players'] {
+  get players(): { [userId: string]: ScumPlayerUI } {
     return this.game.players;
+  }
+
+  get sortedPlayersByTurnOrder(): ScumPlayerUI[] {
+    return Object.values(this.players).sort((a, b) => a.turnOrder - b.turnOrder);
+  }
+
+  get sortedPlayersByFinishOrder(): ScumPlayerUI[] {
+    return Object.values(this.players).sort((a, b) => a.finishOrder - b.finishOrder);
   }
 
   get currentUserTurnId(): string {
@@ -80,28 +96,36 @@ export class ScumGameBoardComponent {
     return this.game.gameOwnerUserId;
   }
 
-  get discardPile(): Card[] {
+  get discardPile(): ScumDiscardPile[] {
     return this.game.discardPile;
   }
 
+  get requiredDiscardSize(): number {
+    return this.game.requiredDiscardSize;
+  }
+
   get numOfCardsRequiredToPlay(): number {
-    return this.game.numOfCardsRequiredToPlay;
+    return this.game.requiredDiscardSize;
   }
 
-  get president(): CardlyUser {
-    return this.players[0].user;
+  get president(): ScumPlayerUI {
+    return this.sortedPlayersByTurnOrder.find((player) => player.turnOrder === 1);
   }
 
-  get vicePresident(): CardlyUser {
-    return this.players[1].user;
+  get vicePresident(): ScumPlayerUI {
+    return this.sortedPlayersByTurnOrder.find((player) => player.turnOrder === 2);
   }
 
-  get scum(): CardlyUser {
-    return this.players[this.players.length - 1].user;
+  get scum(): ScumPlayerUI {
+    return this.sortedPlayersByTurnOrder.find(
+      (player) => player.turnOrder === this.sortedPlayersByTurnOrder.length - 1,
+    );
   }
 
-  get viceScum(): CardlyUser {
-    return this.players[this.players.length - 2].user;
+  get viceScum(): ScumPlayerUI {
+    return this.sortedPlayersByTurnOrder.find(
+      (player) => player.turnOrder === this.sortedPlayersByTurnOrder.length - 2,
+    );
   }
 
   get presidentTraded(): boolean {
@@ -112,8 +136,8 @@ export class ScumGameBoardComponent {
     return this.game.vicePresidentTraded;
   }
 
-  get playerFinishOrder(): CardlyUser[] {
-    return this.game.finishOrderIds.map((id) => this.players.find((player) => player.user.id === id).user);
+  get lastUserToDiscardId(): string {
+    return this.discardPile[this.discardPile.length - 1]?.userId;
   }
 
   constructor(private playIconService: PlayIconRegistryService) {

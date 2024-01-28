@@ -4,7 +4,6 @@ import { Suit } from './suit.enum';
 export interface Card {
   readonly suit: Suit;
   readonly rank: Rank;
-  readonly numericalRank: number;
   readonly order: number;
 }
 

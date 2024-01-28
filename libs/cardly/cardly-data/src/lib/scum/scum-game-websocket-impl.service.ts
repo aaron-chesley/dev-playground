@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ScumGameService } from './scum-game-service.interface';
-import { CardlyUser, ScumGameState, getInitialScumGameState } from '@playground/cardly-util';
+import { CardlyUser, ScumGameUI, getInitialScumGameUI } from '@playground/cardly-util';
 import { CardlyWebsocketService } from '../cardly';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class ScumGameWebsocketImplService implements ScumGameService {
-  private gameStateSubject = new BehaviorSubject<ScumGameState>(getInitialScumGameState());
-  gameState$: Observable<ScumGameState> = this.gameStateSubject.asObservable();
+  private gameStateSubject = new BehaviorSubject<ScumGameUI>(getInitialScumGameUI());
+  gameState$: Observable<ScumGameUI> = this.gameStateSubject.asObservable();
   createNewGame(user: CardlyUser): void {
     // this.cardlyWebsocket.send(getCreateNewGamePayload(user));
   }

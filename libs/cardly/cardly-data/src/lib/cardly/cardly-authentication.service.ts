@@ -1,29 +1,28 @@
 import { Injectable } from '@angular/core';
 import { CardlyUser } from '@playground/cardly-util';
-import { randomId } from '@playground/shared/util/id';
+import { ApiService } from '@playground/shared/shared-data';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CardlyAuthenticationService {
   private user: CardlyUser | null = null;
 
-  getUser(): CardlyUser {
+  async getUser(): Promise<CardlyUser> {
     if (this.user === null) {
       const name = window.prompt('Enter your name');
-      const user = {
-        id: randomId(),
-        displayName: name ?? 'Anonymous',
-        avatar: 'https://i.pravatar.cc/300',
-      };
+      const displayName = name ?? 'Anonymous';
 
-      sessionStorage.setItem('user', JSON.stringify(user));
+      const res = await firstValueFrom(this.api.post<{ user: CardlyUser }>('generate-token', { displayName }));
 
-      this.user = user;
+      sessionStorage.setItem('user', JSON.stringify(res.user));
+
+      this.user = res.user;
     }
 
     return this.user;
   }
 
-  constructor() {
+  constructor(private api: ApiService) {
     const user = sessionStorage.getItem('user');
 
     if (user) {

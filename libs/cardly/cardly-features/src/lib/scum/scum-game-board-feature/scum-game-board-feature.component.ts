@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import { CardlyAuthenticationService, ScumGameStateService } from '@playground/cardly-data';
 import { AsyncPipe } from '@angular/common';
-import { CardlyUser, ScumGameState } from '@playground/cardly-util';
-import { Observable, of } from 'rxjs';
+import { CardlyUser, ScumGameUI } from '@playground/cardly-util';
+import { Observable, from } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -24,8 +24,8 @@ import { ActivatedRoute } from '@angular/router';
   standalone: true,
   imports: [AsyncPipe, ScumGameBoardComponent],
 })
-export class ScumGameBoardFeatureComponent {
-  gameState$: Observable<ScumGameState>;
+export class ScumGameBoardFeatureComponent implements OnDestroy {
+  gameState$: Observable<ScumGameUI>;
   currentUser$: Observable<CardlyUser>;
   stagedCardIndices$: Observable<number[]>;
 
@@ -61,6 +61,11 @@ export class ScumGameBoardFeatureComponent {
     this.state.subscribeToGameUpdates(this.activatedRoute.snapshot.params.gameId);
   }
 
+  ngOnDestroy(): void {
+    this.state.clearState();
+    this.state.unsubscribeFromGameUpdates(this.activatedRoute.snapshot.params.gameId);
+  }
+
   constructor(
     private state: ScumGameStateService,
     private authService: CardlyAuthenticationService,
@@ -68,7 +73,7 @@ export class ScumGameBoardFeatureComponent {
   ) {
     this.gameState$ = this.state.gameState$;
     this.stagedCardIndices$ = this.state.stagedCardIndices$;
-    this.currentUser$ = of(this.authService.getUser());
+    this.currentUser$ = from(this.authService.getUser());
     this.subscribeToGameUpdates();
   }
 }

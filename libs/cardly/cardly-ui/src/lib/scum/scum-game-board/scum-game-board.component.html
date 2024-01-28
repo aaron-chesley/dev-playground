@@ -1,24 +1,35 @@
 @if (gamePhase !== GamePhase.POSTGAME) {
   <ng-container (swipeleft)="onSwipeLeft.emit()" (swiperight)="onSwipeRight.emit()">
     <div class="scum-player-card-list">
-      @for (player of players; track player.user.id; let i = $index) {
-        <div class="scum-player-card" [class.is-my-turn]="currentUserTurnId === players[i].user.id">
-          <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.user.avatar + ')' }">
-            @if (GamePhase.IN_PROGRESS === gamePhase && player.passed) {
-              <play-icon name="localParking" color="red" [size]="50"></play-icon>
-            }
+      @for (player of sortedPlayersByTurnOrder; track player.id; let i = $index) {
+        <div
+          class="scum-player-card"
+          [class.is-my-turn]="currentUserTurnId === player.id"
+          [class.passed]="player.passed"
+        >
+          <div class="header-avatar" [ngStyle]="{ 'background-image': 'url(' + player.avatar + ')' }">
             @if (GamePhase.IN_PROGRESS === gamePhase && !player.numOfCards) {
-              <play-icon name="emojiEvents" color="gold" [size]="50"></play-icon>
+              <div class="placement">
+                {{ player.finishOrder }}
+              </div>
             }
           </div>
-          <div class="player-name">{{ player.user.displayName }}</div>
+          <div class="player-name">{{ player.displayName }}</div>
           <div class="stat-wrapper">
             <play-icon name="cardlyScore" color="white" [size]="20"></play-icon>
             <span>{{ 0 }}</span>
           </div>
           <div class="stat-wrapper">
             <play-icon name="cardlyPlayingCards" color="white" [size]="20"></play-icon>
-            <span>{{ player.numOfCards }}</span>
+            @if (player.numOfCards > 0) {
+              <span>{{ player.numOfCards }}</span>
+            } @else if (player.numOfCards === 0 && player.finishOrder === 1) {
+              <play-icon name="emojiEvents" color="gold" [size]="20"></play-icon>
+            } @else if (player.numOfCards === 0 && player.finishOrder === 2) {
+              <play-icon name="emojiEvents" color="silver" [size]="20"></play-icon>
+            } @else if (player.numOfCards === 0 && player.finishOrder > 2) {
+              <play-icon name="emojiEvents" color="bronze" [size]="20"></play-icon>
+            }
           </div>
         </div>
       }
@@ -26,7 +37,7 @@
 
     @if (GamePhase.PREGAME === gamePhase) {
       <div class="start-container">
-        @if (game.players.length >= 4 && user.id === gameOwnerUserId) {
+        @if (sortedPlayersByTurnOrder.length >= 4 && user.id === gameOwnerUserId) {
           <button playButton appearance="play-flat" theme="primary" (click)="startGame.emit()">Start</button>
         }
         <small>Waiting for players...</small>
@@ -57,9 +68,25 @@
 
     @if (GamePhase.IN_PROGRESS === gamePhase && user.id === currentUserTurnId) {
       <div class="pass-container">
-        <play-button-group [gap]="5">
-          <button playButton appearance="play-flat" theme="primary" (click)="passTurn.emit(user.id)">Pass</button>
-          <button playButton appearance="play-flat" (click)="confirmStagedCardsSelection.emit()" [disabled]="false">
+        <play-button-group [gap]="25">
+          <button
+            playButton
+            appearance="play-flat"
+            theme="primary"
+            (click)="passTurn.emit(user.id)"
+            [disabled]="stagedCardIndices.length"
+          >
+            Pass
+          </button>
+          <button
+            playButton
+            appearance="play-flat"
+            (click)="confirmStagedCardsSelection.emit()"
+            [disabled]="
+              stagedCardIndices.length === 0 ||
+              (requiredDiscardSize && stagedCardIndices.length !== requiredDiscardSize)
+            "
+          >
             Confirm
           </button>
         </play-button-group>
@@ -67,34 +94,36 @@
     }
 
     @if (GamePhase.IN_PROGRESS === gamePhase) {
-      <div class="discard-container" [@listAnimation]="game.discardPile.length">
-        @for (card of game.discardPile; track $index) {
-          <div class="card-container">
-            <div class="card">
-              <cardly-playing-card [card]="card"></cardly-playing-card>
-            </div>
-          </div>
+      <div class="discard-container">
+        @if (players[lastUserToDiscardId]) {
+          <span>
+            <span style="font-size: 12px">Last Discard: </span>
+            <span style="font-weight: bold">{{ players[lastUserToDiscardId].displayName }}</span>
+          </span>
         }
+        <div class="cards-container" [@listAnimation]="game.discardPile.length">
+          @for (cardGroup of game.discardPile; track $index) {
+            @for (card of cardGroup.cards; track $index) {
+              <cardly-playing-card [card]="card"></cardly-playing-card>
+            }
+          }
+        </div>
       </div>
     }
 
     <div class="staged-container" [@listAnimation]="stagedCardIndices.length">
       @for (cardIndex of stagedCardIndices; track i; let i = $index) {
-        <div class="card-container">
-          <div class="card">
-            <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
-          </div>
-        </div>
+        <cardly-playing-card [card]="hand[cardIndex]" (clicked)="unstageCard.emit(i)"></cardly-playing-card>
       }
     </div>
 
     <div class="hand-container" [@listAnimation]="hand.length">
       @for (card of hand; track i; let i = $index) {
-        <div class="card-container">
-          <div class="card" [class.card-is-staged]="stagedCardIndices.includes(i)">
-            <cardly-playing-card [card]="card" (clicked)="stageCard.emit(i)"></cardly-playing-card>
-          </div>
-        </div>
+        <cardly-playing-card
+          [card]="card"
+          (clicked)="stageCard.emit(i)"
+          [class.card-is-staged]="stagedCardIndices.includes(i)"
+        ></cardly-playing-card>
       }
     </div>
   </ng-container>
@@ -111,10 +140,10 @@
         </tr>
       </thead>
       <tbody>
-        @for (user of playerFinishOrder; track i; let i = $index) {
+        @for (player of sortedPlayersByFinishOrder; track i; let i = $index) {
           <tr>
-            <td>{{ user.displayName }}</td>
-            <td>{{ i + 1 }}</td>
+            <td>{{ player.displayName }}</td>
+            <td>{{ player.finishOrder }}</td>
           </tr>
         }
       </tbody>

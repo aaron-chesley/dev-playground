@@ -54,6 +54,9 @@
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
+      "options": {
+        "proxyConfig": "apps/cardly/proxy.conf.json"
+      },
       "configurations": {
         "production": {
           "buildTarget": "cardly:build:production"

@@ -1,9 +1,9 @@
 import { CardlyUser } from '@playground/cardly-util';
-import { ScumGameState } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-game-state.interface';
+import { ScumGameUI } from 'libs/cardly/cardly-util/src/lib/models/scum/scum-game-ui.interface';
 import { Observable } from 'rxjs';
 
 export interface ScumGameService {
-  gameState$: Observable<ScumGameState>;
+  gameState$: Observable<ScumGameUI>;
   addPlayerToGame(user: CardlyUser): void;
   startGame(): void;
   playCards(): void;

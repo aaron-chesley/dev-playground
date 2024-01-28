@@ -1,9 +1,10 @@
 import { Server, Socket } from 'socket.io';
 import http from 'http';
-import express from 'express';
+import express, { Request } from 'express';
 import cors from 'cors';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
 import {
-  CreateNewGameRequest,
   CreateNewGameResponse,
   SubscribeToGameUpdatesRequest,
   ScumGame,
@@ -13,32 +14,90 @@ import {
   StartNewRoundRequest,
   SwapCardsRequest,
 } from '@playground/cardly-util';
+import { randomId } from '@playground/shared/util/id';
 
 export class CardlyServer {
   private server: http.Server;
   private io: Server;
   private app: express.Application;
   private games: { [gameId: string]: ScumGame };
+  private secretKey = 'myCoolSecretKey';
 
   constructor() {
     this.games = {};
     this.app = express();
     this.app.use(cors());
+    this.app.use(cookieParser());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     // Use Express to handle HTTP requests
     this.server = http.createServer(this.app);
-    this.server.on('request', this.app);
 
     this.io = new Server(this.server, {
       cors: {
         origin: '*',
         methods: ['GET', 'POST'],
+        credentials: true,
       },
     });
 
-    // Create a new game
+    // Handle authentication
+    this.io.use((socket, next) => {
+      const cookie = socket.handshake.headers.cookie;
+
+      if (!cookie) {
+        next(new Error('Authentication error'));
+        return;
+      }
+
+      const tokenMatch = cookie.match(/token=([^;]+)/);
+      if (!tokenMatch || !tokenMatch[1]) {
+        next(new Error('Authentication error: Token not found in cookie'));
+        return;
+      }
+
+      const token = tokenMatch[1];
+
+      try {
+        const payload = jwt.verify(token, this.secretKey);
+        socket['user'] = payload['user'];
+        next();
+      } catch (err) {
+        next(new Error('Authentication error'));
+      }
+    });
+
+    // Generate a jwt token and set a cookie
+    this.app.post('/api/generate-token', (req: Request<{}, {}, { displayName: string }>, res) => {
+      // Check if the request includes a cookie:
+
+      if (req.cookies?.token) {
+        try {
+          const user = jwt.verify(req.cookies.token, this.secretKey);
+          res.send({ user: user });
+          return;
+        } catch (err) {}
+      }
+
+      const displayName = req.body?.displayName;
+      if (!displayName) {
+        res.sendStatus(400);
+        return;
+      }
+
+      const user = { id: randomId(), displayName: displayName, avatar: 'https://i.pravatar.cc/300' };
+
+      const token = jwt.sign({ user }, this.secretKey, { expiresIn: '6h' });
+
+      // Set the cookie
+      res.cookie('token', token, { httpOnly: true });
+
+      // Return the token
+      res.send({ user: user });
+    });
+
     this.app.post('/create-game', (req, res) => {});
+    // Create a new game
 
     // Join a game
     this.app.post('/join-game', (req, res) => {});
@@ -54,14 +113,10 @@ export class CardlyServer {
 
     // WebSocket connection handling
     this.io.on('connection', (socket: Socket) => {
-      console.log('Client connected: ', socket.id);
+      console.log('Client connected: ', socket.id, socket['user'].displayName);
 
-      // socket.on('message', (message) => {
-      //   this.gameManager.handleMessage(message, socket);
-      // });
-
-      socket.on('createNewGame', (payload: CreateNewGameRequest, cb) => {
-        const game = new ScumGame(payload.user);
+      socket.on('createNewGame', (payload, cb) => {
+        const game = new ScumGame(socket['user']);
         this.games[game.gameId] = game;
         const response: CreateNewGameResponse = { gameId: game.gameId };
         cb(response);
@@ -69,11 +124,12 @@ export class CardlyServer {
 
       socket.on('joinGame', (payload: any, cb) => {
         const game = this.games[payload.gameId];
+        const user = socket['user'];
         if (!game) {
           console.log('Game not found');
           return;
         }
-        game.addUserToGame(payload.user);
+        game.addUserToGame(user);
         const users = game.getUsers();
         for (const user of users) {
           this.io.to(user.id).emit('gameStateUpdate', game.getCurrentGameState(user.id));
@@ -93,7 +149,7 @@ export class CardlyServer {
 
       socket.on('playCards', (payload: PlayCardsRequest) => {
         const game = this.games[payload.gameId];
-        game.playCards({ userId: payload.userId, cardsInPlay: payload.cards });
+        game.playCards({ userId: socket['user'].id, cardsInPlay: payload.cards });
         const users = game.getUsers();
         for (const user of users) {
           this.io.to(user.id).emit('gameStateUpdate', game.getCurrentGameState(user.id));
@@ -102,7 +158,7 @@ export class CardlyServer {
 
       socket.on('passTurn', (payload: PassTurnRequest) => {
         const game = this.games[payload.gameId];
-        game.passTurn(payload.userId);
+        game.passTurn(socket['user'].id);
         const users = game.getUsers();
         for (const user of users) {
           this.io.to(user.id).emit('gameStateUpdate', game.getCurrentGameState(user.id));
@@ -120,7 +176,7 @@ export class CardlyServer {
 
       socket.on('swapCards', (payload: SwapCardsRequest) => {
         const game = this.games[payload.gameId];
-        game.swapCards({ userId: payload.userId, cards: payload.cards });
+        game.swapCards({ userId: socket['user'].id, cards: payload.cards });
         const users = game.getUsers();
         for (const user of users) {
           this.io.to(user.id).emit('gameStateUpdate', game.getCurrentGameState(user.id));
@@ -129,9 +185,14 @@ export class CardlyServer {
 
       socket.on('subscribeToGameUpdates', (payload: SubscribeToGameUpdatesRequest) => {
         socket.join(payload.gameId);
-        socket.join(payload.userId);
+        socket.join(socket['user'].id);
         const game = this.games[payload.gameId];
-        socket.emit('gameStateUpdate', game.getCurrentGameState(payload.userId));
+        socket.emit('gameStateUpdate', game.getCurrentGameState(socket['user'].id));
+      });
+
+      socket.on('unsubscribeFromGameUpdates', (payload: SubscribeToGameUpdatesRequest) => {
+        socket.leave(payload.gameId);
+        socket.leave(socket['user'].id);
       });
 
       socket.on('close', () => {
@@ -139,7 +200,7 @@ export class CardlyServer {
       });
     });
 
-    this.server.listen(3000, '0.0.0.0', () => {
+    this.server.listen(3000, 'localhost', () => {
       console.log('WebSocket server listening on port 3000');
     });
   }
