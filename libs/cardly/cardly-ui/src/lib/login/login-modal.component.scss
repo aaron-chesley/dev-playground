@@ -1,0 +1,26 @@
+:host {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  height: 436px;
+  width: 300px;
+  background-image: url('/assets/logos/login-background-with-text.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  border-radius: 17px;
+  padding: 20px;
+}
+
+form {
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  input {
+    text-align: center;
+  }
+}

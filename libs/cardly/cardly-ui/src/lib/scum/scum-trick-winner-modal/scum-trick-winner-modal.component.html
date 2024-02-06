@@ -1,0 +1,8 @@
+<div class="winner-banner">
+  <h2>{{ data.winner }} is the Winner!</h2>
+  <div class="cards-container">
+    @for (card of data.cards; track $index) {
+      <cardly-playing-card [card]="card"></cardly-playing-card>
+    }
+  </div>
+</div>

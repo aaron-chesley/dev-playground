@@ -11,8 +11,9 @@ import {
   StartNewRoundRequest,
   SwapCardsRequest,
   ScumGamePhase,
+  ScumTrickWinner,
 } from '@playground/cardly-util';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, distinctUntilChanged, map } from 'rxjs';
 import { CardlyAuthenticationService, CardlyWebsocketService } from '../../cardly';
 import { Router } from '@angular/router';
 
@@ -21,18 +22,18 @@ export class ScumGameStateService {
   private gameStateSubject: BehaviorSubject<ScumGameUI>;
   gameState$: Observable<ScumGameUI>;
 
+  trickWinner$: Observable<ScumTrickWinner>;
+
   private stagedCardIndicesSubject = new BehaviorSubject<number[]>([]);
   stagedCardIndices$ = this.stagedCardIndicesSubject.asObservable();
 
   async createNewGame(): Promise<void> {
-    const user = await this.authService.getUser();
     this.cardlyWebsocket.sendMessage('createNewGame', {}, (res: CreateNewGameResponse) => {
       this.router.navigate(['scum', res.gameId]);
     });
   }
 
   async joinGame(gameId: string): Promise<void> {
-    const user = await this.authService.getUser();
     const payload: JoinGameRequest = { gameId };
     this.cardlyWebsocket.sendMessage('joinGame', payload, (res: JoinGameResponse) => {
       this.router.navigate(['scum', res.gameId]);
@@ -113,13 +114,16 @@ export class ScumGameStateService {
   constructor(
     private router: Router,
     private cardlyWebsocket: CardlyWebsocketService,
-    private authService: CardlyAuthenticationService,
   ) {
     this.gameStateSubject = new BehaviorSubject<ScumGameUI>(getInitialScumGameUI());
     this.gameState$ = this.gameStateSubject.asObservable();
+    this.trickWinner$ = this.gameState$.pipe(
+      map((game) => game.trickWinner),
+      distinctUntilChanged((prev, curr) => prev?.id === curr?.id),
+    );
 
-    this.cardlyWebsocket.receiveMessage('gameStateUpdate', (message) => {
-      this.gameStateSubject.next(message);
+    this.cardlyWebsocket.receiveMessage('gameStateUpdate', (newGame: ScumGameUI) => {
+      this.gameStateSubject.next(newGame);
     });
   }
 }

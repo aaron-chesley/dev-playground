@@ -14,7 +14,7 @@ export class CardlyPlayingCardComponent {
   @Output() clicked = new EventEmitter();
 
   getImg() {
-    return `/cards/${this.card.suit}/${this.card.rank}.png`;
+    return `/assets/cards/${this.card.suit}/${this.card.rank}.png`;
   }
 
   getAlt() {

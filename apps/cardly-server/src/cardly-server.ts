@@ -93,7 +93,23 @@ export class CardlyServer {
       res.cookie('token', token, { httpOnly: true });
 
       // Return the token
-      res.send({ user: user });
+      res.send({ token: token });
+    });
+
+    // Validate a token
+    this.app.post('/api/validate', (req, res) => {
+      const token = req.body?.token;
+      if (!token) {
+        res.sendStatus(400);
+        return;
+      }
+
+      try {
+        const payload = jwt.verify(token, this.secretKey);
+        res.send(true);
+      } catch (err) {
+        res.sendStatus(401);
+      }
     });
 
     this.app.post('/create-game', (req, res) => {});

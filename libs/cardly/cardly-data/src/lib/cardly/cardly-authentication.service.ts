@@ -1,32 +1,52 @@
 import { Injectable } from '@angular/core';
-import { CardlyUser } from '@playground/cardly-util';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { CardlyToken, CardlyUser } from '@playground/cardly-util';
 import { ApiService } from '@playground/shared/shared-data';
-import { firstValueFrom } from 'rxjs';
+import { Observable, of, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CardlyAuthenticationService {
-  private user: CardlyUser | null = null;
-
-  async getUser(): Promise<CardlyUser> {
-    if (this.user === null) {
-      const name = window.prompt('Enter your name');
-      const displayName = name ?? 'Anonymous';
-
-      const res = await firstValueFrom(this.api.post<{ user: CardlyUser }>('generate-token', { displayName }));
-
-      sessionStorage.setItem('user', JSON.stringify(res.user));
-
-      this.user = res.user;
-    }
-
-    return this.user;
+  getAuthTokenFromStorage(): string {
+    return sessionStorage.getItem('token');
   }
 
-  constructor(private api: ApiService) {
-    const user = sessionStorage.getItem('user');
-
-    if (user) {
-      this.user = JSON.parse(user);
+  getUserFromToken(): CardlyUser | undefined {
+    const token = this.getAuthTokenFromStorage();
+    if (token) {
+      try {
+        const decodedToken = this.jwtHelperService.decodeToken<CardlyToken>(token);
+        return decodedToken.user;
+      } catch (e) {
+        return undefined;
+      }
     }
+
+    return undefined;
   }
+
+  isTokenValid(token: string): Observable<boolean> {
+    return this.api.post<boolean>('validate', { token });
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    const token = this.getAuthTokenFromStorage();
+    if (token) {
+      return this.isTokenValid(token);
+    }
+
+    return of(false);
+  }
+
+  register(displayName: string): Observable<{ token: string }> {
+    return this.api.post<{ token: string }>('generate-token', { displayName }).pipe(
+      tap((response) => {
+        sessionStorage.setItem('token', response.token);
+      }),
+    );
+  }
+
+  constructor(
+    private api: ApiService,
+    private jwtHelperService: JwtHelperService,
+  ) {}
 }

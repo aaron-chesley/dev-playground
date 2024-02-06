@@ -39,6 +39,10 @@ body {
   height: 100vh;
   line-height: 1.5;
   font-family: 'Roboto', sans-serif;
+  background-image: url('/assets/logos/login.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 /* Set shorter line heights on headings and interactive elements */

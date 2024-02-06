@@ -1,12 +1,18 @@
 import { Card, CardlyUser } from '../cardly';
 import { ScumGamePhase } from './scum-game-phase.enum';
-import { ScumDiscardPile } from './scum-trick.interface';
+import { ScumDiscardPile, ScumTrick } from './scum-trick.interface';
 
 export interface ScumPlayerUI extends CardlyUser {
   numOfCards: number;
   passed: boolean;
   finishOrder: number;
   turnOrder: number;
+}
+
+export interface ScumTrickWinner {
+  id: string;
+  name: string;
+  cards: Card[];
 }
 
 export interface ScumGameUI {
@@ -21,6 +27,7 @@ export interface ScumGameUI {
   presidentTraded: boolean;
   vicePresidentTraded: boolean;
   players: { [userId: string]: ScumPlayerUI };
+  trickWinner: ScumTrickWinner;
 }
 
 export const getInitialScumGameUI = (): ScumGameUI => {
@@ -36,5 +43,6 @@ export const getInitialScumGameUI = (): ScumGameUI => {
     presidentTraded: false,
     vicePresidentTraded: false,
     players: {},
+    trickWinner: undefined,
   };
 };

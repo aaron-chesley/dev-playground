@@ -1,27 +1,17 @@
-import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { appRoutes } from './app.routes';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
-import { CardlyAuthenticationService } from '@playground/cardly-data';
-import { CardlyUser } from '@playground/cardly-util';
-
-export const initializeApplication = (authService: CardlyAuthenticationService) => {
-  return (): Promise<CardlyUser> => {
-    return authService.getUser();
-  };
-};
+import { provideHttpClient } from '@angular/common/http';
+import { JwtModule } from '@auth0/angular-jwt';
+import { PlayModalModule } from '@playground/play-ui';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
     provideHttpClient(),
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApplication,
-      multi: true,
-      deps: [CardlyAuthenticationService],
-    },
     provideRouter(appRoutes),
+    importProvidersFrom(JwtModule.forRoot({})),
+    importProvidersFrom(PlayModalModule),
   ],
 };

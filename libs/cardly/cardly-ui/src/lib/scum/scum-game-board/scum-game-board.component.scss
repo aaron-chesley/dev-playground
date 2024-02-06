@@ -93,7 +93,7 @@ $margin-bottom: 5px;
   box-sizing: border-box;
   padding: 8px;
   color: white;
-  background: transparentize($color: #000000, $amount: 0.9%);
+  background: transparentize($color: #000000, $amount: 0.7%);
   border-radius: 4px;
   cursor: default;
 }
@@ -141,7 +141,11 @@ $margin-bottom: 5px;
 }
 
 .passed {
-  background: transparentize($color: red, $amount: 0.7%);
+  background: transparentize($color: red, $amount: 0.5%);
+}
+
+.finished {
+  background: transparentize($color: #000000, $amount: 1%);
 }
 
 .card-is-staged {
