@@ -27,3 +27,6 @@ export * from './lib/play-form-field/play-form-field.component';
 export * from './lib/play-form-field/play-form-field-label.component';
 export * from './lib/play-form-field/play-form-field-error.component';
 export * from './lib/play-group/play-group.component';
+export * from './lib/play-snackbar/play-snackbar.service';
+export * from './lib/play-snackbar/play-snackbar/play-snackbar.component';
+export * from './lib/play-snackbar/play-snackbar/play-snackbar.interface';

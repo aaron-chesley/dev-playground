@@ -31,7 +31,24 @@ play-card {
   --play-card-padding: 25px;
   --play-card-border-radius: 4px;
   --play-card-bg: #ffffff;
-  --play-card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124,
-    0 1px 3px #0000001f;
+  --play-card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124, 0 1px 3px #0000001f;
   --play-card-header-height: 64px;
+}
+
+play-snackbar {
+  // --play-snackbar-error-color: #ff66cc;
+  // --play-snackbar-error-active-color: #ffc2eb;
+  // --play-snackbar-error-bg-color: #ffe0f5;
+
+  // --play-snackbar-warning-color: #ff66cc;
+  // --play-snackbar-warning-active-color: #ffc2eb;
+  // --play-snackbar-warning-bg-color: #ffe0f5;
+
+  // --play-snackbar-success-color: #ff66cc;
+  // --play-snackbar-success-active-color: #ffc2eb;
+  // --play-snackbar-success-bg-color: #ffe0f5;
+
+  // --play-snackbar-info-color: #ff66cc;
+  // --play-snackbar-info-active-color: #ffc2eb;
+  // --play-snackbar-info-bg-color: #ffe0f5;
 }

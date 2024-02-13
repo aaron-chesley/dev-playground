@@ -1,0 +1,125 @@
+<div class="top-left stack">
+  @for (snackbar of (snackbars$ | async).topLeft; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="top-center stack">
+  @for (snackbar of (snackbars$ | async).topCenter; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="top-right stack">
+  @for (snackbar of (snackbars$ | async).topRight; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="center-left stack">
+  @for (snackbar of (snackbars$ | async).centerLeft; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="center-center stack">
+  @for (snackbar of (snackbars$ | async).centerCenter; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="center-right stack">
+  @for (snackbar of (snackbars$ | async).centerRight; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="bottom-left stack">
+  @for (snackbar of (snackbars$ | async).bottomLeft; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="bottom-center stack">
+  @for (snackbar of (snackbars$ | async).bottomCenter; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>
+
+<div class="bottom-right stack">
+  @for (snackbar of (snackbars$ | async).bottomRight; track snackbar.id; let i = $index) {
+    <play-snackbar
+      [data]="{
+        title: snackbar.title,
+        message: snackbar.message,
+        severity: snackbar.severity,
+        dismissible: snackbar.dismissible
+      }"
+      (dismiss)="onDismiss(snackbar)"
+    ></play-snackbar>
+  }
+</div>

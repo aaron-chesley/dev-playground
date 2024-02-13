@@ -1,0 +1,30 @@
+<div
+  class="play-snackbar-container"
+  [ngClass]="{
+    'play-snackbar-success': data.severity === 'success',
+    'play-snackbar-error': data.severity === 'error',
+    'play-snackbar-warning': data.severity === 'warning',
+    'play-snackbar-info': data.severity === 'info'
+  }"
+>
+  <div class="left-container">
+    <div class="play-snackbar-icon">
+      <play-icon [name]="icon"></play-icon>
+    </div>
+    <div class="text-container">
+      @if (data.title) {
+        <div class="play-snackbar-title">{{ data.title }}</div>
+      }
+      @if (data.message) {
+        <div class="play-snackbar-message">{{ data.message }}</div>
+      }
+    </div>
+  </div>
+  @if (data.dismissible) {
+    <div class="play-snackbar-action">
+      <button playButton appearance="play-icon-btn" (click)="dismiss.emit()">
+        <play-icon name="close"></play-icon>
+      </button>
+    </div>
+  }
+</div>
