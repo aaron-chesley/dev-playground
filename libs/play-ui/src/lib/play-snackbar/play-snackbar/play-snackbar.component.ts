@@ -33,6 +33,11 @@ export class PlaySnackbarComponent {
     }
   }
 
+  onDoAction() {
+    this.data.action();
+    this.dismiss.emit();
+  }
+
   constructor(private playIconService: PlayIconRegistryService) {
     this.playIconService.registerIcons([infoOutline, checkCircleOutline, warning, errorOutline, close]);
   }

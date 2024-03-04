@@ -8,4 +8,6 @@ export interface PlaySnackbarConfig {
   duration?: number;
   position?: PlaySnackbarPosition;
   dismissible?: boolean;
+  action?: Function;
+  actionLabel?: string;
 }

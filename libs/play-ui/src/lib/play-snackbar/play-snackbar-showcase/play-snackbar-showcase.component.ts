@@ -19,6 +19,7 @@ import { PlaySnackbar } from '../play-snackbar/play-snackbar.interface';
       <play-snackbar [data]="warningSnackbar"></play-snackbar>
       <play-snackbar [data]="errorSnackbar"></play-snackbar>
       <play-snackbar [data]="manualDismissSnackbar"></play-snackbar>
+      <play-snackbar [data]="actionSnackbar"></play-snackbar>
     </div>
   `,
   styles: [
@@ -73,6 +74,18 @@ export class PlaySnackbarShowcaseComponent {
     message: 'This is a snackbar that can be manually dismissed.',
     severity: 'info',
     dismissible: true,
+  };
+
+  actionSnackbar: PlaySnackbar = {
+    title: 'Action',
+    message:
+      'This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action. This is a snackbar with an action.',
+    severity: 'info',
+    dismissible: true,
+    action: () => {
+      window.alert('Action clicked');
+    },
+    actionLabel: 'ACTION',
   };
 
   showSnackbar(severity: PlaySnackbarSeverity, title: string, manualDismiss = false) {

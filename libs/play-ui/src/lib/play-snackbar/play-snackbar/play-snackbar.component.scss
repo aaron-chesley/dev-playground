@@ -23,7 +23,7 @@
   gap: 2px;
 }
 
-.play-snackbar-action {
+.play-snackbar-dismiss {
   margin-top: -8px;
   margin-right: -12px;
 }
@@ -31,6 +31,12 @@
 .play-snackbar-title {
   font-weight: bold;
   font-size: 14px;
+}
+
+.play-snackbar-action {
+  button {
+    font-size: 12px;
+  }
 }
 
 .play-snackbar-info {

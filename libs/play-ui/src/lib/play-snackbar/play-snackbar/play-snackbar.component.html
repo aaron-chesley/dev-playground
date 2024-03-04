@@ -20,8 +20,13 @@
       }
     </div>
   </div>
-  @if (data.dismissible) {
+  @if (data.action) {
     <div class="play-snackbar-action">
+      <button playButton appearance="play-btn" (click)="onDoAction()">{{ data.actionLabel }}</button>
+    </div>
+  }
+  @if (data.dismissible && !data.action) {
+    <div class="play-snackbar-dismiss">
       <button playButton appearance="play-icon-btn" (click)="dismiss.emit()">
         <play-icon name="close"></play-icon>
       </button>

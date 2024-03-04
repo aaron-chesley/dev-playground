@@ -18,6 +18,8 @@ export class PlaySnackbarService {
       duration: snackbar.duration ?? 3000,
       position: snackbar.position || 'bottom-center',
       dismissible: snackbar.dismissible || snackbar.duration === 0 || false,
+      action: snackbar.action || null,
+      actionLabel: snackbar.actionLabel || 'Dismiss',
     };
 
     return this.snackbarStore.add(config);

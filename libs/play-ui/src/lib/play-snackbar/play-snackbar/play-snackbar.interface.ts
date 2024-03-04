@@ -5,4 +5,6 @@ export interface PlaySnackbar {
   message?: string;
   severity?: PlaySnackbarSeverity;
   dismissible?: boolean;
+  action?: Function;
+  actionLabel?: string;
 }
