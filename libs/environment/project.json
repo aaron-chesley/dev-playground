@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/environment/src",
   "prefix": "playground",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,14 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/environment/**/*.ts",
-          "libs/environment/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": []
+  }
 }

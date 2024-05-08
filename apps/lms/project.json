@@ -8,6 +8,7 @@
     "sourceLocale": "en-US",
     "locales": {}
   },
+  "tags": ["type:project"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -28,10 +29,7 @@
             "output": "/assets/"
           }
         ],
-        "styles": [
-          "apps/lms/src/styles.scss",
-          "libs/play-ui/src/lib/play-theme/_play-theme.scss"
-        ],
+        "styles": ["apps/lms/src/styles.scss", "libs/play-ui/src/lib/play-theme/_play-theme.scss"],
         "scripts": []
       },
       "configurations": {
@@ -89,10 +87,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": ["apps/lms/**/*.ts", "apps/lms/**/*.html"]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -101,6 +96,5 @@
         "jestConfig": "apps/lms/jest.config.ts"
       }
     }
-  },
-  "tags": ["type:project"]
+  }
 }

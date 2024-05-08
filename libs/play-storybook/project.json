@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/play-storybook/src",
   "prefix": "playground",
+  "tags": [],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,13 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/play-storybook/**/*.ts",
-          "libs/play-storybook/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -53,6 +48,5 @@
         }
       }
     }
-  },
-  "tags": []
+  }
 }

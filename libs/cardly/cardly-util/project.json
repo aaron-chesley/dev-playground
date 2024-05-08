@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/cardly/cardly-util/src",
   "prefix": "playground",
+  "tags": ["type:util"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -15,14 +16,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/cardly/cardly-util/**/*.ts",
-          "libs/cardly/cardly-util/**/*.html"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     }
-  },
-  "tags": ["type:util"]
+  }
 }

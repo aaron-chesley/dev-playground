@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/lms/lms-features/src",
   "prefix": "playground",
+  "tags": ["type:feature"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,14 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/lms/lms-features/**/*.ts",
-          "libs/lms/lms-features/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": ["type:feature"]
+  }
 }

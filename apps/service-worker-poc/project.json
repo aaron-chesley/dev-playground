@@ -4,6 +4,7 @@
   "projectType": "application",
   "sourceRoot": "apps/service-worker-poc/src",
   "prefix": "playground",
+  "tags": ["type:project"],
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
@@ -79,13 +80,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "apps/service-worker-poc/**/*.ts",
-          "apps/service-worker-poc/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "test": {
       "executor": "@nx/jest:jest",
@@ -94,6 +89,5 @@
         "jestConfig": "apps/service-worker-poc/jest.config.ts"
       }
     }
-  },
-  "tags": ["type:project"]
+  }
 }

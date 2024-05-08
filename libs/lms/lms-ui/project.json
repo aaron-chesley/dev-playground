@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/lms/lms-ui/src",
   "prefix": "playground",
+  "tags": ["type:ui"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,13 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/lms/lms-ui/**/*.ts",
-          "libs/lms/lms-ui/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -53,6 +48,5 @@
         }
       }
     }
-  },
-  "tags": ["type:ui"]
+  }
 }

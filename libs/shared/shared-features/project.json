@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/shared/shared-features/src",
   "prefix": "playground",
+  "tags": ["type:feature"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -14,14 +15,7 @@
       }
     },
     "lint": {
-      "executor": "@nx/eslint:lint",
-      "options": {
-        "lintFilePatterns": [
-          "libs/shared/shared-features/**/*.ts",
-          "libs/shared/shared-features/**/*.html"
-        ]
-      }
+      "executor": "@nx/eslint:lint"
     }
-  },
-  "tags": ["type:feature"]
+  }
 }

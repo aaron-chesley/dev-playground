@@ -4,6 +4,7 @@
   "projectType": "library",
   "sourceRoot": "libs/cardly/cardly-ui/src",
   "prefix": "playground",
+  "tags": ["type:ui"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
@@ -15,13 +16,7 @@
     },
     "lint": {
       "executor": "@nx/eslint:lint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": [
-          "libs/cardly/cardly-ui/**/*.ts",
-          "libs/cardly/cardly-ui/**/*.html"
-        ]
-      }
+      "outputs": ["{options.outputFile}"]
     },
     "storybook": {
       "executor": "@storybook/angular:start-storybook",
@@ -54,6 +49,5 @@
         }
       }
     }
-  },
-  "tags": ["type:ui"]
+  }
 }
