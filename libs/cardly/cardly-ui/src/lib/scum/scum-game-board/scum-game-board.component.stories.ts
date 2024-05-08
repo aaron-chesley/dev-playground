@@ -1,8 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ScumGameUI } from '@playground/cardly-util';
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { ScumGameBoardComponent } from './scum-game-board.component';
-import { user, gameWithoutGameState, players } from './scum-game-board.component.stories.utils';
 
 export default {
   title: 'ScumGameBoardComponent',
@@ -23,44 +21,13 @@ const Template: Story<ScumGameBoardComponent> = (args: ScumGameBoardComponent) =
 });
 
 export const PreGameWaitingForPlayers = Template.bind({});
-PreGameWaitingForPlayers.args = {
-  user: { ...user },
-  game: {
-    ...gameWithoutGameState,
-    state: ScumGameUI.PREGAME,
-    players: [...players.slice(0, 2)],
-  },
-  stagedCards: [],
-};
+PreGameWaitingForPlayers.args = {};
 
 export const PreGameReadyToStart = Template.bind({});
-PreGameReadyToStart.args = {
-  user: { ...user },
-  game: {
-    ...gameWithoutGameState,
-    state: ScumGameUI.PREGAME,
-  },
-  stagedCards: [],
-};
+PreGameReadyToStart.args = {};
 
 export const InProgressRound1CleanBoard = Template.bind({});
-InProgressRound1CleanBoard.args = {
-  user: { ...user },
-  game: {
-    ...gameWithoutGameState,
-    currentPlayerId: '1',
-    state: ScumGameUI.IN_PROGRESS,
-  },
-  stagedCards: [],
-};
+InProgressRound1CleanBoard.args = {};
 
 export const InProgressStagedCards = Template.bind({});
-InProgressStagedCards.args = {
-  user: { ...user },
-  game: {
-    ...gameWithoutGameState,
-    currentPlayerId: '1',
-    state: ScumGameUI.IN_PROGRESS,
-  },
-  stagedCards: [players[0].cards[0], players[0].cards[1]],
-};
+InProgressStagedCards.args = {};

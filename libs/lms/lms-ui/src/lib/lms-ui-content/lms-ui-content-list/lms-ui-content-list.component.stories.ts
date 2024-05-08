@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<LmsUiContentListComponent>;
 
-const Template: Story<LmsUiContentListComponent> = (
-  args: LmsUiContentListComponent
-) => ({
+const Template: Story<LmsUiContentListComponent> = (args: LmsUiContentListComponent) => ({
   props: args,
 });
 
@@ -27,12 +25,13 @@ Primary.args = {
       video: {
         id: '1',
         name: 'Seize The Day',
-        description:
-          'Seize The Day by Avenged Sevenfold from the album City of Evil © 2005',
+        description: 'Seize The Day by Avenged Sevenfold from the album City of Evil © 2005',
         duration: '5:38',
         video_url: 'https://youtu.be/-B2yzG6Gj0A',
         thumbnail_url: 'https://i.ytimg.com/vi/-B2yzG6Gj0A/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '2',
@@ -48,6 +47,8 @@ Primary.args = {
         thumbnail_url:
           'https://upload.wikimedia.org/wikipedia/en/thumb/6/64/HailToTheKingVinyl.jpeg/220px-HailToTheKingVinyl.jpeg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '3',
@@ -62,6 +63,8 @@ Primary.args = {
         video_url: 'https://youtu.be/UCCyoocDxBA',
         thumbnail_url: 'https://i.ytimg.com/vi/UCCyoocDxBA/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '4',
@@ -70,12 +73,13 @@ Primary.args = {
       video: {
         id: '4',
         name: 'In Too Deep',
-        description:
-          'Official Music Video for In Too Deep performed by SUM 41.',
+        description: 'Official Music Video for In Too Deep performed by SUM 41.',
         duration: '3:40',
         video_url: 'https://youtu.be/emGri7i8Y2Y',
         thumbnail_url: 'https://i.ytimg.com/vi/emGri7i8Y2Y/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '5',
@@ -89,6 +93,8 @@ Primary.args = {
         video_url: 'https://youtu.be/K38xNqZvBJI',
         thumbnail_url: 'https://i.ytimg.com/vi/K38xNqZvBJI/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '6',
@@ -102,6 +108,8 @@ Primary.args = {
         video_url: 'https://youtu.be/aJXRFcyWgdk',
         thumbnail_url: 'https://i.ytimg.com/vi/GOobbLwrLCc/hqdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '7',
@@ -116,6 +124,8 @@ Primary.args = {
         video_url: 'https://youtu.be/S9z3gv3MWaM',
         thumbnail_url: 'https://i.ytimg.com/vi/_GVCSkFU_n8/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
     {
       id: '8',
@@ -129,6 +139,8 @@ Primary.args = {
         video_url: 'https://youtu.be/-B2yzG6Gj0A',
         thumbnail_url: 'https://i.ytimg.com/vi/A94dmLthBHA/maxresdefault.jpg',
       },
+      assessment: null,
+      tags: [],
     },
   ],
 };

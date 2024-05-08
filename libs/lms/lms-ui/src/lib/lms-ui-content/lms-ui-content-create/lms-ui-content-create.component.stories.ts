@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<LmsUiContentCreateComponent>;
 
-const Template: Story<LmsUiContentCreateComponent> = (
-  args: LmsUiContentCreateComponent
-) => ({
+const Template: Story<LmsUiContentCreateComponent> = (args: LmsUiContentCreateComponent) => ({
   props: args,
 });
 
