@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+.cdk-overlay-container,.cdk-global-overlay-wrapper{pointer-events:none;top:0;left:0;height:100%;width:100%}.cdk-overlay-container{position:fixed;z-index:1000}.cdk-overlay-container:empty{display:none}.cdk-global-overlay-wrapper{display:flex;position:absolute;z-index:1000}.cdk-overlay-pane{position:absolute;pointer-events:auto;box-sizing:border-box;z-index:1000;display:flex;max-width:100%;max-height:100%}.cdk-overlay-backdrop{position:absolute;top:0;bottom:0;left:0;right:0;z-index:1000;pointer-events:auto;-webkit-tap-highlight-color:rgba(0,0,0,0);transition:opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);opacity:0}.cdk-overlay-backdrop.cdk-overlay-backdrop-showing{opacity:1}.cdk-high-contrast-active .cdk-overlay-backdrop.cdk-overlay-backdrop-showing{opacity:.6}.cdk-overlay-dark-backdrop{background:rgba(0,0,0,.32)}.cdk-overlay-transparent-backdrop{transition:visibility 1ms linear,opacity 1ms linear;visibility:hidden;opacity:1}.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing{opacity:0;visibility:visible}.cdk-overlay-backdrop-noop-animation{transition:none}.cdk-overlay-connected-position-bounding-box{position:absolute;z-index:1000;display:flex;flex-direction:column;min-width:1px;min-height:1px}.cdk-global-scrollblock{position:fixed;width:100%;overflow-y:scroll}
+/* Globals */
+:root {
+  /* Colors */
+  /* https://hypejunction.github.io/color-wizard/ */
+  --play-primary-color-base: 0;
+  --play-primary-color-darkest: hsl(var(--play-primary-color-base), 80%, 23%);
+  --play-primary-color-darker: hsl(var(--play-primary-color-base), 80%, 41%);
+  --play-primary-color: hsl(var(--play-primary-color-base), 80%, 50%);
+  --play-primary-color-lighter: hsl(var(--play-primary-color-base), 80%, 77%);
+  --play-primary-color-lightest: hsl(var(--play-primary-color-base), 80%, 94%);
+  --play-accent-color-base: 210;
+  --play-accent-color-darkest: hsl(var(--play-accent-color-base), 80%, 23%);
+  --play-accent-color-darker: hsl(var(--play-accent-color-base), 80%, 41%);
+  --play-accent-color: hsl(var(--play-accent-color-base), 80%, 50%);
+  --play-accent-color-lighter: hsl(var(--play-accent-color-base), 80%, 77%);
+  --play-accent-color-lightest: hsl(var(--play-accent-color-base), 80%, 94%);
+  --play-success-color: hsl(131, 80%, 50%);
+  --play-error-color: hsl(0, 80%, 50%);
+  --play-warning-color: hsl(39, 80%, 50%);
+  --play-text-color-light: #ffffff;
+  --play-text-color-dark: #000000;
+  --play-bg-color: #ffffff;
+}
+
+/* Component Scoped */
+play-card {
+  --play-card-padding: 25px;
+  --play-card-border-radius: 4px;
+  --play-card-bg: #ffffff;
+  --play-card-box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #f1f1f124, 0 1px 3px #0000001f;
+  --play-card-header-height: 64px;
+}
+
+html,
+body {
+  font-family: "Roboto";
+  box-sizing: border-box !important;
+  padding: 0px !important;
+}
