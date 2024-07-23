@@ -10,7 +10,8 @@
     "deploy-full-storybook": "nx run play-storybook:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-storybook",
     "deploy-play-ui-storybook": "nx run play-ui:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-ui",
     "start-cardly-internet": "nx serve cardly --host 0.0.0.0 --port 4200",
-    "start-cardly-server": "nx serve cardly-server"
+    "start-cardly-server": "nx serve cardly-server",
+    "start-lms": "nx serve lms --host 0.0.0.0 --port 4200"
   },
   "private": true,
   "dependencies": {
