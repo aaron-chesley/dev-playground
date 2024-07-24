@@ -12,7 +12,7 @@
     "start-local-cardly-server": "nx serve cardly-server",
     "start-local-cardly-client": "nx serve cardly",
     "build-prod-cardly-client": "nx build cardly",
-    "build-prod-cardly-server": "npm install && nx build cardly-server",
+    "build-prod-cardly-server": "corepack enable && yarn install && nx build cardly-server",
     "start-prod-cardly-client": "nx serve cardly --host 0.0.0.0 --port 4200",
     "start-prod-cardly-server": "node dist/apps/cardly-server/main.js",
     "start-lms": "nx serve lms --host 0.0.0.0 --port 4200"
