@@ -20,6 +20,7 @@ export class CardlyServer {
   private server: http.Server;
   private io: Server;
   private app: express.Application;
+  private port: number;
   private games: { [gameId: string]: ScumGame };
   private secretKey = 'myCoolSecretKey';
 
@@ -31,6 +32,7 @@ export class CardlyServer {
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     // Use Express to handle HTTP requests
+    this.port = parseInt(process.env.PORT) || 3000;
     this.server = http.createServer(this.app);
 
     this.io = new Server(this.server, {
@@ -216,8 +218,8 @@ export class CardlyServer {
       });
     });
 
-    this.server.listen(3000, 'localhost', () => {
-      console.log('WebSocket server listening on port 3000');
+    this.server.listen(this.port, 'localhost', () => {
+      console.log(`WebSocket server listening on port ${this.port}`);
     });
   }
 }
