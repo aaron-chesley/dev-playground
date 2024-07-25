@@ -218,7 +218,7 @@ export class CardlyServer {
       });
     });
 
-    this.server.listen(this.port, 'localhost', () => {
+    this.server.listen(this.port, '0.0.0.0', () => {
       console.log(`WebSocket server listening on port ${this.port}`);
     });
   }
