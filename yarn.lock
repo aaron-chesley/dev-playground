@@ -193,6 +193,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angular-devkit/core@npm:17.3.7":
+  version: 17.3.7
+  resolution: "@angular-devkit/core@npm:17.3.7"
+  dependencies:
+    ajv: "npm:8.12.0"
+    ajv-formats: "npm:2.1.1"
+    jsonc-parser: "npm:3.2.1"
+    picomatch: "npm:4.0.1"
+    rxjs: "npm:7.8.1"
+    source-map: "npm:0.7.4"
+  peerDependencies:
+    chokidar: ^3.5.2
+  peerDependenciesMeta:
+    chokidar:
+      optional: true
+  checksum: 10c0/74a253bf3933f87df0d8110b7fa68e72f2bb52121ed16c52c3a2e80babea9c4a96c2ad33daa40aa01d2da602908fd09da8a2b92acf4b90970d214ddc533c2088
+  languageName: node
+  linkType: hard
+
 "@angular-devkit/schematics@npm:17.3.6":
   version: 17.3.6
   resolution: "@angular-devkit/schematics@npm:17.3.6"
@@ -203,6 +222,19 @@ __metadata:
     ora: "npm:5.4.1"
     rxjs: "npm:7.8.1"
   checksum: 10c0/ab13c719e7291ab8bced25b779158ad45e2aec7668e876b1892d62d35bbadcc958ad52ff52c9720252f427244fe57574b2d9c6ac62cd9bb483c18a5db570f37e
+  languageName: node
+  linkType: hard
+
+"@angular-devkit/schematics@npm:17.3.7":
+  version: 17.3.7
+  resolution: "@angular-devkit/schematics@npm:17.3.7"
+  dependencies:
+    "@angular-devkit/core": "npm:17.3.7"
+    jsonc-parser: "npm:3.2.1"
+    magic-string: "npm:0.30.8"
+    ora: "npm:5.4.1"
+    rxjs: "npm:7.8.1"
+  checksum: 10c0/3b0a48991f8c1e95cec7f36cd8279820e1e466b2bb0285518399395d2258ecc509a860da575031d5137c84933317123b8fdeff39408053992c79475d158c0075
   languageName: node
   linkType: hard
 
@@ -520,19 +552,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/pwa@npm:17.3.6":
-  version: 17.3.6
-  resolution: "@angular/pwa@npm:17.3.6"
+"@angular/pwa@npm:17.3.7":
+  version: 17.3.7
+  resolution: "@angular/pwa@npm:17.3.7"
   dependencies:
-    "@angular-devkit/schematics": "npm:17.3.6"
-    "@schematics/angular": "npm:17.3.6"
+    "@angular-devkit/schematics": "npm:17.3.7"
+    "@schematics/angular": "npm:17.3.7"
     parse5-html-rewriting-stream: "npm:7.0.0"
   peerDependencies:
     "@angular/cli": ^17.0.0
   peerDependenciesMeta:
     "@angular/cli":
       optional: true
-  checksum: 10c0/a58c745495e6027a5e032f7ac8e8a6b96f5f3c97b5948c5180c8ab4953a2ffd870e20844fd66be6fa755854d287b022bcd196b4e4645dfac0c4561339e0a3659
+  checksum: 10c0/02054987828056684bf20fe0395e8491ae6056ad6ff25587a2b32cb13d3bfb4d4fa80276e342377ea6381028cf8a097e00c704497dede65999f5f991ed31c8ec
   languageName: node
   linkType: hard
 
@@ -7671,6 +7703,17 @@ __metadata:
     "@angular-devkit/schematics": "npm:17.3.6"
     jsonc-parser: "npm:3.2.1"
   checksum: 10c0/c6e7a1fea9c9a192d3bcf137a19bad335ba91a10a29d0f3e2baab50ced8f47bfba07228068fef1c3ec767c306a89bedf35e16c49484223c1422904a817d0448e
+  languageName: node
+  linkType: hard
+
+"@schematics/angular@npm:17.3.7":
+  version: 17.3.7
+  resolution: "@schematics/angular@npm:17.3.7"
+  dependencies:
+    "@angular-devkit/core": "npm:17.3.7"
+    "@angular-devkit/schematics": "npm:17.3.7"
+    jsonc-parser: "npm:3.2.1"
+  checksum: 10c0/f75415b631f64265aa4b6b0099aca65a4c12144ce23ff09c1f0ec636c4b4d4b77844ff47a896799ce201add555e14c73ea126312d603fd7eb82ef5766ce78792
   languageName: node
   linkType: hard
 
@@ -20590,7 +20633,7 @@ __metadata:
     "@angular/material": "npm:17.3.7"
     "@angular/platform-browser": "npm:17.3.7"
     "@angular/platform-browser-dynamic": "npm:17.3.7"
-    "@angular/pwa": "npm:17.3.6"
+    "@angular/pwa": "npm:17.3.7"
     "@angular/router": "npm:17.3.7"
     "@angular/service-worker": "npm:17.3.7"
     "@angular/youtube-player": "npm:^17.3.7"

@@ -26,7 +26,8 @@
           }
         ],
         "styles": ["apps/cardly/src/styles.scss", "libs/play-ui/src/lib/play-theme/_play-theme.scss"],
-        "scripts": []
+        "scripts": [],
+        "serviceWorker": "apps/cardly/ngsw-config.json"
       },
       "configurations": {
         "production": {
@@ -47,7 +48,8 @@
         "development": {
           "optimization": false,
           "extractLicenses": false,
-          "sourceMap": true
+          "sourceMap": true,
+          "serviceWorker": "apps/cardly/ngsw-config.json"
         }
       },
       "defaultConfiguration": "production"
