@@ -4,7 +4,7 @@ import { io, Socket } from 'socket.io-client';
 @Injectable({ providedIn: 'root' })
 export class CardlyWebsocketService {
   private socket: Socket;
-  private readonly url = 'http://localhost:4200';
+  private readonly url = '/';
 
   private connect() {
     this.socket.connect();

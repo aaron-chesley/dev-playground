@@ -10,10 +10,9 @@
     "deploy-full-storybook": "nx run play-storybook:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-storybook",
     "deploy-play-ui-storybook": "nx run play-ui:build-storybook --skip-nx-cache && storybook-to-ghpages --existing-output-dir=dist/storybook/play-ui",
     "start-local-cardly-server": "nx serve cardly-server",
-    "start-local-cardly-client": "nx serve cardly",
+    "start-local-cardly-client": "nx serve cardly --host 0.0.0.0 --port 4200",
     "build-prod-cardly-client": "nx build cardly",
-    "build-prod-cardly-server": "corepack enable && yarn install && nx build cardly-server",
-    "start-prod-cardly-client": "nx serve cardly --host 0.0.0.0 --port 4200",
+    "build-prod-cardly-server": "nx build cardly-server",
     "start-prod-cardly-server": "node dist/apps/cardly-server/main.js",
     "start-lms": "nx serve lms --host 0.0.0.0 --port 4200"
   },
