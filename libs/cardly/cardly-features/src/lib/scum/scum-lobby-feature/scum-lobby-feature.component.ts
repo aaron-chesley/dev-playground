@@ -4,24 +4,33 @@ import { AsyncPipe } from '@angular/common';
 import { ScumActions } from '@playground/cardly-data';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { PlayButtonComponent, PlayInputTextComponent } from '@playground/play-ui';
 
 @Component({
   selector: 'scum-lobby-feature',
-  template: `<form>
-      <button type="button" (click)="createNewGame()">Create New Game</button>
+  template: ` <form>
+      <input playInputText type="text" required placeholder="Enter game id" name="gameId" [(ngModel)]="gameId" />
+      <button playButton appearance="play-flat" theme="accent" (click)="joinGame(gameId)">Join Game</button>
     </form>
+    <span>OR</span>
     <form>
-      <input type="text" required placeholder="Enter game id" name="gameId" [(ngModel)]="gameId" />
-      <button type="button" (click)="joinGame(gameId)">Join Game</button>
+      <button playButton appearance="play-flat" theme="accent" (click)="createNewGame()">Create New Game</button>
     </form>`,
   styles: [
     `
       :host {
         display: flex;
-        gap: 50px;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+        gap: 20px;
         height: 100%;
+      }
+
+      span {
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: bold;
       }
 
       form {
@@ -30,21 +39,17 @@ import { Store } from '@ngrx/store';
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        height: 200px;
+        width: 200px;
       }
 
       form > * {
         width: 100%;
       }
-
-      form > span {
-        text-align: center;
-      }
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AsyncPipe, ScumGameBoardComponent, FormsModule],
+  imports: [AsyncPipe, ScumGameBoardComponent, FormsModule, PlayInputTextComponent, PlayButtonComponent],
 })
 export class ScumLobbyFeatureComponent {
   gameId = '';
