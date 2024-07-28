@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import { AsyncPipe } from '@angular/common';
-import { ScumGameStateService } from '@playground/cardly-data';
+import { ScumActions } from '@playground/cardly-data';
 import { FormsModule } from '@angular/forms';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'scum-lobby-feature',
@@ -49,12 +50,12 @@ export class ScumLobbyFeatureComponent {
   gameId = '';
 
   createNewGame() {
-    this.state.createNewGame();
+    this.store.dispatch(ScumActions.createNewGame());
   }
 
   joinGame(gameId: string) {
-    this.state.joinGame(gameId);
+    this.store.dispatch(ScumActions.joinGame({ gameId }));
   }
 
-  constructor(private state: ScumGameStateService) {}
+  constructor(private store: Store) {}
 }

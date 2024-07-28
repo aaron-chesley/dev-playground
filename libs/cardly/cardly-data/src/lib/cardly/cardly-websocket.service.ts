@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { fromEvent, Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 
 @Injectable({ providedIn: 'root' })
@@ -14,14 +15,16 @@ export class CardlyWebsocketService {
     this.socket.disconnect();
   }
 
-  public sendMessage(messageName: string, payload: any, cb?: Function) {
-    this.socket.emit(messageName, payload, cb ? cb : null);
+  public sendMessage(messageName: string, payload: any): Observable<any> {
+    return new Observable((observer) => {
+      this.socket.emit(messageName, payload);
+      observer.next();
+      observer.complete();
+    });
   }
 
-  public receiveMessage(messageType: string, callback: (message: any) => void) {
-    this.socket.on(messageType, (message) => {
-      callback(message);
-    });
+  public receiveMessage(messageType: string): Observable<any> {
+    return fromEvent(this.socket, messageType);
   }
 
   constructor() {

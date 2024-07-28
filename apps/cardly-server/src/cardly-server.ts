@@ -133,14 +133,14 @@ export class CardlyServer {
     this.io.on('connection', (socket: Socket) => {
       console.log('Client connected: ', socket.id, socket['user'].displayName);
 
-      socket.on('createNewGame', (payload, cb) => {
+      socket.on('createNewGame', (payload: any) => {
         const game = new ScumGame(socket['user']);
         this.games[game.gameId] = game;
         const response: CreateNewGameResponse = { gameId: game.gameId };
-        cb(response);
+        socket.emit('newGameCreated', response);
       });
 
-      socket.on('joinGame', (payload: any, cb) => {
+      socket.on('joinGame', (payload: any) => {
         const game = this.games[payload.gameId];
         const user = socket['user'];
         if (!game) {
@@ -153,7 +153,7 @@ export class CardlyServer {
           this.io.to(user.id).emit('gameStateUpdate', game.getCurrentGameState(user.id));
         }
         const response = { gameId: game.gameId };
-        cb(response);
+        socket.emit('gameJoined', response);
       });
 
       socket.on('startGame', (payload: StartGameRequest) => {
