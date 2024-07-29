@@ -1,0 +1,11 @@
+<div class="page-layout">
+  <div class="card">
+    <input
+      playInputText
+      type="text"
+      placeholder="Display name..."
+      [formControl]="displayName"
+      (keydown.enter)="onSubmit()"
+    />
+  </div>
+</div>

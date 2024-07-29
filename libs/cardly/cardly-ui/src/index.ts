@@ -1,2 +1,2 @@
 export * from './lib/scum/index';
-export * from './lib/login/login-modal.component';
+export * from './lib/login/cardly-login.component';
