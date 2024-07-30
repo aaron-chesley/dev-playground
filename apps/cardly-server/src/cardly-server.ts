@@ -89,28 +89,27 @@ export class CardlyServer {
 
       const user = { id: randomId(), displayName: displayName, avatar: 'https://i.pravatar.cc/300' };
 
-      const token = jwt.sign({ user }, this.secretKey, { expiresIn: '6h' });
+      const token = jwt.sign({ user }, this.secretKey);
 
       // Set the cookie
-      res.cookie('token', token, { httpOnly: true });
+      res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 365 * 10 }); // 10 years
 
       // Return the token
       res.send({ token: token });
     });
 
-    // Validate a token
-    this.app.post('/api/validate', (req, res) => {
-      const token = req.body?.token;
-      if (!token) {
-        res.sendStatus(400);
+    // Check cookie for valid token and return user
+    this.app.post('/api/me', (req, res) => {
+      if (!req.cookies?.token) {
+        res.send({ isAuthenticated: false });
         return;
       }
 
       try {
-        const payload = jwt.verify(token, this.secretKey);
-        res.send(true);
+        const payload = jwt.verify(req.cookies.token, this.secretKey);
+        res.send({ isAuthenticated: true, user: payload['user'] });
       } catch (err) {
-        res.sendStatus(401);
+        res.send({ isAuthenticated: false });
       }
     });
 
