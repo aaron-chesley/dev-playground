@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { CardlyAuthenticationService } from '@playground/cardly-data';
+import { Store } from '@ngrx/store';
+import { AuthActions } from '@playground/cardly-data';
 import { CardlyLoginComponent } from '@playground/cardly-ui';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'cardly-login-modal-feature',
@@ -13,13 +12,7 @@ import { tap } from 'rxjs';
 })
 export class CardlyLoginFeatureComponent {
   onLogin(displayName: string) {
-    this.authService
-      .register(displayName)
-      .pipe(tap(() => this.router.navigate(['/scum'])))
-      .subscribe();
+    this.store.dispatch(AuthActions.login({ displayName }));
   }
-  constructor(
-    private authService: CardlyAuthenticationService,
-    private router: Router,
-  ) {}
+  constructor(private store: Store) {}
 }

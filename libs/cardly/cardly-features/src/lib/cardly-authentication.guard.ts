@@ -1,21 +1,31 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot } from '@angular/router';
 import { of, switchMap } from 'rxjs';
-import { CardlyAuthenticationService } from '@playground/cardly-data';
+import { AuthActions, AuthenticationState, CardlyAuthenticationService, selectUser } from '@playground/cardly-data';
+import { Store } from '@ngrx/store';
 
 export const CardlyAuthenticationGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const service = inject(CardlyAuthenticationService);
+  const authService = inject(CardlyAuthenticationService);
   const router = inject(Router);
+  const store: Store<AuthenticationState> = inject(Store);
 
-  return service.isAuthenticated().pipe(
-    switchMap((isAuthenticated) => {
-      if (isAuthenticated) {
+  // Check if the user is in the store. If not, check the auth service "me" endpoint. If that fails, redirect to login.
+  return store.select(selectUser).pipe(
+    switchMap((user) => {
+      if (user) {
         return of(true);
       }
 
-      router.navigate(['login']);
+      return authService.me().pipe(
+        switchMap((me) => {
+          if (me) {
+            store.dispatch(AuthActions.loginSuccess({ user: me }));
+            return of(true);
+          }
 
-      return of(false);
+          return router.navigate(['/login']);
+        }),
+      );
     }),
   );
 };

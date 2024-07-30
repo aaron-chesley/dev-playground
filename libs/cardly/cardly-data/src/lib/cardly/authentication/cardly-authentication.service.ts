@@ -2,16 +2,11 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { CardlyToken, CardlyUser } from '@playground/cardly-util';
 import { ApiService } from '@playground/shared/shared-data';
-import { Observable, of, tap } from 'rxjs';
+import { map, Observable, of, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class CardlyAuthenticationService {
-  getAuthTokenFromStorage(): string {
-    return sessionStorage.getItem('token');
-  }
-
-  getUserFromToken(): CardlyUser | undefined {
-    const token = this.getAuthTokenFromStorage();
+  getUserFromToken(token: string): CardlyUser | undefined {
     if (token) {
       try {
         const decodedToken = this.jwtHelperService.decodeToken<CardlyToken>(token);
@@ -24,25 +19,12 @@ export class CardlyAuthenticationService {
     return undefined;
   }
 
-  isTokenValid(token: string): Observable<boolean> {
-    return this.api.post<boolean>('validate', { token });
-  }
-
-  isAuthenticated(): Observable<boolean> {
-    const token = this.getAuthTokenFromStorage();
-    if (token) {
-      return this.isTokenValid(token);
-    }
-
-    return of(false);
+  me(): Observable<CardlyUser> {
+    return this.api.post<CardlyUser>('me', {});
   }
 
   register(displayName: string): Observable<{ token: string }> {
-    return this.api.post<{ token: string }>('generate-token', { displayName }).pipe(
-      tap((response) => {
-        sessionStorage.setItem('token', response.token);
-      }),
-    );
+    return this.api.post<{ token: string }>('generate-token', { displayName });
   }
 
   constructor(

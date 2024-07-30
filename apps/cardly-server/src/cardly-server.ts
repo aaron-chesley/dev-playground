@@ -101,15 +101,15 @@ export class CardlyServer {
     // Check cookie for valid token and return user
     this.app.post('/api/me', (req, res) => {
       if (!req.cookies?.token) {
-        res.send({ isAuthenticated: false });
+        res.send(null);
         return;
       }
 
       try {
         const payload = jwt.verify(req.cookies.token, this.secretKey);
-        res.send({ isAuthenticated: true, user: payload['user'] });
+        res.send(payload['user']);
       } catch (err) {
-        res.send({ isAuthenticated: false });
+        res.send(null);
       }
     });
 
