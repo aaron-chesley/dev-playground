@@ -3,7 +3,7 @@ import { ScumGamePhase } from './scum-game-phase.enum';
 import { ScumHand } from './scum-hand.interface';
 import { ScumTrick } from './scum-trick.interface';
 import { ScumGameUI, ScumTrickWinner } from './scum-game-ui.interface';
-import { randomId } from '@playground/shared/util/id';
+import { randomGameId, randomId } from '@playground/shared/util/id';
 
 export class ScumGame {
   public readonly gameId: string;
@@ -19,7 +19,7 @@ export class ScumGame {
   private trickWinner: ScumTrickWinner;
 
   constructor(user: CardlyUser) {
-    this.gameId = randomId();
+    this.gameId = randomGameId();
     this.gameOwnerUserId = user.id;
     this.phase = ScumGamePhase.PREGAME;
     this.addUserToGame(user);
