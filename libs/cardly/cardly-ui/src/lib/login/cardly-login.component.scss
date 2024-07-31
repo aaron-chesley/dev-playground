@@ -9,16 +9,16 @@
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
-
   border-radius: 17px;
   padding: 20px;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.6);
 }
 
 input {
   position: absolute;
-  bottom: 85px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 90px;
+  left: 50px;
+  text-align: center;
 }
 
 .page-layout {

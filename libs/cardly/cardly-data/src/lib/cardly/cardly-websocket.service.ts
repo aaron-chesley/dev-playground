@@ -8,13 +8,14 @@ export class CardlyWebsocketService {
   private readonly url = '/';
 
   public connect() {
-    this.socket = io(this.url, { withCredentials: true });
+    if (!this.socket) {
+      this.socket = io(this.url, { withCredentials: true });
+    }
     this.socket.connect();
   }
 
   public disconnect() {
     this.socket.disconnect();
-    this.socket = null;
   }
 
   public sendMessage(messageName: string, payload: any): Observable<any> {
