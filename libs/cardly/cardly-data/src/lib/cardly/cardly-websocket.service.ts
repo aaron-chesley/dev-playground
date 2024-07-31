@@ -7,12 +7,14 @@ export class CardlyWebsocketService {
   private socket: Socket;
   private readonly url = '/';
 
-  private connect() {
+  public connect() {
+    this.socket = io(this.url, { withCredentials: true });
     this.socket.connect();
   }
 
-  private disconnect() {
+  public disconnect() {
     this.socket.disconnect();
+    this.socket = null;
   }
 
   public sendMessage(messageName: string, payload: any): Observable<any> {
@@ -27,8 +29,5 @@ export class CardlyWebsocketService {
     return fromEvent(this.socket, messageType);
   }
 
-  constructor() {
-    this.socket = io(this.url, { withCredentials: true });
-    this.connect();
-  }
+  constructor() {}
 }

@@ -18,4 +18,8 @@ export const authenticationReducer = createReducer(
     ...state,
     user,
   })),
+  on(AuthActions.logoutSuccess, (state) => ({
+    ...state,
+    user: null,
+  })),
 );

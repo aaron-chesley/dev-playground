@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import { AsyncPipe } from '@angular/common';
-import { ScumActions } from '@playground/cardly-data';
+import { AuthActions, ScumActions } from '@playground/cardly-data';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { PlayButtonComponent, PlayInputTextComponent } from '@playground/play-ui';
@@ -15,6 +15,9 @@ import { PlayButtonComponent, PlayInputTextComponent } from '@playground/play-ui
     <span>OR</span>
     <form>
       <button playButton appearance="play-flat" theme="accent" (click)="createNewGame()">Create New Game</button>
+    </form>
+    <form>
+      <button playButton appearance="play-flat" theme="accent" (click)="logout()">Logout</button>
     </form>`,
   styles: [
     `
@@ -60,6 +63,10 @@ export class ScumLobbyFeatureComponent {
 
   joinGame(gameId: string) {
     this.store.dispatch(ScumActions.joinGame({ gameId }));
+  }
+
+  logout() {
+    this.store.dispatch(AuthActions.logout());
   }
 
   constructor(private store: Store) {}

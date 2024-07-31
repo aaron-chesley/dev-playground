@@ -27,6 +27,10 @@ export class CardlyAuthenticationService {
     return this.api.post<{ token: string }>('generate-token', { displayName });
   }
 
+  logout(): Observable<void> {
+    return this.api.post<void>('logout', {});
+  }
+
   constructor(
     private api: ApiService,
     private jwtHelperService: JwtHelperService,

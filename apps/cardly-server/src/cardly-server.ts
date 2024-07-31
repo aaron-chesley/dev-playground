@@ -113,6 +113,11 @@ export class CardlyServer {
       }
     });
 
+    this.app.post('/api/logout', (req, res) => {
+      res.clearCookie('token'); // Clear the 'token' cookie
+      res.status(200).json({ message: 'Logout successful' });
+    });
+
     this.app.post('/create-game', (req, res) => {});
     // Create a new game
 
