@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { CardlyWebsocketService } from '../../cardly';
-import { Observable, of } from 'rxjs';
-import { catchError, switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
 import * as ScumGameActions from './scum.actions';
 import {
   CreateNewGameResponse,
@@ -16,7 +16,8 @@ import {
   ScumGameUI,
 } from '@playground/cardly-util';
 import { Store } from '@ngrx/store';
-import { selectScumGameState } from './scum.selectors';
+import { selectGameState, selectScumGameState } from './scum.selectors';
+import { PlaySnackbarService } from '@playground/play-ui';
 
 @Injectable()
 export class ScumGameEffects {
@@ -73,7 +74,18 @@ export class ScumGameEffects {
     () =>
       this.actions$.pipe(
         ofType(ScumGameActions.passTurn),
-        switchMap((action) => {
+        withLatestFrom(this.store.select(selectGameState)),
+        switchMap(([action, state]) => {
+          // Access the store to get the discard pile. If there aren't any then the user can't pass their turn.
+          const discardPile = state.discardPile;
+          if (discardPile.length === 0) {
+            this.snackbarService.open({
+              message: 'The first player of the round cannot pass their turn.',
+              severity: 'info',
+              duration: 0,
+            });
+            return of(ScumGameActions.noopAction());
+          }
           const payload: PassTurnRequest = { gameId: action.gameId };
           this.store.dispatch(ScumGameActions.clearStagedCards());
           return this.cardlyWebsocket.sendMessage('passTurn', payload);
@@ -142,5 +154,6 @@ export class ScumGameEffects {
     private cardlyWebsocket: CardlyWebsocketService,
     private router: Router,
     private store: Store,
+    private snackbarService: PlaySnackbarService,
   ) {}
 }

@@ -60,6 +60,46 @@
 .stack {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 8px;
-  max-width: 25%;
+}
+
+/* For small devices (phones) */
+@media (min-width: 0px) and (max-width: 480px) {
+  .stack {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* For medium devices (tablets) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .stack {
+    min-width: 75%;
+    max-width: 75%;
+  }
+}
+
+/* For large devices (desktops) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .stack {
+    min-width: 50%;
+    max-width: 50%;
+  }
+}
+
+/* For extra-large devices (wide screens) */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .stack {
+    min-width: 33%;
+    max-width: 33%;
+  }
+}
+
+/* For even larger devices (full screens) */
+@media (min-width: 1441px) {
+  .stack {
+    min-width: 33%;
+    max-width: 33%;
+  }
 }
