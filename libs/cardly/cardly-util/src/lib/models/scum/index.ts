@@ -4,3 +4,4 @@ export * from './scum-rank.enum';
 export * from './scum-game.class';
 export * from './scum-trick.interface';
 export * from './scum-game-ui.interface';
+export * from './scum-payloads';

@@ -1,20 +1,41 @@
 import { createReducer, on } from '@ngrx/store';
-import { ScumGameUI, getInitialScumGameUI, ScumTrickWinner } from '@playground/cardly-util';
+import { ScumGameUI, getInitialScumGameUI } from '@playground/cardly-util';
 import * as ScumGameActions from './scum.actions';
 
 export interface ScumGameState {
   gameState: ScumGameUI;
   stagedCardIndices: number[];
+  loading: boolean;
 }
 
 const initialState: ScumGameState = {
   gameState: getInitialScumGameUI(),
   stagedCardIndices: [],
+  loading: false,
 };
 
 export const scumGameReducer = createReducer(
   initialState,
-  on(ScumGameActions.updateGameState, (state, { gameState }) => ({ ...state, gameState })),
+  on(ScumGameActions.createNewGame, ScumGameActions.joinGame, (state) => ({ ...state, loading: true })),
+  on(ScumGameActions.createNewGameSuccess, (state, { data }) => ({
+    ...state,
+    gameState: { ...state.gameState, gameId: data.gameId },
+  })),
+  on(ScumGameActions.joinGameSuccess, (state, { data }) => ({
+    ...state,
+    gameState: { ...state.gameState, gameId: data.gameId },
+  })),
+  on(
+    ScumGameActions.createNewGameSuccess,
+    ScumGameActions.joinGameSuccess,
+    ScumGameActions.joinGameFailure,
+    (state) => ({
+      ...state,
+      loading: false,
+    }),
+  ),
+
+  on(ScumGameActions.updateGameState, (state, { data }) => ({ ...state, gameState: data.gameState })),
   on(ScumGameActions.clearState, () => initialState),
   on(ScumGameActions.stageCard, (state, { cardIndex }) => {
     const { hand, phase, discardPile, requiredDiscardSize } = state.gameState;

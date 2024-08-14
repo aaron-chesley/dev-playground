@@ -3,17 +3,19 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { CardlyWebsocketService } from '../../cardly';
 import { of } from 'rxjs';
-import { switchMap, map, withLatestFrom, tap } from 'rxjs/operators';
+import { map, withLatestFrom, tap } from 'rxjs/operators';
 import * as ScumGameActions from './scum.actions';
 import {
-  CreateNewGameResponse,
-  JoinGameResponse,
-  PlayCardsRequest,
-  PassTurnRequest,
-  StartNewRoundRequest,
-  SwapCardsRequest,
-  JoinGameRequest,
-  ScumGameUI,
+  CreateNewGameSuccess,
+  JoinGamePayload,
+  CreateNewGamePayload,
+  SubscribeToGameUpdatesPayload,
+  StartGamePayload,
+  PlayCardsPayload,
+  PassTurnPayload,
+  StartNewRoundPayload,
+  SwapCardsPayload,
+  UnsubscribeFromGameUpdatesPayload,
 } from '@playground/cardly-util';
 import { Store } from '@ngrx/store';
 import { selectGameState, selectScumGameState } from './scum.selectors';
@@ -21,11 +23,50 @@ import { PlaySnackbarService } from '@playground/play-ui';
 
 @Injectable()
 export class ScumGameEffects {
+  gameId$ = this.store.select(selectGameState).pipe(map((state) => state.gameId));
+
   createNewGame$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(ScumGameActions.createNewGame),
-        switchMap((action) => this.cardlyWebsocket.sendMessage('createNewGame', {})),
+        tap((_) => {
+          const payload = new CreateNewGamePayload().toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  createNewGameSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.createNewGameSuccess),
+        tap(({ data }) => this.router.navigate(['scum', data.gameId])),
+      ),
+    { dispatch: false },
+  );
+
+  subscribeToGameUpdates$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.subscribeToGameUpdates),
+        tap(({ gameId }) => {
+          const payload = new SubscribeToGameUpdatesPayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+        }),
+      ),
+    { dispatch: false },
+  );
+
+  unsubscribeFromGameUpdates$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.unsubscribeFromGameUpdates),
+        withLatestFrom(this.gameId$),
+        tap(([_, gameId]) => {
+          const payload = new UnsubscribeFromGameUpdatesPayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+        }),
       ),
     { dispatch: false },
   );
@@ -34,14 +75,19 @@ export class ScumGameEffects {
     () =>
       this.actions$.pipe(
         ofType(ScumGameActions.joinGame),
-        switchMap(({ gameId }) => {
-          const payload: JoinGameRequest = { gameId };
-          return this.cardlyWebsocket.sendMessage('joinGame', payload).pipe(
-            map((res: JoinGameResponse) => {
-              this.router.navigate(['scum', res.gameId]);
-            }),
-          );
+        tap(({ gameId }) => {
+          const payload = new JoinGamePayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
         }),
+      ),
+    { dispatch: false },
+  );
+
+  joinGameSuccess$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.joinGameSuccess),
+        map(({ data }) => this.router.navigate(['scum', data.gameId])),
       ),
     { dispatch: false },
   );
@@ -50,7 +96,11 @@ export class ScumGameEffects {
     () =>
       this.actions$.pipe(
         ofType(ScumGameActions.startGame),
-        switchMap(({ gameId }) => this.cardlyWebsocket.sendMessage('startGame', { gameId })),
+        withLatestFrom(this.gameId$),
+        tap(([_, gameId]) => {
+          const payload = new StartGamePayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+        }),
       ),
     { dispatch: false },
   );
@@ -59,13 +109,12 @@ export class ScumGameEffects {
     this.actions$.pipe(
       ofType(ScumGameActions.playCards),
       withLatestFrom(this.store.select(selectScumGameState)),
-      switchMap(([action, state]) => {
+      map(([_, state]) => {
         const stagedCardIndices = state.stagedCardIndices;
         const cards = stagedCardIndices.map((index) => state.gameState.hand[index]);
-        const payload: PlayCardsRequest = { gameId: action.gameId, cards };
-        return this.cardlyWebsocket
-          .sendMessage('playCards', payload)
-          .pipe(map(() => ScumGameActions.clearStagedCards()));
+        const payload = new PlayCardsPayload({ gameId: state.gameState.gameId, cards }).toSerializedObject();
+        this.cardlyWebsocket.sendGameMessage(payload);
+        return ScumGameActions.clearStagedCards();
       }),
     ),
   );
@@ -75,20 +124,22 @@ export class ScumGameEffects {
       this.actions$.pipe(
         ofType(ScumGameActions.passTurn),
         withLatestFrom(this.store.select(selectGameState)),
-        switchMap(([action, state]) => {
+        map(([_, state]) => {
+          const gameId = state.gameId;
           // Access the store to get the discard pile. If there aren't any then the user can't pass their turn.
           const discardPile = state.discardPile;
           if (discardPile.length === 0) {
             this.snackbarService.open({
+              title: 'Cannot pass turn',
               message: 'The first player of the round cannot pass their turn.',
               severity: 'info',
-              duration: 0,
+              position: 'center-center',
             });
             return of(ScumGameActions.noopAction());
           }
-          const payload: PassTurnRequest = { gameId: action.gameId };
-          this.store.dispatch(ScumGameActions.clearStagedCards());
-          return this.cardlyWebsocket.sendMessage('passTurn', payload);
+          const payload = new PassTurnPayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+          return this.store.dispatch(ScumGameActions.clearStagedCards());
         }),
       ),
     { dispatch: false },
@@ -98,55 +149,27 @@ export class ScumGameEffects {
     () =>
       this.actions$.pipe(
         ofType(ScumGameActions.startNewRound),
-        switchMap((action) => {
-          const payload: StartNewRoundRequest = { gameId: action.gameId };
-          return this.cardlyWebsocket.sendMessage('startNewRound', payload);
+        withLatestFrom(this.gameId$),
+        tap(([_, gameId]) => {
+          const payload = new StartNewRoundPayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
         }),
       ),
     { dispatch: false },
   );
 
-  swapCards$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(ScumGameActions.swapCards),
-        withLatestFrom(this.store.select(selectScumGameState)),
-        switchMap(([action, state]) => {
-          const cards = state.stagedCardIndices.map((index) => state.gameState.hand[index]);
-          const payload: SwapCardsRequest = { gameId: action.gameId, cards };
-          this.store.dispatch(ScumGameActions.clearStagedCards());
-          return this.cardlyWebsocket.sendMessage('swapCards', payload);
-        }),
-      ),
-    { dispatch: false },
-  );
-
-  subscribeToGameUpdates$ = createEffect(() =>
+  swapCards$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ScumGameActions.subscribeToGameUpdates),
-      switchMap((action) => this.cardlyWebsocket.sendMessage('subscribeToGameUpdates', { gameId: action.gameId })),
-      map(() => ScumGameActions.noopAction()),
+      ofType(ScumGameActions.swapCards),
+      withLatestFrom(this.store.select(selectScumGameState)),
+      map(([_, state]) => {
+        const gameId = state.gameState.gameId;
+        const cards = state.stagedCardIndices.map((index) => state.gameState.hand[index]);
+        const payload = new SwapCardsPayload({ gameId, cards }).toSerializedObject();
+        this.cardlyWebsocket.sendGameMessage(payload);
+        return this.store.dispatch(ScumGameActions.clearStagedCards());
+      }),
     ),
-  );
-
-  onGameJoined$ = createEffect(() =>
-    this.cardlyWebsocket.receiveMessage('gameJoined').pipe(
-      tap((res: JoinGameResponse) => this.router.navigate(['scum', res.gameId])),
-      map(() => ScumGameActions.noopAction()),
-    ),
-  );
-
-  onCreateNewGame$ = createEffect(() =>
-    this.cardlyWebsocket.receiveMessage('newGameCreated').pipe(
-      tap((res: CreateNewGameResponse) => this.router.navigate(['scum', res.gameId])),
-      map(() => ScumGameActions.noopAction()),
-    ),
-  );
-
-  onGameUpdate$ = createEffect(() =>
-    this.cardlyWebsocket
-      .receiveMessage('gameStateUpdate')
-      .pipe(map((gameState: ScumGameUI) => ScumGameActions.updateGameState({ gameState }))),
   );
 
   constructor(

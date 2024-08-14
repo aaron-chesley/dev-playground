@@ -5,6 +5,8 @@ export const selectScumGameState = createFeatureSelector<ScumGameState>('scum');
 
 export const selectGameState = createSelector(selectScumGameState, (state: ScumGameState) => state.gameState);
 
+export const selectIsLoading = createSelector(selectScumGameState, (state: ScumGameState) => state.loading);
+
 export const selectStagedCardIndices = createSelector(
   selectScumGameState,
   (state: ScumGameState) => state.stagedCardIndices,

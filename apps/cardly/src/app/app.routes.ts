@@ -1,5 +1,4 @@
 import { Route } from '@angular/router';
-import { CardlyAuthenticationGuard } from '@cardly/cardly-features';
 
 export const appRoutes: Route[] = [
   {
@@ -13,7 +12,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'scum',
-    canMatch: [CardlyAuthenticationGuard],
     loadChildren: () => import('@cardly/cardly-features').then((r) => r.scumRoutes),
   },
 ];

@@ -19,7 +19,7 @@ export const CardlyAuthenticationGuard: CanActivateFn = (route: ActivatedRouteSn
       return authService.me().pipe(
         switchMap((me) => {
           if (me) {
-            store.dispatch(AuthActions.loginSuccess({ user: me }));
+            store.dispatch(AuthActions.setUser({ user: me }));
             return of(true);
           }
 

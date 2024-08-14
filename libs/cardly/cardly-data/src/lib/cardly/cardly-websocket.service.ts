@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { fromEvent, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { CardlyPayload } from '@playground/cardly-util';
 import { io, Socket } from 'socket.io-client';
 
 @Injectable({ providedIn: 'root' })
@@ -8,27 +9,21 @@ export class CardlyWebsocketService {
   private readonly url = '/';
 
   public connect() {
-    if (!this.socket) {
-      this.socket = io(this.url, { withCredentials: true });
-    }
     this.socket.connect();
+    this.socket.onAny((event, msg: CardlyPayload) => {
+      this.store.dispatch({ type: msg.type, data: msg });
+    });
   }
 
   public disconnect() {
     this.socket.disconnect();
   }
 
-  public sendMessage(messageName: string, payload: any): Observable<any> {
-    return new Observable((observer) => {
-      this.socket.emit(messageName, payload);
-      observer.next();
-      observer.complete();
-    });
+  public sendGameMessage(payload: any): void {
+    this.socket.emit('msg', payload);
   }
 
-  public receiveMessage(messageType: string): Observable<any> {
-    return fromEvent(this.socket, messageType);
+  constructor(private store: Store) {
+    this.socket = io(this.url, { withCredentials: true, autoConnect: false });
   }
-
-  constructor() {}
 }

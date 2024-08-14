@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import * as AuthActions from './authentication.actions';
 import { CardlyAuthenticationService } from '../cardly-authentication.service';
 import { of } from 'rxjs';
@@ -24,6 +24,13 @@ export class AuthenticationEffects {
     ),
   );
 
+  setUserAfterLoginSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.loginSuccess),
+      map((action) => AuthActions.setUser({ user: action.user })),
+    ),
+  );
+
   redirectAfterLogin$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -35,13 +42,19 @@ export class AuthenticationEffects {
     { dispatch: false },
   );
 
+  connectToSocketAfterSetUser$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.setUser),
+      map(() => AuthActions.connectToSocket()),
+    ),
+  );
+
   connectToSocket$ = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.connectToSocket),
-        switchMap(() => {
+        tap(() => {
           this.socketService.connect();
-          return of();
         }),
       ),
     { dispatch: false },
@@ -51,19 +64,11 @@ export class AuthenticationEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.disconnectFromSocket),
-        switchMap(() => {
+        tap(() => {
           this.socketService.disconnect();
-          return of();
         }),
       ),
     { dispatch: false },
-  );
-
-  connectToSocketAfterLogin$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.loginSuccess),
-      map(() => AuthActions.connectToSocket()),
-    ),
   );
 
   disconnectFromSocketAfterLogout$ = createEffect(() =>

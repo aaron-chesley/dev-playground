@@ -41,13 +41,14 @@ export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {
   ngDestroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.scumStore.dispatch(ScumActions.subscribeToGameUpdates({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    const gameId = this.activatedRoute.snapshot.params.gameId;
+    this.scumStore.dispatch(ScumActions.subscribeToGameUpdates({ gameId }));
     this.gameState$ = this.scumStore.select(selectGameState);
     this.stagedCardIndices$ = this.scumStore.select(selectStagedCardIndices);
   }
 
   startGame(): void {
-    this.scumStore.dispatch(ScumActions.startGame({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    this.scumStore.dispatch(ScumActions.startGame());
   }
 
   stageCard(cardIndex: number): void {
@@ -59,28 +60,26 @@ export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {
   }
 
   passTurn(): void {
-    this.scumStore.dispatch(ScumActions.passTurn({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    this.scumStore.dispatch(ScumActions.passTurn());
   }
 
   confirmStagedCardsSelection(): void {
-    this.scumStore.dispatch(ScumActions.playCards({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    this.scumStore.dispatch(ScumActions.playCards());
   }
 
   startNewRound(): void {
-    this.scumStore.dispatch(ScumActions.startNewRound({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    this.scumStore.dispatch(ScumActions.startNewRound());
   }
 
   swapCards(): void {
-    this.scumStore.dispatch(ScumActions.swapCards({ gameId: this.activatedRoute.snapshot.params.gameId }));
+    this.scumStore.dispatch(ScumActions.swapCards());
   }
 
   ngOnDestroy(): void {
     this.ngDestroy$.next();
     this.ngDestroy$.complete();
+    this.scumStore.dispatch(ScumActions.unsubscribeFromGameUpdates());
     this.scumStore.dispatch(ScumActions.clearState());
-    this.scumStore.dispatch(
-      ScumActions.unsubscribeFromGameUpdates({ gameId: this.activatedRoute.snapshot.params.gameId }),
-    );
   }
 
   constructor(

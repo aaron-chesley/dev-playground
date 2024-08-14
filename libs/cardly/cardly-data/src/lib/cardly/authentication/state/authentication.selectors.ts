@@ -4,3 +4,4 @@ import { AuthenticationState } from './authentication.reducer';
 export const selectAuthenticationState = createFeatureSelector<AuthenticationState>('authentication');
 
 export const selectUser = createSelector(selectAuthenticationState, (state: AuthenticationState) => state.user);
+export const selectLoading = createSelector(selectAuthenticationState, (state: AuthenticationState) => state.loading);

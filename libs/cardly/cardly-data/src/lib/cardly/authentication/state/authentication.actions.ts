@@ -5,6 +5,8 @@ export const login = createAction('[Authentication] Login', props<{ displayName:
 export const loginSuccess = createAction('[Authentication] Login Success', props<{ user: CardlyUser }>());
 export const loginFailure = createAction('[Authentication] Login Failure');
 
+export const setUser = createAction('[Authentication] Set User', props<{ user: CardlyUser }>());
+
 export const logout = createAction('[Authentication] Logout');
 export const logoutSuccess = createAction('[Authentication] Logout Success');
 export const logoutFailure = createAction('[Authentication] Logout Failure');

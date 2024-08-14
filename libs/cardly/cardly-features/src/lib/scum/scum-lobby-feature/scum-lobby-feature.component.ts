@@ -1,27 +1,32 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import { AsyncPipe } from '@angular/common';
-import { AuthActions, ScumActions } from '@playground/cardly-data';
+import { AuthActions, ScumActions, ScumGameState, selectIsLoading } from '@playground/cardly-data';
 import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { PlayButtonComponent, PlayInputTextComponent } from '@playground/play-ui';
+import { PlayButtonComponent, PlayInputTextComponent, PlayLoadingDirective } from '@playground/play-ui';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'scum-lobby-feature',
-  template: ` <form>
-      <input playInputText type="text" required placeholder="Enter game id" name="gameId" [(ngModel)]="gameId" />
-      <button playButton appearance="play-flat" theme="accent" (click)="joinGame(gameId)">Join Game</button>
-    </form>
-    <span>OR</span>
-    <form>
-      <button playButton appearance="play-flat" theme="accent" (click)="createNewGame()">Create New Game</button>
-    </form>
-    <form>
-      <button playButton appearance="play-flat" theme="accent" (click)="logout()">Logout</button>
-    </form>`,
+  template: `
+    <div class="container" [playLoading]="loading$ | async">
+      <form>
+        <input playInputText type="text" required placeholder="Enter game id" name="gameId" [(ngModel)]="gameId" />
+        <button playButton appearance="play-flat" theme="accent" (click)="joinGame(gameId)">Join Game</button>
+      </form>
+      <span>OR</span>
+      <form>
+        <button playButton appearance="play-flat" theme="accent" (click)="createNewGame()">Create New Game</button>
+      </form>
+      <form>
+        <button playButton appearance="play-flat" theme="accent" (click)="logout()">Logout</button>
+      </form>
+    </div>
+  `,
   styles: [
     `
-      :host {
+      .container {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -52,22 +57,34 @@ import { PlayButtonComponent, PlayInputTextComponent } from '@playground/play-ui
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [AsyncPipe, ScumGameBoardComponent, FormsModule, PlayInputTextComponent, PlayButtonComponent],
+  imports: [
+    AsyncPipe,
+    ScumGameBoardComponent,
+    FormsModule,
+    PlayInputTextComponent,
+    PlayButtonComponent,
+    PlayLoadingDirective,
+  ],
 })
-export class ScumLobbyFeatureComponent {
+export class ScumLobbyFeatureComponent implements OnInit {
   gameId = '';
+  loading$: Observable<boolean>;
+
+  ngOnInit(): void {
+    this.loading$ = this.scumStore.select(selectIsLoading);
+  }
 
   createNewGame() {
-    this.store.dispatch(ScumActions.createNewGame());
+    this.scumStore.dispatch(ScumActions.createNewGame());
   }
 
   joinGame(gameId: string) {
-    this.store.dispatch(ScumActions.joinGame({ gameId }));
+    this.scumStore.dispatch(ScumActions.joinGame({ gameId }));
   }
 
   logout() {
-    this.store.dispatch(AuthActions.logout());
+    this.scumStore.dispatch(AuthActions.logout());
   }
 
-  constructor(private store: Store) {}
+  constructor(private scumStore: Store<ScumGameState>) {}
 }
