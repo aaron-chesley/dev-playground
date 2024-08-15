@@ -13,6 +13,7 @@ import { PlaySnackbar } from '../play-snackbar/play-snackbar.interface';
     <button (click)="showSnackbar('warning', 'Warning')">Show Warn Snackbar</button>
     <button (click)="showSnackbar('error', 'Error')">Show Error Snackbar</button>
     <button (click)="showSnackbar('info', 'Manual Dismiss', true)">Manual Dismiss</button>
+    <button (click)="showActionSnackbar()">Action</button>
     <div class="inline-container">
       <play-snackbar [data]="infoSnackbar"></play-snackbar>
       <play-snackbar [data]="successSnackbar"></play-snackbar>
@@ -94,6 +95,21 @@ export class PlaySnackbarShowcaseComponent {
       message: 'This is a snackbar. Content shouldn’t be more than a sentence or two.',
       duration: manualDismiss ? 0 : 3000,
       severity: severity,
+      position: this.position,
+    });
+  }
+
+  showActionSnackbar() {
+    this.snackbarService.open({
+      title: 'Action',
+      message: 'This is a snackbar with an action.',
+      severity: 'info',
+      duration: 0,
+      dismissible: true,
+      action: () => {
+        window.alert('Action clicked');
+      },
+      actionLabel: 'ACTION',
       position: this.position,
     });
   }

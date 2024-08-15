@@ -45,6 +45,8 @@
 
   --play-icon-btn-color: var(--play-snackbar-info-color, $default);
   --play-icon-btn-active-color: var(--play-snackbar-info-active-color, #c2d8fb);
+  --play-primary-color: var(--play-snackbar-info-color, $default);
+  --play-primary-color-lightest: none;
   color: var(--play-snackbar-info-color, $default);
   background-color: var(--play-snackbar-info-bg-color, $default-bg);
 }
@@ -55,6 +57,8 @@
 
   --play-icon-btn-color: var(--play-snackbar-success-color, $default);
   --play-icon-btn-active-color: var(--play-snackbar-success-active-color, #a7e0da);
+  --play-primary-color: var(--play-snackbar-success-color, $default);
+  --play-primary-color-lightest: none;
   color: var(--play-snackbar-success-color, $default);
   background-color: var(--play-snackbar-success-bg-color, $default-bg);
 }
@@ -65,6 +69,8 @@
 
   --play-icon-btn-color: var(--play-snackbar-warning-color, $default);
   --play-icon-btn-active-color: var(--play-snackbar-warning-active-color, #fddfba);
+  --play-primary-color: var(--play-snackbar-warning-color, $default);
+  --play-primary-color-lightest: none;
   color: var(--play-snackbar-warning-color, $default);
   background-color: var(--play-snackbar-warning-bg-color, $default-bg);
 }
@@ -75,6 +81,8 @@
 
   --play-icon-btn-color: var(--play-snackbar-error-color, $default);
   --play-icon-btn-active-color: var(--play-snackbar-error-active-color, #f0bdbd);
+  --play-primary-color: var(--play-snackbar-error-color, $default);
+  --play-primary-color-lightest: none;
   color: var(--play-snackbar-error-color, $default);
   background-color: var(--play-snackbar-error-bg-color, $default-bg);
 }
