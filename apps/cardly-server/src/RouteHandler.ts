@@ -44,7 +44,7 @@ export class RouteHandlers {
       return;
     }
 
-    const user = { id: randomId(), displayName, avatar: 'https://i.pravatar.cc/300' };
+    const user = { id: randomId(), displayName, avatar: '/assets/avatars/anonymous.svg' };
 
     const token = jwt.sign({ user }, secretKey);
 
