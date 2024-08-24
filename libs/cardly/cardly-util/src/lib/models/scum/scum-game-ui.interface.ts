@@ -21,7 +21,6 @@ export interface ScumGameUI {
   hand: Card[];
   discardPile: ScumDiscardPile[];
   requiredDiscardSize: number;
-  currentDiscardNumericalRank: number;
   phase: ScumGamePhase;
   currentUserTurnId: string;
   presidentTraded: boolean;
@@ -37,7 +36,6 @@ export const getInitialScumGameUI = (): ScumGameUI => {
     hand: [],
     discardPile: [],
     requiredDiscardSize: undefined,
-    currentDiscardNumericalRank: undefined,
     phase: ScumGamePhase.PREGAME,
     currentUserTurnId: '',
     presidentTraded: false,

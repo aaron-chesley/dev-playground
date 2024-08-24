@@ -1,4 +1,3 @@
-import { Serialized } from '@playground/shared/util/typescript';
 import { Card, CardlyPayload } from '../cardly';
 import { CardlyGame } from '../cardly/cardly-game.enum';
 import { ScumGameUI } from './scum-game-ui.interface';

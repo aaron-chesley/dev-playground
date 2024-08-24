@@ -387,7 +387,6 @@ export class ScumGame {
       hand: this.hands[userId]?.cards || [],
       discardPile: this.trick?.discardPile || [],
       requiredDiscardSize: this.trick?.requiredDiscardSize || undefined,
-      currentDiscardNumericalRank: this.trick?.currentDiscardOrder || undefined,
       phase: this.phase,
       currentUserTurnId: this.trick?.currentUserTurnId || '',
       presidentTraded: this.presidentTraded,
