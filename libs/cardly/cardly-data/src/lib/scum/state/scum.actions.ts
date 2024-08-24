@@ -9,6 +9,8 @@ export const joinGame = createAction('[Scum Game] Join Game', props<{ gameId: st
 export const joinGameSuccess = createAction('[ws] JoinGameSuccess', props<{ data: JoinGameSuccess }>());
 export const joinGameFailure = createAction('[Scum Game] Join Game Failure');
 
+export const leaveGame = createAction('[Scum Game] Leave Game');
+
 export const startGame = createAction('[Scum Game] Start Game');
 export const playCards = createAction('[Scum Game] Play Cards');
 export const passTurn = createAction('[Scum Game] Pass Turn');

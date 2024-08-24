@@ -97,6 +97,10 @@ export class ScumTrick {
     }
   }
 
+  public removePlayer(userId: string) {
+    delete this.players[userId];
+  }
+
   private isEveryCardInHand(cards: Card[], hand: ScumHand) {
     return cards.every((cardBeingPlayed) => {
       const countInHand = hand.cards.filter(

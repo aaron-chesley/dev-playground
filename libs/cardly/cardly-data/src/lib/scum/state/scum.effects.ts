@@ -16,6 +16,7 @@ import {
   StartNewRoundPayload,
   SwapCardsPayload,
   UnsubscribeFromGameUpdatesPayload,
+  LeaveGamePayload,
 } from '@playground/cardly-util';
 import { Store } from '@ngrx/store';
 import { selectGameState, selectScumGameState } from './scum.selectors';
@@ -88,6 +89,20 @@ export class ScumGameEffects {
       this.actions$.pipe(
         ofType(ScumGameActions.joinGameSuccess),
         map(({ data }) => this.router.navigate(['scum', data.gameId])),
+      ),
+    { dispatch: false },
+  );
+
+  leaveGame$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.leaveGame),
+        withLatestFrom(this.gameId$),
+        tap(([_, gameId]) => {
+          const payload = new LeaveGamePayload(gameId).toSerializedObject();
+          this.cardlyWebsocket.sendGameMessage(payload);
+          this.router.navigate(['scum']);
+        }),
       ),
     { dispatch: false },
   );

@@ -2,64 +2,123 @@ import { Card, CardlyUser, DeckOfCards, sortCardsByOrder } from '../cardly';
 import { ScumGamePhase } from './scum-game-phase.enum';
 import { ScumHand } from './scum-hand.interface';
 import { ScumTrick } from './scum-trick.interface';
-import { ScumGameUI, ScumTrickWinner } from './scum-game-ui.interface';
+import { ScumTrickWinner } from './scum-game-ui.interface';
 import { randomGameId, randomId } from '@playground/shared/util/id';
 
 export class ScumGame {
-  public readonly gameId: string;
+  private readonly _gameId: string;
   private readonly MIN_PLAYERS_TO_START = 4;
   private readonly PLAYERS_PER_DECK = 5;
-  private gameOwnerUserId: string;
-  private users: CardlyUser[] = [];
-  private trick: ScumTrick;
-  private hands: { [userId: string]: ScumHand } = {};
-  private phase: ScumGamePhase;
-  private presidentTraded: boolean = false;
-  private vicePresidentTraded: boolean = false;
-  private trickWinner: ScumTrickWinner;
+  private _gameOwnerUserId: string;
+  private _users: CardlyUser[] = [];
+  private _trick: ScumTrick;
+  private _hands: { [userId: string]: ScumHand } = {};
+  private _phase: ScumGamePhase;
+  private _presidentTraded: boolean = false;
+  private _vicePresidentTraded: boolean = false;
+  private _trickWinner: ScumTrickWinner;
 
-  constructor(user: CardlyUser) {
-    this.gameId = randomGameId();
-    this.gameOwnerUserId = user.id;
-    this.phase = ScumGamePhase.PREGAME;
-    this.addUserToGame(user);
+  constructor() {
+    this._gameId = randomGameId();
+    this._phase = ScumGamePhase.PREGAME;
+  }
+
+  public get gameId(): string {
+    return this._gameId;
+  }
+
+  public get gameOwnerUserId(): string {
+    return this._gameOwnerUserId;
+  }
+
+  public get users(): CardlyUser[] {
+    return this._users;
+  }
+
+  public get trick(): ScumTrick {
+    return this._trick;
+  }
+
+  public get hands(): { [userId: string]: ScumHand } {
+    return this._hands;
+  }
+
+  public get phase(): ScumGamePhase {
+    return this._phase;
+  }
+
+  public get presidentTraded(): boolean {
+    return this._presidentTraded;
+  }
+
+  public get vicePresidentTraded(): boolean {
+    return this._vicePresidentTraded;
+  }
+
+  public get trickWinner(): ScumTrickWinner {
+    return this._trickWinner;
   }
 
   public addUserToGame(user: CardlyUser): void {
-    if (this.phase !== ScumGamePhase.PREGAME) {
+    if (this._phase !== ScumGamePhase.PREGAME) {
       console.error('Cannot add user to game that has already started.');
       return;
     }
 
-    if (this.users.some((u) => u.id === user.id)) {
+    if (this._users.some((u) => u.id === user.id)) {
       console.error('Cannot add user to game that is already in the game.');
       return;
     }
 
-    this.users.push(user);
+    if (!this._gameOwnerUserId) {
+      this._gameOwnerUserId = user.id;
+    }
+
+    this._users.push(user);
+  }
+
+  public removeUserFromGame(userId: string): void {
+    if (this._gameOwnerUserId === userId) {
+      this._gameOwnerUserId = this._users.find((user) => user.id !== userId)?.id;
+    }
+
+    this._users = this._users.filter((user) => user.id !== userId);
+
+    if (this._users.length < this.MIN_PLAYERS_TO_START) {
+      this._phase = ScumGamePhase.PREGAME;
+      delete this._hands[userId];
+      this.trick.removePlayer(userId);
+      this.trick.resetTrick();
+    }
+
+    if (this._users.length >= this.MIN_PLAYERS_TO_START) {
+      if (this._trick.currentUserTurnId === userId) {
+        this.assignNextPlayerTurn();
+      }
+    }
   }
 
   public startGame(): void {
-    if (this.phase !== ScumGamePhase.PREGAME) {
+    if (this._phase !== ScumGamePhase.PREGAME) {
       console.error('Cannot start game that has already started.');
       return;
     }
 
-    if (this.users.length < this.MIN_PLAYERS_TO_START) {
+    if (this._users.length < this.MIN_PLAYERS_TO_START) {
       console.error(`Cannot start game with less than ${this.MIN_PLAYERS_TO_START} players.`);
       return;
     }
 
-    this.trick = new ScumTrick(this.users);
+    this._trick = new ScumTrick(this._users);
     this.setupNewRound({ isFirstRound: true });
-    this.phase = ScumGamePhase.IN_PROGRESS;
+    this._phase = ScumGamePhase.IN_PROGRESS;
   }
 
   public playCards(payload: { userId: string; cardsInPlay: Card[] }): void {
     let { userId, cardsInPlay } = payload;
-    let { currentUserTurnId } = this.trick;
+    let { currentUserTurnId } = this._trick;
 
-    if (this.phase !== ScumGamePhase.IN_PROGRESS) {
+    if (this._phase !== ScumGamePhase.IN_PROGRESS) {
       console.error('Cannot play turn on game that is not in progress');
       return;
     }
@@ -67,16 +126,16 @@ export class ScumGame {
       console.error('Cannot play turn when it is not your turn.');
       return;
     }
-    if (!this.trick.isValidDiscard(cardsInPlay, this.hands[userId])) {
+    if (!this._trick.isValidDiscard(cardsInPlay, this._hands[userId])) {
       return;
     }
     // Remove cards from players hand.
-    this.removeCardsFromPlayersHand(cardsInPlay, this.hands[userId].cards);
+    this.removeCardsFromPlayersHand(cardsInPlay, this._hands[userId].cards);
     // Add cards to discard pile.
-    this.trick.addCardsToDiscardPile(cardsInPlay, userId);
+    this._trick.addCardsToDiscardPile(cardsInPlay, userId);
     // Check if player is finished for current round. If so, push to user finish order.
-    if (this.isHandFinished(this.hands[userId])) {
-      this.hands[userId].finishOrder = Math.max(...Object.values(this.hands).map((hand) => hand.finishOrder)) + 1;
+    if (this.isHandFinished(this._hands[userId])) {
+      this._hands[userId].finishOrder = Math.max(...Object.values(this._hands).map((hand) => hand.finishOrder)) + 1;
     }
 
     // Calculate new game state.
@@ -84,50 +143,50 @@ export class ScumGame {
   }
 
   public passTurn(userId: string): void {
-    if (this.phase !== ScumGamePhase.IN_PROGRESS) {
+    if (this._phase !== ScumGamePhase.IN_PROGRESS) {
       console.error('Cannot pass turn on game that is not in progress');
       return;
     }
-    if (this.trick.currentUserTurnId !== userId) {
+    if (this._trick.currentUserTurnId !== userId) {
       console.error('Cannot pass turn when it is not your turn.');
       return;
     }
-    if (this.trick.requiredDiscardSize === 0) {
+    if (this._trick.requiredDiscardSize === 0) {
       console.error('Cannot pass turn when no cards have been played.');
       return;
     }
 
-    this.trick.players[userId].passed = true;
-    this.trick.players[userId].hadAleastOneTurn = true;
+    this._trick.players[userId].passed = true;
+    this._trick.players[userId].hadAleastOneTurn = true;
 
     // Calculate new game state.
     this.calculateNewGameState();
   }
 
   public startNewRound(): void {
-    if (this.phase !== ScumGamePhase.POSTGAME) {
+    if (this._phase !== ScumGamePhase.POSTGAME) {
       console.error('Cannot start new round on game that is not in postgame.');
       return;
     }
 
     // Reset sub round.
-    this.trick.setupNextTrick(this.hands);
+    this._trick.setupNextTrick(this._hands);
 
     // Reset round.
     this.setupNewRound({ isFirstRound: false });
 
-    // Set game phase to in progress.
-    this.phase = ScumGamePhase.CARD_SWAP;
+    // Set game _phase to in progress.
+    this._phase = ScumGamePhase.CARD_SWAP;
   }
 
   public swapCards(payload: { userId: string; cards: Card[] }): void {
-    if (this.phase !== ScumGamePhase.CARD_SWAP) {
+    if (this._phase !== ScumGamePhase.CARD_SWAP) {
       console.error('Cannot swap cards on game that is not in card swap.');
       return;
     }
 
-    if (this.hands[payload.userId].turnOrder === 1) {
-      if (this.presidentTraded) {
+    if (this._hands[payload.userId].turnOrder === 1) {
+      if (this._presidentTraded) {
         console.error('President has already traded cards.');
         return;
       }
@@ -138,17 +197,17 @@ export class ScumGame {
       }
 
       // Remove cards from President's hand.
-      this.removeCardsFromPlayersHand(payload.cards, this.hands[payload.userId].cards);
+      this.removeCardsFromPlayersHand(payload.cards, this._hands[payload.userId].cards);
 
       // Add cards to Scum's hand.
-      const scumHand = Object.values(this.hands).find((hand) => hand.turnOrder === this.users.length);
+      const scumHand = Object.values(this._hands).find((hand) => hand.turnOrder === this._users.length);
       scumHand.cards.push(...payload.cards);
 
       // Sort Scum's hand.
       scumHand.cards.sort(sortCardsByOrder);
 
       // Add Scum's highest ranked cards to President's hand.
-      const presidentHand = this.hands[payload.userId].cards;
+      const presidentHand = this._hands[payload.userId].cards;
       const scumHighestRankedCards = scumHand.cards.slice(scumHand.cards.length - 2);
       presidentHand.push(...scumHighestRankedCards);
       this.removeCardsFromPlayersHand(scumHighestRankedCards, scumHand.cards);
@@ -160,9 +219,9 @@ export class ScumGame {
       scumHand.cards.sort(sortCardsByOrder);
 
       // Set President traded to true.
-      this.presidentTraded = true;
-    } else if (this.hands[payload.userId].turnOrder === 2) {
-      if (this.vicePresidentTraded) {
+      this._presidentTraded = true;
+    } else if (this._hands[payload.userId].turnOrder === 2) {
+      if (this._vicePresidentTraded) {
         console.error('Vice President has already traded cards.');
         return;
       }
@@ -173,17 +232,17 @@ export class ScumGame {
       }
 
       // Remove cards from Vice President's hand.
-      this.removeCardsFromPlayersHand(payload.cards, this.hands[payload.userId].cards);
+      this.removeCardsFromPlayersHand(payload.cards, this._hands[payload.userId].cards);
 
       // Add cards to Vice Scum's hand.
-      const viceScumHand = Object.values(this.hands).find((hand) => hand.turnOrder === this.users.length - 1);
+      const viceScumHand = Object.values(this._hands).find((hand) => hand.turnOrder === this._users.length - 1);
       viceScumHand.cards.push(...payload.cards);
 
       // Sort Vice Scum's hand.
       viceScumHand.cards.sort(sortCardsByOrder);
 
       // Add Vice Scum's highest ranked card to Vice President's hand.
-      const vicePresidentHand = this.hands[payload.userId].cards;
+      const vicePresidentHand = this._hands[payload.userId].cards;
       const viceScumHighestRankedCard = viceScumHand.cards[viceScumHand.cards.length - 1];
       vicePresidentHand.push(viceScumHighestRankedCard);
       this.removeCardsFromPlayersHand([viceScumHighestRankedCard], viceScumHand.cards);
@@ -195,19 +254,19 @@ export class ScumGame {
       viceScumHand.cards.sort(sortCardsByOrder);
 
       // Set Vice President traded to true.
-      this.vicePresidentTraded = true;
+      this._vicePresidentTraded = true;
     }
 
-    if (this.presidentTraded && this.vicePresidentTraded) {
-      this.presidentTraded = false;
-      this.vicePresidentTraded = false;
-      // Set game phase to in progress.
-      this.phase = ScumGamePhase.IN_PROGRESS;
+    if (this._presidentTraded && this._vicePresidentTraded) {
+      this._presidentTraded = false;
+      this._vicePresidentTraded = false;
+      // Set game _phase to in progress.
+      this._phase = ScumGamePhase.IN_PROGRESS;
     }
   }
 
   public getUsers(): CardlyUser[] {
-    return this.users;
+    return this._users;
   }
 
   private calculateNewGameState(): void {
@@ -215,18 +274,18 @@ export class ScumGame {
     if (this.isRoundFinished()) {
       this.setTrickWinner();
       // Find the player who is not finished and push their id to the finish order.
-      Object.values(this.hands).find((hand) => hand.cards.length > 0).finishOrder = this.users.length;
-      this.trick.discardPile = [];
-      this.phase = ScumGamePhase.POSTGAME;
+      Object.values(this._hands).find((hand) => hand.cards.length > 0).finishOrder = this._users.length;
+      this._trick.discardPile = [];
+      this._phase = ScumGamePhase.POSTGAME;
       return;
     }
 
     // If the last card played was an ace, the sub round is finished.
-    if (this.trick.wasAceLastCardPlayed()) {
+    if (this._trick.wasAceLastCardPlayed()) {
       this.setTrickWinner();
-      this.trick.resetTrick();
+      this._trick.resetTrick();
       // If the player who played the ace still has cards in their hand, they are the next player.
-      if (this.hands[this.trick.currentUserTurnId].cards.length) {
+      if (this._hands[this._trick.currentUserTurnId].cards.length) {
         // Do nothing.
       } else {
         // Otherwise, the next player is the next player in the turn order.
@@ -241,7 +300,7 @@ export class ScumGame {
     // If there are no players left playing in the sub round, the sub round is finished.
     if (playersStillPlayingTrick.length === 0) {
       this.setTrickWinner();
-      this.trick.resetTrick();
+      this._trick.resetTrick();
       this.assignNextPlayerTurn();
       return;
     }
@@ -249,10 +308,10 @@ export class ScumGame {
     // If there's only one player left playing in the sub round and everyone remaining has had at least one turn, they are the winner and the sub round is finished.
     if (playersStillPlayingTrick.length === 1 && this.everyRemainingPlayerHasHadAtLeastOneTurn()) {
       this.setTrickWinner();
-      this.trick.resetTrick();
+      this._trick.resetTrick();
 
       // The player who is still playing is the next player.
-      this.trick.currentUserTurnId = playersStillPlayingTrick[0].id;
+      this._trick.currentUserTurnId = playersStillPlayingTrick[0].id;
 
       return;
     }
@@ -261,23 +320,23 @@ export class ScumGame {
   }
 
   private getPlayersStillPlayingTrick(): CardlyUser[] {
-    return this.users.filter((user) => {
-      const { players } = this.trick;
-      return this.hands[user.id].cards.length && !players[user.id].passed;
+    return this._users.filter((user) => {
+      const { players } = this._trick;
+      return this._hands[user.id].cards.length && !players[user.id].passed;
     });
   }
 
   private isRoundFinished(): boolean {
     // Round is finished when all but one player has finished by playing all of their cards.
-    const numPlayersFinished = Object.values(this.hands).reduce((acc, hand) => {
+    const numPlayersFinished = Object.values(this._hands).reduce((acc, hand) => {
       return hand.cards.length === 0 ? acc + 1 : acc;
     }, 0);
-    return numPlayersFinished === this.users.length - 1;
+    return numPlayersFinished === this._users.length - 1;
   }
 
   private everyRemainingPlayerHasHadAtLeastOneTurn(): boolean {
     return this.getPlayersStillPlayingTrick().every((player) => {
-      return this.trick.players[player.id].hadAleastOneTurn;
+      return this._trick.players[player.id].hadAleastOneTurn;
     });
   }
 
@@ -286,18 +345,18 @@ export class ScumGame {
   }
 
   private assignNextPlayerTurn(): void {
-    let { currentUserTurnId, players } = this.trick;
-    const numUsers = this.users.length;
+    let { currentUserTurnId, players } = this._trick;
+    const numUsers = this._users.length;
 
     let nextPlayerFound = false;
     let iterations = 0;
-    let currentTurnOrder = Object.values(this.hands).find((hand) => hand.userId === currentUserTurnId).turnOrder;
+    let currentTurnOrder = Object.values(this._hands).find((hand) => hand.userId === currentUserTurnId).turnOrder;
     while (!nextPlayerFound && iterations < numUsers) {
       iterations++;
       const nextTurnOrder = currentTurnOrder === numUsers ? 1 : currentTurnOrder + 1;
-      const nextHand = Object.values(this.hands).find((hand) => hand.turnOrder === nextTurnOrder);
+      const nextHand = Object.values(this._hands).find((hand) => hand.turnOrder === nextTurnOrder);
       if (nextHand.cards.length && !players[nextHand.userId].passed) {
-        this.trick.currentUserTurnId = nextHand.userId;
+        this._trick.currentUserTurnId = nextHand.userId;
         nextPlayerFound = true;
       } else {
         currentTurnOrder = nextTurnOrder;
@@ -317,10 +376,10 @@ export class ScumGame {
   }
 
   private setupNewRound(payload: { isFirstRound: boolean }): void {
-    this.trickWinner = undefined;
+    this._trickWinner = undefined;
     if (payload.isFirstRound) {
-      this.users.forEach((user, index) => {
-        this.hands[user.id] = {
+      this._users.forEach((user, index) => {
+        this._hands[user.id] = {
           userId: user.id,
           cards: [],
           turnOrder: index + 1,
@@ -328,18 +387,18 @@ export class ScumGame {
         };
       });
     } else {
-      this.users.forEach((user) => {
-        this.hands[user.id] = {
+      this._users.forEach((user) => {
+        this._hands[user.id] = {
           userId: user.id,
           cards: [],
-          turnOrder: this.hands[user.id].finishOrder,
+          turnOrder: this._hands[user.id].finishOrder,
           finishOrder: 0,
         };
       });
     }
 
     // Determine how many decks of cards are needed by dividing the number of players by PLAYERS_PER_DECK. If there is a remainder, add 1 to the number of decks.
-    const numberOfDecks = Math.ceil(this.users.length / this.PLAYERS_PER_DECK);
+    const numberOfDecks = Math.ceil(this._users.length / this.PLAYERS_PER_DECK);
 
     // Create a deck of cards for each deck needed.
     const deck = new DeckOfCards({ numOfDecks: numberOfDecks });
@@ -349,59 +408,34 @@ export class ScumGame {
     // Deal cards to each hand.
     while (cards.length > 0) {
       // Push a card to each hand until there are no more cards.
-      for (const userId in this.hands) {
+      for (const userId in this._hands) {
         // If there are no more cards, break out of the loop.
         if (cards.length === 0) {
           break;
         }
         // Push a card to the hand.
-        this.hands[userId].cards.push(cards.pop());
+        this._hands[userId].cards.push(cards.pop());
       }
     }
 
-    // Sort players hands by card value.
-    for (const hand in this.hands) {
-      this.hands[hand].cards.sort(sortCardsByOrder);
+    // Sort players _hands by card value.
+    for (const hand in this._hands) {
+      this._hands[hand].cards.sort(sortCardsByOrder);
     }
 
     if (payload.isFirstRound) {
       // Randomly assign a user id to be the current turn
-      const randomIndex = Math.floor(Math.random() * this.users.length);
-      this.trick.currentUserTurnId = this.users[randomIndex].id;
+      const randomIndex = Math.floor(Math.random() * this._users.length);
+      this._trick.currentUserTurnId = this._users[randomIndex].id;
     }
   }
 
   private setTrickWinner() {
-    const winningDiscard = this.trick.discardPile[this.trick.discardPile.length - 1];
-    this.trickWinner = {
+    const winningDiscard = this._trick.discardPile[this._trick.discardPile.length - 1];
+    this._trickWinner = {
       id: randomId(),
-      name: this.users.find((user) => user.id === winningDiscard.userId).displayName,
+      name: this._users.find((user) => user.id === winningDiscard.userId).displayName,
       cards: winningDiscard.cards,
-    };
-  }
-
-  public getCurrentGameState(userId: string): ScumGameUI {
-    return {
-      gameId: this.gameId,
-      gameOwnerUserId: this.gameOwnerUserId,
-      hand: this.hands[userId]?.cards || [],
-      discardPile: this.trick?.discardPile || [],
-      requiredDiscardSize: this.trick?.requiredDiscardSize || undefined,
-      phase: this.phase,
-      currentUserTurnId: this.trick?.currentUserTurnId || '',
-      presidentTraded: this.presidentTraded,
-      vicePresidentTraded: this.vicePresidentTraded,
-      trickWinner: this.trickWinner,
-      players: this.users.reduce((acc: any, user) => {
-        acc[user.id] = {
-          ...user,
-          numOfCards: this.hands[user.id]?.cards.length || 0,
-          passed: this.trick?.players[user.id]?.passed || false,
-          finishOrder: this.hands[user.id]?.finishOrder || 0,
-          turnOrder: this.hands[user.id]?.turnOrder || 0,
-        };
-        return acc;
-      }, {}),
     };
   }
 }

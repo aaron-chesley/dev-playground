@@ -14,6 +14,8 @@ import {
   CreateNewGamePayload,
   UnsubscribeFromGameUpdatesPayload,
   ScumPayload,
+  ScumGameUI,
+  LeaveGamePayload,
 } from '@playground/cardly-util';
 import { CommunicationService } from './CommunicationService';
 import { Serialized } from '@playground/shared/util/typescript';
@@ -24,6 +26,7 @@ export class ScumGameManager {
     createNewGame: this.createNewGame,
     subscribeToGameUpdates: this.subscribeToGameUpdates,
     joinGame: this.joinGame,
+    leaveGame: this.leaveGame,
     startGame: this.startGame,
     playCards: this.playCards,
     passTurn: this.passTurn,
@@ -44,7 +47,8 @@ export class ScumGameManager {
   }
 
   private createNewGame(msg: Serialized<CreateNewGamePayload>, user: CardlyUser): void {
-    const game = new ScumGame(user);
+    const game = new ScumGame();
+    game.addUserToGame(user);
     const gameId = game.gameId;
     this.games[gameId] = game;
     const res = new CreateNewGameSuccess(gameId).toSerializedObject();
@@ -54,7 +58,7 @@ export class ScumGameManager {
   private subscribeToGameUpdates(msg: Serialized<SubscribeToGameUpdatesPayload>, user: CardlyUser): void {
     this.commService.joinGameRoom(user.id, msg.gameId);
     const game = this.games[msg.gameId];
-    const res = new GameUpdate(game.getCurrentGameState(user.id)).toSerializedObject();
+    const res = new GameUpdate(this.getGameStateForUser(game, user.id)).toSerializedObject();
     this.commService.sendToUser(user.id, res);
   }
 
@@ -68,6 +72,12 @@ export class ScumGameManager {
     this.sendGameStateToUsers(game.gameId);
     const res = new JoinGameSuccess(game.gameId).toSerializedObject();
     this.commService.sendToUser(user.id, res);
+  }
+
+  private leaveGame(msg: Serialized<LeaveGamePayload>, user: CardlyUser): void {
+    const game = this.games[msg.gameId];
+    game.removeUserFromGame(user.id);
+    this.sendGameStateToUsers(game.gameId);
   }
 
   private startGame(msg: Serialized<StartGamePayload>, user: CardlyUser): void {
@@ -107,8 +117,33 @@ export class ScumGameManager {
     const game = this.games[gameId];
     const users = game.getUsers();
     for (const user of users) {
-      const res = new GameUpdate(game.getCurrentGameState(user.id)).toSerializedObject();
+      const res = new GameUpdate(this.getGameStateForUser(game, user.id)).toSerializedObject();
       this.commService.sendToUser(user.id, res);
     }
+  }
+
+  private getGameStateForUser(game: ScumGame, userId: string): ScumGameUI {
+    return {
+      gameId: game.gameId,
+      gameOwnerUserId: game.gameOwnerUserId,
+      hand: game.hands[userId]?.cards || [],
+      discardPile: game.trick?.discardPile || [],
+      requiredDiscardSize: game.trick?.requiredDiscardSize || undefined,
+      phase: game.phase,
+      currentUserTurnId: game.trick?.currentUserTurnId || '',
+      presidentTraded: game.presidentTraded,
+      vicePresidentTraded: game.vicePresidentTraded,
+      trickWinner: game.trickWinner,
+      players: game.users.reduce((acc: any, user) => {
+        acc[user.id] = {
+          ...user,
+          numOfCards: game.hands[user.id]?.cards.length || 0,
+          passed: game.trick?.players[user.id]?.passed || false,
+          finishOrder: game.hands[user.id]?.finishOrder || 0,
+          turnOrder: game.hands[user.id]?.turnOrder || 0,
+        };
+        return acc;
+      }, {}),
+    };
   }
 }

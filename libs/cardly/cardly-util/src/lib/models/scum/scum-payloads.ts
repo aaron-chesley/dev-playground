@@ -59,6 +59,15 @@ export class JoinGameSuccess extends ScumPayload {
   }
 }
 
+export class LeaveGamePayload extends ScumPayload {
+  readonly gameId: string;
+
+  constructor(gameId: string) {
+    super('leaveGame');
+    this.gameId = gameId;
+  }
+}
+
 export class GameUpdate extends ScumPayload {
   readonly gameState: ScumGameUI;
 
