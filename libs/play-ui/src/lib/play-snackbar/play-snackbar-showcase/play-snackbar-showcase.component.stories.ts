@@ -1,4 +1,4 @@
-import { Story, Meta, applicationConfig } from '@storybook/angular';
+import { StoryFn, Meta, applicationConfig } from '@storybook/angular';
 import { PlaySnackbarShowcaseComponent } from './play-snackbar-showcase.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { PLAY_SNACKBAR_POSITIONS } from '../play-snackbar-position.type';
@@ -19,7 +19,7 @@ export default {
   ],
 } as Meta<PlaySnackbarShowcaseComponent>;
 
-const Template: Story<PlaySnackbarShowcaseComponent> = (args: PlaySnackbarShowcaseComponent) => ({
+const Template: StoryFn<PlaySnackbarShowcaseComponent> = (args: PlaySnackbarShowcaseComponent) => ({
   props: args,
 });
 

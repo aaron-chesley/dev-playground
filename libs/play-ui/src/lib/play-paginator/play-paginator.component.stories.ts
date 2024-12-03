@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayPaginatorComponent } from './play-paginator.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayPaginatorComponent>;
 
-const Template: Story<PlayPaginatorComponent> = (
-  args: PlayPaginatorComponent
-) => ({
+const Template: StoryFn<PlayPaginatorComponent> = (args: PlayPaginatorComponent) => ({
   props: args,
 });
 

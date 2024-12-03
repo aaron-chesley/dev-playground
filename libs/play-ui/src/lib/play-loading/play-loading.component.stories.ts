@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayLoadingShowcaseComponent } from './play-loading-showcase.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayLoadingShowcaseComponent>;
 
-const Template: Story<PlayLoadingShowcaseComponent> = (
-  args: PlayLoadingShowcaseComponent
-) => ({
+const Template: StoryFn<PlayLoadingShowcaseComponent> = (args: PlayLoadingShowcaseComponent) => ({
   props: args,
 });
 

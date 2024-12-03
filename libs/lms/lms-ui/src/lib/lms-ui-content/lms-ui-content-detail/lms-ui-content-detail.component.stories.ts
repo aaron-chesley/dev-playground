@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { LmsUiContentDetailComponent } from './lms-ui-content-detail.component';
 
 export default {
@@ -11,7 +11,7 @@ export default {
   ],
 } as Meta<LmsUiContentDetailComponent>;
 
-const Template: Story<LmsUiContentDetailComponent> = (args: LmsUiContentDetailComponent) => ({
+const Template: StoryFn<LmsUiContentDetailComponent> = (args: LmsUiContentDetailComponent) => ({
   props: args,
 });
 

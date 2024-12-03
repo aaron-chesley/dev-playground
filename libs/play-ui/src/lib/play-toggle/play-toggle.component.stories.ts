@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayToggleComponent } from './play-toggle.component';
 
 export default {
@@ -17,7 +17,7 @@ export default {
   },
 } as Meta<PlayToggleComponent>;
 
-const Template: Story<PlayToggleComponent> = (args: PlayToggleComponent) => ({
+const Template: StoryFn<PlayToggleComponent> = (args: PlayToggleComponent) => ({
   props: args,
   template: `
     <play-toggle [checked]="checked" [labelPosition]="labelPosition" [disabled]="disabled">Toggle Me</play-toggle>

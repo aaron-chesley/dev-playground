@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayAccordionShowcaseComponent } from './play-accordion-showcase.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayAccordionShowcaseComponent>;
 
-const Template: Story<PlayAccordionShowcaseComponent> = (
-  args: PlayAccordionShowcaseComponent
-) => ({
+const Template: StoryFn<PlayAccordionShowcaseComponent> = (args: PlayAccordionShowcaseComponent) => ({
   props: args,
 });
 

@@ -16,7 +16,7 @@ import {
   supervisedUserCircle,
   videoLibrary,
 } from '@playground/play-ui';
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { LmsUiSidebarComponent } from './lms-ui-sidebar.component';
 import { LmsUiSidebarItemComponent } from '../lms-ui-sidebar-item/lms-ui-sidebar-item.component';
 
@@ -87,9 +87,7 @@ export default {
   ],
 } as Meta<LmsUiSidebarComponent>;
 
-const Template: Story<LmsUiSidebarComponent> = (
-  args: LmsUiSidebarComponent
-) => {
+const Template: StoryFn<LmsUiSidebarComponent> = (args: LmsUiSidebarComponent) => {
   const sidebarItems = [
     {
       title: 'Employees',

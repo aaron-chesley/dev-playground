@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { LmsUiLoginComponent } from './lms-ui-login.component';
 
 export default {
@@ -11,7 +11,7 @@ export default {
   ],
 } as Meta<LmsUiLoginComponent>;
 
-const Template: Story<LmsUiLoginComponent> = (args: LmsUiLoginComponent) => ({
+const Template: StoryFn<LmsUiLoginComponent> = (args: LmsUiLoginComponent) => ({
   props: args,
 });
 

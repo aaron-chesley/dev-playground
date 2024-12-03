@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { ScumGameBoardComponent } from './scum-game-board.component';
 
 export default {
@@ -12,7 +12,7 @@ export default {
   ],
 } as Meta<ScumGameBoardComponent>;
 
-const Template: Story<ScumGameBoardComponent> = (args: ScumGameBoardComponent) => ({
+const Template: StoryFn<ScumGameBoardComponent> = (args: ScumGameBoardComponent) => ({
   props: args,
   template: `
   <div style="height:100vh">

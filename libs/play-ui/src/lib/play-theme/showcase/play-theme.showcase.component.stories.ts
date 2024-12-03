@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayThemeShowcaseComponent } from './play-theme.showcase.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayThemeShowcaseComponent>;
 
-const Template: Story<PlayThemeShowcaseComponent> = (
-  args: PlayThemeShowcaseComponent
-) => ({
+const Template: StoryFn<PlayThemeShowcaseComponent> = (args: PlayThemeShowcaseComponent) => ({
   props: args,
 });
 

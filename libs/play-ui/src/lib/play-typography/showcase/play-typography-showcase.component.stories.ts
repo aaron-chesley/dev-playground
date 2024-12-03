@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayTypographyShowcaseComponent } from './play-typography-showcase.component';
 import { PlayTypographyShowcaseModule } from './play-typography-showcase.module';
 
@@ -12,9 +12,7 @@ export default {
   ],
 } as Meta<PlayTypographyShowcaseComponent>;
 
-const Template: Story<PlayTypographyShowcaseComponent> = (
-  args: PlayTypographyShowcaseComponent
-) => ({
+const Template: StoryFn<PlayTypographyShowcaseComponent> = (args: PlayTypographyShowcaseComponent) => ({
   props: args,
 });
 

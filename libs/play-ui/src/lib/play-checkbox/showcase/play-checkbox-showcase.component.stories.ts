@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayCheckboxShowcaseComponent } from './play-checkbox-showcase.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayCheckboxShowcaseComponent>;
 
-const Template: Story<PlayCheckboxShowcaseComponent> = (
-  args: PlayCheckboxShowcaseComponent
-) => ({
+const Template: StoryFn<PlayCheckboxShowcaseComponent> = (args: PlayCheckboxShowcaseComponent) => ({
   props: args,
 });
 

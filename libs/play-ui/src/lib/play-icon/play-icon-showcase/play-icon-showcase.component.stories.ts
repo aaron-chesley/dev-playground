@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayIconShowcaseComponent } from './play-icon-showcase.component';
 
 export default {
@@ -17,9 +17,7 @@ export default {
   },
 } as Meta<PlayIconShowcaseComponent>;
 
-const Template: Story<PlayIconShowcaseComponent> = (
-  args: PlayIconShowcaseComponent
-) => ({
+const Template: StoryFn<PlayIconShowcaseComponent> = (args: PlayIconShowcaseComponent) => ({
   component: PlayIconShowcaseComponent,
   props: args,
 });

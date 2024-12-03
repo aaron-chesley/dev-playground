@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { PlayInputTextShowcaseComponent } from './play-input-text-showcase.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<PlayInputTextShowcaseComponent>;
 
-const Template: Story<PlayInputTextShowcaseComponent> = (
-  args: PlayInputTextShowcaseComponent
-) => ({
+const Template: StoryFn<PlayInputTextShowcaseComponent> = (args: PlayInputTextShowcaseComponent) => ({
   props: args,
 });
 

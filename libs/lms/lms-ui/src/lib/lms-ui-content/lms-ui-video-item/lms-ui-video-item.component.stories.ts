@@ -1,4 +1,4 @@
-import { moduleMetadata, Story, Meta } from '@storybook/angular';
+import { moduleMetadata, StoryFn, Meta } from '@storybook/angular';
 import { LmsUiVideoItemComponent } from './lms-ui-video-item.component';
 
 export default {
@@ -11,9 +11,7 @@ export default {
   ],
 } as Meta<LmsUiVideoItemComponent>;
 
-const Template: Story<LmsUiVideoItemComponent> = (
-  args: LmsUiVideoItemComponent
-) => ({
+const Template: StoryFn<LmsUiVideoItemComponent> = (args: LmsUiVideoItemComponent) => ({
   props: args,
   template: `<lms-ui-video-item class="lms-sb-video-item" [video]="video"></lms-ui-video-item>`,
   styles: [`.lms-sb-video-item {width: 300px; margin: 5px}`],
