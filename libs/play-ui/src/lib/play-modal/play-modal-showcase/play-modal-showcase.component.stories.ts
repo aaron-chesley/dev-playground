@@ -11,7 +11,7 @@ export default {
   ],
 } as Meta<PlayModalShowcaseComponent>;
 
-const Template: StoryFn<PlayModalShowcaseComponent> = (args: PlayModalShowcaseComponent) => ({
+const Template: StoryFn<PlayModalShowcaseComponent> = (args: Partial<PlayModalShowcaseComponent>) => ({
   props: args,
 });
 

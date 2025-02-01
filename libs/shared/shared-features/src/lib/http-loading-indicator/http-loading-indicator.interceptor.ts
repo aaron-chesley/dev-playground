@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpEvent,
-  HttpInterceptor,
-  HttpHandler,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/common/http';
 import { finalize, Observable } from 'rxjs';
 import { HttpLoadingIndicatorService } from './http-loading-indicator.service';
 

@@ -11,8 +11,10 @@ export default {
   ],
 } as Meta<PlayPaginatorComponent>;
 
-const Template: StoryFn<PlayPaginatorComponent> = (args: PlayPaginatorComponent) => ({
-  props: args,
+const Template: StoryFn<PlayPaginatorComponent> = (args) => ({
+  props: {
+    ...args,
+  },
 });
 
 export const Showcase = Template.bind({});

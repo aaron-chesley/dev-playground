@@ -11,7 +11,7 @@ export default {
   ],
 } as Meta<PlayThemeShowcaseComponent>;
 
-const Template: StoryFn<PlayThemeShowcaseComponent> = (args: PlayThemeShowcaseComponent) => ({
+const Template: StoryFn<PlayThemeShowcaseComponent> = (args) => ({
   props: args,
 });
 

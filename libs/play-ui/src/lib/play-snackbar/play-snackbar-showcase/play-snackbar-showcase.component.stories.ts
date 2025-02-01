@@ -19,7 +19,7 @@ export default {
   ],
 } as Meta<PlaySnackbarShowcaseComponent>;
 
-const Template: StoryFn<PlaySnackbarShowcaseComponent> = (args: PlaySnackbarShowcaseComponent) => ({
+const Template: StoryFn<PlaySnackbarShowcaseComponent> = (args: Partial<PlaySnackbarShowcaseComponent>) => ({
   props: args,
 });
 

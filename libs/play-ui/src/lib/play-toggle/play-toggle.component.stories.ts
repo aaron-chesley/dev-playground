@@ -17,7 +17,7 @@ export default {
   },
 } as Meta<PlayToggleComponent>;
 
-const Template: StoryFn<PlayToggleComponent> = (args: PlayToggleComponent) => ({
+const Template: StoryFn<PlayToggleComponent> = (args: any) => ({
   props: args,
   template: `
     <play-toggle [checked]="checked" [labelPosition]="labelPosition" [disabled]="disabled">Toggle Me</play-toggle>

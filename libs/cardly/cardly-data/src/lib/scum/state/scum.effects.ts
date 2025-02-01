@@ -164,7 +164,8 @@ export class ScumGameEffects {
           }
           const payload = new PassTurnPayload(gameId).toSerializedObject();
           this.cardlyWebsocket.sendGameMessage(payload);
-          return this.store.dispatch(ScumGameActions.clearStagedCards());
+          this.store.dispatch(ScumGameActions.clearStagedCards());
+          return ScumGameActions.noopAction();
         }),
       ),
     { dispatch: false },
@@ -205,7 +206,7 @@ export class ScumGameEffects {
         const cards = state.stagedCardIndices.map((index) => state.gameState.hand[index]);
         const payload = new SwapCardsPayload({ gameId, cards }).toSerializedObject();
         this.cardlyWebsocket.sendGameMessage(payload);
-        return this.store.dispatch(ScumGameActions.clearStagedCards());
+        return ScumGameActions.clearStagedCards();
       }),
     ),
   );

@@ -1,6 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Injectable } from '@angular/core';
-import { ComponentStore, tapResponse } from '@ngrx/component-store';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
+
 import { LmsDataEmployeeService } from '@playground/lms-data';
 import { LmsEmployee } from '@playground/lms-util';
 import { Observable, switchMap } from 'rxjs';

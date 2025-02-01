@@ -17,7 +17,7 @@ export default {
   },
 } as Meta<PlayIconShowcaseComponent>;
 
-const Template: StoryFn<PlayIconShowcaseComponent> = (args: PlayIconShowcaseComponent) => ({
+const Template: StoryFn<PlayIconShowcaseComponent> = (args: Partial<PlayIconShowcaseComponent>) => ({
   component: PlayIconShowcaseComponent,
   props: args,
 });
