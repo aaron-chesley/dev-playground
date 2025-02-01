@@ -1,6 +1,6 @@
 import { Card, CardlyPayload } from '../cardly';
 import { CardlyGame } from '../cardly/cardly-game.enum';
-import { ScumGameUI } from './scum-game-ui.interface';
+import { ScumGameUI, ScumTrickWinner } from './scum-game-ui.interface';
 
 export class ScumPayload extends CardlyPayload {
   constructor(type: string) {
@@ -74,6 +74,15 @@ export class GameUpdate extends ScumPayload {
   constructor(game: ScumGameUI) {
     super('[ws] GameUpdate');
     this.gameState = game;
+  }
+}
+
+export class ScumTrickWon extends ScumPayload {
+  readonly trickWinner: ScumTrickWinner;
+
+  constructor(data: ScumTrickWinner) {
+    super('[ws] ScumTrickWon');
+    this.trickWinner = data;
   }
 }
 

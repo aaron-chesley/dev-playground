@@ -1,23 +1,20 @@
 import { Server, Socket } from 'socket.io';
 import jwt from 'jsonwebtoken';
 import { CardlyUser, CardlyPayload } from '@playground/cardly-util';
-import { CardlyGameManager } from './CardlyGameManager';
-import { CommunicationService } from './CommunicationService';
+import { CardlyGameManager } from '../managers/CardlyGameManager';
 import { Serialized } from '@playground/shared/util/typescript';
-
-const secretKey = 'myCoolSecretKey';
+import { config } from '../config';
+import { UserSocketMap } from '../services/UserSocketMap';
 
 export class SocketHandlers {
   private io: Server;
-  private userSocketMap: { [userId: string]: string };
-  private commService: CommunicationService;
+  private userSocketMap: UserSocketMap;
   private cardlyGameManager: CardlyGameManager;
 
-  constructor(io: Server) {
+  constructor(io: Server, cardlyGameManager: CardlyGameManager, userSocketMap: UserSocketMap) {
     this.io = io;
-    this.userSocketMap = {};
-    this.commService = new CommunicationService(this.io, this.userSocketMap);
-    this.cardlyGameManager = new CardlyGameManager(this.commService);
+    this.userSocketMap = userSocketMap;
+    this.cardlyGameManager = cardlyGameManager;
     this.setupMiddlewares();
     this.setupSocketHandlers();
   }
@@ -27,7 +24,7 @@ export class SocketHandlers {
       const cookie = socket.handshake.headers.cookie;
 
       if (!cookie) {
-        next(new Error('Authentication error'));
+        next(new Error('Authentication error: No cookie found'));
         return;
       }
 
@@ -40,27 +37,33 @@ export class SocketHandlers {
       const token = tokenMatch[1];
 
       try {
-        const payload = jwt.verify(token, secretKey) as { user: CardlyUser };
+        const payload = jwt.verify(token, config.secretKey) as { user: CardlyUser };
         socket.user = payload.user;
         next();
       } catch (err) {
-        next(new Error('Authentication error'));
+        next(new Error('Authentication error: Invalid token'));
       }
     });
   }
 
   private setupSocketHandlers(): void {
     this.io.on('connection', (socket: Socket) => {
-      console.log('Client connected: ', socket.id, socket.user.displayName);
-      this.userSocketMap[socket.user.id] = socket.id;
+      console.log('Client connected: ', socket.id, socket.user?.displayName);
+      if (socket.user) {
+        this.userSocketMap.set(socket.user.id, socket.id);
+      }
 
       socket.on('msg', (msg: Serialized<CardlyPayload>) => {
-        this.cardlyGameManager.handleMessage(msg, socket.user);
+        if (socket.user) {
+          this.cardlyGameManager.handleMessage(msg, socket.user);
+        }
       });
 
       socket.on('close', () => {
         console.log('Client disconnected');
-        delete this.userSocketMap[socket.id];
+        if (socket.user) {
+          this.userSocketMap.delete(socket.user.id);
+        }
       });
     });
   }

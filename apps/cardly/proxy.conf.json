@@ -1,13 +1,15 @@
 {
   "/api": {
-    "target": "https://cardly.aaronchesley.com",
-    "secure": true,
-    "changeOrigin": true
+    "target": "http://127.0.0.1:3000",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
   },
   "/socket.io/*": {
-    "target": "https://cardly.aaronchesley.com",
-    "secure": true,
+    "target": "http://127.0.0.1:3000",
+    "secure": false,
     "changeOrigin": true,
-    "ws": true
+    "ws": true,
+    "logLevel": "debug"
   }
 }

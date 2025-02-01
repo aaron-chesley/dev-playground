@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { ScumGameBoardComponent, ScumTrickWinnerComponent } from '@playground/cardly-ui';
+import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import {
   AuthenticationState,
   ScumActions,
   ScumGameState,
   selectGameState,
   selectStagedCardIndices,
-  selectTrickWinner,
   selectUser,
 } from '@playground/cardly-data';
 import { AsyncPipe } from '@angular/common';
 import { CardlyUser, ScumGameUI } from '@playground/cardly-util';
-import { distinctUntilChanged, filter, Observable, Subject, takeUntil } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { PlayModalModule, PlayModalService } from '@playground/play-ui';
 import { Store } from '@ngrx/store';
@@ -89,17 +88,5 @@ export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {
     private modalService: PlayModalService,
   ) {
     this.currentUser$ = this.authStore.select(selectUser);
-    this.scumStore
-      .select(selectTrickWinner)
-      .pipe(
-        takeUntil(this.ngDestroy$),
-        filter(Boolean),
-        distinctUntilChanged((prev, curr) => prev?.id === curr?.id),
-      )
-      .subscribe((winner) => {
-        this.modalService.custom(ScumTrickWinnerComponent, {
-          data: { winner: winner.name, cards: winner.cards },
-        });
-      });
   }
 }

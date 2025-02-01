@@ -4,40 +4,48 @@ import { PlayNotificationPayload } from './play-notification-payload.interface';
 @Injectable({ providedIn: 'root' })
 export class PlayNotificationService {
   async sendNotification(payload: PlayNotificationPayload): Promise<void> {
-    if (this.getPermissionLevel() === 'denied') {
-      return;
-    }
-    if (this.getPermissionLevel() === 'default') {
-      const showNotifications = confirm(
-        'We need permission to show notifications. If this is what you want click "OK"'
-      );
+    try {
+      const permissionLevel = this.getPermissionLevel();
 
-      if (showNotifications) {
-        const permissionGranted = await this.requestPermission();
+      if (permissionLevel === 'denied') {
+        console.warn('Notification permission denied');
+        return;
+      }
+      if (permissionLevel === 'default') {
+        const showNotifications = confirm(
+          'We need permission to show notifications. If this is what you want click "OK"',
+        );
 
-        if (permissionGranted !== 'granted') {
+        if (showNotifications) {
+          const permissionGranted = await this.requestPermission();
+
+          if (permissionGranted !== 'granted') {
+            console.warn('Notification permission not granted');
+            return;
+          }
+        } else {
           return;
         }
       }
-    }
 
-    const useServiceWorker = await this.shouldUseServiceWorker();
+      const useServiceWorker = await this.shouldUseServiceWorker();
 
-    if (useServiceWorker) {
-      const serviceWorker = await navigator.serviceWorker.ready;
-      serviceWorker.showNotification(payload.title, payload.options);
-    } else {
-      // Fallback to Notifications API without actions
-      const notification = new Notification(payload.title);
-      notification.onclick = () => window.focus();
+      if (useServiceWorker) {
+        const serviceWorker = await navigator.serviceWorker.ready;
+        serviceWorker.showNotification(payload.title, payload.options);
+      } else {
+        // Fallback to Notifications API without actions
+        const notification = new Notification(payload.title, payload.options);
+        notification.onclick = () => window.focus();
+      }
+    } catch (error) {
+      console.error('Error sending notification:', error);
     }
   }
 
   async requestPermission(): Promise<NotificationPermission> {
     return new Promise((resolve, reject) => {
-      const permissionResult = Notification.requestPermission((result) =>
-        resolve(result)
-      );
+      const permissionResult = Notification.requestPermission((result) => resolve(result));
 
       if (permissionResult) {
         permissionResult.then(resolve, reject);
@@ -54,18 +62,11 @@ export class PlayNotificationService {
     // Check if there is a service worker registered and active:
     const swRegistration = await navigator.serviceWorker.getRegistration();
 
-    return (
-      !!swRegistration &&
-      !!swRegistration.active &&
-      swRegistration.active.state === 'activated'
-    );
+    return !!swRegistration && !!swRegistration.active && swRegistration.active.state === 'activated';
   }
 
   isSupported(): boolean {
-    if (!('Notification' in window)) {
-      return false;
-    }
-    return true;
+    return 'Notification' in window;
   }
 
   getPermissionLevel(): NotificationPermission {

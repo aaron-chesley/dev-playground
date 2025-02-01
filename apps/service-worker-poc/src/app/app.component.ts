@@ -11,9 +11,7 @@ import { AppNotificationMap } from './app-notification';
 })
 export class AppComponent {
   sendNotification() {
-    this.notificationService.sendNotification(
-      AppNotificationMap['INCOMING_CALL']
-    );
+    this.notificationService.sendNotification(AppNotificationMap['INCOMING_CALL']);
   }
 
   requestNotificationPermission() {
@@ -22,10 +20,10 @@ export class AppComponent {
 
   constructor(
     private notificationService: PlayNotificationService,
-    private swPush: SwPush
+    private swPush: SwPush,
   ) {
     this.swPush.notificationClicks.subscribe((res) => {
-      console.log('Action Clicked:', res.action);
+      console.log('Action Clicked:', res);
     });
   }
 }

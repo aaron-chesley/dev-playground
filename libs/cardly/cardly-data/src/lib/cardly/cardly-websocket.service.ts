@@ -9,7 +9,13 @@ export class CardlyWebsocketService {
   private readonly url = '/';
 
   public connect() {
+    if (this.socket.connected) {
+      return;
+    }
     this.socket.connect();
+    this.socket.on('connect_error', (error) => {
+      console.error('WebSocket connection error:', error);
+    });
     this.socket.onAny((event, msg: CardlyPayload) => {
       this.store.dispatch({ type: msg.type, data: msg });
     });

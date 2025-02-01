@@ -34,6 +34,7 @@ yarn-error.log
 testem.log
 /typings
 /.angular
+.env
 
 # System Files
 .DS_Store
@@ -52,3 +53,4 @@ Thumbs.db
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+

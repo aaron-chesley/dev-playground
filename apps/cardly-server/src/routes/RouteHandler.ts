@@ -3,9 +3,7 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import { randomId } from '@playground/shared/util/id';
-
-const secretKey = 'myCoolSecretKey';
-
+import { config } from '../config';
 export class RouteHandlers {
   private app: express.Application;
 
@@ -32,7 +30,7 @@ export class RouteHandlers {
   private generateTokenHandler = (req: Request<{}, {}, { displayName: string }>, res: Response): void => {
     if (req.cookies?.token) {
       try {
-        const user = jwt.verify(req.cookies.token, secretKey);
+        const user = jwt.verify(req.cookies.token, config.secretKey);
         res.send({ user });
         return;
       } catch (err) {}
@@ -46,7 +44,7 @@ export class RouteHandlers {
 
     const user = { id: randomId(), displayName, avatar: '/assets/avatars/anonymous.svg' };
 
-    const token = jwt.sign({ user }, secretKey);
+    const token = jwt.sign({ user }, config.secretKey);
 
     res.cookie('token', token, { httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 365 * 10 });
 
@@ -60,7 +58,7 @@ export class RouteHandlers {
     }
 
     try {
-      const payload = jwt.verify(req.cookies.token, secretKey);
+      const payload = jwt.verify(req.cookies.token, config.secretKey);
       res.send(payload['user']);
     } catch (err) {
       res.send(null);
@@ -82,7 +80,7 @@ export class RouteHandlers {
     }
 
     try {
-      const payload = jwt.verify(cookie, secretKey);
+      const payload = jwt.verify(cookie, config.secretKey);
       req['user'] = payload['user'];
       next();
     } catch (err) {

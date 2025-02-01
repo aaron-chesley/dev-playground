@@ -1,18 +1,27 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-import { RouteHandlers } from './RouteHandler';
-import { SocketHandlers } from './SocketHandler';
+import { RouteHandlers } from './routes/RouteHandler';
+import { SocketHandlers } from './sockets/SocketHandler';
+import { CardlyGameManager } from './managers/CardlyGameManager';
+import { ScumGameManager } from './managers/ScumGameManager';
+import { CommunicationService } from './services/CommunicationService';
+import { config } from './config';
+import { UserSocketMap } from './services/UserSocketMap';
+import { CardlyGame } from '@playground/cardly-util';
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-const routeHandler = new RouteHandlers(app);
-const socketHandler = new SocketHandlers(io);
+const userSocketMap = new UserSocketMap();
+const commService = new CommunicationService(io, userSocketMap);
+const cardlyGameManager = new CardlyGameManager();
+cardlyGameManager.registerGameManager(CardlyGame.SCUM, new ScumGameManager(commService));
 
-const port = parseInt(process.env.PORT) || 3000;
+new RouteHandlers(app);
+new SocketHandlers(io, cardlyGameManager, userSocketMap);
 
-server.listen(port, '0.0.0.0', () => {
-  console.log('Server is running on port 3000');
+server.listen(config.port, config.serverAddress, () => {
+  console.log(`Server is running on port ${config.port}`);
 });

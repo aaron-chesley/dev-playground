@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Card } from '@playground/cardly-util';
+import { ScumTrickWinner } from '@playground/cardly-util';
 import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playing-card/cardly-playing-card.component';
 
 @Component({
@@ -13,7 +13,7 @@ import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playi
 })
 export class ScumTrickWinnerComponent {
   constructor(
-    @Inject(DIALOG_DATA) public data: { winner: string; cards: Card[] },
+    @Inject(DIALOG_DATA) public data: ScumTrickWinner,
     private dialogRef: DialogRef<void, ScumTrickWinnerComponent>,
   ) {
     setTimeout(() => {

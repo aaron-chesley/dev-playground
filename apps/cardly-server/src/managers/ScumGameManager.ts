@@ -1,28 +1,31 @@
+import { GameManager } from './GameManager';
 import {
   CardlyUser,
-  CreateNewGameSuccess,
   ScumGame,
-  SubscribeToGameUpdatesPayload,
-  JoinGameSuccess,
-  GameUpdate,
+  ScumPayload,
+  CreateNewGamePayload,
   JoinGamePayload,
+  LeaveGamePayload,
   StartGamePayload,
   PlayCardsPayload,
   PassTurnPayload,
   StartNewRoundPayload,
   SwapCardsPayload,
-  CreateNewGamePayload,
+  SubscribeToGameUpdatesPayload,
   UnsubscribeFromGameUpdatesPayload,
-  ScumPayload,
+  CreateNewGameSuccess,
+  GameUpdate,
+  JoinGameSuccess,
   ScumGameUI,
-  LeaveGamePayload,
+  ScumTrickWinner,
+  ScumTrickWon,
 } from '@playground/cardly-util';
-import { CommunicationService } from './CommunicationService';
+import { CommunicationService } from '../services/CommunicationService';
 import { Serialized } from '@playground/shared/util/typescript';
 
-export class ScumGameManager {
-  games: { [gameId: string]: ScumGame } = {};
-  messageHandlers: { [type: string]: (msg: Serialized<ScumPayload>, user: CardlyUser) => void } = {
+export class ScumGameManager implements GameManager {
+  private games: { [gameId: string]: ScumGame } = {};
+  private messageHandlers: { [type: string]: (msg: Serialized<ScumPayload>, user: CardlyUser) => void } = {
     createNewGame: this.createNewGame,
     subscribeToGameUpdates: this.subscribeToGameUpdates,
     joinGame: this.joinGame,
@@ -37,7 +40,7 @@ export class ScumGameManager {
 
   constructor(private commService: CommunicationService) {}
 
-  public handleMessage(msg: Serialized<ScumPayload>, user: CardlyUser): void {
+  handleMessage(msg: Serialized<ScumPayload>, user: CardlyUser): void {
     const handler = this.messageHandlers[msg.type];
     if (handler) {
       handler.call(this, msg, user);
@@ -48,6 +51,7 @@ export class ScumGameManager {
 
   private createNewGame(msg: Serialized<CreateNewGamePayload>, user: CardlyUser): void {
     const game = new ScumGame();
+    this.subscribeToGameEvents(game);
     game.addUserToGame(user);
     const gameId = game.gameId;
     this.games[gameId] = game;
@@ -122,6 +126,30 @@ export class ScumGameManager {
     }
   }
 
+  private subscribeToGameEvents(game: ScumGame): void {
+    game.on('trickWinner', (event: ScumTrickWinner) => this.emitTrickWinner(event, game));
+  }
+
+  private unsubscribeFromGameEvents(game: ScumGame): void {
+    game.off('trickWinner', (event) => this.emitTrickWinner(event, game));
+  }
+
+  private emitTrickWinner(event: ScumTrickWinner, game: ScumGame): void {
+    const res = new ScumTrickWon(event).toSerializedObject();
+    this.commService.broadcastToGame(game.gameId, res);
+  }
+
+  private deleteGame(gameId: string): void {
+    const game = this.games[gameId];
+    if (game) {
+      this.unsubscribeFromGameEvents(game);
+      delete this.games[gameId];
+      console.log(`Game ${gameId} delete and unsubscribed from events`);
+    } else {
+      console.error(`Game ${gameId} not found`);
+    }
+  }
+
   private getGameStateForUser(game: ScumGame, userId: string): ScumGameUI {
     return {
       gameId: game.gameId,
@@ -133,7 +161,6 @@ export class ScumGameManager {
       currentUserTurnId: game.trick?.currentUserTurnId || '',
       presidentTraded: game.presidentTraded,
       vicePresidentTraded: game.vicePresidentTraded,
-      trickWinner: game.trickWinner,
       players: game.users.reduce((acc: any, user) => {
         acc[user.id] = {
           ...user,

@@ -1,3 +1,4 @@
+import { EventEmitter } from 'events';
 import { Card, CardlyUser, DeckOfCards, sortCardsByOrder } from '../cardly';
 import { ScumGamePhase } from './scum-game-phase.enum';
 import { ScumHand } from './scum-hand.interface';
@@ -5,7 +6,7 @@ import { ScumTrick } from './scum-trick.interface';
 import { ScumTrickWinner } from './scum-game-ui.interface';
 import { randomGameId, randomId } from '@playground/shared/util/id';
 
-export class ScumGame {
+export class ScumGame extends EventEmitter {
   private readonly _gameId: string;
   private readonly MIN_PLAYERS_TO_START = 4;
   private readonly PLAYERS_PER_DECK = 5;
@@ -16,9 +17,9 @@ export class ScumGame {
   private _phase: ScumGamePhase;
   private _presidentTraded: boolean = false;
   private _vicePresidentTraded: boolean = false;
-  private _trickWinner: ScumTrickWinner;
 
   constructor() {
+    super();
     this._gameId = randomGameId();
     this._phase = ScumGamePhase.PREGAME;
   }
@@ -53,10 +54,6 @@ export class ScumGame {
 
   public get vicePresidentTraded(): boolean {
     return this._vicePresidentTraded;
-  }
-
-  public get trickWinner(): ScumTrickWinner {
-    return this._trickWinner;
   }
 
   public addUserToGame(user: CardlyUser): void {
@@ -272,7 +269,7 @@ export class ScumGame {
   private calculateNewGameState(): void {
     // Check if the round is finished.
     if (this.isRoundFinished()) {
-      this.setTrickWinner();
+      this.emitTrickWinner();
       // Find the player who is not finished and push their id to the finish order.
       Object.values(this._hands).find((hand) => hand.cards.length > 0).finishOrder = this._users.length;
       this._trick.discardPile = [];
@@ -282,7 +279,7 @@ export class ScumGame {
 
     // If the last card played was an ace, the sub round is finished.
     if (this._trick.wasAceLastCardPlayed()) {
-      this.setTrickWinner();
+      this.emitTrickWinner();
       this._trick.resetTrick();
       // If the player who played the ace still has cards in their hand, they are the next player.
       if (this._hands[this._trick.currentUserTurnId].cards.length) {
@@ -299,7 +296,7 @@ export class ScumGame {
 
     // If there are no players left playing in the sub round, the sub round is finished.
     if (playersStillPlayingTrick.length === 0) {
-      this.setTrickWinner();
+      this.emitTrickWinner();
       this._trick.resetTrick();
       this.assignNextPlayerTurn();
       return;
@@ -307,7 +304,7 @@ export class ScumGame {
 
     // If there's only one player left playing in the sub round and everyone remaining has had at least one turn, they are the winner and the sub round is finished.
     if (playersStillPlayingTrick.length === 1 && this.everyRemainingPlayerHasHadAtLeastOneTurn()) {
-      this.setTrickWinner();
+      this.emitTrickWinner();
       this._trick.resetTrick();
 
       // The player who is still playing is the next player.
@@ -376,7 +373,6 @@ export class ScumGame {
   }
 
   private setupNewRound(payload: { isFirstRound: boolean }): void {
-    this._trickWinner = undefined;
     if (payload.isFirstRound) {
       this._users.forEach((user, index) => {
         this._hands[user.id] = {
@@ -430,12 +426,13 @@ export class ScumGame {
     }
   }
 
-  private setTrickWinner() {
+  private emitTrickWinner() {
     const winningDiscard = this._trick.discardPile[this._trick.discardPile.length - 1];
-    this._trickWinner = {
+    const trickWinner: ScumTrickWinner = {
       id: randomId(),
       name: this._users.find((user) => user.id === winningDiscard.userId).displayName,
       cards: winningDiscard.cards,
     };
+    this.emit('trickWinner', trickWinner);
   }
 }

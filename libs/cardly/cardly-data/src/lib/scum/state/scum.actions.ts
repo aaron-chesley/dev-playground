@@ -1,12 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import { CreateNewGameSuccess, JoinGameSuccess, GameUpdate } from '@playground/cardly-util';
+import { CreateNewGameSuccess, JoinGameSuccess, GameUpdate, ScumTrickWon } from '@playground/cardly-util';
+import { ScumTrickWinner } from '@playground/cardly-util';
+import { Serialized } from '@playground/shared/util/typescript';
 
 // Game State Actions
 export const createNewGame = createAction('[Scum Game] Create New Game');
-export const createNewGameSuccess = createAction('[ws] CreateNewGameSuccess', props<{ data: CreateNewGameSuccess }>());
+export const createNewGameSuccess = createAction(
+  '[ws] CreateNewGameSuccess',
+  props<{ data: Serialized<CreateNewGameSuccess> }>(),
+);
 
 export const joinGame = createAction('[Scum Game] Join Game', props<{ gameId: string }>());
-export const joinGameSuccess = createAction('[ws] JoinGameSuccess', props<{ data: JoinGameSuccess }>());
+export const joinGameSuccess = createAction('[ws] JoinGameSuccess', props<{ data: Serialized<JoinGameSuccess> }>());
 export const joinGameFailure = createAction('[Scum Game] Join Game Failure');
 
 export const leaveGame = createAction('[Scum Game] Leave Game');
@@ -21,8 +26,9 @@ export const subscribeToGameUpdates = createAction(
   props<{ gameId: string }>(),
 );
 export const unsubscribeFromGameUpdates = createAction('[Scum Game] Unsubscribe From Game Updates');
-export const updateGameState = createAction('[ws] GameUpdate', props<{ data: GameUpdate }>());
+export const updateGameState = createAction('[ws] GameUpdate', props<{ data: Serialized<GameUpdate> }>());
 export const clearState = createAction('[Scum Game] Clear State');
+export const scumTrickWon = createAction('[ws] ScumTrickWon', props<{ data: Serialized<ScumTrickWon> }>());
 export const noopAction = createAction('[Noop] No Operation');
 
 // Staged Card Actions

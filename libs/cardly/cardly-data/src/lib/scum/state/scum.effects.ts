@@ -20,11 +20,21 @@ import {
 } from '@playground/cardly-util';
 import { Store } from '@ngrx/store';
 import { selectGameState, selectScumGameState } from './scum.selectors';
-import { PlaySnackbarService } from '@playground/play-ui';
+import { PlayModalService, PlaySnackbarService } from '@playground/play-ui';
+import { ScumTrickWinnerComponent } from '@playground/cardly-ui';
 
 @Injectable()
 export class ScumGameEffects {
   gameId$ = this.store.select(selectGameState).pipe(map((state) => state.gameId));
+
+  constructor(
+    private actions$: Actions,
+    private cardlyWebsocket: CardlyWebsocketService,
+    private router: Router,
+    private store: Store,
+    private snackbarService: PlaySnackbarService,
+    private modal: PlayModalService,
+  ) {}
 
   createNewGame$ = createEffect(
     () =>
@@ -160,6 +170,19 @@ export class ScumGameEffects {
     { dispatch: false },
   );
 
+  scumTrickWon$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(ScumGameActions.scumTrickWon),
+        map(({ data }) => {
+          this.modal.custom(ScumTrickWinnerComponent, {
+            data: data.trickWinner,
+          });
+        }),
+      ),
+    { dispatch: false },
+  );
+
   startNewRound$ = createEffect(
     () =>
       this.actions$.pipe(
@@ -186,12 +209,4 @@ export class ScumGameEffects {
       }),
     ),
   );
-
-  constructor(
-    private actions$: Actions,
-    private cardlyWebsocket: CardlyWebsocketService,
-    private router: Router,
-    private store: Store,
-    private snackbarService: PlaySnackbarService,
-  ) {}
 }

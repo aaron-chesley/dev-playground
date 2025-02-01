@@ -11,5 +11,3 @@ export const selectStagedCardIndices = createSelector(
   selectScumGameState,
   (state: ScumGameState) => state.stagedCardIndices,
 );
-
-export const selectTrickWinner = createSelector(selectGameState, (gameState) => gameState.trickWinner);

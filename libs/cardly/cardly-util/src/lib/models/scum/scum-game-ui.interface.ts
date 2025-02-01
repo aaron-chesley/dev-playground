@@ -26,7 +26,6 @@ export interface ScumGameUI {
   presidentTraded: boolean;
   vicePresidentTraded: boolean;
   players: { [userId: string]: ScumPlayerUI };
-  trickWinner: ScumTrickWinner;
 }
 
 export const getInitialScumGameUI = (): ScumGameUI => {
@@ -41,6 +40,5 @@ export const getInitialScumGameUI = (): ScumGameUI => {
     presidentTraded: false,
     vicePresidentTraded: false,
     players: {},
-    trickWinner: undefined,
   };
 };
