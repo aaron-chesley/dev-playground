@@ -9,13 +9,12 @@ import {
 import { PlayInputTextComponent } from '../play-input-text/play-input-text.component';
 
 @Component({
-  selector: 'play-form-field',
-  templateUrl: './play-form-field.component.html',
-  styleUrls: ['./play-form-field.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [],
+    selector: 'play-form-field',
+    templateUrl: './play-form-field.component.html',
+    styleUrls: ['./play-form-field.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: []
 })
 export class PlayFormFieldComponent {
   @HostBinding('class') get classes() {

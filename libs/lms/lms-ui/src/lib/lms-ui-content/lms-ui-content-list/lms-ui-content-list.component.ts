@@ -20,19 +20,18 @@ import { Subject, takeUntil } from 'rxjs';
 import { LmsUiVideoItemComponent } from '../lms-ui-video-item/lms-ui-video-item.component';
 
 @Component({
-  selector: 'lms-ui-content-list',
-  templateUrl: './lms-ui-content-list.component.html',
-  styleUrls: ['./lms-ui-content-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    LmsUiVideoItemComponent,
-    PlayPaginatorComponent,
-    PlayInputTextComponent,
-    PlayButtonComponent,
-  ],
+    selector: 'lms-ui-content-list',
+    templateUrl: './lms-ui-content-list.component.html',
+    styleUrls: ['./lms-ui-content-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ReactiveFormsModule,
+        LmsUiVideoItemComponent,
+        PlayPaginatorComponent,
+        PlayInputTextComponent,
+        PlayButtonComponent,
+    ]
 })
 export class LmsUiContentListComponent implements OnInit, OnDestroy {
   @HostBinding('class.lms-ui-content-list') lmsUiContentListClass =

@@ -30,7 +30,6 @@ import { Store } from '@ngrx/store';
     (swapCards)="swapCards()"
   ></scum-game-board>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [AsyncPipe, ScumGameBoardComponent, PlayModalModule],
 })
 export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {

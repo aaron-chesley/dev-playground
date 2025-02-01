@@ -8,14 +8,13 @@ import { LmsUiLoginComponent } from '@playground/lms-ui';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'lms-feature-login',
-  template: `<lms-ui-login
+    selector: 'lms-feature-login',
+    template: `<lms-ui-login
     [loading]="loading$ | async"
     (loginClicked)="attemptLogin($event)"
   ></lms-ui-login>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule, LmsUiLoginComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, LmsUiLoginComponent]
 })
 export class LmsLoginFeatureComponent {
   private loadingSub = new BehaviorSubject<boolean>(false);

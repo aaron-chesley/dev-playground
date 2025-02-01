@@ -10,12 +10,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { PlayLoadingDirective } from '@playground/play-ui';
 
 @Component({
-  selector: 'lms-ui-sidebar',
-  templateUrl: './lms-ui-sidebar.component.html',
-  styleUrls: ['./lms-ui-sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [MatSidenavModule, PlayLoadingDirective],
+    selector: 'lms-ui-sidebar',
+    templateUrl: './lms-ui-sidebar.component.html',
+    styleUrls: ['./lms-ui-sidebar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [MatSidenavModule, PlayLoadingDirective]
 })
 export class LmsUiSidebarComponent implements OnInit {
   @Input() isLoading = false;

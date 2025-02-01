@@ -45,29 +45,28 @@ const isValidHtmlInputValue = (event: KeyboardEvent): boolean => {
 };
 
 @Component({
-  selector: 'play-select',
-  templateUrl: './play-select.component.html',
-  styleUrls: ['./play-select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  encapsulation: ViewEncapsulation.None,
-  imports: [
-    AsyncPipe,
-    NgTemplateOutlet,
-    ReactiveFormsModule,
-    OverlayModule,
-    A11yModule,
-    ScrollingModule,
-    PlayCheckboxComponent,
-    PlayInputTextComponent,
-  ],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: PlaySelectComponent,
-      multi: true,
-    },
-  ],
+    selector: 'play-select',
+    templateUrl: './play-select.component.html',
+    styleUrls: ['./play-select.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        AsyncPipe,
+        NgTemplateOutlet,
+        ReactiveFormsModule,
+        OverlayModule,
+        A11yModule,
+        ScrollingModule,
+        PlayCheckboxComponent,
+        PlayInputTextComponent,
+    ],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: PlaySelectComponent,
+            multi: true,
+        },
+    ]
 })
 export class PlaySelectComponent implements OnInit, ControlValueAccessor {
   isOpen = false;

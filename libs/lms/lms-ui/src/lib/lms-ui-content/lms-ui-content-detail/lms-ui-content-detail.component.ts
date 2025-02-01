@@ -19,11 +19,8 @@ import {
 import { YouTubePlayerModule } from '@angular/youtube-player';
 import {
   PlayButtonComponent,
-  PlayCardBodyComponent,
-  PlayCardComponent,
   PlayCheckboxComponent,
   PlayFormFieldComponent,
-  PlayFormFieldErrorComponent,
   PlayFormFieldLabelComponent,
   PlayGroupComponent,
   PlayIconComponent,
@@ -36,27 +33,23 @@ import { YouTubeIdPipe } from '../youtube-id.pipe';
 import { getLmsAssessmentForm } from 'libs/lms/lms-util/src/lib/interfaces/lms-assessment.interface';
 
 @Component({
-  selector: 'lms-ui-content-detail',
-  templateUrl: './lms-ui-content-detail.component.html',
-  styleUrls: ['./lms-ui-content-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    YouTubePlayerModule,
-    PlayCardComponent,
-    PlayCardBodyComponent,
-    YouTubeIdPipe,
-    PlayFormFieldComponent,
-    PlayFormFieldLabelComponent,
-    PlayFormFieldErrorComponent,
-    PlayInputTextComponent,
-    PlayButtonComponent,
-    PlayGroupComponent,
-    PlayCheckboxComponent,
-    PlayIconComponent,
-  ],
+    selector: 'lms-ui-content-detail',
+    templateUrl: './lms-ui-content-detail.component.html',
+    styleUrls: ['./lms-ui-content-detail.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ReactiveFormsModule,
+        YouTubePlayerModule,
+        YouTubeIdPipe,
+        PlayFormFieldComponent,
+        PlayFormFieldLabelComponent,
+        PlayInputTextComponent,
+        PlayButtonComponent,
+        PlayGroupComponent,
+        PlayCheckboxComponent,
+        PlayIconComponent,
+    ]
 })
 export class LmsUiContentDetailComponent implements OnInit, OnChanges {
   @HostBinding('class.lms-ui-content-detail') lmsUiContentDetailClass =

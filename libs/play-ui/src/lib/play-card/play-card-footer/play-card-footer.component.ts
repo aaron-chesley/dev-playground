@@ -7,12 +7,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'play-card-footer',
-  templateUrl: './play-card-footer.component.html',
-  styleUrls: ['./play-card-footer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'play-card-footer',
+    templateUrl: './play-card-footer.component.html',
+    styleUrls: ['./play-card-footer.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule]
 })
 export class PlayCardFooterComponent {
   @HostBinding('class') className = 'play-card-footer';

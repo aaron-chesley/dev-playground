@@ -16,14 +16,13 @@ import {
 import { PlayRippleDirective } from '../play-ripple/play-ripple';
 
 @Component({
-  selector: 'button[playButton]',
-  templateUrl: './play-button.component.html',
-  styleUrls: ['./play-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  hostDirectives: [PlayRippleDirective],
-  standalone: true,
-  imports: [],
+    selector: 'button[playButton]',
+    templateUrl: './play-button.component.html',
+    styleUrls: ['./play-button.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    hostDirectives: [PlayRippleDirective],
+    imports: []
 })
 export class PlayButtonComponent implements OnChanges {
   @HostBinding('class') className = '';

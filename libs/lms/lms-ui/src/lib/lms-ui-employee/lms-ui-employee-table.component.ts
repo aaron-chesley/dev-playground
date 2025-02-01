@@ -10,7 +10,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { LmsEmployee } from '@playground/lms-util';
 import {
   check,
-  PlayButtonComponent,
   PlayCheckboxComponent,
   PlayIconComponent,
   PlayIconRegistryService,
@@ -19,19 +18,17 @@ import {
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'lms-ui-employee-table',
-  templateUrl: './lms-ui-employee-table.component.html',
-  styleUrls: ['./lms-ui-employee-table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    DatePipe,
-    CdkTableModule,
-    PlayCheckboxComponent,
-    PlayButtonComponent,
-    PlayIconComponent,
-    PlaySelectComponent,
-  ],
+    selector: 'lms-ui-employee-table',
+    templateUrl: './lms-ui-employee-table.component.html',
+    styleUrls: ['./lms-ui-employee-table.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        DatePipe,
+        CdkTableModule,
+        PlayCheckboxComponent,
+        PlayIconComponent,
+        PlaySelectComponent,
+    ]
 })
 export class LmsUiEmployeeTableComponent {
   @Input() employees: LmsEmployee[] = [];

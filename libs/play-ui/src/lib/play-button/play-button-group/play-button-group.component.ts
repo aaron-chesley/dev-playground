@@ -8,13 +8,12 @@ import {
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'play-button-group',
-  templateUrl: './play-button-group.component.html',
-  styleUrls: ['./play-button-group.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'play-button-group',
+    templateUrl: './play-button-group.component.html',
+    styleUrls: ['./play-button-group.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule]
 })
 export class PlayButtonGroupComponent {
   @HostBinding('class') className = 'play-btn-group';

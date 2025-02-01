@@ -14,19 +14,18 @@ import { PlayCardBodyComponent } from '../../play-card/play-card-body/play-card-
 import { PlayCardFooterComponent } from '../../play-card/play-card-footer/play-card-footer.component';
 
 @Component({
-  selector: 'play-modal-alert',
-  templateUrl: './play-modal-alert.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    CommonModule,
-    PlayCardComponent,
-    PlayCardHeaderComponent,
-    PlayCardBodyComponent,
-    PlayCardFooterComponent,
-    PlayButtonComponent,
-  ],
+    selector: 'play-modal-alert',
+    templateUrl: './play-modal-alert.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        PlayCardComponent,
+        PlayCardHeaderComponent,
+        PlayCardBodyComponent,
+        PlayCardFooterComponent,
+        PlayButtonComponent,
+    ]
 })
 export class PlayModalAlertComponent {
   constructor(

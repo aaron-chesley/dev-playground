@@ -7,7 +7,6 @@ import { PlayInputTextComponent, PlayLoadingDirective } from '@playground/play-u
   templateUrl: './cardly-login.component.html',
   styleUrls: ['./cardly-login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ReactiveFormsModule, PlayInputTextComponent, PlayLoadingDirective],
 })
 export class CardlyLoginComponent {

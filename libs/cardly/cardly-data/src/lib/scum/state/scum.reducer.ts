@@ -64,5 +64,5 @@ export const scumGameReducer = createReducer(
     }
     return { ...state, stagedCardIndices: [...stagedCards] };
   }),
-  on(ScumGameActions.clearStagedCards, (state) => ({ ...state, stagedCardIndices: [] })),
+  on(ScumGameActions.clearStagedCards, (state) => ({ ...state, stagedCardIndices: [] as number[] })),
 );

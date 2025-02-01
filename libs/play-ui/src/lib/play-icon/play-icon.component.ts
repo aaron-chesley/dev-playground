@@ -14,21 +14,20 @@ import {
 import { PlayIconRegistryService } from './play-icon-registry.service';
 
 @Component({
-  selector: 'play-icon',
-  template: ``,
-  styles: [
-    `
+    selector: 'play-icon',
+    template: ``,
+    styles: [
+        `
       .play-icon {
         display: flex;
         justify-content: center;
         align-items: center;
       }
     `,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [CommonModule],
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule]
 })
 export class PlayIconComponent implements OnChanges {
   @HostBinding('class') className = 'play-icon';

@@ -8,7 +8,6 @@ import { CardlyPlayingCardComponent } from '../../shared/components/cardly-playi
   templateUrl: 'scum-trick-winner-modal.component.html',
   styleUrls: ['./scum-trick-winner-modal.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [CardlyPlayingCardComponent],
 })
 export class ScumTrickWinnerComponent {

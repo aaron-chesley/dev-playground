@@ -7,12 +7,11 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'play-card-header',
-  templateUrl: './play-card-header.component.html',
-  styleUrls: ['./play-card-header.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'play-card-header',
+    templateUrl: './play-card-header.component.html',
+    styleUrls: ['./play-card-header.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule]
 })
 export class PlayCardHeaderComponent {
   @HostBinding('class') className = 'play-card-header';

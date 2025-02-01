@@ -6,7 +6,6 @@ import { Card } from '@playground/cardly-util';
   templateUrl: './cardly-playing-card.component.html',
   styleUrls: ['./cardly-playing-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [],
 })
 export class CardlyPlayingCardComponent {

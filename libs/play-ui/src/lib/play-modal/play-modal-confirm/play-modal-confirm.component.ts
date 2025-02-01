@@ -15,20 +15,19 @@ import { PlayCardFooterComponent } from '../../play-card/play-card-footer/play-c
 import { PlayButtonGroupComponent } from '../../play-button/play-button-group/play-button-group.component';
 
 @Component({
-  selector: 'play-modal-confirm',
-  templateUrl: './play-modal-confirm.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    CommonModule,
-    PlayCardComponent,
-    PlayCardHeaderComponent,
-    PlayCardBodyComponent,
-    PlayCardFooterComponent,
-    PlayButtonComponent,
-    PlayButtonGroupComponent,
-  ],
+    selector: 'play-modal-confirm',
+    templateUrl: './play-modal-confirm.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        PlayCardComponent,
+        PlayCardHeaderComponent,
+        PlayCardBodyComponent,
+        PlayCardFooterComponent,
+        PlayButtonComponent,
+        PlayButtonGroupComponent,
+    ]
 })
 export class PlayModalConfirmComponent {
   closeDialog(value: boolean) {

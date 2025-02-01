@@ -36,7 +36,6 @@ import { fadeAnimation, listAnimation } from '../../animations';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [listAnimation, fadeAnimation],
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     NgStyle,
     CardlyPlayingCardComponent,

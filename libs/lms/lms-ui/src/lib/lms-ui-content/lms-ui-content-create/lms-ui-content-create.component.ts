@@ -34,26 +34,25 @@ interface LmsUiContentCreateForm {
 }
 
 @Component({
-  selector: 'lms-ui-content-create',
-  templateUrl: './lms-ui-content-create.component.html',
-  styleUrls: ['./lms-ui-content-create.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    PlayCardComponent,
-    PlayCardHeaderComponent,
-    PlayCardBodyComponent,
-    PlayCardFooterComponent,
-    PlayButtonComponent,
-    PlayButtonGroupComponent,
-    PlayFormFieldComponent,
-    PlayFormFieldLabelComponent,
-    PlayInputTextComponent,
-    PlaySelectComponent,
-    PlayGroupComponent,
-  ],
+    selector: 'lms-ui-content-create',
+    templateUrl: './lms-ui-content-create.component.html',
+    styleUrls: ['./lms-ui-content-create.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        ReactiveFormsModule,
+        PlayCardComponent,
+        PlayCardHeaderComponent,
+        PlayCardBodyComponent,
+        PlayCardFooterComponent,
+        PlayButtonComponent,
+        PlayButtonGroupComponent,
+        PlayFormFieldComponent,
+        PlayFormFieldLabelComponent,
+        PlayInputTextComponent,
+        PlaySelectComponent,
+        PlayGroupComponent,
+    ]
 })
 export class LmsUiContentCreateComponent implements OnInit {
   @HostBinding('class.lms-ui-content-create') lmsUiContentCreateClass = 'lms-ui-content-create';

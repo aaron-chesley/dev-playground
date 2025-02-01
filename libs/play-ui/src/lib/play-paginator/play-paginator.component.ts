@@ -16,18 +16,17 @@ import { arrowBack, arrowForward } from '../play-icon/play-icons';
 import { PlayTextComponent } from '../play-typography/play-text/play-text.component';
 
 @Component({
-  selector: 'play-paginator',
-  templateUrl: './play-paginator.component.html',
-  styleUrls: ['./play-paginator.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [
-    CommonModule,
-    PlayButtonComponent,
-    PlayIconComponent,
-    PlayTextComponent,
-  ],
+    selector: 'play-paginator',
+    templateUrl: './play-paginator.component.html',
+    styleUrls: ['./play-paginator.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [
+        CommonModule,
+        PlayButtonComponent,
+        PlayIconComponent,
+        PlayTextComponent,
+    ]
 })
 export class PlayPaginatorComponent implements OnChanges {
   @HostBinding('class.play-paginator') className = 'play-paginator';

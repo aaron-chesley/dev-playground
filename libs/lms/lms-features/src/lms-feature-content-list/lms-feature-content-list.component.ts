@@ -11,8 +11,8 @@ import { LmsFeatureContentListStore } from './lms-feature-content-list.store';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'lms-feature-content-list',
-  template: `<lms-ui-content-list
+    selector: 'lms-feature-content-list',
+    template: `<lms-ui-content-list
     [contentItems]="contentItems$ | async"
     [currentPage]="currentPage$ | async"
     [count]="count$ | async"
@@ -22,9 +22,8 @@ import { ActivatedRoute, Router } from '@angular/router';
     (createNewContent)="onCreateNewContent()"
     (contentItemClick)="onContentItemClick($event)"
   ></lms-ui-content-list>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule, LmsUiContentListComponent, PlayModalModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, LmsUiContentListComponent, PlayModalModule]
 })
 export class LmsFeatureContentListComponent {
   contentItems$ = this.contentStore.contentList$;

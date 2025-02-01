@@ -12,14 +12,13 @@ interface ContentDetailsState {
 }
 
 @Component({
-  selector: 'lms-feature-content-detail',
-  template: `<lms-ui-content-detail
+    selector: 'lms-feature-content-detail',
+    template: `<lms-ui-content-detail
     [content]="content$ | async"
     (saveContent)="saveContent($event)"
   ></lms-ui-content-detail>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [AsyncPipe, LmsUiContentDetailComponent],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [AsyncPipe, LmsUiContentDetailComponent],
 })
 export class LmsFeatureContentDetailsComponent implements OnInit {
   private contentDetailsStateSub = new BehaviorSubject<ContentDetailsState>({

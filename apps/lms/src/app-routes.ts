@@ -6,7 +6,8 @@ function ngHTML(html: string) {
   @Component({
     template: `<div [innerHTML]="html"></div>`,
     host: { 'collision-id': Math.random().toString(36).substring(2) },
-  })
+    standalone: false
+})
   class _HTMLComponent {
     html = html;
   }

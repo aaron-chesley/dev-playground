@@ -24,11 +24,10 @@ import { HttpLoadingIndicatorService } from '@playground/shared/shared-features'
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-  selector: 'lms-feature-sidebar',
-  templateUrl: './lms-feature-sidebar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [AsyncPipe, RouterModule, LmsUiSidebarComponent, LmsUiSidebarItemComponent, PlayIconComponent],
+    selector: 'lms-feature-sidebar',
+    templateUrl: './lms-feature-sidebar.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [AsyncPipe, RouterModule, LmsUiSidebarComponent, LmsUiSidebarItemComponent, PlayIconComponent]
 })
 export class LmsFeatureSidebarComponent implements OnInit {
   currentUser$: Observable<AuthUser>;

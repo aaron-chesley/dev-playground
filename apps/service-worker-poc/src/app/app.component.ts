@@ -4,10 +4,11 @@ import { PlayNotificationService } from '@playground/play-ui';
 import { AppNotificationMap } from './app-notification';
 
 @Component({
-  selector: 'playground-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'playground-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AppComponent {
   sendNotification() {

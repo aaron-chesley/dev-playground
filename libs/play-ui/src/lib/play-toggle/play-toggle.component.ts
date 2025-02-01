@@ -12,13 +12,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { getLabelPosition, LabelPosition } from '../label-position.type';
 
 @Component({
-  selector: 'play-toggle',
-  templateUrl: './play-toggle.component.html',
-  styleUrls: ['./play-toggle.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'play-toggle',
+    templateUrl: './play-toggle.component.html',
+    styleUrls: ['./play-toggle.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule]
 })
 export class PlayToggleComponent {
   @HostBinding('class') className = 'play-toggle';

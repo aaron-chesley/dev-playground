@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { ScumGameBoardComponent } from '@playground/cardly-ui';
 import { AsyncPipe } from '@angular/common';
 import { AuthActions, ScumActions, ScumGameState, selectIsLoading } from '@playground/cardly-data';
 import { FormsModule } from '@angular/forms';
@@ -56,10 +55,8 @@ import { Observable } from 'rxjs';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
-    ScumGameBoardComponent,
     FormsModule,
     PlayInputTextComponent,
     PlayButtonComponent,

@@ -3,7 +3,7 @@ import { AuthActions } from '.';
 import { CardlyUser } from '@playground/cardly-util';
 
 export interface AuthenticationState {
-  user: CardlyUser;
+  user: CardlyUser | null;
   loading: boolean;
 }
 

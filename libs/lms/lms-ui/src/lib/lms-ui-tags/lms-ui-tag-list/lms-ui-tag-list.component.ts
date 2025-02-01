@@ -11,17 +11,16 @@ import { PlayCardFooterComponent } from 'libs/play-ui/src/lib/play-card/play-car
 import { LmsUiTag } from '../lms-ui-tag.interface';
 
 @Component({
-  selector: 'lms-ui-tag-list',
-  templateUrl: './lms-ui-tag-list.component.html',
-  styleUrls: ['./lms-ui-tag-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    PlayCardComponent,
-    PlayCardBodyComponent,
-    PlayCardFooterComponent,
-    PlayButtonComponent,
-  ],
+    selector: 'lms-ui-tag-list',
+    templateUrl: './lms-ui-tag-list.component.html',
+    styleUrls: ['./lms-ui-tag-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [
+        PlayCardComponent,
+        PlayCardBodyComponent,
+        PlayCardFooterComponent,
+        PlayButtonComponent,
+    ]
 })
 export class LmsUiTagListComponent {
   @Input() tags: LmsUiTag[] = [];

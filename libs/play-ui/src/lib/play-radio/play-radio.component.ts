@@ -12,13 +12,12 @@ import { getLabelPosition, LabelPosition } from '../label-position.type';
 import { PlayRadioGroupService } from './play-radio-group.service';
 
 @Component({
-  selector: 'play-radio',
-  templateUrl: './play-radio.component.html',
-  styleUrls: ['./play-radio.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None,
-  standalone: true,
-  imports: [CommonModule],
+    selector: 'play-radio',
+    templateUrl: './play-radio.component.html',
+    styleUrls: ['./play-radio.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    encapsulation: ViewEncapsulation.None,
+    imports: [CommonModule]
 })
 export class PlayRadioComponent {
   @HostBinding('class.play-radio') className = 'play-radio';

@@ -10,29 +10,28 @@ import {
 } from '@angular/forms';
 
 @Component({
-  selector: 'play-counter',
-  template: `
+    selector: 'play-counter',
+    template: `
     <div class="play-counter">
       <button class="play-counter-btn" (click)="onRemove()">&minus;</button>
       <div class="play-counter-quantity">{{ quantity }}</div>
       <button class="play-counter-btn" (click)="onAdd()">&plus;</button>
     </div>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      multi: true,
-      useExisting: PlayCounterComponent,
-    },
-    {
-      provide: NG_VALIDATORS,
-      multi: true,
-      useExisting: PlayCounterComponent,
-    },
-  ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            multi: true,
+            useExisting: PlayCounterComponent,
+        },
+        {
+            provide: NG_VALIDATORS,
+            multi: true,
+            useExisting: PlayCounterComponent,
+        },
+    ]
 })
 export class PlayCounterComponent implements ControlValueAccessor, Validator {
   quantity = 0;

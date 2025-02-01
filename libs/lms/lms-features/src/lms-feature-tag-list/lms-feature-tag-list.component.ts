@@ -7,14 +7,13 @@ import { catchError, filter, switchMap } from 'rxjs/operators';
 import { LmsFeatureTagListStore } from './lms-feature-tag-list.store';
 
 @Component({
-  selector: 'lms-feature-tag-list',
-  template: `<lms-ui-tag-list
+    selector: 'lms-feature-tag-list',
+    template: `<lms-ui-tag-list
     [tags]="tags$ | async"
     (deleteTagClick)="deleteTag($event)"
   ></lms-ui-tag-list>`,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [CommonModule, LmsUiTagListComponent, PlayModalModule],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [CommonModule, LmsUiTagListComponent, PlayModalModule]
 })
 export class LmsFeatureTagListComponent implements OnInit {
   tags$: Observable<LmsUiTag[]>;

@@ -7,12 +7,11 @@ import { NgClass } from '@angular/common';
 import { PlaySnackbar } from './play-snackbar.interface';
 
 @Component({
-  selector: 'play-snackbar',
-  templateUrl: './play-snackbar.component.html',
-  styleUrls: ['./play-snackbar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [NgClass, PlayIconComponent, PlayButtonComponent],
+    selector: 'play-snackbar',
+    templateUrl: './play-snackbar.component.html',
+    styleUrls: ['./play-snackbar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [NgClass, PlayIconComponent, PlayButtonComponent]
 })
 export class PlaySnackbarComponent {
   @Input() data: PlaySnackbar;

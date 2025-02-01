@@ -7,13 +7,12 @@ import { PlaySnackbarRef } from '../play-snackbar-ref.interface';
 import { fadeAnimation } from '../../play-animations/fade.animation';
 
 @Component({
-  selector: 'play-snackbar-container',
-  templateUrl: './play-snackbar-container.component.html',
-  styleUrls: ['./play-snackbar-container.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [AsyncPipe, PlaySnackbarComponent],
-  animations: [fadeAnimation],
+    selector: 'play-snackbar-container',
+    templateUrl: './play-snackbar-container.component.html',
+    styleUrls: ['./play-snackbar-container.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    imports: [AsyncPipe, PlaySnackbarComponent],
+    animations: [fadeAnimation]
 })
 export class PlaySnackbarContainerComponent {
   snackbars$: Observable<{

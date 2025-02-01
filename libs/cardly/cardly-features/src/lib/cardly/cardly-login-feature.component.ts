@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
   selector: 'cardly-login-modal-feature',
   template: `<cardly-login [loading]="loading$ | async" (login)="onLogin($event)"></cardly-login>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [AsyncPipe, CardlyLoginComponent],
 })
 export class CardlyLoginFeatureComponent implements OnInit {
