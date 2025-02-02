@@ -30,6 +30,6 @@ export const authenticationReducer = createReducer(
   })),
   on(AuthActions.logoutSuccess, (state) => ({
     ...state,
-    user: null,
+    user: null as any,
   })),
 );

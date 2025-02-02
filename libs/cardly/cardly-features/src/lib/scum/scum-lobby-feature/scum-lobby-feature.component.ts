@@ -55,13 +55,7 @@ import { Observable } from 'rxjs';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    AsyncPipe,
-    FormsModule,
-    PlayInputTextComponent,
-    PlayButtonComponent,
-    PlayLoadingDirective,
-  ],
+  imports: [AsyncPipe, FormsModule, PlayInputTextComponent, PlayButtonComponent, PlayLoadingDirective],
 })
 export class ScumLobbyFeatureComponent implements OnInit {
   gameId = '';

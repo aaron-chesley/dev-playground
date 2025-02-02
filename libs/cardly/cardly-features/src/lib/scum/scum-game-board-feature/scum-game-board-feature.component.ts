@@ -12,7 +12,6 @@ import { AsyncPipe } from '@angular/common';
 import { CardlyUser, ScumGameUI } from '@playground/cardly-util';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { PlayModalModule, PlayModalService } from '@playground/play-ui';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -30,7 +29,7 @@ import { Store } from '@ngrx/store';
     (swapCards)="swapCards()"
   ></scum-game-board>`,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, ScumGameBoardComponent, PlayModalModule],
+  imports: [AsyncPipe, ScumGameBoardComponent],
 })
 export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {
   gameState$: Observable<ScumGameUI>;
@@ -84,7 +83,6 @@ export class ScumGameBoardFeatureComponent implements OnInit, OnDestroy {
     private scumStore: Store<ScumGameState>,
     private authStore: Store<AuthenticationState>,
     private activatedRoute: ActivatedRoute,
-    private modalService: PlayModalService,
   ) {
     this.currentUser$ = this.authStore.select(selectUser);
   }
