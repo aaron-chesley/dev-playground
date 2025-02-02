@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
@@ -20,7 +20,7 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(StoreDevtoolsModule.instrument()),
     importProvidersFrom(JwtModule.forRoot({})),
     importProvidersFrom(PlayModalModule),
-    importProvidersFrom(ServiceWorkerModule.register('/ngsw-worker.js', { enabled: true })),
+    importProvidersFrom(ServiceWorkerModule.register('/ngsw-worker.js', { enabled: !isDevMode() })),
     provideState({ name: authenticationFeatureKey, reducer: authenticationReducer }),
     provideEffects(AuthenticationEffects),
   ],
