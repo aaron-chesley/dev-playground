@@ -611,17 +611,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/youtube-player@npm:^17.3.7":
-  version: 17.3.10
-  resolution: "@angular/youtube-player@npm:17.3.10"
+"@angular/youtube-player@npm:^19.1.4":
+  version: 19.2.5
+  resolution: "@angular/youtube-player@npm:19.2.5"
   dependencies:
-    "@types/youtube": "npm:^0.0.42"
+    "@types/youtube": "npm:^0.1.0"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": ^17.0.0 || ^18.0.0
-    "@angular/core": ^17.0.0 || ^18.0.0
+    "@angular/common": ^19.0.0 || ^20.0.0
+    "@angular/core": ^19.0.0 || ^20.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/dab09011ffb87692acf5d8a0b545470d07a84864903448d7cad7bb3d52e82f7e6277d23aeb4a334cfcd0766a91a482680414204027dcfafcb0a83f1a216b81ad
+  checksum: 10c0/a85a03716ba4d06dbd4487ae8996dda8269b6fbb32ab039d78674d9c28818595cceb5edfdaff341067f6724b8220028431175bfcb954928a49e15600a53b1db4
   languageName: node
   linkType: hard
 
@@ -6786,10 +6786,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/youtube@npm:^0.0.42":
-  version: 0.0.42
-  resolution: "@types/youtube@npm:0.0.42"
-  checksum: 10c0/5edf4553e4ab1c80a2dfb95a3f53f078a10d09a7a2ee5d05fca866cdb083c384cd0d914a089f9f31f43120c224933d7c3bf482303dbaa8b19a0efc53911eed7f
+"@types/youtube@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@types/youtube@npm:0.1.0"
+  checksum: 10c0/2629187927d26699da6f9499cc73bb70fc3ccf8075c8428ca801a062e64c31d50b3baf188ef8514e294ca15455ee2e06903425535475eb0cb106a36a19a08aaf
   languageName: node
   linkType: hard
 
@@ -7776,17 +7776,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.6.0":
-  version: 1.6.0
-  resolution: "axios@npm:1.6.0"
-  dependencies:
-    follow-redirects: "npm:^1.15.0"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: 10c0/2879e17b96cbca7e2096d231a44e2d0f03e657d79f8928ea38ec5fbaf5a5b7bf952d580cdb58a66ba328c26eb3528b89d5a32da57cc5cf89813786c044f7e9d6
-  languageName: node
-  linkType: hard
-
 "axios@npm:^1.7.4":
   version: 1.7.9
   resolution: "axios@npm:1.7.9"
@@ -7795,6 +7784,17 @@ __metadata:
     form-data: "npm:^4.0.0"
     proxy-from-env: "npm:^1.1.0"
   checksum: 10c0/b7a41e24b59fee5f0f26c1fc844b45b17442832eb3a0fb42dd4f1430eb4abc571fe168e67913e8a1d91c993232bd1d1ab03e20e4d1fee8c6147649b576fc1b0b
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.8.4":
+  version: 1.8.4
+  resolution: "axios@npm:1.8.4"
+  dependencies:
+    follow-redirects: "npm:^1.15.6"
+    form-data: "npm:^4.0.0"
+    proxy-from-env: "npm:^1.1.0"
+  checksum: 10c0/450993c2ba975ffccaf0d480b68839a3b2435a5469a71fa2fb0b8a55cdb2c2ae47e609360b9c1e2b2534b73dfd69e2733a1cf9f8215bee0bcd729b72f801b0ce
   languageName: node
   linkType: hard
 
@@ -10839,7 +10839,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express@npm:4.21.2, express@npm:^4.21.2":
+"express@npm:^4.21.2":
   version: 4.21.2
   resolution: "express@npm:4.21.2"
   dependencies:
@@ -11168,7 +11168,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.0, follow-redirects@npm:^1.15.6":
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.6":
   version: 1.15.9
   resolution: "follow-redirects@npm:1.15.9"
   peerDependenciesMeta:
@@ -16225,7 +16225,7 @@ __metadata:
     "@angular/pwa": "npm:19.1.5"
     "@angular/router": "npm:19.1.4"
     "@angular/service-worker": "npm:19.1.4"
-    "@angular/youtube-player": "npm:^17.3.7"
+    "@angular/youtube-player": "npm:^19.1.4"
     "@auth0/angular-jwt": "npm:^5.2.0"
     "@babel/core": "npm:7.24.5"
     "@ngrx/component-store": "npm:19.0.0"
@@ -16263,7 +16263,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:7.16.0"
     "@typescript-eslint/parser": "npm:7.16.0"
     "@typescript-eslint/utils": "npm:^7.16.0"
-    axios: "npm:1.6.0"
+    axios: "npm:^1.8.4"
     body-parser: "npm:^1.20.2"
     cookie-parser: "npm:^1.4.6"
     cors: "npm:^2.8.5"
@@ -16274,7 +16274,7 @@ __metadata:
     eslint-config-prettier: "npm:9.0.0"
     eslint-plugin-cypress: "npm:^2.15.2"
     eslint-plugin-storybook: "npm:^0.11.2"
-    express: "npm:4.21.2"
+    express: "npm:^4.21.2"
     express-session: "npm:^1.18.0"
     html-webpack-plugin: "npm:^5.6.0"
     jest: "npm:29.7.0"

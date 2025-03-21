@@ -31,7 +31,7 @@
     "@angular/pwa": "19.1.5",
     "@angular/router": "19.1.4",
     "@angular/service-worker": "19.1.4",
-    "@angular/youtube-player": "^17.3.7",
+    "@angular/youtube-player": "^19.1.4",
     "@auth0/angular-jwt": "^5.2.0",
     "@ngrx/component-store": "19.0.0",
     "@ngrx/effects": "19.0.0",
@@ -39,16 +39,12 @@
     "@ngrx/store": "19.0.0",
     "@ngrx/store-devtools": "19.0.0",
     "@storybook/addon-interactions": "^8.5.3",
-    "@types/cookie-parser": "^1.4.7",
-    "@types/events": "^3.0.3",
-    "@types/jsonwebtoken": "^9.0.6",
-    "@types/nanoid": "^3.0.0",
-    "axios": "1.6.0",
+    "axios": "^1.8.4",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
-    "express": "4.21.2",
+    "express": "^4.21.2",
     "express-session": "^1.18.0",
     "jsonwebtoken": "^9.0.2",
     "nanoid": "^3.0.0",
@@ -91,7 +87,11 @@
     "@storybook/storybook-deployer": "^2.8.16",
     "@swc-node/register": "1.9.2",
     "@swc/core": "1.5.7",
+    "@types/cookie-parser": "^1.4.7",
+    "@types/events": "^3.0.3",
     "@types/jest": "29.5.14",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/nanoid": "^3.0.0",
     "@types/node": "18.16.9",
     "@types/tinycolor2": "^1.4.6",
     "@types/uuid": "^9.0.8",
@@ -121,7 +121,7 @@
     "webpack": "^5.91.0"
   },
   "engines": {
-    "node": "^16.14.0 || >=18.13.0"
+    "node": "18.13.0 || >=18.19.1"
   },
   "packageManager": "yarn@4.2.1"
 }
