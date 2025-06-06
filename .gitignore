@@ -54,3 +54,5 @@ Thumbs.db
 !.yarn/sdks
 !.yarn/versions
 
+
+.github\instructions\nx.instructions.md
